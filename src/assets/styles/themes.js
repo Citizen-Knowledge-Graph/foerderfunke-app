@@ -1,9 +1,7 @@
 // themes.js
 export const colors = {
-    primary: '#8E72FF',
-    accent: '#ff6f00',
-    background: '#f0f0f0',
-    text: '#333',
+    primary: '#6e4aff',
+    secondary: "#e3dcff"
     // ... more colors
   };
   

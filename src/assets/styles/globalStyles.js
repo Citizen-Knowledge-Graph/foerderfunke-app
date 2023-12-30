@@ -3,17 +3,17 @@ import { StyleSheet } from 'react-native';
 import { colors } from './themes';
 
 export const globalStyles = StyleSheet.create({
-container: {
+  primaryContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary,
   },
-  titleText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+  secondaryContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.secondary,
   },
-  // ... more styles
 });
 
