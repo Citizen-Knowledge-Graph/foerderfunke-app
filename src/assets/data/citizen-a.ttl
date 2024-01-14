@@ -1,0 +1,20 @@
+@prefix ckg: <http://ckg.de/default#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+ckg:this a ckg:CitizenProfile .
+
+ckg:HouseA a ckg:House ;
+           ckg:roofArea 110 ;
+           ckg:houseAge 15 .
+
+ckg:CarA a ckg:Car ;
+         ckg:carAge 5 ;
+         ckg:carType "Electric" .
+
+ckg:citizen-a a ckg:Person, ckg:Citizen ;
+              ckg:owns ckg:HouseA ;
+              ckg:hasBirthday "2001-01-15"^^xsd:date ;
+              ckg:hasResidence "Berlin" ;
+              ckg:hasDrivingLicense true ;
+              ckg:owns ckg:CarA ;
+              ckg:hasChildren 2 .
