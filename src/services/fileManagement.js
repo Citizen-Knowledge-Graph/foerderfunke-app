@@ -31,7 +31,6 @@ export const readFileFromFS = async (filename) => {
 
     // Read the file
     const fileContents = await RNFS.readFile(filePath, 'utf8');
-    console.log('File contents:', fileContents);
     return fileContents;
   } catch (error) {
     console.error('Error reading file:', error);

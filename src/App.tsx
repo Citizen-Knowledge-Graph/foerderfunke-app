@@ -6,15 +6,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './screens/MainScreen'; 
 import SecondScreen from './screens/SecondScreen'; 
 import { loadInitialData, readProjectDir, readTestFile } from './services/fileManagement';
+import { loadToShapes } from './services/validator';
 
 
 const Stack = createStackNavigator();
 
 const App = () => {
   useEffect(() => {
-    readProjectDir();
     loadInitialData();
-    readTestFile();
+    loadToShapes("citizen-a.ttl")
   }, []);
 
   return (

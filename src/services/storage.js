@@ -1,6 +1,5 @@
 import {Store as N3Store, Parser as N3Parser, DataFactory} from "n3"
-import fs from "fs";
-import path from "path";
+import { readFileFromFS } from "./fileManagement";
 
 const { quad } = DataFactory;
 
@@ -24,20 +23,20 @@ class Storage {
      *
      * @param filePath Path to file.
      */
-    async loadFile(filePath) {
-        console.log("Loading file:", filePath)
+    async loadFile(fileName) {
+        console.log("Loading file:", fileName)
         const parser = new N3Parser();
-        const rdfStream = fs.createReadStream(filePath);
-        const filename = path.basename(filePath, ".ttl")
+        const fileContent = await readFileFromFS(fileName)
+        console.log(fileContent)
 
         return new Promise((resolve, reject) => {
             const quads = [];
-            parser.parse(rdfStream, (error, newQuad, prefixes) => {
+            parser.parse(fileContent, (error, newQuad, _) => {
                 if (error) {
                     reject(error);
                 } else
-                if (newQuad) {
-                    quads.push(quad(newQuad.subject, newQuad.predicate, newQuad.object, filename))
+                if (newQuad) {            
+                    quads.push(newQuad)
                 } else {
                     resolve(quads);
                 }
@@ -45,3 +44,5 @@ class Storage {
         });
     }
 }
+
+export default Storage;
