@@ -17,6 +17,6 @@ export function NamedShape(name, shape) {
 export async function loadToShapes(fileName) {
     const store = storage.getInstance();
     const quads = await store.loadFile(fileName);
-    console.log("quads", quads)
+    console.log("done loading quads: ", quads)
     return NamedShape(fileName, rdf.dataset(quads))
 }

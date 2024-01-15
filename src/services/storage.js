@@ -1,7 +1,7 @@
 import {Store as N3Store, Parser as N3Parser, DataFactory} from "n3"
 import { readFileFromFS } from "./fileManagement";
 
-const { quad } = DataFactory;
+const { quad, namedNode } = DataFactory;
 
 class Storage {
     constructor() {
@@ -24,10 +24,10 @@ class Storage {
      * @param filePath Path to file.
      */
     async loadFile(fileName) {
-        console.log("Loading file:", fileName)
         const parser = new N3Parser();
         const fileContent = await readFileFromFS(fileName)
         console.log(fileContent)
+        const graphName = namedNode(`http://example.org/${fileName}`);
 
         return new Promise((resolve, reject) => {
             const quads = [];
@@ -35,8 +35,8 @@ class Storage {
                 if (error) {
                     reject(error);
                 } else
-                if (newQuad) {            
-                    quads.push(newQuad)
+                if (newQuad) {
+                    quads.push(quad(newQuad.subject, newQuad.predicate, newQuad.object, graphName))
                 } else {
                     resolve(quads);
                 }
