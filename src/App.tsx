@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './screens/MainScreen'; 
 import SecondScreen from './screens/SecondScreen'; 
 import { loadInitialData, readProjectDir, readTestFile } from './services/fileManagement';
-import { loadToShapes } from './services/validator';
+import { loadToShapes, createValidationReport } from './services/validator';
 
 
 const Stack = createStackNavigator();
@@ -14,7 +14,19 @@ const Stack = createStackNavigator();
 const App = () => {
   useEffect(() => {
     loadInitialData();
-    loadToShapes("citizen-a.ttl")
+    
+    const runValidation = async () => {
+      try {
+        const funding_profile = await loadToShapes("citizen-solar-funding.ttl");
+        const citizen = await loadToShapes("citizen-b.ttl");
+        const validationReport = await createValidationReport(funding_profile, citizen);
+        console.log("The report: ", validationReport);
+      } catch (error) {
+          // Handle the error
+      }
+    };
+    runValidation()
+
   }, []);
 
   return (

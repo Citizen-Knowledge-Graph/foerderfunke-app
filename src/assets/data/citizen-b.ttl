@@ -4,7 +4,7 @@
 ckg:this a ckg:CitizenProfile .
 
 ckg:HouseA a ckg:House ;
-           ckg:roofArea 110 ;
+           ckg:roofArea 90 ;
            ckg:houseAge 15 .
 
 ckg:CarA a ckg:Car ;

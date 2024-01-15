@@ -26,7 +26,6 @@ class Storage {
     async loadFile(fileName) {
         const parser = new N3Parser();
         const fileContent = await readFileFromFS(fileName)
-        console.log(fileContent)
         const graphName = namedNode(`http://example.org/${fileName}`);
 
         return new Promise((resolve, reject) => {
@@ -37,6 +36,7 @@ class Storage {
                 } else
                 if (newQuad) {
                     quads.push(quad(newQuad.subject, newQuad.predicate, newQuad.object, graphName))
+                    console.log(newQuad.object)
                 } else {
                     resolve(quads);
                 }

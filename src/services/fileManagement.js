@@ -4,12 +4,9 @@ const copyFileIfNeeded = async (filename) => {
   const sourcePath = RNFS.MainBundlePath + `/assets/data/${filename}`;
   const destinationPath = RNFS.DocumentDirectoryPath + `/${filename}`;
 
-  console.log(sourcePath)
   try {
-    // Check if file already exists in the destination
     const fileExists = await RNFS.exists(destinationPath);
     if (!fileExists) {
-      // Copy file from bundle to document directory
       await RNFS.copyFile(sourcePath, destinationPath);
       console.log(`${filename} copied to DocumentDirectoryPath`);
     }
@@ -25,7 +22,7 @@ export const readFileFromFS = async (filename) => {
     // Check if file exists
     const fileExists = await RNFS.exists(filePath);
     if (!fileExists) {
-      console.log('File does not exist');
+      console.log(`File does not exist: ${filename}`);
       return null;
     }
 
@@ -39,7 +36,8 @@ export const readFileFromFS = async (filename) => {
 };
 
 export const loadInitialData = async () => {
-  await copyFileIfNeeded('citizen-a.ttl');
+  await copyFileIfNeeded('citizen-b.ttl');
+  await copyFileIfNeeded('citizen-solar-funding.ttl');
 };
 
 export const readProjectDir = async () => {
