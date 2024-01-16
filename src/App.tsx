@@ -20,8 +20,9 @@ const App = () => {
         const funding_profile = await loadToShapes("citizen-solar-funding.ttl");
         const citizen = await loadToShapes("citizen-b.ttl");
         const validationReport = await createValidationReport(funding_profile, citizen);
-        console.log("The report: ", validationReport);
+        console.log(`Validation conforms: ${validationReport.report.conforms}`);
       } catch (error) {
+        console.log(error)
           // Handle the error
       }
     };

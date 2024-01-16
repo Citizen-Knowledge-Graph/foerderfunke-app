@@ -36,7 +36,6 @@ class Storage {
                 } else
                 if (newQuad) {
                     quads.push(quad(newQuad.subject, newQuad.predicate, newQuad.object, graphName))
-                    console.log(newQuad.object)
                 } else {
                     resolve(quads);
                 }
