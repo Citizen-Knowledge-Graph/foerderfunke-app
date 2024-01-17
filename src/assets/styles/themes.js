@@ -1,14 +1,13 @@
 // themes.js
 export const colors = {
-    primary: '#6e4aff',
-    secondary: "#e3dcff"
-    // ... more colors
-  };
-  
-  export const fontSizes = {
-    small: 12,
-    medium: 16,
-    large: 20,
-    title: 48
-    // ... more sizes
-  };
+  mainBackground: '#384361',
+};
+
+export const fontSizes = {
+  small: 12,
+  small_medium: 16,
+  medium: 20,
+  large: 40,
+  title: 48
+  // ... more sizes
+};
