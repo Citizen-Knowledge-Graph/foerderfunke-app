@@ -33,22 +33,17 @@ const InfoSection = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderTopWidth: 1, // Defines the thickness of the top border
-        borderColor: '#E0E0E0', // A light grey color for the border; replace with your desired color
-        paddingHorizontal: 16, // Adjust the padding as needed
     },
     infoSection: {
         flex: 1,
         backgroundColor: '#FFF', // Assuming a white background; replace with your desired color
-        paddingHorizontal: 16, // Adjust the padding as needed
         paddingTop: 16,
         alignItems: 'center', // This centers the content horizontally
     },
     sectionHeader: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         paddingTop: 16,
-        paddingHorizontal: 16, // Adjust the padding as needed
         backgroundColor: '#FFF', // Or any color you want for the background of the header
     },
     imageFrame: {
@@ -59,19 +54,19 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     infoImage: {
-        width: 100, // Adjust the size as needed
-        height: 100, // Adjust the size as needed
+        width: 90, // Adjust the size as needed
+        height: 90, // Adjust the size as needed
     },
     textContainer: {
         alignItems: 'flex-start', // Aligns the text to the left
     },
     infoTitle: {
-        fontSize: 14, // Adjust the font size as needed
+        fontSize: 12, // Adjust the font size as needed
         fontWeight: 'bold', // Adjust the font weight as needed
         marginBottom: 8, // Adds some space between the title and the description
     },
     infoDescription: {
-        fontSize: 12, // Adjust the font size as needed
+        fontSize: 10, // Adjust the font size as needed
         color: '#666', // A light gray color for the text; replace with your desired color
     },
 });

@@ -1,7 +1,8 @@
 // App.tsx
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import MainScreen from './screens/MainScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -9,7 +10,42 @@ import { loadInitialData, readProjectDir, readTestFile } from './services/fileMa
 import { loadToShapes, createValidationReport } from './services/validator';
 
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const BottomTabNavigator = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#384361',
+          paddingBottom: 5,
+          borderTopWidth: 0,
+        },
+        tabBarActiveTintColor: '#007bff', // Color of the icon and text when the tab is active
+        tabBarInactiveTintColor: '#8e8e93', // Color of the icon and text when the tab is inactive
+      }}
+    >
+      <Tab.Screen
+        name="Main"
+        component={MainScreen}
+        options={({ route }) => ({ // Include route in the function parameters
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            return <FontAwesome name={"home"} size={size} color={color} />;
+          },
+        })} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={({ route }) => ({ // Include route in the function parameters
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            return <FontAwesome name={"home"} size={size} color={color} />;
+          },
+        })} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   useEffect(() => {
@@ -27,23 +63,11 @@ const App = () => {
       }
     };
     runValidation()
-
   }, []);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Main"
-          component={MainScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 };

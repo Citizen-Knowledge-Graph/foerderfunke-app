@@ -1,44 +1,44 @@
 import React from 'react';
-import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import HeaderBar from '../components/HeaderBar';
 import InfoSection from '../components/InfoSection';
 import FörderungenList from '../components/SupportList';
 
-// HomeScreen Component
+// Component
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <HeaderBar />
-      <FörderungenList />
-      <InfoSection />
-    </SafeAreaView>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.scrollItem}>
+          <InfoSection />
+        </View>
+        <View style={styles.scrollItem}>
+          <FörderungenList />
+        </View>
+      </ScrollView>
+    </SafeAreaView >
   );
 };
 
 // Styles
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  deineFörderungenSection: {
+    // Additional styles if needed
+  },
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // Or any other background color for the safe area
-  },
-  headerContainer: {
-    width: '100%',
-    height: 60,
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // shadow properties...
   },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  scrollView: {
-    flex: 1, // Takes up all space below the header
-    // Other styles for your scroll view
-  },
-  // ... other styles
+  scrollItem: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    borderTopWidth: 3, // Defines the thickness of the top border
+    borderColor: '#E0E0E0', // A light grey color for the border; replace with your desired color
+  }
 });
 
 export default HomeScreen;
