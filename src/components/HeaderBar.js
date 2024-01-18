@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { fontSizes } from '../assets/styles/themes';
 
-const HeaderBar = () => {
+const HeaderBar = ({ title }) => {
     return (
         <View style={styles.headerContainer}>
             <StatusBar barStyle="dark-content" />
-            <Text style={styles.headerTitle}>Home</Text>
+            <Text style={styles.headerTitle}>{title}</Text>
         </View>
     );
 };

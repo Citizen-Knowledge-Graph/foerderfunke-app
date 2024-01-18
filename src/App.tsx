@@ -4,8 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import MainScreen from './screens/MainScreen';
+import StartScreen from './screens/StartScreen';
 import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import { loadInitialData, readProjectDir, readTestFile } from './services/fileManagement';
 import { loadToShapes, createValidationReport } from './services/validator';
 
@@ -26,8 +27,8 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Main"
-        component={MainScreen}
+        name="Start"
+        component={StartScreen}
         options={({ route }) => ({ // Include route in the function parameters
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
@@ -37,6 +38,15 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
+        options={({ route }) => ({ // Include route in the function parameters
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            return <FontAwesome name={"home"} size={size} color={color} />;
+          },
+        })} />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
         options={({ route }) => ({ // Include route in the function parameters
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
