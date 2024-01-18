@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import HeaderBar from '../components/HeaderBar';
 import UserProfile from '../components/UserProfile';
 import ScrollItem from '../components/ScrollItem';
