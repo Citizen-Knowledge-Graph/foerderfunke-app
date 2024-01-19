@@ -1,76 +1,9 @@
 // App.tsx
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-import StartScreen from './screens/StartScreen';
-import HomeScreen from './screens/HomeScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import SchemeScreen from './screens/SchemeScreen';
+import { BottomTabNavigator } from './AppNavigation';
 import { loadInitialData, readProjectDir, readTestFile } from './services/fileManagement';
 import { loadToShapes, createValidationReport } from './services/validator';
-
-
-// Stack Navigation
-const Stack = createStackNavigator();
-
-function SchemeStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="HomeStackScreen" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="SchemeStackScreen" component={SchemeScreen} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  );
-}
-
-
-// Tab Navigation
-const Tab = createBottomTabNavigator();
-const BottomTabNavigator = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: '#384361',
-          paddingBottom: 5,
-          borderTopWidth: 0,
-        },
-        tabBarActiveTintColor: '#007bff', // Color of the icon and text when the tab is active
-        tabBarInactiveTintColor: '#8e8e93', // Color of the icon and text when the tab is inactive
-      }}
-    >
-      <Tab.Screen
-        name="Start"
-        component={StartScreen}
-        options={({ route }) => ({ // Include route in the function parameters
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            return <FontAwesome name={"home"} size={size} color={color} />;
-          },
-        })} />
-      <Tab.Screen
-        name="Home"
-        component={SchemeStack}
-        options={({ route }) => ({ // Include route in the function parameters
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            return <FontAwesome name={"home"} size={size} color={color} />;
-          },
-        })} />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={({ route }) => ({ // Include route in the function parameters
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            return <FontAwesome name={"home"} size={size} color={color} />;
-          },
-        })} />
-    </Tab.Navigator>
-  );
-};
 
 const App = () => {
   useEffect(() => {

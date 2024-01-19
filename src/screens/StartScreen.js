@@ -1,18 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Logo from '../components/Logo';
 import TextBox from '../components/TextBox';
 import { colors } from '../assets/styles/themes';
-
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.mainBackground,
-  },
-});
 
 // Screen
 const MainScreen = () => {
@@ -23,5 +13,15 @@ const MainScreen = () => {
     </View>
   );
 };
+
+// Styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.mainBackground,
+  },
+});
 
 export default MainScreen;
