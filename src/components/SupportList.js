@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 // Dummy data for the list
 const data = [
@@ -46,16 +47,28 @@ const ListHeader = () => {
     );
 };
 
-const ListItem = ({ item }) => (
-    <View style={styles.listItem}>
-        <Image source={item.image} style={styles.listItemImage} />
-        <View style={styles.listItemContent}>
-            <Text style={styles.listItemTitle}>{item.title}</Text>
-            <Text style={styles.listItemDescription}>{item.description}</Text>
-        </View>
-        <Text style={styles.listItemTime}>{item.time}</Text>
-    </View>
-);
+const ListItem = ({ item }) => {
+    const navigation = useNavigation();
+
+    const handleListItemPress = () => {
+        navigation.navigate('SchemeStackScreen', {});
+    };
+
+    return (
+
+
+        <TouchableOpacity onPress={handleListItemPress}>
+            <View style={styles.listItem}>
+                <Image source={item.image} style={styles.listItemImage} />
+                <View style={styles.listItemContent}>
+                    <Text style={styles.listItemTitle}>{item.title}</Text>
+                    <Text style={styles.listItemDescription}>{item.description}</Text>
+                </View>
+                <Text style={styles.listItemTime}>{item.time}</Text>
+            </View>
+        </TouchableOpacity>
+    )
+};
 
 const FörderungenList = () => {
     return (

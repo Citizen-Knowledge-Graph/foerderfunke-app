@@ -2,17 +2,32 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import StartScreen from './screens/StartScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import SchemeScreen from './screens/SchemeScreen';
 import { loadInitialData, readProjectDir, readTestFile } from './services/fileManagement';
 import { loadToShapes, createValidationReport } from './services/validator';
 
 
-const Tab = createBottomTabNavigator();
+// Stack Navigation
+const Stack = createStackNavigator();
 
+function SchemeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="HomeStackScreen" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SchemeStackScreen" component={SchemeScreen} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+}
+
+
+// Tab Navigation
+const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
@@ -37,7 +52,7 @@ const BottomTabNavigator = () => {
         })} />
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={SchemeStack}
         options={({ route }) => ({ // Include route in the function parameters
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {

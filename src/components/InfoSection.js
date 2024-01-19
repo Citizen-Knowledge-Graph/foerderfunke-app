@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     infoImage: {
-        width: 90, // Adjust the size as needed
-        height: 90, // Adjust the size as needed
+        width: 120, // Adjust the size as needed
+        height: 120, // Adjust the size as needed
     },
     textContainer: {
         alignItems: 'flex-start', // Aligns the text to the left
