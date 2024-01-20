@@ -5,7 +5,7 @@ import { DataFactory } from "n3";
 
 import storage from "./storage.js";
 
-const {quad} = DataFactory;
+const { quad } = DataFactory;
 
 export function NamedShape(name, shape) {
     return {
@@ -37,7 +37,7 @@ export async function loadToShapes(fileName) {
  */
 function createValidator(shapes) {
     return new Validator(shapes, { factory: rdfDataModel })
-}     
+}
 
 /**
  * Create report for profile
@@ -45,6 +45,15 @@ function createValidator(shapes) {
 export async function createValidationReport(shapes, profile) {
     const validator = createValidator(shapes.shape);
     const dataset = profile.shape
-    const report = await validator.validate( { dataset } )
+    const report = await validator.validate({ dataset })
     return NamedValidationReport(shapes.name, profile.name, report);
+}
+
+// run validation
+export const runValidation = async () => {
+
+    // load user profile to shapes
+
+    // load queries to shapes
+
 }

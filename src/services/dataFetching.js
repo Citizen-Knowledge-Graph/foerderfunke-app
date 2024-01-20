@@ -1,39 +1,21 @@
-import RNFS from 'react-native-fs';
-import { readDirectory, ensureDirectoryExists } from './fileManagement';
-
-// Configuration
-const DATA_PATH = "/assets/data";
+import { readDirectory, ensureDirectoryExists, copyFileToDevice } from './fileManagement';
 
 // Fetch individual file and copy it to device
-const fetchFileToDevice = async (filename) => {
-
-  // set up file paths
-  const sourcePath = RNFS.MainBundlePath + `/assets/data/${filename}`;
-  const destinationPath = RNFS.DocumentDirectoryPath + `/${filename}`;
-
-  // fetch data to device
-  try {
-    const fileExists = await RNFS.exists(destinationPath);
-    if (!fileExists) {
-      await RNFS.copyFile(sourcePath, destinationPath);
-      console.log(`${filename} copied to DocumentDirectoryPath`);
-    }
-  } catch (error) {
-    console.error(`Error copying ${sourcePath}: `, error);
-  }
+const fetchFileToDevice = async (relativefilename) => {
+  await copyFileToDevice(relativefilename);
 };
 
 // Fetch entire directory to device
 const fetchDirectoryToDevice = async (directory) => {
 
-  // set up directory paths
-  const bundleDirectoryPath = RNFS.MainBundlePath + `/assets/data/${directory}`
-  const deviceDirectoryPath = RNFS.DocumentDirectoryPath + `/${directory}`;
-  await ensureDirectoryExists(deviceDirectoryPath);
+  // ensure target directory exists
+  await ensureDirectoryExists(directory);
 
-  // read file names and fetch to device
-  const filepaths = await readDirectory(bundleDirectoryPath)
-  filepaths.map(filename => fetchFileToDevice(`${directory}/${filename}`))
+  // read file names from bundle and fetch to device
+  const filepaths = await readDirectory(directory, "bundle")
+
+  // copy individual files over
+  filepaths.map(filename => fetchFileToDevice(directory + "/" + filename))
 }
 
 // Fetch all data and copy it to device
