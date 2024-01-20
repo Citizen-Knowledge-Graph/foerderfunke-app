@@ -1,23 +1,7 @@
 import RNFS from 'react-native-fs';
 
-const copyFileIfNeeded = async (filename) => {
-  const sourcePath = RNFS.MainBundlePath + `/assets/data/${filename}`;
-  const destinationPath = RNFS.DocumentDirectoryPath + `/${filename}`;
-
-  try {
-    const fileExists = await RNFS.exists(destinationPath);
-    if (!fileExists) {
-      await RNFS.copyFile(sourcePath, destinationPath);
-      console.log(`${filename} copied to DocumentDirectoryPath`);
-    }
-  } catch (error) {
-    console.error(`Error copying ${filename}: `, error);
-  }
-};
-
 export const readFileFromFS = async (filename) => {
   const filePath = RNFS.DocumentDirectoryPath + `/${filename}`;
-
   try {
     // Check if file exists
     const fileExists = await RNFS.exists(filePath);
@@ -35,17 +19,26 @@ export const readFileFromFS = async (filename) => {
   }
 };
 
-export const loadInitialData = async () => {
-  await copyFileIfNeeded('citizen-b.ttl');
-  await copyFileIfNeeded('citizen-solar-funding.ttl');
+
+export const readDirectory = async (directoryPath) => {
+  try {
+    files = await RNFS.readDir(directoryPath, 'utf8');
+    const fileNames = files.map(file => file.name);
+    return fileNames;
+  } catch (error) {
+    console.error('Error reading files: ', error);
+  }
 };
 
-export const readProjectDir = async () => {
-  const sourcePath = RNFS.MainBundlePath + `/assets`;
-  dirContents = await RNFS.readDir(sourcePath, 'utf8');
-  console.log('Directory contents:', dirContents);
-};
-
-export const readTestFile = async () => {
-  await readFileFromFS("citizen-a.ttl");
+export const ensureDirectoryExists = async (directoryPath) => {
+  const directoryExists = await RNFS.exists(directoryPath);
+  if (!directoryExists) {
+    try {
+      await RNFS.mkdir(directoryPath);
+      console.log(`Directory created at: ${directoryPath}`);
+    } catch (error) {
+      console.error(`Error creating directory: ${error.message}`);
+      // Handle any errors, such as permissions issues
+    }
+  }
 };
