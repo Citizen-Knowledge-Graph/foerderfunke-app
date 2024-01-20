@@ -6,8 +6,12 @@ const DATA_PATH = "/assets/data";
 
 // Fetch individual file and copy it to device
 const fetchFileToDevice = async (filename) => {
+
+  // set up file paths
   const sourcePath = RNFS.MainBundlePath + `/assets/data/${filename}`;
   const destinationPath = RNFS.DocumentDirectoryPath + `/${filename}`;
+
+  // fetch data to device
   try {
     const fileExists = await RNFS.exists(destinationPath);
     if (!fileExists) {
@@ -21,6 +25,7 @@ const fetchFileToDevice = async (filename) => {
 
 // Fetch entire directory to device
 const fetchDirectoryToDevice = async (directory) => {
+
   // set up directory paths
   const bundleDirectoryPath = RNFS.MainBundlePath + `/assets/data/${directory}`
   const deviceDirectoryPath = RNFS.DocumentDirectoryPath + `/${directory}`;
