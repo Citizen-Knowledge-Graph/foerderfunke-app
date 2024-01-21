@@ -34,13 +34,18 @@ export const readFile = async (relativeFilePath, filesystem = "device") => {
   }
 };
 
-// Function to read directory contents - possible for both device and bundle. we set default to device
+/**
+ * Asynchronously reads a file from the specified relative path and options.
+ *
+ * @param {string} relativeFilepath - The relative path of the file to be read.
+ * @param {string} filesystem - The filesystem to be used. Can be 'device' or 'bundle'.
+ * @returns {Promise<string>} A promise that resolves with the contents of the file.
+ */
 export const readDirectory = async (relativeDirectoryPath, filesystem = "device") => {
   const absoluteFilePath = setAbsolutePath(relativeDirectoryPath, filesystem)
   try {
     files = await RNFS.readDir(absoluteFilePath, 'utf8');
-    const fileNames = files.map(file => file.name);
-    return fileNames;
+    return files.map(file => file.name);
   } catch (error) {
     console.error('Error reading directory ', error);
   }

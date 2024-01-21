@@ -1,59 +1,48 @@
 import rdfDataModel from '@rdfjs/data-model'
 import rdfDataset from '@rdfjs/dataset'
 import Validator from 'shacl-engine/Validator.js';
-import { DataFactory } from "n3";
+import { readFile, readDirectory } from './fileManagement.js';
+import { parseTurtle } from './rdfHandling.js';
 
-import storage from "./storage.js";
-
-const { quad } = DataFactory;
-
-export function NamedShape(name, shape) {
-    return {
-        name: name,
-        shape: shape
-    }
-}
-
-function NamedValidationReport(queryName, profileName, report) {
-    return {
-        queryName: queryName,
-        profileName: profileName,
-        report: report
-    }
-}
-
-/**
- * Loads data from filepath to a shapes object. Shapes object is used to validate profiles.
- */
-export async function loadToShapes(fileName) {
-    const store = storage.getInstance();
-    const quads = await store.loadFile(fileName);
-    console.log(`${fileName} has been loaded into shape`)
-    return NamedShape(fileName, rdfDataset.dataset(quads))
-}
-
-/**
- * Returns validator object
- */
-function createValidator(shapes) {
-    return new Validator(shapes, { factory: rdfDataModel })
+function NamedReport(name, report) {
+    this.name = name;
+    this.report = report;
 }
 
 /**
  * Create report for profile
  */
-export async function createValidationReport(shapes, profile) {
-    const validator = createValidator(shapes.shape);
-    const dataset = profile.shape
-    const report = await validator.validate({ dataset })
-    return NamedValidationReport(shapes.name, profile.name, report);
+const createValidationReport = async (shapes, profile) => {
+    const validator = new Validator(shapes, { factory: rdfDataModel })
+    return await validator.validate({ dataset: profile })
 }
 
 // run validation
-export const runValidation = async () => {
+const runValidation = async () => {
+
+    // set up filepaths
+    const userProfilePath = "user-profile.ttl"
+    const queriesPath = "queries"
 
     // load user profile to shapes
+    const userProfileString = await readFile(userProfilePath)
+    const userProfile = await parseTurtle(userProfileString)
 
     // load queries to shapes
+    const fileNames = await readDirectory(queriesPath)
+    const queryProfilePromises = fileNames.map(fileName => [fileName, readFile(fileName)])
 
+    // run validations
+    const reports = []
+    queryProfilePromises.forEach(async (query, index) => {
+        try {
+            const queryProfile = await parseTurtle(await query[1])
+            const report = await createValidationReport(queryProfile, userProfile)
+            console.log(`Validation for ${query[0]} was ${report.conforms}`)
+        } catch (error) {
+            console.log(`Promise ${index} rejected:`, error);
+        }
+    });
 }
+
+export default runValidation;

@@ -1,11 +1,24 @@
-import formats from '@rdfjs/formats';
+import { Parser } from 'n3';
+import rdfDataset from '@rdfjs/dataset'
 
-const parseTurtle = async (content) => {
+function parseQuads(content, parser) {
+    return new Promise((resolve, reject) => {
+        const quads = [];
+        parser.parse(content, (error, newQuad, _) => {
+            if (error) {
+                reject(error);
+            } else if (newQuad) {
+                quads.push(newQuad);
+            } else {
+                resolve(quads);
+            }
+        });
+    });
+}
 
-    // initialise parser
-    const parser = formats.parsers.get('text/turtle')
-
-    // parse and return content
-    return parser.import(content)
+export const parseTurtle = async (content) => {
+    const parser = new Parser();
+    quads = await parseQuads(content, parser);
+    return rdfDataset.dataset(quads)
 }
 
