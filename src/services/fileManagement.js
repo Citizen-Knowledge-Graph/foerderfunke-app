@@ -26,7 +26,8 @@ const setAbsolutePath = (relativeFilePath, filesystem) => {
 /**
  * Asynchronously reads a file's contents from the specified filesystem.
  *
- * This function takes a relative file path and an optional filesystem type, reads the file from the specified path, and returns its contents as a string.
+ * This function takes a relative file path and an optional filesystem type, 
+ * reads the file from the specified path, and returns its contents as a string.
  *
  * @param {string} relativeFilePath - The relative path of the file to be read.
  * @param {string} [filesystem='device'] - The filesystem type ('device' by default).
@@ -53,6 +54,28 @@ export const readFile = async (relativeFilePath, filesystem = "device") => {
 };
 
 /**
+ * Asynchronously reads a JSON file and parses it to a JavaScript object.
+ *
+ * This function reads a file from the specified relative file path and filesystem, 
+ * and then tries to parse it as JSON. It returns the parsed JavaScript object or 
+ * null if an error occurs during reading or parsing.
+ *
+ * @param {string} relativeFilePath - The relative path of the JSON file to be read.
+ * @param {string} [filesystem="device"] - The filesystem type ('device' by default). Specifies where to read the file from.
+ * @returns {Promise<Object|null>} A promise that resolves to the parsed JSON object, or null if an error occurs.
+ */
+export const readJson = async (relativeFilePath, filesystem = "device") => {
+  const stringObject = await readFile(relativeFilePath, filesystem);
+
+  try {
+    return JSON.parse(stringObject);
+  } catch (error) {
+    console.error("Error parsing file to Json", error);
+    return null;
+  }
+}
+
+/**
  * Asynchronously reads a file from the specified relative path and options.
  *
  * @param {string} relativeFilepath - The relative path of the file to be read.
@@ -72,7 +95,8 @@ export const readDirectory = async (relativeDirectoryPath, filesystem = "device"
 /**
  * Asynchronously copies a file from the bundle to the device directory.
  *
- * This function checks if the specified file exists in the device directory, and if not, copies it from the bundle directory to the device directory.
+ * This function checks if the specified file exists in the device directory, 
+ * and if not, copies it from the bundle directory to the device directory.
  *
  * @param {string} relativeFileName - The relative name of the file to be copied.
  * @returns {Promise<void>} A promise that resolves when the file has been copied or if it already exists.
