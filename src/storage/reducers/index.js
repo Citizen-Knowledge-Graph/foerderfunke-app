@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import initialReducer from './initialReducer';
+import validationReducer from './validationReducer';
 
 const rootReducer = combineReducers({
-    initialReducer, // Add your reducers here
+    validationReducer, // Add your reducers here
     // otherReducer,
 });
 

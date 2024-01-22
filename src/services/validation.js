@@ -2,6 +2,7 @@ import rdfDataModel from '@rdfjs/data-model'
 import Validator from 'shacl-engine/Validator.js';
 import { readFile, readJson } from './fileManagement.js';
 import { parseTurtle } from './rdfHandling.js';
+import validationReportAction from '../storage/actions/validationReport.js';
 
 function NamedReport(name, report) {
     this.name = name;
@@ -17,12 +18,11 @@ const createValidationReport = async (shapes, profile) => {
 }
 
 // run validation
-const runValidation = async () => {
+const runValidation = async (dispatch) => {
 
     // set up filepaths
     const userProfilePath = "user-profile.ttl"
     const queryRegistryPath = "query-registry.json"
-    const queriesPath = "queries"
 
     // load user profile to shapes
     const userProfileString = await readFile(userProfilePath)
@@ -41,6 +41,7 @@ const runValidation = async () => {
             const report = await createValidationReport(queryProfile, userProfile)
 
             console.log(`Validation for ${key} was ${report.conforms}`)
+            dispatch(validationReportAction(key, report));
         }
     }
 }
