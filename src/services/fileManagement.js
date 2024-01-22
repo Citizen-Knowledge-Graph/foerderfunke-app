@@ -2,6 +2,16 @@ import RNFS from 'react-native-fs';
 
 const BUNDLE_DATA_PATH = "/assets/data/"
 
+/**
+ * Constructs the absolute file path based on the provided filesystem.
+ *
+ * This function takes a relative file path and a filesystem type ('device' or 'bundle') and constructs the absolute path based on the filesystem.
+ *
+ * @param {string} relativeFilePath - The relative path of the file.
+ * @param {string} filesystem - The type of filesystem ('device' or 'bundle').
+ * @returns {string} The absolute file path.
+ * @throws {Error} If an invalid filesystem is provided.
+ */
 const setAbsolutePath = (relativeFilePath, filesystem) => {
   switch (filesystem) {
     case "device":
@@ -13,7 +23,15 @@ const setAbsolutePath = (relativeFilePath, filesystem) => {
   }
 }
 
-// Function to read file in - possible for both device and bundle. we set default to device
+/**
+ * Asynchronously reads a file's contents from the specified filesystem.
+ *
+ * This function takes a relative file path and an optional filesystem type, reads the file from the specified path, and returns its contents as a string.
+ *
+ * @param {string} relativeFilePath - The relative path of the file to be read.
+ * @param {string} [filesystem='device'] - The filesystem type ('device' by default).
+ * @returns {Promise<string|null>} A promise that resolves to the file's contents, or null if the file does not exist or an error occurs.
+ */
 export const readFile = async (relativeFilePath, filesystem = "device") => {
   const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem)
 
@@ -51,7 +69,14 @@ export const readDirectory = async (relativeDirectoryPath, filesystem = "device"
   }
 };
 
-// copy data from bundle to device
+/**
+ * Asynchronously copies a file from the bundle to the device directory.
+ *
+ * This function checks if the specified file exists in the device directory, and if not, copies it from the bundle directory to the device directory.
+ *
+ * @param {string} relativeFileName - The relative name of the file to be copied.
+ * @returns {Promise<void>} A promise that resolves when the file has been copied or if it already exists.
+ */
 export const copyFileToDevice = async (relativeFileName) => {
 
   // configure file paths
@@ -71,7 +96,14 @@ export const copyFileToDevice = async (relativeFileName) => {
   }
 }
 
-// check if directory exists or else create it
+/**
+ * Asynchronously ensures that a directory exists in the device directory.
+ *
+ * This function checks if the specified directory exists in the device directory, and if not, creates it.
+ *
+ * @param {string} relativeDirectoryPath - The relative path of the directory to check or create.
+ * @returns {Promise<void>} A promise that resolves when the directory has been checked or created.
+ */
 export const ensureDirectoryExists = async (relativeDirectoryPath) => {
   const absoluteDirectoryPath = setAbsolutePath(relativeDirectoryPath, "device")
 

@@ -1,5 +1,4 @@
 import rdfDataModel from '@rdfjs/data-model'
-import rdfDataset from '@rdfjs/dataset'
 import Validator from 'shacl-engine/Validator.js';
 import { readFile, readDirectory } from './fileManagement.js';
 import { parseTurtle } from './rdfHandling.js';
@@ -33,7 +32,6 @@ const runValidation = async () => {
     const queryProfilePromises = fileNames.map(fileName => [fileName, readFile(fileName)])
 
     // run validations
-    const reports = []
     queryProfilePromises.forEach(async (query, index) => {
         try {
             const queryProfile = await parseTurtle(await query[1])
