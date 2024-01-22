@@ -24,6 +24,9 @@ const fetchDataToDevice = async () => {
   // Fetch user profile
   await fetchFileToDevice('user-profile.ttl');
 
+  // Fetch query registry
+  await fetchFileToDevice('query-registry.json');
+
   // Fetch queries
   await fetchDirectoryToDevice('queries');
 };
