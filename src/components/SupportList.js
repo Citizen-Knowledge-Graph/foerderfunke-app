@@ -3,45 +3,6 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
-// Dummy data for the list
-const data = [
-    {
-        id: '1',
-        title: 'Energiepauschale',
-        description: "He'll want to use your yacht, and I don't want this thing smelling like fish.",
-        time: '8m ago',
-        image: require('../assets/images/family_icon.png'), // Replace with your local image
-    },
-    {
-        id: '2',
-        title: 'Bildungsgutschein',
-        description: "He'll want to use your yacht, and I don't want this thing smelling like fish.",
-        time: '8m ago',
-        image: require('../assets/images/family_icon.png'), // Replace with your local image
-    },
-    {
-        id: '3',
-        title: 'Elterngeld',
-        description: "He'll want to use your yacht, and I don't want this thing smelling like fish.",
-        time: '8m ago',
-        image: require('../assets/images/family_icon.png'), // Replace with your local image
-    },
-    {
-        id: '4',
-        title: 'Arbeitslosengeld',
-        description: "He'll want to use your yacht, and I don't want this thing smelling like fish.",
-        time: '8m ago',
-        image: require('../assets/images/family_icon.png'), // Replace with your local image
-    },
-    {
-        id: '5',
-        title: 'Gesundheitsversicherung',
-        description: "He'll want to use your yacht, and I don't want this thing smelling like fish.",
-        time: '8m ago',
-        image: require('../assets/images/family_icon.png'), // Replace with your local image
-    }
-];
-
 const ListHeader = () => {
     return (
         <Text style={styles.listHeader}>Deine Förderungen</Text>
