@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 // Dummy data for the list
 const data = [
@@ -55,11 +56,9 @@ const ListItem = ({ item }) => {
     };
 
     return (
-
-
         <TouchableOpacity onPress={handleListItemPress}>
             <View style={styles.listItem}>
-                <Image source={item.image} style={styles.listItemImage} />
+                <Image source={require('../assets/images/family_icon.png')} style={styles.listItemImage} />
                 <View style={styles.listItemContent}>
                     <Text style={styles.listItemTitle}>{item.title}</Text>
                     <Text style={styles.listItemDescription}>{item.description}</Text>
@@ -71,12 +70,16 @@ const ListItem = ({ item }) => {
 };
 
 const FörderungenList = () => {
+    const validationState = useSelector(state => state.validationReducer);
+
     return (
         <View style={styles.container}>
             <ListHeader />
-            {data.map(item => (
-                <ListItem key={item.id} item={item} />))
-            }
+
+            {Object.keys(validationState).map(key => (
+                <ListItem key={key} item={validationState[key]} />
+            ))}
+
         </View>
     );
 };

@@ -8,15 +8,16 @@ const AppStartup = ({ children }) => {
 
 
     useEffect(() => {
-        // Fetch data from bundle to device - this will be API call later
-        fetchDataToDevice();
 
-        // Run initial validation
-        try {
+        const initializeData = async () => {
+            // Fetch data from bundle to device - this will be API call later
+            await fetchDataToDevice();
+
+            // Run initial validation
             runValidation(dispatch);
-        } catch (error) {
-            console.log("validation failed: ", error)
-        }
+        };
+
+        initializeData();
 
     }, [dispatch]);
 

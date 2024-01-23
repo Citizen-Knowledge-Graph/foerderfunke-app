@@ -7,9 +7,6 @@ import ScrollItem from '../components/ScrollItem';
 
 // Component
 const HomeScreen = () => {
-  const validationState = useSelector(state => state.validationReducer);
-  console.log('Current validation state:', validationState);
-
   return (
     <ScreenView screenName={"Home"}>
       <ScrollItem>

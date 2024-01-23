@@ -39,8 +39,6 @@ const runValidation = async (dispatch) => {
             const queryString = await readFile(queryRegistry[key]["path"])
             const queryProfile = await parseTurtle(queryString)
             const report = await createValidationReport(queryProfile, userProfile)
-
-            console.log(`Validation for ${key} was ${report.conforms}`)
             dispatch(validationReportAction(key, report));
         }
     }
