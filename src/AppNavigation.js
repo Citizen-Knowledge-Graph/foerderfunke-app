@@ -9,17 +9,19 @@ import SchemeScreen from './screens/SchemeScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();
+
 export const SchemeStackNavigator = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="HomeStackScreen" component={HomeScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="SchemeStackScreen" component={SchemeScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="StartStackScreen" component={StartScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="MainTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }
 
 // Tab Navigation
 const Tab = createBottomTabNavigator();
+
 export const BottomTabNavigator = () => {
     return (
         <Tab.Navigator
@@ -34,17 +36,8 @@ export const BottomTabNavigator = () => {
             }}
         >
             <Tab.Screen
-                name="Start"
-                component={StartScreen}
-                options={({ route }) => ({ // Include route in the function parameters
-                    headerShown: false,
-                    tabBarIcon: ({ focused, color, size }) => {
-                        return <FontAwesome name={"home"} size={size} color={color} />;
-                    },
-                })} />
-            <Tab.Screen
                 name="Home"
-                component={SchemeStackNavigator}
+                component={HomeScreen}
                 options={({ route }) => ({ // Include route in the function parameters
                     headerShown: false,
                     tabBarIcon: ({ focused, color, size }) => {

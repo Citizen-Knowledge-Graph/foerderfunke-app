@@ -1,16 +1,22 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Logo from '../components/Logo';
 import TextBox from '../components/TextBox';
-import { colors } from '../assets/styles/themes';
 
 // Screen
-const MainScreen = () => {
+const StartScreen = ({ navigation }) => {
+
   return (
-    <View style={styles.container}>
-      <Logo />
-      <TextBox style={styles.title} text="FörderFuchs" />
-    </View>
+    <TouchableOpacity
+      style={{ flex: 1 }}
+      onPress={() => navigation.navigate('MainTabNavigator')}
+      activeOpacity={0.7} // Optional: for better touch feedback
+    >
+      <View style={styles.container}>
+        <Logo />
+        <TextBox style={styles.title} text="FörderFuchs" />
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -24,4 +30,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainScreen;
+export default StartScreen;
