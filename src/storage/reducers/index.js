@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import validationReducer from './validationReducer';
+import registryReducer from './registryReducer';
 
 const rootReducer = combineReducers({
-    validationReducer, // Add your reducers here
-    // otherReducer,
+    validationReducer,
+    registryReducer
 });
 
 export default rootReducer;
