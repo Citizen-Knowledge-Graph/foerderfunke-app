@@ -9,7 +9,7 @@ const MainScreen = () => {
   return (
     <View style={styles.container}>
       <Logo />
-      <TextBox text="FörderFuchs" />
+      <TextBox style={styles.title} text="FörderFuchs" />
     </View>
   );
 };
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.mainBackground,
-  },
+    backgroundColor: 'white',
+  }
 });
 
 export default MainScreen;

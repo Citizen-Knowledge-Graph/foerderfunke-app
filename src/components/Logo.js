@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 
 // Component
 const Logo = () => {
-    return <Image source={require('../assets/images/logo.png')} style={styles.logo} />;
+    return <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />;
 };
 
 export default Logo;
