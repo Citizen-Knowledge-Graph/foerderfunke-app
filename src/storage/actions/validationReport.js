@@ -5,10 +5,6 @@ export const VALIDATION_REPORT = 'VALIDATION_REPORT';
 const validationReportAction = (key, report) => {
     const serializableReport = {
         conforms: report._conforms(),
-        image: '../assets/images/family_icon.png',
-        title: "Foerderungsname",
-        description: "Foerderungsdesription",
-        time: "8 min"
     };
 
     return {

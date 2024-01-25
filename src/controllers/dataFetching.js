@@ -1,4 +1,4 @@
-import { readDirectory, ensureDirectoryExists, copyFileToDevice } from './fileManagement';
+import { readDirectory, ensureDirectoryExists, copyFileToDevice } from '../utilities/fileManagement';
 
 // Fetch individual file and copy it to device
 const fetchFileToDevice = async (relativefilename) => {

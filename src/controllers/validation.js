@@ -1,7 +1,7 @@
 import rdfDataModel from '@rdfjs/data-model'
 import Validator from 'shacl-engine/Validator.js';
-import { readFile, readJson } from './fileManagement.js';
-import { parseTurtle } from './rdfHandling.js';
+import { readFile, readJson } from '../utilities/fileManagement.js';
+import { parseTurtle } from '../utilities/rdfHandling.js';
 import validationReportAction from '../storage/actions/validationReport.js';
 
 function NamedReport(name, report) {
