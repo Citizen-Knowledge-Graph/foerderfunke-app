@@ -14,7 +14,7 @@ const StartScreen = ({ navigation }) => {
     >
       <View style={styles.container}>
         <Logo />
-        <TextBox style={styles.title} text="FörderFuchs" />
+        <TextBox style={styles.title} text="FörderFox" />
       </View>
     </TouchableOpacity>
   );
