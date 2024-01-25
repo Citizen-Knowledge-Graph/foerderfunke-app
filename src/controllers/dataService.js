@@ -10,7 +10,7 @@ const loadDataIntoRedux = async (dispatch) => {
     const registryJson = await readJson(registryPath);
 
     // load registry into redux store
-    dispatch(registryReportAction(registryPath, registryJson));
+    dispatch(registryReportAction(registryPath.replace(".json", ""), registryJson));
 };
 
 export default loadDataIntoRedux;

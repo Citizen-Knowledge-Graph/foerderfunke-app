@@ -1,11 +1,11 @@
 {
     "citizen-child-allowance.ttl": {
-        "title": "Citzen Child Allowance",
+        "title": "Kindergeld",
         "description": "Sie haben Anspruch auf Kindergeld.",
         "path": "queries/citizen-child-allowance.ttl"
     },
     "citizen-ecar-bonus.ttl": {
-        "title": "Citzen Electric Car Bonus",
+        "title": "Unterstützung für den Kauf eines Elektroautos",
         "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto.",
         "path": "queries/citizen-ecar-bonus.ttl"
     },
