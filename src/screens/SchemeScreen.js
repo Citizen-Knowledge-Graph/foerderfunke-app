@@ -1,22 +1,11 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
-import { useNavigation } from '@react-navigation/native';
 
 const SchemeScreen = () => {
-    const navigation = useNavigation();
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <Button title="Back" onPress={() => navigation.goBack()} />
-            ),
-        });
-    }, [navigation]);
-
     return (
-        <ScreenView screenName={"Förderleistung"}>
+        <ScreenView screenName={"Förderleistung"} backButton={true}>
             <ScrollItem>
                 <View style={styles.section}>
                     <Image

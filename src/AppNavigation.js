@@ -15,6 +15,7 @@ export const SchemeStackNavigator = () => {
         <Stack.Navigator>
             <Stack.Screen name="StartStackScreen" component={StartScreen} options={{ headerShown: false }} />
             <Stack.Screen name="MainTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="SchemeStackScreen" component={SchemeScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }
