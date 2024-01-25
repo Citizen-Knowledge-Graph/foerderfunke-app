@@ -32,6 +32,8 @@ const ListItem = ({ item }) => {
 
 const FörderungenList = () => {
     const validationState = useSelector(state => state.validationReducer);
+    const registryState = useSelector(state => state.registryReducer);
+    console.log(registryState)
 
     return (
         <View style={styles.container}>
