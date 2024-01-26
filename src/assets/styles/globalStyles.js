@@ -1,6 +1,6 @@
 // globalStyles.js
-import { StyleSheet } from 'react-native';
-import { colors } from './themes';
+import {StyleSheet} from 'react-native';
+import {colors} from './themes';
 
 export const globalStyles = StyleSheet.create({
   primaryContainer: {
@@ -16,4 +16,3 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: colors.secondary,
   },
 });
-

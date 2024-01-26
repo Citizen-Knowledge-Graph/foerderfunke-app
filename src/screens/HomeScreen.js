@@ -7,7 +7,7 @@ import ScrollItem from '../components/ScrollItem';
 // Component
 const HomeScreen = () => {
   return (
-    <ScreenView screenName={"Home"}>
+    <ScreenView screenName={'Home'}>
       <ScrollItem>
         <InfoSection />
       </ScrollItem>

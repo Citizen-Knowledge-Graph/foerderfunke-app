@@ -1,6 +1,5 @@
-import { Parser } from 'n3';
-import rdfDataset from '@rdfjs/dataset'
-
+import {Parser} from 'n3';
+import rdfDataset from '@rdfjs/dataset';
 
 /**
  * Parses RDF quads from the given content.
@@ -12,18 +11,18 @@ import rdfDataset from '@rdfjs/dataset'
  * @returns {Promise<Array>} A Promise that resolves to an array of RDF quads parsed from the content.
  */
 function parseQuads(content, parser) {
-    return new Promise((resolve, reject) => {
-        const quads = [];
-        parser.parse(content, (error, newQuad, _) => {
-            if (error) {
-                reject(error);
-            } else if (newQuad) {
-                quads.push(newQuad);
-            } else {
-                resolve(quads);
-            }
-        });
+  return new Promise((resolve, reject) => {
+    const quads = [];
+    parser.parse(content, (error, newQuad, _) => {
+      if (error) {
+        reject(error);
+      } else if (newQuad) {
+        quads.push(newQuad);
+      } else {
+        resolve(quads);
+      }
     });
+  });
 }
 
 /**
@@ -34,11 +33,10 @@ function parseQuads(content, parser) {
  * @param {string} content - The Turtle content to be parsed.
  * @returns {Promise<Object>} A Promise that resolves to an RDF dataset containing the parsed quads.
  */
-export const parseTurtle = async (content) => {
-    const parser = new Parser();
+export const parseTurtle = async content => {
+  const parser = new Parser();
 
-    quads = await parseQuads(content, parser);
+  quads = await parseQuads(content, parser);
 
-    return rdfDataset.dataset(quads)
-}
-
+  return rdfDataset.dataset(quads);
+};

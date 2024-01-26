@@ -8,6 +8,6 @@ export const fontSizes = {
   small_medium: 16,
   medium: 20,
   large: 40,
-  title: 48
+  title: 48,
   // ... more sizes
 };

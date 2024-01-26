@@ -1,31 +1,28 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import fetchDataToDevice from './controllers/dataFetching';
 import runValidation from './controllers/validation';
 import loadDataIntoRedux from './controllers/dataService';
 
-const AppStartup = ({ children }) => {
-    const dispatch = useDispatch();
+const AppStartup = ({children}) => {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const initializeData = async () => {
+      // Fetch data from bundle to device - this will be API call later
+      await fetchDataToDevice();
 
-    useEffect(() => {
+      // Initialise redux store
+      await loadDataIntoRedux(dispatch);
 
-        const initializeData = async () => {
-            // Fetch data from bundle to device - this will be API call later
-            await fetchDataToDevice();
+      // Run initial validation
+      runValidation(dispatch);
+    };
 
-            // Initialise redux store
-            await loadDataIntoRedux(dispatch);
+    initializeData();
+  }, [dispatch]);
 
-            // Run initial validation
-            runValidation(dispatch);
-        };
-
-        initializeData();
-
-    }, [dispatch]);
-
-    return <>{children}</>
+  return <>{children}</>;
 };
 
 export default AppStartup;
