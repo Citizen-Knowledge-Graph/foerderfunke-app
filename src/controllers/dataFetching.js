@@ -1,7 +1,6 @@
 import {
-  readDirectory,
-  ensureDirectoryExists,
   copyFileToDevice,
+  copyDirectoryToDevice
 } from '../utilities/fileManagement';
 
 // Fetch individual file and copy it to device
@@ -10,16 +9,9 @@ const fetchFileToDevice = async relativefilename => {
 };
 
 // Fetch entire directory to device
-const fetchDirectoryToDevice = async directory => {
-  // ensure target directory exists
-  await ensureDirectoryExists(directory);
-
-  // read file names from bundle and fetch to device
-  const filepaths = await readDirectory(directory, 'bundle');
-
-  // copy individual files over
-  filepaths.map(filename => fetchFileToDevice(directory + '/' + filename));
-};
+const fetchDirectoryToDevice = async (directory) => {
+  await copyDirectoryToDevice(directory)
+}
 
 // Fetch all data and copy it to device
 const fetchDataToDevice = async () => {

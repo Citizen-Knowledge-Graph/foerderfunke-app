@@ -37,18 +37,15 @@ export const readFile = async (relativeFilePath, filesystem = 'device') => {
   const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem);
 
   try {
-    // Check if file exists
     const fileExists = await RNFS.exists(absoluteFilePath);
     if (!fileExists) {
       console.log(`File does not exist: ${relativeFilePath}`);
       return null;
     }
-
-    // Read the file
     const fileContents = await RNFS.readFile(absoluteFilePath, 'utf8');
     return fileContents;
   } catch (error) {
-    console.error('Error reading file:', error);
+    console.error(`Error reading file: ${relativeFilePath}`, error);
     return null;
   }
 };
@@ -96,6 +93,29 @@ export const readDirectory = async (
 };
 
 /**
+ * Asynchronously ensures that a directory exists in the device directory.
+ *
+ * This function checks if the specified directory exists in the device directory, and if not, creates it.
+ *
+ * @param {string} relativeDirectoryPath - The relative path of the directory to check or create.
+ * @returns {Promise<void>} A promise that resolves when the directory has been checked or created.
+ */
+export const ensureDirectoryExists = async (relativeDirectoryPath) => {
+  const absoluteDirectoryPath = setAbsolutePath(relativeDirectoryPath, "device")
+
+  const directoryExists = await RNFS.exists(absoluteDirectoryPath);
+  if (!directoryExists) {
+    try {
+      await RNFS.mkdir(absoluteDirectoryPath);
+      console.log(`Directory created at: ${relativeDirectoryPath}`);
+    } catch (error) {
+      console.error(`Error creating directory: ${error.message}`);
+    }
+  }
+};
+
+
+/**
  * Asynchronously copies a file from the bundle to the device directory.
  *
  * This function checks if the specified file exists in the device directory,
@@ -123,27 +143,33 @@ export const copyFileToDevice = async relativeFileName => {
 };
 
 /**
- * Asynchronously ensures that a directory exists in the device directory.
+ * Recursively copies a directory from the bundle to the device directory.
  *
- * This function checks if the specified directory exists in the device directory, and if not, creates it.
+ * This function checks if the specified directory and its subdirectories exist on the device, 
+ * and if not, creates them. It then copies all files from the bundle to the device directory, 
+ * applying the process recursively to subdirectories.
  *
- * @param {string} relativeDirectoryPath - The relative path of the directory to check or create.
- * @returns {Promise<void>} A promise that resolves when the directory has been checked or created.
+ * @param {string} relativeDirectoryPath - The relative path of the directory to be copied.
+ * @returns {Promise<void>} A promise that resolves when the entire directory has been copied.
  */
-export const ensureDirectoryExists = async relativeDirectoryPath => {
-  const absoluteDirectoryPath = setAbsolutePath(
-    relativeDirectoryPath,
-    'device',
-  );
+export const copyDirectoryToDevice = async (relativeDirectoryPath) => {
+  const bundleDirPath = setAbsolutePath(relativeDirectoryPath, "bundle");
 
-  const directoryExists = await RNFS.exists(absoluteDirectoryPath);
-  if (!directoryExists) {
-    try {
-      await RNFS.mkdir(absoluteDirectoryPath);
-      console.log(`Directory created at: ${relativeDirectoryPath}`);
-    } catch (error) {
-      console.error(`Error creating directory: ${error.message}`);
-      // Handle any errors, such as permissions issues
+  try {
+
+    await ensureDirectoryExists(relativeDirectoryPath);
+
+    const items = await RNFS.readDir(bundleDirPath);
+
+    for (let item of items) {
+      const relativeItemPath = `${relativeDirectoryPath}/${item.name}`;
+      if (item.isDirectory()) {
+        await copyDirectoryToDevice(relativeItemPath);
+      } else if (item.isFile()) {
+        await copyFileToDevice(relativeItemPath);
+      }
     }
+  } catch (error) {
+    console.error(`Error copying directory ${bundleDirPath} to device: `, error);
   }
 };

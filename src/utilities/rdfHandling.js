@@ -1,4 +1,4 @@
-import {Parser} from 'n3';
+import { Parser } from 'n3';
 import rdfDataset from '@rdfjs/dataset';
 
 /**

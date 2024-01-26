@@ -1,37 +1,37 @@
 {
-    "citizen-child-allowance.ttl": {
+    "citizen-child-allowance": {
         "title": "Kindergeld",
         "description": "Sie haben Anspruch auf Kindergeld.",
-        "path": "queries/citizen-child-allowance.ttl"
+        "path": "queries/citizen-child-allowance"
     },
-    "citizen-ecar-bonus.ttl": {
+    "citizen-ecar-bonus": {
         "title": "Unterstützung für den Kauf eines Elektroautos",
         "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto.",
-        "path": "queries/citizen-ecar-bonus.ttl"
+        "path": "queries/citizen-ecar-bonus"
     },
-    "citizen-insulation-bonus.ttl": {
-        "title": "Citzen Insulation Bonus",
+    "citizen-insulation-bonus": {
+        "title": "Förderung einer neuen Wärmedämmung",
         "description": "Sie haben Anspruch auf eine Förderung einer neuen Hausdämmung.",
-        "path": "queries/citizen-insulation-bonus.ttl"
+        "path": "queries/citizen-insulation-bonus"
     },
-    "citizen-solar-funding.ttl": {
-        "title": "Citzen Solar Funding",
+    "citizen-solar-funding": {
+        "title": "Förderung einer neuen Solaranlange",
         "description": "Sie haben Anspruch auf eine Förderung neuer Solaranlagen.",
-        "path": "queries/citizen-solar-funding.ttl"
+        "path": "queries/citizen-solar-funding"
     },
-    "citizen-wohngeld.ttl": {
-        "title": "Citzen Housing Benefit",
+    "citizen-wohngeld": {
+        "title": "Wohngeld",
         "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben.",
-        "path": "queries/citizen-wohngeld.ttl"
+        "path": "queries/citizen-wohngeld"
     },
-    "municipality-sportfield-funding.ttl": {
-        "title": "Municipality Sportfield Funding",
+    "municipality-sportfield-funding": {
+        "title": "Förderung einer neuen Sportanlange",
         "description": "Ihre Gemeinde hat Anspruch auf die Förderung neuer Sportanlagen.",
-        "path": "queries/municipality-sportfield-funding.ttl"
+        "path": "queries/municipality-sportfield-funding"
     },
-    "ngo-sustainability-funding.ttl": {
-        "title": "NGO Sustainability Funding",
+    "ngo-sustainability-funding": {
+        "title": "Förderung für nachhaltige NGOs",
         "description": "Ihre NGO hat Anspruch auf eine Förderung.",
-        "path": "queries/ngo-sustainability-funding.ttl"
+        "path": "queries/ngo-sustainability-funding"
     }
 }
