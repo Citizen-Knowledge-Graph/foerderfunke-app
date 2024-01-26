@@ -1,20 +1,20 @@
-@prefix ckg: <http://ckg.de/default#> .
+@prefix fox: <https://foerderfox.org/default#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 
-ckg:this a ckg:CitizenProfile .
+fox:this a fox:CitizenProfile .
 
-ckg:HouseA a ckg:House ;
-           ckg:roofArea 90 ;
-           ckg:houseAge 15 .
+fox:HouseA a fox:House ;
+           fox:roofArea 90 ;
+           fox:houseAge 15 .
 
-ckg:CarA a ckg:Car ;
-         ckg:carAge 5 ;
-         ckg:carType "Electric" .
+fox:CarA a fox:Car ;
+         fox:carAge 5 ;
+         fox:carType "Electric" .
 
-ckg:citizen-a a ckg:Person, ckg:Citizen ;
-              ckg:owns ckg:HouseA ;
-              ckg:hasBirthday "2001-01-15"^^xsd:date ;
-              ckg:hasResidence "Berlin" ;
-              ckg:hasDrivingLicense true ;
-              ckg:owns ckg:CarA ;
-              ckg:hasChildren 2 .
+fox:citizen-a a fox:Person, fox:Citizen ;
+              fox:owns fox:HouseA ;
+              fox:hasBirthday "2001-01-15"^^xsd:date ;
+              fox:hasResidence "Berlin" ;
+              fox:hasDrivingLicense true ;
+              fox:owns fox:CarA ;
+              fox:hasChildren 2 .

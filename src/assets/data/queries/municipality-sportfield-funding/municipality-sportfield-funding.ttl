@@ -1,35 +1,35 @@
-@prefix ckg: <http://ckg.de/default#> .
+@prefix fox: <https://foerderfox.org/default#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-ckg:metadata ckg:author ckg:benjaminaaron ;
-             ckg:created "2023-10-27"^^xsd:date ;
-             ckg:title "Checks if municipalities are eligible to receive funding for building a sport field" ;
-             ckg:queryType ckg:dev ;
-             ckg:targetGroup ckg:Municipality ;
-             ckg:fundingProvider ckg:GermanState .
+fox:metadata fox:author fox:benjaminaaron ;
+             fox:created "2023-10-27"^^xsd:date ;
+             fox:title "Checks if municipalities are eligible to receive funding for building a sport field" ;
+             fox:queryType fox:dev ;
+             fox:targetGroup fox:Municipality ;
+             fox:fundingProvider fox:GermanState .
 
-ckg:TypeDeclarationShape
+fox:TypeDeclarationShape
     a sh:NodeShape ;
-    sh:targetNode ckg:this ;
+    sh:targetNode fox:this ;
     sh:property [
           sh:path rdf:type ;
-          sh:hasValue ckg:MunicipalityProfile ;
+          sh:hasValue fox:MunicipalityProfile ;
           sh:minCount 1 ;
       ] .
 
-ckg:MunicipalityEligibleForSportFieldFundingShape
+fox:MunicipalityEligibleForSportFieldFundingShape
     a sh:NodeShape ;
-    sh:targetClass ckg:Municipality ;
+    sh:targetClass fox:Municipality ;
     sh:property [
-          sh:path ckg:populuation ;
+          sh:path fox:populuation ;
           sh:datatype xsd:integer ;
           sh:minInclusive 10000 ;
           sh:message "Population is below the minimum required" ;
       ] ;
     sh:property [
-          sh:path ckg:numberOfSchools ;
+          sh:path fox:numberOfSchools ;
           sh:datatype xsd:integer ;
           sh:minInclusive 2 ;
           sh:message "Number of schools is below the minimum required" ;
