@@ -1,4 +1,4 @@
-package com.foerderplus
+package com.foerderfox
 
 import android.app.Application
 import com.facebook.react.PackageList

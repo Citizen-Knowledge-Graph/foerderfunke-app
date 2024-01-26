@@ -25,7 +25,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'FoerderPlus' do
+target 'FoerderFox' do
   config = use_native_modules!
 
   use_react_native!(
@@ -39,7 +39,7 @@ target 'FoerderPlus' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'FoerderPlusTests' do
+  target 'FoerderFoxTests' do
     inherit! :complete
     # Pods for testing
   end
