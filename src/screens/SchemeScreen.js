@@ -1,29 +1,54 @@
-import React from 'react';
-import {View, Text, Image, StyleSheet, Button} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet, Button } from 'react-native';
 import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
+import fetchHydrationData from '../controllers/hydration';
 
-const SchemeScreen = () => {
+const SchemeScreen = ({ route }) => {
+  const [data, setData] = useState({ title: '', sub_title: '', steps: [] });
+  const { id } = route.params
+
+
+  useEffect(() => {
+    // Function to load data
+
+    const loadData = async () => {
+      // Your data loading logic here
+      const hydrationData = await fetchHydrationData(id);
+
+      // make hydration available to component
+      setData(hydrationData);
+    };
+
+    // Call the function to load data
+    loadData();
+
+    // The useEffect hook will run this function every time `propToWatch` changes
+  }, [route]); // Dependency array
+
+
+
   return (
-    <ScreenView screenName={'Förderleistung'} backButton={true}>
+    <ScreenView screenName={data.title} backButton={true}>
       <ScrollItem>
         <View style={styles.section}>
           <Image
-            source={{uri: 'https://example.com/image.jpg'}} // Replace with your image URL
+            source={require('../assets/images/family_icon.png')}
             style={styles.image}
           />
           <Text style={styles.text}>
-            Here is some explanatory text about the Förderleistung.
+            {data.sub_title}
           </Text>
         </View>
       </ScrollItem>
       <ScrollItem>
         <View style={styles.section}>
           <Text style={styles.text}>
-            Short guide on how to apply for Förderleistung:
+            {data.title} können Sie folgendermaßen beantragen.
           </Text>
-          <Text style={styles.text}>1. Step one...</Text>
-          <Text style={styles.text}>2. Step two...</Text>
+          {data.steps.map((step, index) => (
+            <Text key={index} style={styles.text}>{index + 1}. {step}</Text>
+          ))}
         </View>
       </ScrollItem>
     </ScreenView>

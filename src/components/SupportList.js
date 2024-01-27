@@ -7,11 +7,11 @@ const ListHeader = () => {
   return <Text style={styles.listHeader}>Deine Förderungen</Text>;
 };
 
-const ListItem = ({ item }) => {
+const ListItem = ({ id, item }) => {
   const navigation = useNavigation();
 
   const handleListItemPress = () => {
-    navigation.navigate('SchemeStackScreen', {});
+    navigation.navigate('SchemeStackScreen', { id: id });
   };
 
   return (
@@ -42,7 +42,7 @@ const FörderungenList = () => {
       <ListHeader />
       {Object.keys(validationState).map(key => {
         if (validationState[key].conforms) {
-          return <ListItem key={key} item={registryState[key]} />;
+          return <ListItem key={key} id={key} item={registryState[key]} />;
         }
       })}
     </View>
