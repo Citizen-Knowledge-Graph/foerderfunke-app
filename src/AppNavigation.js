@@ -1,11 +1,12 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import StartScreen from './screens/StartScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SchemeScreen from './screens/SchemeScreen';
+import GuideScreen from './screens/GuideScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();
@@ -16,17 +17,22 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name="StartStackScreen"
         component={StartScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="MainTabNavigator"
         component={BottomTabNavigator}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SchemeStackScreen"
         component={SchemeScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GuideStackScreen"
+        component={GuideScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -50,10 +56,10 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           // Include route in the function parameters
           headerShown: false,
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({ focused, color, size }) => {
             return <FontAwesome name={'home'} size={size} color={color} />;
           },
         })}
@@ -61,10 +67,10 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           // Include route in the function parameters
           headerShown: false,
-          tabBarIcon: ({focused, color, size}) => {
+          tabBarIcon: ({ focused, color, size }) => {
             return <FontAwesome name={'home'} size={size} color={color} />;
           },
         })}

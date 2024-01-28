@@ -29,7 +29,7 @@ const buildQueriesPath = (state, key) => {
 
 const buildGuidesPath = (state, key) => {
   const registry = state.guidesReducer["guides-registry"]
-  return `${registry[key].path}/${key}-hydration.json`;
+  return `${registry[key].path}`;
 }
 
 export default fetchHydrationData;

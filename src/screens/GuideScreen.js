@@ -4,7 +4,7 @@ import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
 import fetchHydrationData from '../controllers/hydration';
 
-const Guidecreen = ({ route }) => {
+const GuideScreen = ({ route }) => {
   const [data, setData] = useState({ title: '', sub_title: '', steps: [] });
   const { id } = route.params
 
@@ -26,8 +26,6 @@ const Guidecreen = ({ route }) => {
     // The useEffect hook will run this function every time `propToWatch` changes
   }, [route]); // Dependency array
 
-
-
   return (
     <ScreenView screenName={data.title} backButton={true}>
       <ScrollItem>
@@ -46,9 +44,6 @@ const Guidecreen = ({ route }) => {
           <Text style={styles.text}>
             Zu {data.title} sollten sie folgende Dinge wissen.
           </Text>
-          {data.steps.map((step, index) => (
-            <Text key={index} style={styles.text}>{index + 1}. {step}</Text>
-          ))}
         </View>
       </ScrollItem>
     </ScreenView>
@@ -71,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SchemeScreen;
+export default GuideScreen;

@@ -26,6 +26,9 @@ const fetchDataToDevice = async () => {
 
   // Fetch queries
   await fetchDirectoryToDevice('queries');
+
+  // Fetch guides
+  await fetchDirectoryToDevice('guides');
 };
 
 export default fetchDataToDevice;
