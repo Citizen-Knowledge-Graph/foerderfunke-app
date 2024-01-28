@@ -4,9 +4,9 @@ import queriesReducer from './queriesReducer';
 import guidesReducer from './guidesReducer';
 
 const rootReducer = combineReducers({
-  validationReducer,
-  queriesReducer,
-  guidesReducer
+  validationReducer: validationReducer,
+  queriesReducer: queriesReducer,
+  guidesReducer: guidesReducer
 });
 
 export default rootReducer;

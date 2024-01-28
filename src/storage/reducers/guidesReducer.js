@@ -1,8 +1,9 @@
-import { QUERIES_REPORT } from '../actions/queriesReport';
+import { GUIDES_REPORT } from "../actions/guidesReport";
 
-const queriesReducer = (state = {}, action) => {
+const guidesReducer = (state = {}, action) => {
+
   switch (action.type) {
-    case QUERIES_REPORT:
+    case GUIDES_REPORT:
       return {
         ...state,
         [action.payload.key]: action.payload.report,
@@ -12,4 +13,4 @@ const queriesReducer = (state = {}, action) => {
   }
 };
 
-export default queriesReducer;
+export default guidesReducer;
