@@ -33,7 +33,7 @@ const ListItem = ({ id, item }) => {
 
 const FörderungenList = () => {
   const validationState = useSelector(state => state.validationReducer);
-  const registryState = useSelector(state => state.registryReducer)[
+  const queriesState = useSelector(state => state.queriesReducer)[
     'query-registry'
   ];
 
@@ -42,7 +42,7 @@ const FörderungenList = () => {
       <ListHeader />
       {Object.keys(validationState).map(key => {
         if (validationState[key].conforms) {
-          return <ListItem key={key} id={key} item={registryState[key]} />;
+          return <ListItem key={key} id={key} item={queriesState[key]} />;
         }
       })}
     </View>

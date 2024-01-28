@@ -5,10 +5,10 @@ const fetchHydrationData = async (key) => {
 
   // load registry from redux
   const state = store.getState();
-  const registryState = state.registryReducer;
+  const queriesState = state.queriesReducer;
 
   // build path
-  const hydrationPath = `${registryState["query-registry"][key].path}/${key}-hydration.json`;
+  const hydrationPath = `${queriesState["query-registry"][key].path}/${key}-hydration.json`;
 
   // read in data
   return await readJson(hydrationPath);

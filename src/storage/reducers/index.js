@@ -1,10 +1,12 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import validationReducer from './validationReducer';
-import registryReducer from './registryReducer';
+import queriesReducer from './queriesReducer';
+import guidesReducer from './guidesReducer';
 
 const rootReducer = combineReducers({
   validationReducer,
-  registryReducer,
+  queriesReducer,
+  guidesReducer
 });
 
 export default rootReducer;
