@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Button } from 'react-native';
 import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
 import fetchHydrationData from '../controllers/hydration';
 
-const SchemeScreen = ({ route }) => {
+const Guidecreen = ({ route }) => {
   const [data, setData] = useState({ title: '', sub_title: '', steps: [] });
   const { id } = route.params
 
@@ -14,7 +14,7 @@ const SchemeScreen = ({ route }) => {
 
     const loadData = async () => {
       // Your data loading logic here
-      const hydrationData = await fetchHydrationData(id, "QUERY");
+      const hydrationData = await fetchHydrationData(id, "GUIDE");
 
       // make hydration available to component
       setData(hydrationData);
@@ -44,7 +44,7 @@ const SchemeScreen = ({ route }) => {
       <ScrollItem>
         <View style={styles.section}>
           <Text style={styles.text}>
-            {data.title} können Sie folgendermaßen beantragen.
+            Zu {data.title} sollten sie folgende Dinge wissen.
           </Text>
           {data.steps.map((step, index) => (
             <Text key={index} style={styles.text}>{index + 1}. {step}</Text>
