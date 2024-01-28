@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const SectionHeader = () => {
   return <Text style={styles.sectionHeader}>Förderguides</Text>;
 };
 
 const InfoSection = () => {
+  const guidesState = useSelector(state => state.guidesReducer)[
+    'guides-registry'
+  ]
+  const currentGuide = guidesState["citizen-child-allowance"]
+
   return (
     <View style={styles.container}>
       <SectionHeader />
@@ -18,10 +24,9 @@ const InfoSection = () => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.infoTitle}>Elterngeld</Text>
+          <Text style={styles.infoTitle}>{currentGuide.title}</Text>
           <Text style={styles.infoDescription}>
-            He'll want to use your yacht, and I don't want this thing smelling
-            like fish.
+            {currentGuide.description}
           </Text>
         </View>
       </View>

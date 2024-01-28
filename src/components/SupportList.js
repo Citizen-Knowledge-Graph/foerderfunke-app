@@ -36,9 +36,6 @@ const FörderungenList = () => {
   const queriesState = useSelector(state => state.queriesReducer)[
     'query-registry'
   ];
-  const guidesState = useSelector(state => state.guidesReducer)[
-    'guides-registry'
-  ]
 
   return (
     <View style={styles.container}>
