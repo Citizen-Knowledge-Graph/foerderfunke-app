@@ -1,6 +1,6 @@
 import React from 'react';
-import {Image} from 'react-native';
-import {StyleSheet} from 'react-native';
+import { Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // Styles
 const styles = StyleSheet.create({
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 // Component
 const Logo = () => {
   return (
-    <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
+    <Image source={require('../assets/images/AppIcon.jpg')} style={styles.logo} />
   );
 };
 
