@@ -1,11 +1,14 @@
 import React from 'react';
-import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 // Component
 const UserUpdate = () => {
+  const navigation = useNavigation()
+
   // Navigate to Edit Profile Screen
   const handleEditProfile = () => {
-    navigation.navigate('EditProfile'); // Replace with your actual navigation logic
+    navigation.navigate('UpdateProfileStackScreen'); // Replace with your actual navigation logic
   };
 
   return (

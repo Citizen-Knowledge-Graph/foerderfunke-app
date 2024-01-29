@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SchemeScreen from './screens/SchemeScreen';
 import GuideScreen from './screens/GuideScreen';
+import UpdateProfileScreen from './screens/UpdateProfileScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();
@@ -32,6 +33,11 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name="GuideStackScreen"
         component={GuideScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UpdateProfileStackScreen"
+        component={UpdateProfileScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

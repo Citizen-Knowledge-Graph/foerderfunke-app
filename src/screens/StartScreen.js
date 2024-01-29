@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Logo from '../components/Logo';
 import TextBox from '../components/TextBox';
 
 // Screen
-const StartScreen = ({navigation}) => {
+const StartScreen = ({ navigation }) => {
   return (
     <TouchableOpacity
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       onPress={() => navigation.navigate('MainTabNavigator')}
       activeOpacity={0.7} // Optional: for better touch feedback
     >
