@@ -1,4 +1,4 @@
-import { Parser } from 'n3';
+import {Parser} from 'n3';
 import rdfDataset from '@rdfjs/dataset';
 
 /**
@@ -35,8 +35,20 @@ function parseQuads(content, parser) {
  */
 export const parseTurtle = async content => {
   const parser = new Parser();
-
-  quads = await parseQuads(content, parser);
-
+  const quads = await parseQuads(content, parser);
   return rdfDataset.dataset(quads);
+};
+
+/**
+ * Serializes an RDF dataset to a canonical N-Quads string format.
+ *
+ * Takes an RDF/JS DatasetCore compliant dataset and converts it into a canonical
+ * N-Quads string. This format is a line-based representation of RDF quads,
+ * suitable for RDF data comparisons and storage. Although named `serializeTurtle`,
+ * the function outputs in N-Quads, a related format that also accommodates named graphs.
+ *
+ * @returns {string} Serialized dataset in canonical N-Quads format.
+ */
+export const serializeTurtle = dataset => {
+  return dataset.toCanonical();
 };

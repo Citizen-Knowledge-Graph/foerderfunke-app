@@ -1,6 +1,6 @@
 import {
   copyFileToDevice,
-  copyDirectoryToDevice
+  copyDirectoryToDevice,
 } from '../utilities/fileManagement';
 
 // Fetch individual file and copy it to device
@@ -9,9 +9,9 @@ const fetchFileToDevice = async relativefilename => {
 };
 
 // Fetch entire directory to device
-const fetchDirectoryToDevice = async (directory) => {
-  await copyDirectoryToDevice(directory)
-}
+const fetchDirectoryToDevice = async directory => {
+  await copyDirectoryToDevice(directory);
+};
 
 // Fetch all data and copy it to device
 const fetchDataToDevice = async () => {
