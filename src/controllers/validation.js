@@ -4,11 +4,6 @@ import { readFile, readJson } from '../utilities/fileManagement.js';
 import { parseTurtle } from '../utilities/rdfHandling.js';
 import validationReportAction from '../storage/actions/validationReport.js';
 
-function NamedReport(name, report) {
-  this.name = name;
-  this.report = report;
-}
-
 /**
  * Create report for profile
  */
@@ -19,6 +14,7 @@ const createValidationReport = async (shapes, profile) => {
 
 // run validation
 const runValidation = async dispatch => {
+
   // set up filepaths
   const userProfilePath = 'user-profile.ttl';
   const queryRegistryPath = 'query-registry.json';
