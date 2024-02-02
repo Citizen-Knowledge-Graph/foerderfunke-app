@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
 import fetchHydrationData from '../controllers/hydration';
 
-const SchemeScreen = ({ route }) => {
-  const [data, setData] = useState({ title: '', sub_title: '', steps: [] });
-  const { id } = route.params
-
+const SchemeScreen = ({route}) => {
+  const [data, setData] = useState({title: '', sub_title: '', steps: []});
+  const {id} = route.params;
 
   useEffect(() => {
     // Function to load data
 
     const loadData = async () => {
       // Your data loading logic here
-      const hydrationData = await fetchHydrationData(id, "QUERY");
+      const hydrationData = await fetchHydrationData(id, 'QUERY');
 
       // make hydration available to component
       setData(hydrationData);
@@ -26,8 +25,6 @@ const SchemeScreen = ({ route }) => {
     // The useEffect hook will run this function every time `propToWatch` changes
   }, [route]); // Dependency array
 
-
-
   return (
     <ScreenView screenName={data.title} backButton={true}>
       <ScrollItem>
@@ -36,9 +33,7 @@ const SchemeScreen = ({ route }) => {
             source={require('../assets/images/family_icon.png')}
             style={styles.image}
           />
-          <Text style={styles.text}>
-            {data.sub_title}
-          </Text>
+          <Text style={styles.text}>{data.sub_title}</Text>
         </View>
       </ScrollItem>
       <ScrollItem>
@@ -47,7 +42,9 @@ const SchemeScreen = ({ route }) => {
             {data.title} können Sie folgendermaßen beantragen.
           </Text>
           {data.steps.map((step, index) => (
-            <Text key={index} style={styles.text}>{index + 1}. {step}</Text>
+            <Text key={index} style={styles.text}>
+              {index + 1}. {step}
+            </Text>
           ))}
         </View>
       </ScrollItem>

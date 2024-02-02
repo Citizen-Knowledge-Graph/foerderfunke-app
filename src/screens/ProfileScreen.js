@@ -3,11 +3,11 @@ import ScreenView from '../components/ScreenView';
 import UserProfile from '../components/UserProfile';
 import ScrollItem from '../components/ScrollItem';
 import UserUpdate from '../components/UserUpdate';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 // Component
 const ProfileScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   // Navigate to Edit Profile Screen
   const handleEditProfile = () => {

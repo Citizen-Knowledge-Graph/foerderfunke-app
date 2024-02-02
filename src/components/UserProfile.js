@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
+import {parseTurtle} from '../utilities/rdfHandling';
 
 // Dummy user data
 const userData = {
@@ -16,6 +18,24 @@ const userData = {
 
 // Component
 const UserProfile = () => {
+  const serializedUserData = useSelector(state => state.userReducer);
+  const [deserializedData, setDeserializedData] = useState(null);
+
+  useEffect(() => {
+    const performDeserialization = async () => {
+      if (serializedUserData && serializedUserData['user-profile']) {
+        try {
+          const data = await parseTurtle(serializedUserData['user-profile']);
+          setDeserializedData(data);
+        } catch (error) {
+          console.error('Deserialization error:', error);
+        }
+      }
+    };
+
+    performDeserialization();
+  }, [serializedUserData]);
+
   return (
     <View style={styles.userSection}>
       <Image
@@ -55,7 +75,7 @@ const UserProfile = () => {
           </View>
           <View style={styles.dataItem}>
             <Text style={styles.userData}>Company: </Text>
-            <Text style={styles.userData}>{userData.company}</Text>
+            <Text>Deserialized Data:</Text>
           </View>
         </View>
       </View>

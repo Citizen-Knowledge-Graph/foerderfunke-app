@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const SectionHeader = () => {
   return <Text style={styles.sectionHeader}>Förderguides</Text>;
@@ -11,11 +11,11 @@ const InfoSection = () => {
   const navigation = useNavigation(); // Get navigation prop
   const guidesState = useSelector(state => state.guidesReducer)[
     'guides-registry'
-  ]
-  const currentGuide = guidesState["citizen-child-allowance"]
+  ];
+  const currentGuide = guidesState['citizen-child-allowance'];
 
   const handleListItemPress = () => {
-    navigation.navigate('GuideStackScreen', { id: "citizen-child-allowance" });
+    navigation.navigate('GuideStackScreen', {id: 'citizen-child-allowance'});
   };
 
   return (
@@ -23,8 +23,7 @@ const InfoSection = () => {
       <SectionHeader />
       <TouchableOpacity
         style={styles.infoSection}
-        onPress={handleListItemPress}
-      >
+        onPress={handleListItemPress}>
         <View style={styles.imageFrame}>
           <Image
             source={require('../assets/images/family_icon.png')}
@@ -34,9 +33,7 @@ const InfoSection = () => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.infoTitle}>{currentGuide.title}</Text>
-          <Text style={styles.infoDescription}>
-            {currentGuide.description}
-          </Text>
+          <Text style={styles.infoDescription}>{currentGuide.description}</Text>
         </View>
       </TouchableOpacity>
     </View>
