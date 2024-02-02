@@ -42,13 +42,13 @@ const loadGuidesRegistry = async dispatch => {
 
 const loadDataIntoRedux = async dispatch => {
   // load user profile
-  //await loadUserProfile(dispatch);
+  await loadUserProfile(dispatch);
 
   // load query registry
-  await loadQueryRegistry(dispatch);
+  //await loadQueryRegistry(dispatch);
 
   // load guides registry
-  await loadGuidesRegistry(dispatch);
+  //await loadGuidesRegistry(dispatch);
 };
 
 export default loadDataIntoRedux;

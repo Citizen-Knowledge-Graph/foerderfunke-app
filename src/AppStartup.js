@@ -16,7 +16,7 @@ const AppStartup = ({children}) => {
       await loadDataIntoRedux(dispatch);
 
       // Run initial validation
-      await runValidation(dispatch);
+      //await runValidation(dispatch);
     };
 
     initializeData();

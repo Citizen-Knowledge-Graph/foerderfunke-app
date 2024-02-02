@@ -1,5 +1,6 @@
-import {Parser} from 'n3';
+import {DataFactory, Parser, Writer} from 'n3';
 import rdfDataset from '@rdfjs/dataset';
+import {compileNode} from 'shacl-engine/lib/validations/shape';
 
 /**
  * Parses RDF quads from the given content.
@@ -10,7 +11,7 @@ import rdfDataset from '@rdfjs/dataset';
  * @param {Object} parser - The parser object used to parse the content. It should have a `parse` method that takes content and a callback.
  * @returns {Promise<Array>} A Promise that resolves to an array of RDF quads parsed from the content.
  */
-function parseQuads(content, parser) {
+const parseQuads = (content, parser) => {
   return new Promise((resolve, reject) => {
     const quads = [];
     parser.parse(content, (error, newQuad, _) => {
@@ -23,7 +24,7 @@ function parseQuads(content, parser) {
       }
     });
   });
-}
+};
 
 /**
  * Asynchronously parses Turtle content into an RDF dataset.
@@ -49,6 +50,28 @@ export const parseTurtle = async content => {
  *
  * @returns {string} Serialized dataset in canonical N-Quads format.
  */
-export const serializeTurtle = dataset => {
-  return dataset.toCanonical();
+export const serializeTurtle = async dataset => {
+  const writer = new Writer({format: 'Turtle'});
+  dataset._quads.forEach(({subject, predicate, object, graph}) => {
+    writer.addQuad(
+      DataFactory.namedNode(subject.value),
+      DataFactory.namedNode(predicate.value),
+      object.termType === 'Literal'
+        ? DataFactory.literal(object.value, object.datatype || object.language)
+        : DataFactory.namedNode(object.value),
+      graph.value
+        ? DataFactory.namedNode(graph.value)
+        : DataFactory.defaultGraph(),
+    );
+  });
+
+  return new Promise((resolve, reject) => {
+    writer.end((error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
 };
