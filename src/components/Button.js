@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const BasicButton = ({title}) => {
   return (
     <View style={styles.buttonContainer}>
-      <Text style={styles.buttonText}>Icon</Text>
+      <Text style={styles.buttonText}>{title}</Text>
     </View>
   );
 };

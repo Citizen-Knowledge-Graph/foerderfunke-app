@@ -1,7 +1,7 @@
 import React from 'react';
 import ScreenView from '../components/ScreenView';
 import InfoSection from '../components/InfoSection';
-import FörderungenList from '../components/SupportList';
+import SupportList from '../components/SupportList';
 import ScrollItem from '../components/ScrollItem';
 import ButtonSection from '../components/ButtonSection';
 
@@ -13,7 +13,7 @@ const HomeScreen = () => {
         <ButtonSection />
       </ScrollItem>
       <ScrollItem>
-        <FörderungenList />
+        <SupportList />
       </ScrollItem>
       <ScrollItem>
         <InfoSection />
