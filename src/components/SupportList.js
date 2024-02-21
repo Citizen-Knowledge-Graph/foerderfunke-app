@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listHeader: {
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: 'bold',
     paddingTop: 16,
     backgroundColor: '#FFF', // Or any color you want for the background of the header

@@ -9,9 +9,8 @@ const ScrollItem = ({children, style}) => {
 // Styles
 const styles = StyleSheet.create({
   scrollItem: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    borderTopWidth: 3, // Defines the thickness of the top border
+    paddingHorizontal: 16,
+    paddingBottom: 16,
     borderColor: '#E0E0E0', // A light grey color for the border; replace with your desired color
   },
 });
