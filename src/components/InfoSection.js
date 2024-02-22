@@ -1,11 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import InfoItem from './InfoItem';
-
-const SectionHeader = () => {
-  return <Text style={styles.sectionHeader}>Förderguides</Text>;
-};
+import SectionHeader from './SectionHeader';
 
 const InfoSection = () => {
   const guidesState = useSelector(state => state.guidesReducer)[
@@ -14,7 +11,7 @@ const InfoSection = () => {
 
   return (
     <View style={styles.container}>
-      <SectionHeader />
+      <SectionHeader title={'Förderguides'} />
       <View style={styles.infoSection}>
         {Object.keys(guidesState).map(key => {
           if (guidesState[key]) {
@@ -33,13 +30,6 @@ const styles = StyleSheet.create({
   infoSection: {
     flexDirection: 'row', // Align items in a row
     alignItems: 'flex-start',
-  },
-  sectionHeader: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    paddingTop: 16,
-    paddingBottom: 4,
-    backgroundColor: '#FFF',
   },
 });
 

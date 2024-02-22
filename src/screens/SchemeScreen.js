@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
 import fetchHydrationData from '../controllers/hydration';
+import SectionHeader from '../components/SectionHeader';
 
 const SchemeScreen = ({route}) => {
   const [data, setData] = useState({title: '', sub_title: '', steps: []});
@@ -28,15 +29,17 @@ const SchemeScreen = ({route}) => {
   return (
     <ScreenView screenName={data.title} backButton={true}>
       <ScrollItem>
-        <View style={styles.section}>
-          <Image
-            source={require('../assets/images/family_icon.png')}
-            style={styles.image}
-          />
-          <Text style={styles.text}>{data.sub_title}</Text>
+        <SectionHeader title={data.title} />
+        <View style={styles.imagePlaceholder}>
+          <Text style={styles.imagePlaceholderTitle}>Image Placeholder</Text>
         </View>
       </ScrollItem>
       <ScrollItem>
+        <SectionHeader title={'Was sieht die Förderung aus?'} />
+        <View style={styles.section}>
+          <Text style={styles.text}>{data.description_long}</Text>
+        </View>
+        <SectionHeader title={'Beantragung'} />
         <View style={styles.section}>
           <Text style={styles.text}>
             {data.title} können Sie folgendermaßen beantragen.
@@ -53,9 +56,28 @@ const SchemeScreen = ({route}) => {
 };
 
 const styles = StyleSheet.create({
+  imagePlaceholder: {
+    height: 150,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 8,
+    borderWidth: 2,
+    borderColor: '#B0B0B0',
+    borderRadius: 5,
+  },
+  imagePlaceholderTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   section: {
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    marginTop: 8,
+    borderWidth: 2,
+    borderColor: '#B0B0B0',
+    borderRadius: 5,
   },
   image: {
     width: '100%',
@@ -63,7 +85,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   text: {
-    marginTop: 10,
     fontSize: 16,
   },
 });
