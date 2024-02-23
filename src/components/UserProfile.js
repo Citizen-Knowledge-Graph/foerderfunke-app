@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {parseTurtle} from '../utilities/rdfHandling';
+import SectionHeader from './SectionHeader';
 
 // Dummy user data
 const userData = {
@@ -37,13 +38,12 @@ const UserProfile = () => {
   }, [serializedUserData]);
 
   return (
-    <View style={styles.userSection}>
-      <Image
-        source={require('../assets/images/family_icon.png')}
-        style={styles.profileImage}
-      />
-      <Text style={styles.name}>{userData.name}</Text>
-      <Text style={styles.email}>{userData.email}</Text>
+    <View style={styles.container}>
+      <SectionHeader title={'Dein Profil'} />
+      <View style={styles.nameSection}>
+        <Text style={styles.name}>{userData.name}</Text>
+        <Text style={styles.email}>{userData.email}</Text>
+      </View>
       <View style={styles.userDataSection}>
         <View style={styles.dataSection}>
           <Text style={styles.dataSectionTitle}>Personal Data</Text>
@@ -87,36 +87,32 @@ const UserProfile = () => {
 const styles = StyleSheet.create({
   userSection: {
     flex: 1,
-    backgroundColor: '#FFF', // Assuming a white background; replace with your desired color
-    paddingTop: 16,
-    alignItems: 'center', // This centers the content horizontally
   },
-  profileImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75, // Makes it circular
-    marginBottom: 20,
-    borderWidth: 2, // Width of the border
+  nameSection: {
+    marginVertical: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderWidth: 2,
     borderColor: '#E0E0E0',
+    borderRadius: 5,
   },
   name: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
   email: {
     fontSize: 16,
-    marginBottom: 20,
   },
   userDataSection: {
     flex: 1,
-    width: '100%',
-    paddingHorizontal: 16,
   },
   dataSection: {
     paddingVertical: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+    paddingHorizontal: 16,
+    marginBottom: 8,
+    borderWidth: 2,
+    borderColor: '#E0E0E0',
+    borderRadius: 5,
   },
   dataSectionTitle: {
     fontSize: 14,

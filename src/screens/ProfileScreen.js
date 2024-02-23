@@ -4,6 +4,7 @@ import UserProfile from '../components/UserProfile';
 import ScrollItem from '../components/ScrollItem';
 import UserUpdate from '../components/UserUpdate';
 import {useNavigation} from '@react-navigation/native';
+import SectionHeader from '../components/SectionHeader';
 
 // Component
 const ProfileScreen = () => {
