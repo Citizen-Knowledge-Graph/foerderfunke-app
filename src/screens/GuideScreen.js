@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Image, StyleSheet, Button} from 'react-native';
 import ScrollItem from '../components/ScrollItem';
 import ScreenView from '../components/ScreenView';
 import fetchHydrationData from '../controllers/hydration';
+import SectionHeader from '../components/SectionHeader';
 
-const GuideScreen = ({ route }) => {
-  const [data, setData] = useState({ title: '', sub_title: '', steps: [] });
-  const { id } = route.params
-
+const GuideScreen = ({route}) => {
+  const [data, setData] = useState({title: '', sub_title: '', steps: []});
+  const {id} = route.params;
 
   useEffect(() => {
     // Function to load data
 
     const loadData = async () => {
       // Your data loading logic here
-      const hydrationData = await fetchHydrationData(id, "GUIDE");
+      const hydrationData = await fetchHydrationData(id, 'GUIDE');
 
       // make hydration available to component
       setData(hydrationData);
@@ -29,14 +29,9 @@ const GuideScreen = ({ route }) => {
   return (
     <ScreenView screenName={data.title} backButton={true}>
       <ScrollItem>
+        <SectionHeader title={data.title} />
         <View style={styles.section}>
-          <Image
-            source={require('../assets/images/family_icon.png')}
-            style={styles.image}
-          />
-          <Text style={styles.text}>
-            {data.sub_title}
-          </Text>
+          <Text style={styles.text}>{data.sub_title}</Text>
         </View>
       </ScrollItem>
       <ScrollItem>
@@ -53,7 +48,11 @@ const GuideScreen = ({ route }) => {
 const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderWidth: 2,
+    borderColor: '#B0B0B0',
+    borderRadius: 5,
   },
   image: {
     width: '100%',
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   text: {
-    marginTop: 10,
     fontSize: 16,
   },
 });
