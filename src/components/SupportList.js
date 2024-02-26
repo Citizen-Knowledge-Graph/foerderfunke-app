@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import SupportListItem from './SupportListItem';
 import SectionHeader from './SectionHeader';

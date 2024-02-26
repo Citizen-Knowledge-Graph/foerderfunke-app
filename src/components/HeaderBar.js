@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, StatusBar, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const HeaderBar = ({title, backButton}) => {
+const HeaderBar = ({backButton}) => {
   const navigation = useNavigation();
 
   return (
@@ -13,7 +13,6 @@ const HeaderBar = ({title, backButton}) => {
       ) : (
         <View style={styles.placeholderButton} />
       )}
-      <Text style={styles.headerTitle}>{title}</Text>
       <View style={styles.placeholderButton} />
     </View>
   );

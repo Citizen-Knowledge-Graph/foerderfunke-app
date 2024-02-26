@@ -7,10 +7,10 @@ const SectionHeader = ({title}) => {
 
 const styles = StyleSheet.create({
   sectionHeader: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    paddingTop: 16,
-    paddingBottom: 4,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     backgroundColor: '#FFF', // Or any color you want for the background of the header
   },
 });
