@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
-import {parseTurtle} from '../utilities/rdfHandling';
-import SectionHeader from './SectionHeader';
+import {parseTurtle} from '../../utilities/rdfHandling';
+import SectionHeader from '../generic/SectionHeader';
 
 // Dummy user data
 const userData = {

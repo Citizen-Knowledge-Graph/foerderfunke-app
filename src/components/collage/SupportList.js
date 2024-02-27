@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import SupportListItem from './SupportListItem';
-import SectionHeader from './SectionHeader';
+import SectionHeader from '../generic/SectionHeader';
 
 const SupportList = () => {
   const validationState = useSelector(state => state.validationReducer);
@@ -12,7 +12,6 @@ const SupportList = () => {
 
   return (
     <View style={styles.container}>
-      <SectionHeader title={'Deine Förderungen'} />
       {Object.keys(validationState).map(key => {
         if (validationState[key].conforms) {
           return (

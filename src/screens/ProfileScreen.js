@@ -1,10 +1,9 @@
 import React from 'react';
-import ScreenView from '../components/ScreenView';
-import UserProfile from '../components/UserProfile';
-import ScrollItem from '../components/ScrollItem';
-import UserUpdate from '../components/UserUpdate';
+import ScreenView from '../components/generic/ScreenView';
+import UserProfile from '../components/collage/UserProfile';
+import ScrollItem from '../components/generic/PrimaryContainer';
+import UserUpdate from '../components/collage/UserUpdate';
 import {useNavigation} from '@react-navigation/native';
-import SectionHeader from '../components/SectionHeader';
 
 // Component
 const ProfileScreen = () => {

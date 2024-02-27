@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet, Button} from 'react-native';
-import ScrollItem from '../components/ScrollItem';
-import ScreenView from '../components/ScreenView';
+import {View, Text, StyleSheet} from 'react-native';
+import ScrollItem from '../components/generic/PrimaryContainer';
+import ScreenView from '../components/generic/ScreenView';
 import fetchHydrationData from '../controllers/hydration';
-import SectionHeader from '../components/SectionHeader';
+import SectionHeader from '../components/generic/SectionHeader';
 
 const GuideScreen = ({route}) => {
   const [data, setData] = useState({title: '', sub_title: '', steps: []});

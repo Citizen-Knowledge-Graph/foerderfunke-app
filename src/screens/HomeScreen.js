@@ -1,15 +1,12 @@
 import React from 'react';
-import ScreenView from '../components/ScreenView';
-import SupportList from '../components/SupportList';
-import ScrollItem from '../components/ScrollItem';
+import ScreenView from '../components/generic/ScreenView';
+import SupportList from '../components/collage/SupportList';
 
 // Component
 const HomeScreen = () => {
   return (
-    <ScreenView screenName={'Home'}>
-      <ScrollItem>
-        <SupportList />
-      </ScrollItem>
+    <ScreenView screenName={'Deine Förderungen'}>
+      <SupportList />
     </ScreenView>
   );
 };

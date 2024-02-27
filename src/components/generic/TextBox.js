@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {StyleSheet} from 'react-native';
-import {fontSizes} from '../assets/styles/themes';
+import {fontSizes} from '../../assets/styles/fonts';
 
 // Styles
 const styles = StyleSheet.create({
