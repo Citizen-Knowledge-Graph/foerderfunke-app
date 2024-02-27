@@ -1,31 +1,31 @@
-@prefix fox: <https://foerderfox.org/default#> .
+@prefix ff: <https://foerderfunke.org/default#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-fox:TypeDeclarationShape
+ff:TypeDeclarationShape
     a sh:NodeShape ;
-    sh:targetNode fox:this ;
+    sh:targetNode ff:this ;
     sh:property [
           sh:path rdf:type ;
-          sh:hasValue fox:CitizenProfile ;
+          sh:hasValue ff:CitizenProfile ;
           sh:minCount 1 ;
       ] .
 
-fox:CitizenOwnsHouseShape
+ff:CitizenOwnsHouseShape
     a sh:NodeShape ;
-    sh:targetClass fox:Citizen ;
+    sh:targetClass ff:Citizen ;
     sh:property [
-          sh:path fox:owns ;
-          sh:class fox:House ;
+          sh:path ff:owns ;
+          sh:class ff:House ;
           sh:minCount 1 ;
       ] .
 
-fox:HouseEligibleForInsulationBonusShape
+ff:HouseEligibleForInsulationBonusShape
     a sh:NodeShape ;
-    sh:targetClass fox:House ;
+    sh:targetClass ff:House ;
     sh:property [
-          sh:path fox:roofArea ;
+          sh:path ff:roofArea ;
           sh:minCount 1 ;
           sh:datatype xsd:integer ;
           sh:minInclusive 50 ;

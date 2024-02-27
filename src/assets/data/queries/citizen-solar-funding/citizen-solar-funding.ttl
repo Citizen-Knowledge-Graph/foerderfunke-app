@@ -1,47 +1,47 @@
-@prefix fox: <https://foerderfox.org/default#> .
+@prefix ff: <https://foerderfunke.org/default#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-fox:metadata fox:author fox:benjaminaaron ;
-             fox:created "2023-10-26"^^xsd:date ;
-             fox:title "Checks if house owners are eligible for funding for solar panels" ;
-             fox:queryType fox:dev ;
-             fox:targetGroup fox:Citizen ;
-             fox:fundingProvider fox:GermanState .
+ff:metadata ff:author ff:benjaminaaron ;
+             ff:created "2023-10-26"^^xsd:date ;
+             ff:title "Checks if house owners are eligible for funding for solar panels" ;
+             ff:queryType ff:dev ;
+             ff:targetGroup ff:Citizen ;
+             ff:fundingProvider ff:GermanState .
 
-fox:TypeDeclarationShape
+ff:TypeDeclarationShape
     a sh:NodeShape ;
-    sh:targetNode fox:this ;
+    sh:targetNode ff:this ;
     sh:property [
           sh:path rdf:type ;
-          sh:hasValue fox:CitizenProfile ;
+          sh:hasValue ff:CitizenProfile ;
           sh:minCount 1 ;
       ] .
 
-fox:CitizenOwnsHouseShape
+ff:CitizenOwnsHouseShape
     a sh:NodeShape ;
-    sh:targetClass fox:Citizen ;
+    sh:targetClass ff:Citizen ;
     sh:property [
-        sh:path fox:owns ;
+        sh:path ff:owns ;
         sh:qualifiedValueShape [
-            sh:class fox:House ; # Shape that values must conform to, in this case, a House
+            sh:class ff:House ; # Shape that values must conform to, in this case, a House
         ] ;
         sh:qualifiedMinCount 1 ; # At least one value must conform to the above shape
     ] .
 
-fox:HouseEligibleForSolarFundingShape
+ff:HouseEligibleForSolarFundingShape
     a sh:NodeShape ;
-    sh:targetClass fox:House ;
+    sh:targetClass ff:House ;
     sh:property [
-        sh:path fox:roofArea ;
+        sh:path ff:roofArea ;
         sh:minCount 1 ;
         sh:datatype xsd:integer ;
         sh:minInclusive 100 ;
         sh:message "100" ;
     ] ;
     sh:property [
-        sh:path fox:houseAge ;
+        sh:path ff:houseAge ;
         sh:minCount 1 ;
         sh:datatype xsd:integer ;
         sh:maxInclusive 20 ;

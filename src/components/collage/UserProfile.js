@@ -14,7 +14,7 @@ const userData = {
   profession: 'Software Engineer',
   married: 'No',
   children: 2,
-  company: 'FörderFox',
+  company: 'FörderFunke',
 };
 
 // Component

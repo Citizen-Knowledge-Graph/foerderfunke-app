@@ -1,40 +1,40 @@
-@prefix fox: <https://foerderfox.org/default#> .
+@prefix ff: <https://foerderfunke.org/default#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-fox:metadata fox:author fox:benjaminaaron ;
-             fox:created "2023-10-27"^^xsd:date ;
-             fox:title "Checks if NGOs are eligible to receive sustainability funding" ;
-             fox:queryType fox:dev ;
-             fox:targetGroup fox:NGO;
-             fox:fundingProvider fox:CityOfBerlin .
+ff:metadata ff:author ff:benjaminaaron ;
+             ff:created "2023-10-27"^^xsd:date ;
+             ff:title "Checks if NGOs are eligible to receive sustainability funding" ;
+             ff:queryType ff:dev ;
+             ff:targetGroup ff:NGO;
+             ff:fundingProvider ff:CityOfBerlin .
 
-fox:TypeDeclarationShape
+ff:TypeDeclarationShape
     a sh:NodeShape ;
-    sh:targetNode fox:this ;
+    sh:targetNode ff:this ;
     sh:property [
           sh:path rdf:type ;
-          sh:hasValue fox:NGOProfile ;
+          sh:hasValue ff:NGOProfile ;
           sh:minCount 1 ;
       ] .
 
-fox:MunicipalityEligibleForSportFieldFundingShape
+ff:MunicipalityEligibleForSportFieldFundingShape
     a sh:NodeShape ;
-    sh:targetClass fox:NGO ;
+    sh:targetClass ff:NGO ;
     sh:property [
-          sh:path fox:employees ;
+          sh:path ff:employees ;
           sh:datatype xsd:integer ;
           sh:minInclusive 10 ;
           sh:message "Number of Employees is below the minimum required" ;
       ] ;
     sh:property [
-          sh:path fox:focusArea ;
+          sh:path ff:focusArea ;
           sh:in ( "Sustainability" ) ;
           sh:message "Focus area not applicable" ;
       ] ;
     sh:property [
-          sh:path fox:location ;
+          sh:path ff:location ;
           sh:in ( "Berlin" ) ;
           sh:message "Focus area not applicable" ;
       ] .

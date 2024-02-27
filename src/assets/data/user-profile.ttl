@@ -1,20 +1,20 @@
-@prefix fox: <https://foerderfox.org/default#> .
+@prefix ff: <https://foerderfunke.org/default#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 
-fox:this a fox:CitizenProfile .
+ff:this a ff:CitizenProfile .
 
-fox:HouseA a fox:House ;
-           fox:roofArea 90 ;
-           fox:houseAge 15 .
+ff:HouseA a ff:House ;
+           ff:roofArea 90 ;
+           ff:houseAge 15 .
 
-fox:CarA a fox:Car ;
-         fox:carAge 5 ;
-         fox:carType "Electric" .
+ff:CarA a ff:Car ;
+         ff:carAge 5 ;
+         ff:carType "Electric" .
 
-fox:citizen-a a fox:Person, fox:Citizen ;
-              fox:owns fox:HouseA ;
-              fox:hasBirthday "2001-01-15"^^xsd:date ;
-              fox:hasResidence "Berlin" ;
-              fox:hasDrivingLicense true ;
-              fox:owns fox:CarA ;
-              fox:hasChildren 2 .
+ff:citizen-a a ff:Person, ff:Citizen ;
+              ff:owns ff:HouseA ;
+              ff:hasBirthday "2001-01-15"^^xsd:date ;
+              ff:hasResidence "Berlin" ;
+              ff:hasDrivingLicense true ;
+              ff:owns ff:CarA ;
+              ff:hasChildren 2 .
