@@ -30,8 +30,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   backButton: {
-    fontSize: fontSizes.medium,
-    color: fontColors.primary,
     paddingRight: 16,
   },
   sectionHeader: {

@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import SectionHeader from '../generic/SectionHeader';
 import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
 import TextBoxHeader from '../generic/TextBoxHeader';
@@ -30,18 +29,6 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.large,
     fontWeight: fontWeights.bold,
     color: fontColors.tertiary,
-  },
-  section: {
-    marginBottom: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    marginTop: 8,
-    borderWidth: 2,
-    borderColor: '#B0B0B0',
-    borderRadius: 5,
-  },
-  text: {
-    fontSize: 16,
   },
 });
 
