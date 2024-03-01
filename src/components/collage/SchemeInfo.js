@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import SectionHeader from '../generic/SectionHeader';
 import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
+import TextBoxHeader from '../generic/TextBoxHeader';
 
 const SchemeInfo = ({data}) => {
   return (
@@ -10,21 +11,8 @@ const SchemeInfo = ({data}) => {
       <View style={styles.imagePlaceholder}>
         <Text style={styles.imagePlaceholderTitle}>Image Placeholder</Text>
       </View>
-      <SectionHeader title={'Was sieht die Förderung aus?'} />
-      <View style={styles.section}>
-        <Text style={styles.text}>{data.description_long}</Text>
-      </View>
-      <SectionHeader title={'Beantragung'} />
-      <View style={styles.section}>
-        <Text style={styles.text}>
-          {data.title} können Sie folgendermaßen beantragen.
-        </Text>
-        {data.steps.map((step, index) => (
-          <Text key={index} style={styles.text}>
-            {index + 1}. {step}
-          </Text>
-        ))}
-      </View>
+      <TextBoxHeader title={data.title} text={data.description_long} />
+      <TextBoxHeader title={data.title} text={data.description_long} />
     </View>
   );
 };

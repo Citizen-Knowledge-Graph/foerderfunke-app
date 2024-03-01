@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   sectionHeader: {
     fontSize: fontSizes.large,
     fontWeight: fontWeights.bold,
+    paddingBottom: 8,
   },
 });
 
