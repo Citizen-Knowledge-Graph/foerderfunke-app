@@ -16,7 +16,6 @@ const ProfileScreen = () => {
   return (
     <ScreenView screenName={'Profile'}>
       <UserProfile />
-      <UserUpdate />
     </ScreenView>
   );
 };

@@ -70,7 +70,7 @@ const UserProfile = () => {
 const styles = StyleSheet.create({
   imageContainer: {
     height: 150,
-    backgroundColor: colors.beige,
+    backgroundColor: colors.dark_blue,
     padding: 16,
     borderRadius: 5,
   },
@@ -80,19 +80,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
   },
-  imagePlaceholderTitle: {
-    fontSize: fontSizes.large,
-    fontWeight: fontWeights.bold,
-    color: fontColors.secondary,
-  },
   name: {
     fontSize: fontSizes.large,
     fontWeight: fontWeights.bold,
-    color: fontColors.primary,
+    color: fontColors.tertiary,
   },
   surname: {
     fontSize: fontSizes.medium,
-    color: fontColors.secondary,
+    color: fontColors.quaternary,
   },
   userSection: {
     flex: 1,
