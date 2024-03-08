@@ -5,6 +5,8 @@ import {parseTurtle} from '../../utilities/rdfHandling';
 import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
 import UserItem from './UserItem';
+import grapoi from 'grapoi';
+import rdf from 'rdf-ext';
 
 // Dummy user data
 const userData = {
@@ -18,6 +20,11 @@ const userData = {
   married: 'No',
   children: 2,
   company: 'FörderFunke',
+};
+
+const ns = {
+  ff: rdf.namespace('https://foerderfunke.org/default#'),
+  xsd: rdf.namespace('http://www.w3.org/2001/XMLSchema#'),
 };
 
 // Component
@@ -39,6 +46,26 @@ const UserProfile = () => {
 
     performDeserialization();
   }, [serializedUserData]);
+
+  useEffect(() => {
+    const dataset = rdf.dataset(deserializedData);
+    if (deserializedData) {
+      const houses = grapoi({
+        dataset,
+        factory: rdf,
+        term: ns.ff('HouseA'),
+      });
+
+      for (const house of houses.out(ns.ff('roofArea')).quads()) {
+        console.log(`\t${house.object.value}`);
+      }
+      //console.log('Houses owned by citizen-a:', houses);
+
+      // for (const quad of citizenA.out(ns.ff('owns')).out(ns.ff('a')).quads()) {
+      //   console.log(`\t${quad.object.value}`);
+      // }
+    }
+  }, [deserializedData]);
 
   return (
     <View>
