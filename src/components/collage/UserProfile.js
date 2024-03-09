@@ -5,8 +5,8 @@ import {parseTurtle} from '../../utilities/rdfHandling';
 import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
 import UserItem from './UserItem';
-import grapoi from 'grapoi';
 import rdf from 'rdf-ext'; // Assume rdf-ext is used for RDF operations
+import {retrieveNodes} from '../../utilities/graphManagement';
 
 // Dummy user data
 const userData = {
@@ -20,12 +20,6 @@ const userData = {
   married: 'No',
   children: 2,
   company: 'FörderFunke',
-};
-
-const ns = {
-  ff: rdf.namespace('https://foerderfunke.org/default#'),
-  rdf: rdf.namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#'),
-  xsd: rdf.namespace('http://www.w3.org/2001/XMLSchema#'),
 };
 
 // Component
@@ -51,23 +45,10 @@ const UserProfile = () => {
   useEffect(() => {
     const dataset = rdf.dataset(deserializedData);
     if (deserializedData) {
-      const houses = grapoi({
-        dataset,
-        factory: rdf,
-        term: ns.ff('citizen-a'),
-      });
-
-      const houseType = ns.ff('House'); // Define the type you're filtering for
-      const ownedHouses = []; // Array to store the filtered results
-
-      for (const quad of houses.out(ns.ff('owns')).quads()) {
-        const matches = dataset.match(quad.object, ns.rdf('type'), houseType);
-
-        // If there are matches, it means this object is a House, so log its value and add to the array
-        if (matches.size > 0) {
-          console.log(`\tHouse: ${quad.object.value}`);
-          ownedHouses.push(quad.object); // Add the object to your list of houses
-        }
+      const targetNodes = retrieveNodes(dataset, 'citizen-a', 'hasBirthday');
+      for (const node of targetNodes) {
+        console.log('Citizen owns: ');
+        console.log(node.object.value);
       }
     }
   }, [deserializedData]);

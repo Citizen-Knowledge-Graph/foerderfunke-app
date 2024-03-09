@@ -1,11 +1,12 @@
 import {DataFactory, Parser, Writer} from 'n3';
 import rdfDataset from '@rdfjs/dataset';
-import {compileNode} from 'shacl-engine/lib/validations/shape';
 
 /**
  * Parses RDF quads from the given content.
  *
- * This function takes a string of content and a parser object, and returns a Promise that resolves to an array of quads. The Promise is rejected if the parser encounters an error.
+ * This function takes a string of content and a parser object, and returns a
+ * Promise that resolves to an array of quads. The Promise is rejected if the
+ * parser encounters an error.
  *
  * @param {string} content - The string content to be parsed into RDF quads.
  * @param {Object} parser - The parser object used to parse the content. It should have a `parse` method that takes content and a callback.
