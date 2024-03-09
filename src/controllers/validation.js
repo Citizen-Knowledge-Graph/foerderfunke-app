@@ -16,7 +16,7 @@ const createValidationReport = async (shapes, profile) => {
 const runValidation = async dispatch => {
   // set up filepaths
   const userProfilePath = 'user-profile.ttl';
-  const userValidationPath = 'entity_validation/person.ttl';
+  const userValidationPath = 'entity-validation/person.ttl';
   const queryRegistryPath = 'query-registry.json';
 
   // load user profile to shapes
@@ -29,8 +29,8 @@ const runValidation = async dispatch => {
 
   // validate user profile
   const userReport = await createValidationReport(userValidation, userProfile);
-  if (userReport.conforms) {
-    console.log('User profile conforms to constraints');
+  if (!userReport.conforms) {
+    throw new Error('User profile does not conform to constraints');
   }
 
   // load query registry

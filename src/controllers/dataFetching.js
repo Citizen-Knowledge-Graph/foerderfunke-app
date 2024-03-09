@@ -31,7 +31,7 @@ const fetchDataToDevice = async () => {
   await fetchDirectoryToDevice('guides');
 
   // Fetch entity validation
-  await fetchDirectoryToDevice('entity_validation');
+  await fetchDirectoryToDevice('entity-validation');
 };
 
 export default fetchDataToDevice;
