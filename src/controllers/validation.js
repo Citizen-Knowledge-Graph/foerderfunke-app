@@ -16,11 +16,22 @@ const createValidationReport = async (shapes, profile) => {
 const runValidation = async dispatch => {
   // set up filepaths
   const userProfilePath = 'user-profile.ttl';
+  const userValidationPath = 'entity_validation/person.ttl';
   const queryRegistryPath = 'query-registry.json';
 
   // load user profile to shapes
   const userProfileString = await readFile(userProfilePath);
   const userProfile = await parseTurtle(userProfileString);
+
+  // load user validation to shapes
+  const userValidationString = await readFile(userValidationPath);
+  const userValidation = await parseTurtle(userValidationString);
+
+  // validate user profile
+  const userReport = await createValidationReport(userValidation, userProfile);
+  if (userReport.conforms) {
+    console.log('User profile conforms to constraints');
+  }
 
   // load query registry
   const queryRegistry = await readJson(queryRegistryPath);
