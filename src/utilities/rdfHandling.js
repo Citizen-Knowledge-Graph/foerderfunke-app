@@ -1,5 +1,5 @@
 import {DataFactory, Parser, Writer} from 'n3';
-import rdfDataset from '@rdfjs/dataset';
+import rdf from 'rdf-ext';
 
 /**
  * Parses RDF quads from the given content.
@@ -38,7 +38,7 @@ const parseQuads = (content, parser) => {
 export const parseTurtle = async content => {
   const parser = new Parser();
   const quads = await parseQuads(content, parser);
-  return rdfDataset.dataset(quads);
+  return rdf.dataset(quads);
 };
 
 /**
@@ -75,4 +75,21 @@ export const serializeTurtle = async dataset => {
       }
     });
   });
+};
+
+/**
+ * Reads and parses a list of Turtle strings into a single combined RDF/JS dataset.
+ * @param {string[]} turtleStrings - An array of Turtle strings to be parsed.
+ * @returns {Promise<DatasetCore>} A Promise that resolves to a combined RDF/JS
+ * dataset containing all parsed triples.
+ */
+export const combineTurtleStringsIntoDataset = async turtleStrings => {
+  const combinedDataset = rdf.dataset();
+
+  for (const turtleString of turtleStrings) {
+    const dataset = await parseTurtle(turtleString);
+    combinedDataset.addAll(dataset);
+  }
+
+  return combinedDataset;
 };

@@ -1,9 +1,11 @@
 import rdfDataModel from '@rdfjs/data-model';
 import Validator from 'shacl-engine/Validator.js';
 import {readFile, readJson} from '../utilities/fileManagement.js';
-import {parseTurtle} from '../utilities/rdfHandling.js';
+import {
+  combineTurtleStringsIntoDataset,
+  parseTurtle,
+} from '../utilities/rdfHandling.js';
 import validationReportAction from '../storage/actions/validationReport.js';
-import rdf from 'rdf-ext';
 
 /**
  * Create report for profile
@@ -30,30 +32,26 @@ const runValidation = async dispatch => {
   );
 
   // Iterate through entity registry
-  const entityShapes = rdf.dataset();
+  const entityShapesArray = [];
   for (let key in enitityValidationRegistry) {
     if (enitityValidationRegistry.hasOwnProperty(key)) {
       const constraintsPath = enitityValidationRegistry[key].path;
-      console.log('constraints path: ', constraintsPath);
       const entityString = await readFile(constraintsPath);
-      console.log('entity string: ', entityString);
-      const entityProfile = await parseTurtle(entityString);
-      entityShapes.merge(entityProfile);
+      entityShapesArray.push(entityString);
     }
   }
 
   // run validation for entity shapes
+  const entityShapes = await combineTurtleStringsIntoDataset(entityShapesArray);
   const entityReport = await createValidationReport(entityShapes, userProfile);
-  if (entityReport.conforms) {
-    console.log('Entity validation passed');
-  } else {
-    console.log('Entity validation failed');
+  if (!entityReport.conforms) {
+    console.error('Entity validation failed');
   }
 
   // load query registry
   const queryRegistry = await readJson(queryRegistryPath);
 
-  // Iterate through registry
+  // Iterate through queries gitregistry
   for (let key in queryRegistry) {
     if (queryRegistry.hasOwnProperty(key)) {
       console.log('Running validation for: ', key);
