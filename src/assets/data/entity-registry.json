@@ -1,0 +1,10 @@
+{
+  "person": {
+    "title": "Person Shape",
+    "path": "entity-validation/person.ttl"
+  },
+  "house": {
+    "title": "House Shape",
+    "path": "entity-validation/house.ttl"
+  }
+}

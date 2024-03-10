@@ -3,6 +3,7 @@ import Validator from 'shacl-engine/Validator.js';
 import {readFile, readJson} from '../utilities/fileManagement.js';
 import {parseTurtle} from '../utilities/rdfHandling.js';
 import validationReportAction from '../storage/actions/validationReport.js';
+import rdf from 'rdf-ext';
 
 /**
  * Create report for profile
@@ -16,7 +17,7 @@ const createValidationReport = async (shapes, profile) => {
 const runValidation = async dispatch => {
   // set up filepaths
   const userProfilePath = 'user-profile.ttl';
-  const userValidationPath = 'entity-validation/person.ttl';
+  const enitityValidationRegistryPath = 'entity-registry.json';
   const queryRegistryPath = 'query-registry.json';
 
   // load user profile to shapes
@@ -24,13 +25,29 @@ const runValidation = async dispatch => {
   const userProfile = await parseTurtle(userProfileString);
 
   // load user validation to shapes
-  const userValidationString = await readFile(userValidationPath);
-  const userValidation = await parseTurtle(userValidationString);
+  const enitityValidationRegistry = await readJson(
+    enitityValidationRegistryPath,
+  );
 
-  // validate user profile
-  const userReport = await createValidationReport(userValidation, userProfile);
-  if (!userReport.conforms) {
-    throw new Error('User profile does not conform to constraints');
+  // Iterate through entity registry
+  const entityShapes = rdf.dataset();
+  for (let key in enitityValidationRegistry) {
+    if (enitityValidationRegistry.hasOwnProperty(key)) {
+      const constraintsPath = enitityValidationRegistry[key].path;
+      console.log('constraints path: ', constraintsPath);
+      const entityString = await readFile(constraintsPath);
+      console.log('entity string: ', entityString);
+      const entityProfile = await parseTurtle(entityString);
+      entityShapes.merge(entityProfile);
+    }
+  }
+
+  // run validation for entity shapes
+  const entityReport = await createValidationReport(entityShapes, userProfile);
+  if (entityReport.conforms) {
+    console.log('Entity validation passed');
+  } else {
+    console.log('Entity validation failed');
   }
 
   // load query registry

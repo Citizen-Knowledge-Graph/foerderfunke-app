@@ -1,0 +1,13 @@
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix ff:  <https://foerderfunke.org/default#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ff:HouseShape
+    a              sh:NodeShape ;
+    sh:targetClass ff:House ;
+    sh:property    [ sh:path         ff:roofArea ;
+                     sh:datatype     xsd:integer ;
+                     sh:minInclusive 1 ; ] ;
+    sh:property    [ sh:path         ff:houseAge ;
+                     sh:datatype     xsd:integer ;
+                     sh:minInclusive 0 ; ] .

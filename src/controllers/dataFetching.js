@@ -21,6 +21,9 @@ const fetchDataToDevice = async () => {
   // Fetch query registry
   await fetchFileToDevice('query-registry.json');
 
+  // Fetch entity registry
+  await fetchFileToDevice('entity-registry.json');
+
   // Fetch guide registry
   await fetchFileToDevice('guides-registry.json');
 
