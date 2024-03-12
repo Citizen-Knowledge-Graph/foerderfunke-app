@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@foerderfunke/matching-engine": "^0.2.1",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
