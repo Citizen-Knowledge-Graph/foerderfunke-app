@@ -20,6 +20,7 @@ bundle exec pod install
 # if dependencies were changed
 npm install
 # and in ios/
+pod update
 bundle exec pod install
 
 # from project root
