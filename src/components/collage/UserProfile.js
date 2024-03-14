@@ -4,9 +4,10 @@ import {useSelector} from 'react-redux';
 import {parseTurtle} from '../../utilities/rdfHandling';
 import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
-import UserItem from './UserItem';
 import rdf from 'rdf-ext'; // Assume rdf-ext is used for RDF operations
-import {retrieveNodes} from '../../utilities/graphManagement';
+import {retrieveAttribute} from '../../utilities/graphManagement';
+
+import ProfileList from './ProfileList';
 
 // Dummy user data
 const userData = {
@@ -42,17 +43,6 @@ const UserProfile = () => {
     performDeserialization();
   }, [serializedUserData]);
 
-  useEffect(() => {
-    const dataset = rdf.dataset(deserializedData);
-    if (deserializedData) {
-      const targetNodes = retrieveNodes(dataset, 'citizen-a', 'hasBirthday');
-      for (const node of targetNodes) {
-        console.log('Citizen owns: ');
-        console.log(node.object.value);
-      }
-    }
-  }, [deserializedData]);
-
   return (
     <View>
       <View style={styles.imageContainer}>
@@ -65,16 +55,9 @@ const UserProfile = () => {
           </View>
         </View>
       </View>
-      <UserItem category="age" value={userData.age} variant="blue" />
-      <UserItem category="residence" value={userData.residence} variant="" />
-      <UserItem
-        category="profession"
-        value={userData.profession}
-        variant="blue"
-      />
-      <UserItem category="married" value={userData.married} variant="" />
-      <UserItem category="children" value={userData.children} variant="blue" />
-      <UserItem category="company" value={userData.company} variant="" />
+      {deserializedData && (
+        <ProfileList profileData={rdf.dataset(deserializedData)} />
+      )}
     </View>
   );
 };
@@ -101,44 +84,6 @@ const styles = StyleSheet.create({
   surname: {
     fontSize: fontSizes.medium,
     color: fontColors.quaternary,
-  },
-  userSection: {
-    flex: 1,
-  },
-  nameSection: {
-    marginVertical: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderWidth: 2,
-    borderColor: '#E0E0E0',
-    borderRadius: 5,
-  },
-  email: {
-    fontSize: 16,
-  },
-  userDataSection: {
-    flex: 1,
-  },
-  dataSection: {
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    marginBottom: 8,
-    borderWidth: 2,
-    borderColor: '#E0E0E0',
-    borderRadius: 5,
-  },
-  dataSectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  dataItem: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'space-between',
-  },
-  userData: {
-    fontSize: 12,
-    marginBottom: 3,
   },
 });
 

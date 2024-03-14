@@ -1,10 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import {colors} from '../../assets/styles/colors';
 import {fontSizes, fontColors, fontWeights} from '../../assets/styles/fonts';
 
-const UserItem = ({category, value, variant}) => {
+const ProfileListItem = ({category, value}) => {
   return (
     <View style={styles.userItem}>
       <View style={styles.userItemContent}>
@@ -41,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserItem;
+export default ProfileListItem;

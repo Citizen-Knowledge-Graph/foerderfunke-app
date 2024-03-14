@@ -14,9 +14,8 @@ import rdf from 'rdf-ext';
  * @returns {Array<Quad>} An array of RDF/JS Quads that represent the relationship
  * from the subject to related objects via the specified predicate.
  */
-export const retrieveNodes = (dataset, term, predicate, factory = rdf) => {
+export const retrieveAttribute = (dataset, term, predicate, factory = rdf) => {
   const termIri = findNamespace(term);
-  console.log('Term IRI:', termIri);
   const initialNode = grapoi({
     dataset,
     factory: rdf,
@@ -24,7 +23,6 @@ export const retrieveNodes = (dataset, term, predicate, factory = rdf) => {
   });
 
   const predicateIri = findNamespace(predicate);
-  console.log('Predicate IRI:', predicateIri);
   return initialNode.out(predicateIri).quads();
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import SupportListItem from './SupportListItem';
-import PrimaryContainer from '../generic/PrimaryContainer';
 
 const SupportList = () => {
   const validationState = useSelector(state => state.validationReducer);
