@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import ProfileListItem from './ProfileListItem';
-import {retrieveAttribute} from '../../utilities/graphManagement';
+import {getFirstAttributeValue} from '../../utilities/graphManagement';
 
 const ProfileList = ({profileData}) => {
   const dataFields = [
@@ -14,15 +14,14 @@ const ProfileList = ({profileData}) => {
   return (
     <View style={styles.container}>
       {dataFields.map((field, index) => {
-        const targetNodes = retrieveAttribute(
+        const value = getFirstAttributeValue(
           profileData,
           'citizen-a',
           field[0],
         );
-        const value = Array.from(targetNodes)[0].object.value;
-        return (
+        return value !== undefined ? (
           <ProfileListItem key={index} category={field[1]} value={value} />
-        );
+        ) : null;
       })}
     </View>
   );

@@ -14,7 +14,7 @@ import rdf from 'rdf-ext';
  * @returns {Array<Quad>} An array of RDF/JS Quads that represent the relationship
  * from the subject to related objects via the specified predicate.
  */
-export const retrieveAttribute = (dataset, term, predicate, factory = rdf) => {
+export const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
   const termIri = findNamespace(term);
   const initialNode = grapoi({
     dataset,
@@ -24,6 +24,27 @@ export const retrieveAttribute = (dataset, term, predicate, factory = rdf) => {
 
   const predicateIri = findNamespace(predicate);
   return initialNode.out(predicateIri).quads();
+};
+
+/**
+ * This function fetches target nodes, attempts to convert the iterable of into
+ * an array to access the first node. If the first node exists and contains an
+ * `object` property, the value of this object is returned. Otherwise, the
+ * function returns `undefined`.
+ *
+ * @param {Object} data - The source data from which attributes are to be retrieved.
+ * @param {String} node - The node name to start the search from.
+ * @param {String} predicate - The predicate to be used for filtering the target nodes.
+ *
+ * @returns {any} The value of the object from the first target node if available,
+ * otherwise `undefined`.
+ */
+export const getFirstAttributeValue = (data, node, predicate) => {
+  const targetNodes = retrieveAttributes(data, node, predicate);
+  const nodesArray = Array.from(targetNodes);
+  return nodesArray.length > 0 && nodesArray[0].object
+    ? nodesArray[0].object.value
+    : undefined;
 };
 
 /**

@@ -16,6 +16,8 @@ ff:CarA
 
 ff:citizen-a
     a                    ff:Person, ff:Citizen ;
+    ff:hasName           "Max" ;
+    ff:hasSurname        "Mustermann" ;
     ff:owns              ff:HouseA ;
     ff:hasBirthday       "2001-01-15"^^xsd:date ;
     ff:hasResidence      "Berlin" ;
