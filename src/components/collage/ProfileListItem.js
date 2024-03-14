@@ -3,14 +3,16 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {colors} from '../../assets/styles/colors';
 import {fontSizes, fontColors, fontWeights} from '../../assets/styles/fonts';
 
-const ProfileListItem = ({category, value}) => {
+const ProfileListItem = ({category, value, onOpenModal}) => {
   return (
-    <View style={styles.userItem}>
-      <View style={styles.userItemContent}>
-        <Text style={styles.userItemKey}>{category}</Text>
-        <Text style={styles.userItemValue}>{value}</Text>
+    <TouchableOpacity onPress={() => onOpenModal(true)}>
+      <View style={styles.userItem}>
+        <View style={styles.userItemContent}>
+          <Text style={styles.userItemKey}>{category}</Text>
+          <Text style={styles.userItemValue}>{value}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

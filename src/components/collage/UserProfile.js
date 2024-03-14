@@ -4,24 +4,10 @@ import {useSelector} from 'react-redux';
 import {parseTurtle} from '../../utilities/rdfHandling';
 import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
-import rdf from 'rdf-ext'; // Assume rdf-ext is used for RDF operations
-import {retrieveAttribute} from '../../utilities/graphManagement';
+import rdf from 'rdf-ext';
+import {getFirstAttributeValue} from '../../utilities/graphManagement';
 
 import ProfileList from './ProfileList';
-
-// Dummy user data
-const userData = {
-  name: 'John',
-  surname: 'Doe',
-  email: 'johndoe@example.com',
-  profileImageUrl: 'https://via.placeholder.com/150', // Replace with actual image URL
-  age: 32,
-  residence: 'Berlin',
-  profession: 'Software Engineer',
-  married: 'No',
-  children: 2,
-  company: 'FörderFunke',
-};
 
 // Component
 const UserProfile = () => {
@@ -41,7 +27,7 @@ const UserProfile = () => {
     };
 
     performDeserialization();
-  }, [serializedUserData]);
+  }, [deserializedData, serializedUserData]);
 
   return (
     <View>
@@ -49,9 +35,17 @@ const UserProfile = () => {
         <View style={styles.imagePlaceholder}>
           <View>
             <Text style={styles.name}>
-              {userData.name} {userData.surname}
+              {getFirstAttributeValue(
+                rdf.dataset(deserializedData),
+                'citizen-a',
+                'hasName',
+              ) || 'Name'}{' '}
+              {getFirstAttributeValue(
+                rdf.dataset(deserializedData),
+                'citizen-a',
+                'hasSurname',
+              ) || 'Name'}
             </Text>
-            <Text style={styles.surname}>{userData.email}</Text>
           </View>
         </View>
       </View>
