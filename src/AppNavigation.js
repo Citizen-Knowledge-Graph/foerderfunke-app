@@ -82,7 +82,6 @@ export const BottomTabNavigator = () => {
           headerShown: false,
         })}
       />
-      g
     </Tab.Navigator>
   );
 };
