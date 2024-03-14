@@ -51,6 +51,13 @@ export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
+        tabBarStyle: {
+          backgroundColor: '#fff',
+          borderTopWidth: 0,
+          marginBottom: 5,
+        },
+        tabBarActiveTintColor: '#000',
+        tabBarInactiveTintColor: '#8e8e93',
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
           if (route.name === 'Home') {
@@ -75,16 +82,7 @@ export const BottomTabNavigator = () => {
           headerShown: false,
         })}
       />
+      g
     </Tab.Navigator>
   );
 };
-
-// {{
-//   tabBarStyle: {
-//     backgroundColor: '#fff',
-//       borderTopWidth: 0,
-//       marginBottom: 5,
-//   },
-//   tabBarActiveTintColor: '#007bff',
-//     tabBarInactiveTintColor: '#8e8e93',
-// }}
