@@ -21,7 +21,7 @@ const ModalView = ({
         <View style={styles.modalView}>
           <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => setModalVisible(!modalVisible)}>
+            onPress={() => setModalVisible(false)}>
             <FontAwesomeIcon name={'close'} size={16} />
           </TouchableOpacity>
           {children}

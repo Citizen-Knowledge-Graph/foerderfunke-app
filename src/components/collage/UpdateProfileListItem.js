@@ -1,13 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import ModalUpdateButton from '../generic/ModalUpdateButton';
 
-const UpdateProfileListItem = ({category, value, setUpdateValue}) => {
+const UpdateProfileListItem = ({
+  category,
+  value,
+  setModalVisible,
+  updateGraph,
+}) => {
   const [inputText, setInputText] = useState(value);
+  const [updateValue, setUpdateValue] = useState('');
+
+  useEffect(() => {
+    console.log(inputText);
+    setUpdateValue(inputText);
+  }, [inputText]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.updateTitle}>New {category}</Text>
+      <Text style={styles.updateTitle}>New {category} State</Text>
       <View style={styles.updateContainer}>
         <TextInput
           style={styles.input}
@@ -16,7 +27,12 @@ const UpdateProfileListItem = ({category, value, setUpdateValue}) => {
           placeholder="Enter new value"
         />
       </View>
-      <ModalUpdateButton />
+      <ModalUpdateButton
+        category={category}
+        updateValue={updateValue}
+        setModalVisible={setModalVisible}
+        updateGraph={updateGraph}
+      />
     </View>
   );
 };
@@ -25,7 +41,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 16,
   },
   updateTitle: {
     color: 'black',

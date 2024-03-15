@@ -16,6 +16,10 @@ const ProfileList = ({profileData}) => {
     ['hasChildren', 'Children'],
   ];
 
+  const updateGraph = (category, value) => {
+    console.log(`Graph updated. New ${category} is ${value}`);
+  };
+
   return (
     <View style={styles.container}>
       <ModalView
@@ -26,6 +30,8 @@ const ProfileList = ({profileData}) => {
         <UpdateProfileListItem
           category={currentCategory[0]}
           value={currentCategory[1]}
+          setModalVisible={setModalVisible}
+          updateGraph={updateGraph}
         />
       </ModalView>
       {dataFields.map((field, index) => {

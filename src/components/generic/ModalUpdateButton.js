@@ -1,11 +1,22 @@
-import React from 'react';
-import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-const ModalUpdateButton = ({modalVisible, setModalVisible}) => {
+const ModalUpdateButton = ({
+  category,
+  updateValue,
+  setModalVisible,
+  updateGraph,
+}) => {
   return (
-    <TouchableOpacity style={styles.updateButton}>
-      <FontAwesomeIcon name={'close'} size={16} />
+    <TouchableOpacity
+      style={styles.updateButton}
+      onPress={() => {
+        setModalVisible(false);
+        updateGraph(category, updateValue);
+      }}>
+      <View style={styles.updateButton}>
+        <Text style={styles.updateButtonText}>Update Profile</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -14,9 +25,12 @@ const styles = StyleSheet.create({
   updateButton: {
     backgroundColor: '#007aff',
     borderRadius: 5,
-    padding: 10,
+    padding: 4,
     elevation: 2,
-    marginHorizontal: 10,
+    margin: 4,
+  },
+  updateButtonText: {
+    fontSize: 16,
   },
 });
 
