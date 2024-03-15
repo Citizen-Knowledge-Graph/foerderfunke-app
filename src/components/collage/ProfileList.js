@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import ProfileListItem from './ProfileListItem';
 import {getFirstAttributeValue} from '../../utilities/graphManagement';
+import ModalView from '../generic/ModalView';
 
 const ProfileList = ({profileData}) => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const dataFields = [
     ['hasBirthday', 'Birthday'],
@@ -15,26 +16,9 @@ const ProfileList = ({profileData}) => {
 
   return (
     <View style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-
-            {/* Button inside the modal to close it */}
-            <TouchableOpacity
-              style={{...styles.openButton, backgroundColor: '#2196F3'}}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <ModalView modalVisible={modalVisible} setModalVisible={setModalVisible}>
+        <Text style={styles.modalText}>Hello World!</Text>
+      </ModalView>
       {dataFields.map((field, index) => {
         const value = getFirstAttributeValue(
           profileData,
@@ -61,15 +45,15 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
+    margin: 16,
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 15,
     padding: 35,
     alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -80,8 +64,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#F194FF',
-    borderRadius: 20,
+    backgroundColor: '#8e8e93',
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
   },
