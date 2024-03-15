@@ -18,10 +18,14 @@ const ProfileList = ({profileData}) => {
 
   return (
     <View style={styles.container}>
-      <ModalView modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <Text>
-          We want to update {fieldUpdate[0]} with current value {fieldUpdate[1]}
-        </Text>
+      <ModalView
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        hideButton={'Update Profile'}>
+        <UpdateProfileListItem
+          category={fieldUpdate[0]}
+          value={fieldUpdate[1]}
+        />
       </ModalView>
       {dataFields.map((field, index) => {
         const value = getFirstAttributeValue(

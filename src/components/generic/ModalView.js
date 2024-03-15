@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-const ModalView = ({children, modalVisible, setModalVisible}) => {
+const ModalView = ({children, modalVisible, setModalVisible, hideButton}) => {
   return (
     <Modal
       animationType="slide"
@@ -13,11 +13,18 @@ const ModalView = ({children, modalVisible, setModalVisible}) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           {children}
-          <TouchableOpacity
-            style={styles.hideButton}
-            onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.textStyle}>Hide Modal</Text>
-          </TouchableOpacity>
+          <View style={styles.modalButtons}>
+            <TouchableOpacity
+              style={styles.hideButton}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.hideButton}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>{hideButton}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -33,7 +40,7 @@ const styles = StyleSheet.create({
     margin: 16,
     backgroundColor: 'white',
     borderRadius: 15,
-    padding: 32,
+    padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -45,11 +52,17 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   hideButton: {
     backgroundColor: '#8e8e93',
     borderRadius: 5,
     padding: 10,
     elevation: 2,
+    marginHorizontal: 10,
   },
   textStyle: {
     color: 'white',
