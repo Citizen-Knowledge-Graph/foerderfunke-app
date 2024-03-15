@@ -3,9 +3,13 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {colors} from '../../assets/styles/colors';
 import {fontSizes, fontColors, fontWeights} from '../../assets/styles/fonts';
 
-const ProfileListItem = ({category, value, onOpenModal}) => {
+const ProfileListItem = ({category, value, onOpenModal, onUpdateField}) => {
   return (
-    <TouchableOpacity onPress={() => onOpenModal(true)}>
+    <TouchableOpacity
+      onPress={() => {
+        onOpenModal(true);
+        onUpdateField([category, value]);
+      }}>
       <View style={styles.userItem}>
         <View style={styles.userItemContent}>
           <Text style={styles.userItemKey}>{category}</Text>

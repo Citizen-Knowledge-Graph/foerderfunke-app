@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-const ModalView = ({childComponent, modalVisible, setModalVisible}) => {
+const ModalView = ({children, modalVisible, setModalVisible}) => {
   return (
     <Modal
       animationType="slide"
@@ -12,7 +12,7 @@ const ModalView = ({childComponent, modalVisible, setModalVisible}) => {
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          {childComponent}
+          {children}
           <TouchableOpacity
             style={styles.hideButton}
             onPress={() => setModalVisible(!modalVisible)}>

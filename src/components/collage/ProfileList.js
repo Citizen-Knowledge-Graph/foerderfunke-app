@@ -3,9 +3,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import ProfileListItem from './ProfileListItem';
 import {getFirstAttributeValue} from '../../utilities/graphManagement';
 import ModalView from '../generic/ModalView';
+import UpdateProfileListItem from './UpdateProfileListItem';
 
 const ProfileList = ({profileData}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [fieldUpdate, setFieldUpdate] = useState(['', '']);
 
   const dataFields = [
     ['hasBirthday', 'Birthday'],
@@ -17,7 +19,9 @@ const ProfileList = ({profileData}) => {
   return (
     <View style={styles.container}>
       <ModalView modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <Text style={styles.modalText}>Hello World!</Text>
+        <Text>
+          We want to update {fieldUpdate[0]} with current value {fieldUpdate[1]}
+        </Text>
       </ModalView>
       {dataFields.map((field, index) => {
         const value = getFirstAttributeValue(
@@ -31,6 +35,7 @@ const ProfileList = ({profileData}) => {
             category={field[1]}
             value={value}
             onOpenModal={setModalVisible}
+            onUpdateField={setFieldUpdate}
           />
         ) : null;
       })}
