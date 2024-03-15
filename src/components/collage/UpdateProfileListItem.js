@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 
-const UpdateProfileListItem = ({category, value}) => {
+const UpdateProfileListItem = ({ category, value }) => {
   const [inputText, setInputText] = useState(value);
 
   return (
@@ -21,30 +21,31 @@ const UpdateProfileListItem = ({category, value}) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingBottom: 16,
   },
   updateTitle: {
-    color: 'black',
+    color: "black",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   updateContainer: {
     marginTop: 16,
   },
   input: {
+    a
     padding: 12,
     borderWidth: 1,
     borderRadius: 5,
   },
   categoryContainer: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   valueContainer: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
   },
 });
