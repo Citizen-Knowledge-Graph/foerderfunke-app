@@ -7,7 +7,7 @@ import UpdateProfileListItem from './UpdateProfileListItem';
 
 const ProfileList = ({profileData}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [fieldUpdate, setFieldUpdate] = useState(['', '']);
+  const [currentCategory, setCurrentCategory] = useState(['', '']);
 
   const dataFields = [
     ['hasBirthday', 'Birthday'],
@@ -21,10 +21,11 @@ const ProfileList = ({profileData}) => {
       <ModalView
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        hideButton={'Update Profile'}>
+        hideButton={'Update Profile'}
+        category={currentCategory[0]}>
         <UpdateProfileListItem
-          category={fieldUpdate[0]}
-          value={fieldUpdate[1]}
+          category={currentCategory[0]}
+          value={currentCategory[1]}
         />
       </ModalView>
       {dataFields.map((field, index) => {
@@ -39,7 +40,7 @@ const ProfileList = ({profileData}) => {
             category={field[1]}
             value={value}
             onOpenModal={setModalVisible}
-            onUpdateField={setFieldUpdate}
+            onUpdateField={setCurrentCategory}
           />
         ) : null;
       })}

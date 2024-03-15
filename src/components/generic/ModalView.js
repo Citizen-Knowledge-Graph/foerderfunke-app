@@ -1,7 +1,14 @@
 import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const ModalView = ({children, modalVisible, setModalVisible, hideButton}) => {
+const ModalView = ({
+  children,
+  modalVisible,
+  setModalVisible,
+  updateFieldInGraph,
+  hideButton,
+}) => {
   return (
     <Modal
       animationType="slide"
@@ -12,19 +19,12 @@ const ModalView = ({children, modalVisible, setModalVisible, hideButton}) => {
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setModalVisible(!modalVisible)}>
+            <FontAwesomeIcon name={'close'} size={16} />
+          </TouchableOpacity>
           {children}
-          <View style={styles.modalButtons}>
-            <TouchableOpacity
-              style={styles.hideButton}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.hideButton}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>{hideButton}</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </Modal>
@@ -51,6 +51,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    padding: 10,
   },
   modalButtons: {
     flexDirection: 'row',
@@ -59,6 +66,13 @@ const styles = StyleSheet.create({
   },
   hideButton: {
     backgroundColor: '#8e8e93',
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+    marginHorizontal: 10,
+  },
+  updateButton: {
+    backgroundColor: '#007aff',
     borderRadius: 5,
     padding: 10,
     elevation: 2,
