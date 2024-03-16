@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: colors.white,
+    paddingHorizontal: 16,
   },
   scrollView: {
     flex: 1,

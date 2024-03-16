@@ -9,7 +9,6 @@ const PrimaryContainer = ({children, style}) => {
 // Styles
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
     paddingBottom: 8,
   },
 });
