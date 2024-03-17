@@ -15,13 +15,6 @@ const ModalUpdateButton = ({
   const dispatch = useDispatch();
 
   const storeNewValue = () => {
-    console.log(
-      'updatePredicatedObject: ',
-      userData,
-      category,
-      initialValue,
-      updateValue,
-    );
     const updatedUserData = updatePredicatedObject(
       userData,
       category,
@@ -29,6 +22,7 @@ const ModalUpdateButton = ({
       'replace',
       updateValue,
     );
+    console.log('updatedUserData: ', updatedUserData);
     dispatch(userReportAction('user-profile', updatedUserData));
   };
 
