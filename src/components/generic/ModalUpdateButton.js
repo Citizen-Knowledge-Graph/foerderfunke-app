@@ -1,18 +1,45 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {updatePredicatedObject} from '../../utilities/graphManagement';
+import useDeserializedUserData from '../../hooks/useDeserializedUserData';
+import userReportAction from '../../storage/actions/userReport';
+import {useDispatch} from 'react-redux';
 
 const ModalUpdateButton = ({
   category,
+  initialValue,
   updateValue,
   setModalVisible,
-  updateGraph,
 }) => {
+  const userData = useDeserializedUserData();
+  const dispatch = useDispatch();
+
+  const storeNewValue = () => {
+    console.log(
+      'updatePredicatedObject: ',
+      userData,
+      category,
+      initialValue,
+      updateValue,
+    );
+    const updatedUserData = updatePredicatedObject(
+      userData,
+      category,
+      initialValue,
+      'replace',
+      updateValue,
+    );
+    dispatch(userReportAction('user-profile', updatedUserData));
+  };
+
+  console.log('we are updating: ', category, initialValue, updateValue);
+
   return (
     <TouchableOpacity
       style={styles.updateButton}
       onPress={() => {
         setModalVisible(false);
-        updateGraph(category, updateValue);
+        storeNewValue();
       }}>
       <View style={styles.updateButton}>
         <Text style={styles.updateButtonText}>Update Profile</Text>

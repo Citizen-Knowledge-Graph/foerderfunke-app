@@ -12,26 +12,23 @@ const UpdateProfileListItem = ({
   const [updateValue, setUpdateValue] = useState('');
 
   useEffect(() => {
-    console.log(inputText);
     setUpdateValue(inputText);
   }, [inputText]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.updateTitle}>New {category} State</Text>
-      <View style={styles.updateContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setInputText(text)}
-          value={inputText}
-          placeholder="Enter new value"
-        />
-      </View>
+      <TextInput
+        style={styles.input}
+        onChangeText={text => setInputText(text)}
+        value={inputText}
+        placeholder="Enter new value"
+      />
       <ModalUpdateButton
         category={category}
+        initialValue={value}
         updateValue={updateValue}
         setModalVisible={setModalVisible}
-        updateGraph={updateGraph}
       />
     </View>
   );
@@ -47,14 +44,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  updateContainer: {
-    marginTop: 16,
-  },
   input: {
     padding: 12,
     borderWidth: 1,
     borderColor: '#8e8e93',
     borderRadius: 5,
+    marginTop: 16,
   },
   categoryContainer: {
     color: 'black',

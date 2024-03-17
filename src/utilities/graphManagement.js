@@ -15,12 +15,7 @@ import rdf from 'rdf-ext';
  * from the subject to related objects via the specified predicate.
  */
 export const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
-  const termIri = findNamespace(term);
-  const initialNode = grapoi({
-    dataset,
-    factory: rdf,
-    term: termIri,
-  });
+  const initialNode = retrieveTermNode(dataset, term);
 
   const predicateIri = findNamespace(predicate);
   return initialNode.out(predicateIri).quads();
@@ -33,18 +28,72 @@ export const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
  * function returns `undefined`.
  *
  * @param {Object} data - The source data from which attributes are to be retrieved.
- * @param {String} node - The node name to start the search from.
+ * @param {String} term - The node name to start the search from.
  * @param {String} predicate - The predicate to be used for filtering the target nodes.
  *
  * @returns {any} The value of the object from the first target node if available,
  * otherwise `undefined`.
  */
-export const getFirstAttributeValue = (data, node, predicate) => {
-  const targetNodes = retrieveAttributes(data, node, predicate);
+export const getFirstAttributeValue = (data, term, predicate) => {
+  const targetNodes = retrieveAttributes(data, term, predicate);
   const nodesArray = Array.from(targetNodes);
   return nodesArray.length > 0 && nodesArray[0].object
     ? nodesArray[0].object.value
     : undefined;
+};
+
+/**
+ * Updates the object linked to a term node by a specific predicate in the
+ * dataset based on the update operation specified.
+ *
+ * @param {Object} data - The dataset containing the term node.
+ * @param {string} term - The term identifying the node to be updated.
+ * @param {string} predicate - The predicate linking the term node to the object.
+ * @param {string} object - The object to be updated or deleted.
+ * @param {string} update_type - The type of update operation ('add', 'delete', 'replace').
+ * @param {string} [new_object=null] - The new object to replace the existing one, required if update_type is 'replace'.
+ * @throws {Error} Throws an error if an invalid update type is provided.
+ */
+export const updatePredicatedObject = (
+  data,
+  predicate,
+  object,
+  update_type,
+  new_object = null,
+  term = 'citizen-a',
+) => {
+  const initialNode = retrieveTermNode(data, term);
+  const predicateIri = findNamespace(predicate);
+  const objectIri = findNamespace(object);
+  const newObjectIri = new_object ? findNamespace(new_object) : null;
+  switch (update_type) {
+    case 'add':
+      initialNode.addOut(predicateIri, objectIri);
+      break;
+    case 'delete':
+      initialNode.deleteOut(predicateIri, objectIri);
+      break;
+    case 'replace':
+      initialNode.deleteOut(predicateIri, objectIri);
+      initialNode.addOut(predicateIri, newObjectIri);
+      break;
+    default:
+      throw new Error('Invalid update type');
+  }
+  return data;
+};
+
+/**
+ * Retrieves a node associated with a specific term from a dataset.
+ *
+ * @param {Object} dataset - The dataset from which the term node is to be retrieved.
+ * @param {string} term - The term for which the node is sought. It is converted to an IRI using `findNamespace`.
+ * @param {Object} [factory=rdf] - An optional RDF/JS data factory to be used for creating nodes, literals, etc.
+ * @returns {Object} The node associated with the given term, retrieved using the `grapoi` function.
+ */
+export const retrieveTermNode = (dataset, term, factory = rdf) => {
+  const termIri = findNamespace(term);
+  return grapoi({dataset, factory, term: termIri});
 };
 
 /**
