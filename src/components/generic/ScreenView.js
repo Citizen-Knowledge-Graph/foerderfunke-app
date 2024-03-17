@@ -8,9 +8,7 @@ import PrimaryContainer from './PrimaryContainer';
 const ScreenView = ({screenName, children, backButton}) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <PrimaryContainer>
-        <ScreenHeader screenName={screenName} backButton={backButton} />
-      </PrimaryContainer>
+      <ScreenHeader screenName={screenName} backButton={backButton} />
       <ScrollView style={styles.scrollView}>
         <PrimaryContainer>{children}</PrimaryContainer>
       </ScrollView>
@@ -22,7 +20,6 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingHorizontal: 16,
   },
   scrollView: {
     flex: 1,

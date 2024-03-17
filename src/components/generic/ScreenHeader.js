@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 20,
+    paddingHorizontal: 16,
+    marginVertical: 8,
   },
   backButton: {
     paddingRight: 16,
