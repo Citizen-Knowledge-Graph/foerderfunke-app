@@ -76,6 +76,7 @@ export const updatePredicatedObject = (
     case 'replace':
       initialNode.deleteOut(predicateIri, objectIri);
       initialNode.addOut(predicateIri, newObjectIri);
+      console.log('this happened');
       break;
     default:
       throw new Error('Invalid update type');

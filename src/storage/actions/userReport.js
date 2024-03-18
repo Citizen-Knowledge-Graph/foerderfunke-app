@@ -7,6 +7,7 @@ export const USER_REPORT = 'USER_REPORT';
 const userReportAction = (key, report) => dispatch => {
   serializeTurtle(report)
     .then(serializedReport => {
+      console.log('serializedReport: ', serializedReport);
       dispatch({
         type: USER_REPORT,
         payload: {key, report: serializedReport},
