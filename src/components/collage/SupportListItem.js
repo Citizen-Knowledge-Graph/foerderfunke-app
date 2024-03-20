@@ -1,18 +1,17 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import {colors} from '../../assets/styles/colors';
 import {fontSizes, fontColors, fontWeights} from '../../assets/styles/fonts';
 
-const SupportListItem = ({id, item}) => {
-  const navigation = useNavigation();
-
-  const handleListItemPress = () => {
-    navigation.navigate('SchemeStackScreen', {id: id});
-  };
+const SupportListItem = ({item}) => {
+  // const navigation = useNavigation();
+  //
+  // const handleListItemPress = () => {
+  //   navigation.navigate('SchemeStackScreen', {id: id});
+  // };
 
   return (
-    <TouchableOpacity onPress={handleListItemPress}>
+    <TouchableOpacity>
       <View style={styles.listItem}>
         <View style={styles.listItemContent}>
           <Text style={styles.listItemTitle}>{item.title}</Text>

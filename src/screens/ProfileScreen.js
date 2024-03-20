@@ -1,21 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ScreenView from '../components/generic/ScreenView';
 import UserProfile from '../components/collage/UserProfile';
-import UserUpdate from '../components/collage/UserUpdate';
-import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 
 // Component
 const ProfileScreen = () => {
-  const navigation = useNavigation();
+  // handle all data and logic here and render according to data
+  const [profileScreenData, setProfileScreenData] = useState(null);
+  const userState = useSelector(state => state.validationReducer);
 
-  // Navigate to Edit Profile Screen
-  const handleEditProfile = () => {
-    navigation.navigate('EditProfile'); // Replace with your actual navigation logic
-  };
+  useEffect(() => {
+    setProfileScreenData('test');
+    //
+    // we only want to use actions to update the state
+    // here need to retrieve the list of active schemes, send these ids to our
+    // flat file storage api and retrieve the corresponding data points
+    // profileScreenData = retrieveProfileScreenData()
+  }, []);
 
   return (
     <ScreenView screenName={'Profile'}>
-      <UserProfile />
+      {profileScreenData ? <UserProfile /> : null}
     </ScreenView>
   );
 };

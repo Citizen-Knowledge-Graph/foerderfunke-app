@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import StartScreen from './screens/StartScreen';
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SchemeScreen from './screens/SchemeScreen';
 import GuideScreen from './screens/GuideScreen';

@@ -1,7 +1,6 @@
-import { GUIDES_REPORT } from "../actions/guidesReport";
+import {GUIDES_REPORT} from '../actions/guidesReport';
 
 const guidesReducer = (state = {}, action) => {
-
   switch (action.type) {
     case GUIDES_REPORT:
       return {
