@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import ScreenView from '../components/generic/ScreenView';
-import SupportList from '../components/collage/SupportList';
+import ScreenView from '../../components/generic/ScreenView';
+import SupportList from '../../components/collage/SupportList';
 import {useSelector} from 'react-redux';
 import {fetchHomeScreenData} from './HomeScreenController';
+import {Text} from 'react-native';
 
 const HomeScreen = () => {
   const [homeScreenData, setHomeScreenData] = useState(null);
@@ -11,8 +12,9 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newHomeScreenData = await fetchHomeScreenData(validationState());
+        const newHomeScreenData = await fetchHomeScreenData(validationState);
         setHomeScreenData(newHomeScreenData);
+        console.log(newHomeScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);
       }
@@ -23,7 +25,7 @@ const HomeScreen = () => {
 
   return (
     <ScreenView screenName={'Deine Förderungen'}>
-      {homeScreenData ? <SupportList homeScreenData={homeScreenData} /> : null}
+      {homeScreenData && <SupportList homeScreenData={homeScreenData} />}
     </ScreenView>
   );
 };

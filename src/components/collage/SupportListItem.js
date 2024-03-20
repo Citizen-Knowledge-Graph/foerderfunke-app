@@ -4,20 +4,10 @@ import {colors} from '../../assets/styles/colors';
 import {fontSizes, fontColors, fontWeights} from '../../assets/styles/fonts';
 
 const SupportListItem = ({item}) => {
-  // const navigation = useNavigation();
-  //
-  // const handleListItemPress = () => {
-  //   navigation.navigate('SchemeStackScreen', {id: id});
-  // };
-
   return (
     <TouchableOpacity>
       <View style={styles.listItem}>
-        <View style={styles.listItemContent}>
-          <Text style={styles.listItemTitle}>{item.title}</Text>
-          <Text style={styles.listItemDescription}>{item.description}</Text>
-        </View>
-        <Text style={styles.listItemTime}>{item.time}</Text>
+        <Text>{item.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -49,3 +39,9 @@ const styles = StyleSheet.create({
 });
 
 export default SupportListItem;
+
+// <View style={styles.listItemContent}>
+//   <Text style={styles.listItemTitle}>{item.title}</Text>
+//   <Text style={styles.listItemDescription}>{item.description}</Text>
+// </View>
+// <Text style={styles.listItemTime}>{item.time}</Text>
