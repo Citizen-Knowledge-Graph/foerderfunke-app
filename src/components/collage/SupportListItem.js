@@ -8,7 +8,7 @@ const SupportListItem = ({scheme}) => {
   const navigation = useNavigation();
 
   const handleListItemPress = () => {
-    navigation.navigate('SchemeStackScreen', {id: scheme.key});
+    navigation.navigate('SchemeStackScreen', {scheme: scheme.key});
   };
 
   return (

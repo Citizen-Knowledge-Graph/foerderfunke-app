@@ -5,7 +5,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import StartScreen from './screens/StartScreen';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import SchemeScreen from './screens/SchemeScreen';
+import SchemeScreen from './screens/schemescreen/SchemeScreen';
 import GuideScreen from './screens/GuideScreen';
 import UpdateProfileScreen from './screens/UpdateProfileScreen';
 

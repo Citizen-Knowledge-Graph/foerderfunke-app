@@ -4,14 +4,20 @@ import {colors} from '../../assets/styles/colors';
 import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
 import TextBoxHeader from '../generic/TextBoxHeader';
 
-const SchemeInfo = ({data}) => {
+const SchemeInfo = ({schemeScreenData}) => {
   return (
     <View>
       <View style={styles.imagePlaceholder}>
         <Text style={styles.imagePlaceholderTitle}>Image Placeholder</Text>
       </View>
-      <TextBoxHeader title={data.title} text={data.description_long} />
-      <TextBoxHeader title={data.title} text={data.description_long} />
+      <TextBoxHeader
+        title={schemeScreenData.data.title}
+        text={schemeScreenData.data.description_long}
+      />
+      <TextBoxHeader
+        title={schemeScreenData.data.title}
+        text={schemeScreenData.data.description_long}
+      />
     </View>
   );
 };

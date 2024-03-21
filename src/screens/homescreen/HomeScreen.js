@@ -13,7 +13,6 @@ const HomeScreen = () => {
       try {
         const newHomeScreenData = await fetchHomeScreenData(validationState);
         setHomeScreenData(newHomeScreenData);
-        console.log(newHomeScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);
       }

@@ -16,7 +16,6 @@ export const fetchHomeScreenData = async validationState => {
   return Object.keys(validationState)
     .map(key => {
       if (validationState[key].conforms) {
-        console.log('this is fetched: ', schemeRegistry[key]);
         return new SchemeData(key, schemeRegistry[key]);
       }
     })
