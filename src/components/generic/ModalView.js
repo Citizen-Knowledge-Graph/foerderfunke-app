@@ -7,7 +7,7 @@ const ModalView = ({
   modalVisible,
   setModalVisible,
   updateFieldInGraph,
-  hideButton,
+  updateButton,
 }) => {
   return (
     <Modal

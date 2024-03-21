@@ -9,32 +9,20 @@ import useDeserializedUserData from '../../hooks/useDeserializedUserData';
 import ProfileList from './ProfileList';
 
 // Component
-const UserProfile = () => {
-  const deserializedUserData = useDeserializedUserData();
-
+const UserProfile = ({profileScreenData}) => {
   return (
     <View>
       <View style={styles.imageContainer}>
         <View style={styles.imagePlaceholder}>
           <View>
             <Text style={styles.name}>
-              {getFirstAttributeValue(
-                rdf.dataset(deserializedUserData),
-                'citizen-a',
-                'hasName',
-              ) || 'Name'}{' '}
-              {getFirstAttributeValue(
-                rdf.dataset(deserializedUserData),
-                'citizen-a',
-                'hasSurname',
-              ) || 'Name'}
+              {profileScreenData.hasName.value}{' '}
+              {profileScreenData.hasSurname.value}
             </Text>
           </View>
         </View>
       </View>
-      {deserializedUserData && (
-        <ProfileList profileData={rdf.dataset(deserializedUserData)} />
-      )}
+      <ProfileList profileScreenData={profileScreenData} />
     </View>
   );
 };

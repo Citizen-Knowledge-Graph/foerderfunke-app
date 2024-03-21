@@ -5,51 +5,32 @@ import {getFirstAttributeValue} from '../../utilities/graphManagement';
 import ModalView from '../generic/ModalView';
 import UpdateProfileListItem from './UpdateProfileListItem';
 
-const ProfileList = ({profileData}) => {
+const ProfileList = ({profileScreenData}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(['', '']);
-
-  const dataFields = [
-    ['hasBirthday', 'Birthday'],
-    ['hasResidence', 'Residence'],
-    ['hasDrivingLicense', 'Driving License'],
-    ['hasChildren', 'Children'],
-  ];
-
-  const updateGraph = (category, value) => {
-    console.log(`Graph updated. New ${category} is ${value}`);
-  };
 
   return (
     <View style={styles.container}>
       <ModalView
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        hideButton={'Update Profile'}
+        updateButton={'Update Profile'}
         category={currentCategory[0]}>
         <UpdateProfileListItem
           category={currentCategory[0]}
           value={currentCategory[1]}
           setModalVisible={setModalVisible}
-          updateGraph={updateGraph}
         />
       </ModalView>
-      {dataFields.map((field, index) => {
-        const value = getFirstAttributeValue(
-          profileData,
-          'citizen-a',
-          field[0],
-        );
-        return value !== undefined ? (
-          <ProfileListItem
-            key={index}
-            category={field[1]}
-            value={value}
-            onOpenModal={setModalVisible}
-            onUpdateField={setCurrentCategory}
-          />
-        ) : null;
-      })}
+      {Object.entries(profileScreenData).map(([key, valuePair], index) => (
+        <ProfileListItem
+          key={index}
+          category={valuePair.title}
+          value={valuePair.value}
+          onOpenModal={setModalVisible}
+          onUpdateField={setCurrentCategory}
+        />
+      ))}
     </View>
   );
 };
