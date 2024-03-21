@@ -12,6 +12,5 @@ export const fetchSchemeScreenData = async scheme => {
   const registry = await readJson(registryPath);
   const schemePath = `${registry[scheme].path}/${scheme}-hydration.json`;
   const schemeData = await readJson(schemePath);
-  const newSchemeData = new SchemeGuideData(scheme, schemeData);
-  return newSchemeData;
+  return new SchemeGuideData(scheme, schemeData);
 };
