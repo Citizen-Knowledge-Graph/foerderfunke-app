@@ -3,17 +3,17 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {colors} from '../../assets/styles/colors';
 import {fontSizes, fontColors, fontWeights} from '../../assets/styles/fonts';
 
-const ProfileListItem = ({category, value, onOpenModal, onUpdateField}) => {
+const ProfileListItem = ({entry, onOpenModal, setCurrentEntry}) => {
   return (
     <TouchableOpacity
       onPress={() => {
         onOpenModal(true);
-        onUpdateField([category, value]);
+        setCurrentEntry(entry);
       }}>
       <View style={styles.userItem}>
         <View style={styles.userItemContent}>
-          <Text style={styles.userItemKey}>{category}</Text>
-          <Text style={styles.userItemValue}>{value}</Text>
+          <Text style={styles.userItemKey}>{entry.valuePair.title}</Text>
+          <Text style={styles.userItemValue}>{entry.valuePair.value}</Text>
         </View>
       </View>
     </TouchableOpacity>

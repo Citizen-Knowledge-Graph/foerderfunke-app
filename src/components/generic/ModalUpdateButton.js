@@ -11,22 +11,9 @@ const ModalUpdateButton = ({
   updateValue,
   setModalVisible,
 }) => {
-  const userData = useDeserializedUserData();
   const dispatch = useDispatch();
 
-  const storeNewValue = () => {
-    const updatedUserData = updatePredicatedObject(
-      userData,
-      category,
-      initialValue,
-      'replace',
-      updateValue,
-    );
-    console.log('updatedUserData: ', updatedUserData);
-    dispatch(userReportAction('user-profile', updatedUserData));
-  };
-
-  console.log('we are updating: ', category, initialValue, updateValue);
+  const storeNewValue = () => {};
 
   return (
     <TouchableOpacity

@@ -2,13 +2,7 @@ import React from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const ModalView = ({
-  children,
-  modalVisible,
-  setModalVisible,
-  updateFieldInGraph,
-  updateButton,
-}) => {
+const ModalView = ({children, modalVisible, setModalVisible}) => {
   return (
     <Modal
       animationType="slide"

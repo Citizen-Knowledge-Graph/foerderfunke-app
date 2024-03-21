@@ -1,36 +1,31 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import ProfileListItem from './ProfileListItem';
-import {getFirstAttributeValue} from '../../utilities/graphManagement';
 import ModalView from '../generic/ModalView';
 import UpdateProfileListItem from './UpdateProfileListItem';
 
 const ProfileList = ({profileScreenData}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(['', '']);
+  const [currentEntry, setCurrentEntry] = useState(null);
 
   return (
     <View style={styles.container}>
-      <ModalView
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        updateButton={'Update Profile'}
-        category={currentCategory[0]}>
+      <ModalView modalVisible={modalVisible} setModalVisible={setModalVisible}>
         <UpdateProfileListItem
-          category={currentCategory[0]}
-          value={currentCategory[1]}
+          currentEntry={currentEntry}
           setModalVisible={setModalVisible}
         />
       </ModalView>
-      {Object.entries(profileScreenData).map(([key, valuePair], index) => (
-        <ProfileListItem
-          key={index}
-          category={valuePair.title}
-          value={valuePair.value}
-          onOpenModal={setModalVisible}
-          onUpdateField={setCurrentCategory}
-        />
-      ))}
+      {Object.entries(profileScreenData).map(
+        ([identifier, valuePair], index) => (
+          <ProfileListItem
+            key={index}
+            entry={{key: identifier, valuePair: valuePair}}
+            onOpenModal={setModalVisible}
+            setCurrentEntry={setCurrentEntry}
+          />
+        ),
+      )}
     </View>
   );
 };
