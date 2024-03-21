@@ -3,7 +3,6 @@ import ScreenView from '../../components/generic/ScreenView';
 import SupportList from '../../components/collage/SupportList';
 import {useSelector} from 'react-redux';
 import {fetchHomeScreenData} from './HomeScreenController';
-import {Text} from 'react-native';
 
 const HomeScreen = () => {
   const [homeScreenData, setHomeScreenData] = useState(null);

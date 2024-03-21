@@ -6,7 +6,7 @@ const SupportList = ({homeScreenData}) => {
   return (
     <View style={styles.container}>
       {homeScreenData.map((scheme, index) => (
-        <SupportListItem key={index} item={scheme} />
+        <SupportListItem key={index} scheme={scheme} />
       ))}
     </View>
   );
