@@ -60,7 +60,7 @@ export const updatePredicatedObject = (
   object,
   update_type,
   new_object = null,
-  term = 'citizen-a',
+  term = 'user-profile',
 ) => {
   const initialNode = retrieveTermNode(data, term);
   const predicateIri = findNamespace(predicate);

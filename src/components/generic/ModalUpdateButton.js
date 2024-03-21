@@ -2,25 +2,25 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {updatePredicatedObject} from '../../utilities/graphManagement';
 import useDeserializedUserData from '../../hooks/useDeserializedUserData';
-import userReportAction from '../../storage/actions/userReport';
+import userReportAction, {
+  performUpdate,
+} from '../../storage/actions/userReport';
 import {useDispatch} from 'react-redux';
 
 const ModalUpdateButton = ({
-  category,
+  identifier,
   initialValue,
   updateValue,
   setModalVisible,
 }) => {
   const dispatch = useDispatch();
 
-  const storeNewValue = () => {};
-
   return (
     <TouchableOpacity
       style={styles.updateButton}
       onPress={() => {
         setModalVisible(false);
-        storeNewValue();
+        dispatch(performUpdate(identifier, initialValue, updateValue));
       }}>
       <View style={styles.updateButton}>
         <Text style={styles.updateButtonText}>Update Profile</Text>

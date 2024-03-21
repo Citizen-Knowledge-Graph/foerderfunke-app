@@ -1,21 +1,31 @@
-// action types
-import {serializeTurtle} from '../../utilities/rdfHandling';
+import {updatePredicatedObject} from '../../utilities/graphManagement';
 
-export const USER_REPORT = 'USER_REPORT';
+export const INITIATE_UPDATE = 'INITIATE_UPDATE';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 
-// action creator
-const userReportAction = (key, report) => dispatch => {
-  serializeTurtle(report)
-    .then(serializedReport => {
-      console.log('serializedReport: ', serializedReport);
-      dispatch({
-        type: USER_REPORT,
-        payload: {key, report: serializedReport},
-      });
-    })
-    .catch(error => {
-      console.error('Error serializing user report', error);
-    });
-};
+export const initiateUpdate = () => ({
+  type: INITIATE_UPDATE,
+});
 
-export default userReportAction;
+export const updateSuccess = () => ({
+  type: UPDATE_SUCCESS,
+});
+
+// Simulated asynchronous database update function
+const simulateDbUpdate = () =>
+  new Promise(resolve => setTimeout(resolve, 2000));
+
+// Thunk action creator
+export const performUpdate =
+  (identifier, initialValue, updateValue) => async dispatch => {
+    dispatch(initiateUpdate());
+
+    try {
+      updatePredicatedObject(identifier, initialValue, updateValue);
+      await simulateDbUpdate(identifier, initialValue);
+      console.log('update succeeded');
+      dispatch(updateSuccess());
+    } catch (error) {
+      console.error('Update failed:', error);
+    }
+  };

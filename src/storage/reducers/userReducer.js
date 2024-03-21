@@ -1,12 +1,15 @@
-import {USER_REPORT} from '../actions/userReport';
+import {INITIATE_UPDATE, UPDATE_SUCCESS} from '../actions/userReport';
 
-const userReducer = (state = {}, action) => {
+const initialState = {
+  status: 'idle',
+};
+
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_REPORT:
-      return {
-        ...state,
-        [action.payload.key]: action.payload.report,
-      };
+    case INITIATE_UPDATE:
+      return {...state, status: 'updating'};
+    case UPDATE_SUCCESS:
+      return {...state, status: 'updated'};
     default:
       return state;
   }
