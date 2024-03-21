@@ -7,7 +7,7 @@ import {fetchProfileScreenData} from './ProfileScreenController';
 // Component
 const ProfileScreen = () => {
   const [profileScreenData, setProfileScreenData] = useState(null);
-  const userState = useSelector(state => state.validationReducer);
+  const userState = useSelector(state => state.userReducer);
 
   useEffect(() => {
     const fetchData = async () => {

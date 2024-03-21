@@ -16,16 +16,14 @@ const ProfileList = ({profileScreenData}) => {
           setModalVisible={setModalVisible}
         />
       </ModalView>
-      {Object.entries(profileScreenData).map(
-        ([identifier, valuePair], index) => (
-          <ProfileListItem
-            key={index}
-            entry={{key: identifier, valuePair: valuePair}}
-            onOpenModal={setModalVisible}
-            setCurrentEntry={setCurrentEntry}
-          />
-        ),
-      )}
+      {profileScreenData.map((entry, index) => (
+        <ProfileListItem
+          key={index}
+          entry={entry}
+          onOpenModal={setModalVisible}
+          setCurrentEntry={setCurrentEntry}
+        />
+      ))}
     </View>
   );
 };

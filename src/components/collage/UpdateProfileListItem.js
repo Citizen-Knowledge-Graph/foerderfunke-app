@@ -12,7 +12,7 @@ const UpdateProfileListItem = ({currentEntry, setModalVisible}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.updateTitle}>New {currentEntry.valuePair.title}</Text>
+      <Text style={styles.updateTitle}>New {currentEntry.title}</Text>
       <TextInput
         style={styles.input}
         onChangeText={text => setInputText(text)}
@@ -20,8 +20,7 @@ const UpdateProfileListItem = ({currentEntry, setModalVisible}) => {
         placeholder="Enter new value"
       />
       <ModalUpdateButton
-        identifier={currentEntry.key}
-        initialValue={currentEntry.valuePair.value}
+        entry={currentEntry}
         updateValue={updateValue}
         setModalVisible={setModalVisible}
       />

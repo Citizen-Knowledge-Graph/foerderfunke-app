@@ -51,6 +51,34 @@ export const readFile = async (relativeFilePath, filesystem = 'device') => {
 };
 
 /**
+ * Asynchronously writes contents to a file on the specified filesystem.
+ *
+ * This function takes a relative file path, content to write, and an optional filesystem type,
+ * writes the content to the file at the specified path, and returns a promise that resolves when the operation is complete.
+ *
+ * @param {string} relativeFilePath - The relative path of the file to be written.
+ * @param {string} content - The content to be written to the file.
+ * @param {string} [filesystem='device'] - The filesystem type ('device' by default).
+ * @returns {Promise<boolean>} A promise that resolves to true if the file is written successfully, or rejects if an error occurs.
+ */
+export const writeFile = async (
+  relativeFilePath,
+  content,
+  filesystem = 'device',
+) => {
+  const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem);
+
+  try {
+    await RNFS.writeFile(absoluteFilePath, content, 'utf8');
+    console.log(`File written successfully: ${relativeFilePath}`);
+    return true;
+  } catch (error) {
+    console.error(`Error writing file: ${relativeFilePath}`, error);
+    throw error;
+  }
+};
+
+/**
  * Asynchronously reads a JSON file and parses it to a JavaScript object.
  *
  * This function reads a file from the specified relative file path and filesystem,

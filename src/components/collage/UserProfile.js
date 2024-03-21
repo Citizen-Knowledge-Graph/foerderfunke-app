@@ -14,12 +14,7 @@ const UserProfile = ({profileScreenData}) => {
     <View>
       <View style={styles.imageContainer}>
         <View style={styles.imagePlaceholder}>
-          <View>
-            <Text style={styles.name}>
-              {profileScreenData.hasName.value}{' '}
-              {profileScreenData.hasSurname.value}
-            </Text>
-          </View>
+          <View />
         </View>
       </View>
       <ProfileList profileScreenData={profileScreenData} />

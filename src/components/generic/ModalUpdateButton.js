@@ -7,12 +7,7 @@ import userReportAction, {
 } from '../../storage/actions/userReport';
 import {useDispatch} from 'react-redux';
 
-const ModalUpdateButton = ({
-  identifier,
-  initialValue,
-  updateValue,
-  setModalVisible,
-}) => {
+const ModalUpdateButton = ({entry, updateValue, setModalVisible}) => {
   const dispatch = useDispatch();
 
   return (
@@ -20,7 +15,7 @@ const ModalUpdateButton = ({
       style={styles.updateButton}
       onPress={() => {
         setModalVisible(false);
-        dispatch(performUpdate(identifier, initialValue, updateValue));
+        dispatch(performUpdate(entry, updateValue));
       }}>
       <View style={styles.updateButton}>
         <Text style={styles.updateButtonText}>Update Profile</Text>

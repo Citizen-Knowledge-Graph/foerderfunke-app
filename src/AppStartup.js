@@ -13,9 +13,6 @@ const AppStartup = ({children}) => {
       // Fetch data from bundle to device - this will be API call later
       await fetchDataToDevice();
 
-      // Initialise redux store
-      await loadDataIntoRedux(dispatch);
-
       // Run initial validation
       await runValidation(dispatch);
 

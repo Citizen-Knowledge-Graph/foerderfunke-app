@@ -12,8 +12,8 @@ const ProfileListItem = ({entry, onOpenModal, setCurrentEntry}) => {
       }}>
       <View style={styles.userItem}>
         <View style={styles.userItemContent}>
-          <Text style={styles.userItemKey}>{entry.valuePair.title}</Text>
-          <Text style={styles.userItemValue}>{entry.valuePair.value}</Text>
+          <Text style={styles.userItemKey}>{entry.title}</Text>
+          <Text style={styles.userItemValue}>{entry.value}</Text>
         </View>
       </View>
     </TouchableOpacity>
