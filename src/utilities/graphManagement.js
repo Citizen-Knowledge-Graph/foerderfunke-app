@@ -15,7 +15,7 @@ export class NamespacedTerm {
 
   getNamespacedTerm() {
     if (this.namespace === 'literal') {
-      return this.term;
+      return namespaces.xsd(this.term);
     } else {
       return namespaces[this.namespace](this.term);
     }
@@ -59,21 +59,21 @@ export const getFirstAttributeValue = (
  *
  * NOTE: This currently only allows literal updates
  *
+ * @param {string} update_type - The type of update operation ('add', 'delete', 'replace').
  * @param {Object} dataset - The dataset containing the term node.
  * @param {string} term - The node name to start the search from.
  * @param {string} term_namespace - Namespace of starting node.
  * @param {string} predicate - The predicate to be used for filtering the target nodes.
  * @param {string} predicate_namespace - Namespace of predicate.
  * @param {string} object - The object to be updated or deleted.
- * @param {string} update_type - The type of update operation ('add', 'delete', 'replace').
  * @param {string | null} [replace_object=null] - The new object to replace the existing one, required if update_type is 'replace'.
  * @throws {Error} Throws an error if an invalid update type is provided.
  */
 export const updatePredicatedObject = (
+  update_type,
   dataset,
   predicate,
   predicate_namespace,
-  update_type,
   object,
   replace_object = null,
   term = 'user-profile',
@@ -81,18 +81,34 @@ export const updatePredicatedObject = (
 ) => {
   const termIri = new NamespacedTerm(term_namespace, term);
   const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
+  const objectIri = new NamespacedTerm('literal', object);
+  const replaceIri = replace_object
+    ? new NamespacedTerm('literal', object)
+    : null;
   const initialNode = retrieveTermNode(dataset, termIri);
 
   switch (update_type) {
     case 'add':
-      initialNode.addOut(predicateIri.getNamespacedTerm(), object);
+      initialNode.addOut(
+        predicateIri.getNamespacedTerm(),
+        objectIri.getNamespacedTerm(),
+      );
       break;
     case 'delete':
-      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
+      initialNode.deleteOut(
+        predicateIri.getNamespacedTerm(),
+        objectIri.getNamespacedTerm(),
+      );
       break;
     case 'replace':
-      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
-      initialNode.addOut(predicateIri.getNamespacedTerm(), replace_object);
+      initialNode.deleteOut(
+        predicateIri.getNamespacedTerm(),
+        objectIri.getNamespacedTerm(),
+      );
+      initialNode.addOut(
+        predicateIri.getNamespacedTerm(),
+        replaceIri.getNamespacedTerm(),
+      );
       break;
     default:
       throw new Error('Invalid update type');

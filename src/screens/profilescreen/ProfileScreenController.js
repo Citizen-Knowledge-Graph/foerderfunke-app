@@ -2,7 +2,6 @@ import {readFile, readJson, writeFile} from '../../utilities/fileManagement';
 import {parseTurtle, serializeTurtle} from '../../utilities/rdfHandling';
 import {
   getFirstAttributeValue,
-  NamespacedTerm,
   updatePredicatedObject,
 } from '../../utilities/graphManagement';
 import {ProfileDataField} from './ProfileModel';
@@ -50,10 +49,11 @@ export const updateUserProfile = async (entry, updateValue) => {
   const userString = await readFile(userPath);
   const userGraph = await parseTurtle(userString);
   const updatedGraph = updatePredicatedObject(
-    userGraph,
-    new NamespacedTerm(entry.namespace, entry.key),
-    initialValue,
     'replace',
+    userGraph,
+    entry.name,
+    entry.namespace,
+    entry.value,
     updateValue,
   );
   const updatedGraphString = await serializeTurtle(updatedGraph);
