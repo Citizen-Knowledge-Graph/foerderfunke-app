@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ScreenView from '../../components/generic/ScreenView';
-import SchemeInfo from '../../components/collage/SchemeInfo';
-import {Text} from 'react-native';
+import SchemeInfo from './components/SchemeInfo';
 import {fetchSchemeScreenData} from './SchemeScreenController';
 
 const SchemeScreen = ({route}) => {

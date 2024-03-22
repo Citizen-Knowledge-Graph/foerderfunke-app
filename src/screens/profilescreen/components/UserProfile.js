@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {colors} from '../../assets/styles/colors';
-import {fontColors, fontSizes, fontWeights} from '../../assets/styles/fonts';
+import {colors} from '../../../assets/styles/colors';
+import {fontColors, fontSizes, fontWeights} from '../../../assets/styles/fonts';
 import rdf from 'rdf-ext';
-import {getFirstAttributeValue} from '../../utilities/graphManagement';
-import useDeserializedUserData from '../../hooks/useDeserializedUserData';
+import {getFirstAttributeValue} from '../../../utilities/graphManagement';
+import useDeserializedUserData from '../../../hooks/useDeserializedUserData';
 
 import ProfileList from './ProfileList';
 

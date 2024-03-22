@@ -6,8 +6,6 @@ import StartScreen from './screens/StartScreen';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/profilescreen/ProfileScreen';
 import SchemeScreen from './screens/schemescreen/SchemeScreen';
-import GuideScreen from './screens/GuideScreen';
-import UpdateProfileScreen from './screens/UpdateProfileScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();
@@ -28,16 +26,6 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name="SchemeStackScreen"
         component={SchemeScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="GuideStackScreen"
-        component={GuideScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="UpdateProfileStackScreen"
-        component={UpdateProfileScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
