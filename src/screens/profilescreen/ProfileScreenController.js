@@ -49,6 +49,5 @@ export const updateUserProfile = async (entry, updateValue) => {
     updateValue,
   );
   const updatedGraphString = await serializeTurtle(updatedGraph);
-  console.log('new ttl: ', updatedGraphString);
   await writeFile('user-profile.ttl', updatedGraphString);
 };

@@ -1,8 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {updatePredicatedObject} from '../utilities/graphManagement';
-import useDeserializedUserData from '../hooks/useDeserializedUserData';
-import userReportAction, {performUpdate} from '../storage/actions/userReport';
+import {performUpdate} from '../storage/actions/userReport';
 import {useDispatch} from 'react-redux';
 
 const ModalUpdateButton = ({entry, updateValue, setModalVisible}) => {
