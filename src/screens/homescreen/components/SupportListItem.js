@@ -15,12 +15,10 @@ const SupportListItem = ({scheme}) => {
     <TouchableOpacity onPress={handleListItemPress}>
       <View style={styles.listItem}>
         <View style={styles.listItemContent}>
-          <Text style={styles.listItemTitle}>{scheme.data.title}</Text>
-          <Text style={styles.listItemDescription}>
-            {scheme.data.description}
-          </Text>
+          <Text style={styles.listItemTitle}>{scheme.title}</Text>
+          <Text style={styles.listItemDescription}>{scheme.description}</Text>
         </View>
-        <Text style={styles.listItemTime}>{scheme.data.time}</Text>
+        <Text style={styles.listItemTime}>{scheme.time}</Text>
       </View>
     </TouchableOpacity>
   );

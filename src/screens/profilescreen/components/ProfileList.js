@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import ProfileListItem from './ProfileListItem';
-import ModalView from '../../../components/generic/ModalView';
+import ModalView from '../../../components/ModalView';
 import UpdateProfileListItem from './UpdateProfileListItem';
 
 const ProfileList = ({profileScreenData}) => {

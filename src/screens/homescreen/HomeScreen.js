@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ScreenView from '../../components/generic/ScreenView';
+import ScreenView from '../../components/ScreenView';
 import SupportList from './components/SupportList';
 import {useSelector} from 'react-redux';
 import {fetchHomeScreenData} from './HomeScreenController';

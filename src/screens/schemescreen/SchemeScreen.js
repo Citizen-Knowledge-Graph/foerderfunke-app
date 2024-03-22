@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ScreenView from '../../components/generic/ScreenView';
+import ScreenView from '../../components/ScreenView';
 import SchemeInfo from './components/SchemeInfo';
 import {fetchSchemeScreenData} from './SchemeScreenController';
 

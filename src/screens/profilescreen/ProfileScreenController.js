@@ -1,7 +1,7 @@
 import {readFile, readJson, writeFile} from '../../utilities/fileManagement';
 import {parseTurtle, serializeTurtle} from '../../utilities/rdfHandling';
 import {getFirstOut, updateOut} from '../../utilities/graphManagement';
-import {ProfileDataField} from './ProfileModel';
+import {ProfileDataField} from './ProfileScreenModel';
 
 // config
 const dataFields = [

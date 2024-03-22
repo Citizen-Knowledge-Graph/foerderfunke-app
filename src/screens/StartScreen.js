@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import TextBox from '../components/generic/TextBox';
+import TextBox from '../components/TextBox';
 
 // Screen
 const StartScreen = ({navigation}) => {

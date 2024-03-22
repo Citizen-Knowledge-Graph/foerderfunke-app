@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import {fontColors, fontSizes} from '../../assets/styles/fonts';
+import {fontColors, fontSizes} from '../assets/styles/fonts';
 import {useNavigation} from '@react-navigation/native'; // Import useNavigation
 
 const SectionHeader = ({screenName, backButton}) => {

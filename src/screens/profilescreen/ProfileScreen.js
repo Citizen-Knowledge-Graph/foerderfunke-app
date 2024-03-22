@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ScreenView from '../../components/generic/ScreenView';
+import ScreenView from '../../components/ScreenView';
 import UserProfile from './components/UserProfile';
 import {useSelector} from 'react-redux';
 import {fetchProfileScreenData} from './ProfileScreenController';
