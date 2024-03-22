@@ -8,7 +8,7 @@ class SchemeData {
   }
 }
 
-// Interfacte
+// Interface
 export const fetchHomeScreenData = async validationState => {
   const registryPath = 'query-registry.json';
   const schemeRegistry = await readJson(registryPath);

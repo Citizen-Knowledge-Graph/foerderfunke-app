@@ -12,7 +12,7 @@ const ProfileListItem = ({entry, onOpenModal, setCurrentEntry}) => {
       }}>
       <View style={styles.userItem}>
         <View style={styles.userItemContent}>
-          <Text style={styles.userItemKey}>{entry.title}</Text>
+          <Text style={styles.userItemKey}>{entry.displayName}</Text>
           <Text style={styles.userItemValue}>{entry.value}</Text>
         </View>
       </View>

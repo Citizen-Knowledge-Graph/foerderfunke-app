@@ -23,6 +23,84 @@ export class NamespacedTerm {
 }
 
 /**
+ * This function fetches target nodes, attempts to convert the iterable of into
+ * an array to access the first node. If the first node exists and contains an
+ * `object` property, the value of this object is returned. Otherwise, the
+ * function returns `undefined`.
+ *
+ * @param {DatasetCore} dataset - The source data from which attributes are to be retrieved.
+ * @param {string} term - The node name to start the search from.
+ * @param {string} term_namespace - Namespace of starting node.
+ * @param {string} predicate - The predicate to be used for filtering the target nodes.
+ * @param {string} predicate_namespace - Namespace of predicate.
+ *
+ * @returns {any} The value of the object from the first target node if available,
+ * otherwise `undefined`.
+ */
+export const getFirstAttributeValue = (
+  dataset,
+  predicate,
+  predicate_namespace,
+  term = 'user-profile',
+  term_namespace = 'ff',
+) => {
+  const termIri = new NamespacedTerm(term_namespace, term);
+  const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
+  const targetNodes = retrieveAttributes(dataset, termIri, predicateIri);
+  const nodesArray = Array.from(targetNodes);
+  return nodesArray.length > 0 && nodesArray[0].object
+    ? nodesArray[0].object.value
+    : undefined;
+};
+
+/**
+ * Updates the object linked to a term node by a specific predicate in the
+ * dataset based on the update operation specified.
+ *
+ * NOTE: This currently only allows literal updates
+ *
+ * @param {Object} dataset - The dataset containing the term node.
+ * @param {string} term - The node name to start the search from.
+ * @param {string} term_namespace - Namespace of starting node.
+ * @param {string} predicate - The predicate to be used for filtering the target nodes.
+ * @param {string} predicate_namespace - Namespace of predicate.
+ * @param {string} object - The object to be updated or deleted.
+ * @param {string} update_type - The type of update operation ('add', 'delete', 'replace').
+ * @param {string | null} [replace_object=null] - The new object to replace the existing one, required if update_type is 'replace'.
+ * @throws {Error} Throws an error if an invalid update type is provided.
+ */
+export const updatePredicatedObject = (
+  dataset,
+  predicate,
+  predicate_namespace,
+  update_type,
+  object,
+  replace_object = null,
+  term = 'user-profile',
+  term_namespace = 'ff',
+) => {
+  const termIri = new NamespacedTerm(term_namespace, term);
+  const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
+  const initialNode = retrieveTermNode(dataset, termIri);
+
+  switch (update_type) {
+    case 'add':
+      initialNode.addOut(predicateIri.getNamespacedTerm(), object);
+      break;
+    case 'delete':
+      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
+      break;
+    case 'replace':
+      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
+      initialNode.addOut(predicateIri.getNamespacedTerm(), replace_object);
+      break;
+    default:
+      throw new Error('Invalid update type');
+  }
+  return dataset;
+};
+
+/**
  * Retrieves RDF quads for a given subject and predicate from the specified dataset.
  * This function dynamically resolves the namespaces for both the term (subject) and predicate
  * before querying the dataset. It uses the grapoi library to facilitate graph traversal
@@ -35,91 +113,9 @@ export class NamespacedTerm {
  * @returns {Array<Quad>} An array of RDF/JS Quads that represent the relationship
  * from the subject to related objects via the specified predicate.
  */
-export const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
+const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
   const initialNode = retrieveTermNode(dataset, term);
   return initialNode.out(predicate.getNamespacedTerm()).quads();
-};
-
-/**
- * This function fetches target nodes, attempts to convert the iterable of into
- * an array to access the first node. If the first node exists and contains an
- * `object` property, the value of this object is returned. Otherwise, the
- * function returns `undefined`.
- *
- * @param {Object} dataset - The source data from which attributes are to be retrieved.
- * @param {NamespacedTerm} term - The node name to start the search from.
- * @param {NamespacedTerm} predicate - The predicate to be used for filtering the target nodes.
- *
- * @returns {any} The value of the object from the first target node if available,
- * otherwise `undefined`.
- */
-export const getFirstAttributeValue = (dataset, term, predicate) => {
-  const targetNodes = retrieveAttributes(dataset, term, predicate);
-  const nodesArray = Array.from(targetNodes);
-  console.log('this thingy; ', nodesArray[0].object);
-  return nodesArray.length > 0 && nodesArray[0].object
-    ? nodesArray[0].object.value
-    : undefined;
-};
-
-/**
- * Updates the object linked to a term node by a specific predicate in the
- * dataset based on the update operation specified.
- *
- * @param {Object} dataset - The dataset containing the term node.
- * @param {NamespacedTerm} term - The term identifying the node to be updated.
- * @param {NamespacedTerm} predicate - The predicate linking the term node to the object.
- * @param {NamespacedTerm} object - The object to be updated or deleted.
- * @param {string} update_type - The type of update operation ('add', 'delete', 'replace').
- * @param {NamespacedTerm} [new_object=null] - The new object to replace the existing one, required if update_type is 'replace'.
- * @throws {Error} Throws an error if an invalid update type is provided.
- */
-export const updatePredicatedObject = (
-  dataset,
-  predicate,
-  object,
-  update_type,
-  new_object = null,
-  term = 'user-profile',
-) => {
-  const initialNode = retrieveTermNode(dataset, term);
-  initialNode.addOut(
-    predicate.getNamespacedTerm(),
-    new_object.getNamespacedTerm(),
-  );
-  for (const quad of initialNode.out(predicate.getNamespacedTerm()).quads()) {
-    console.log(`\t${quad.object.value}`);
-  }
-
-  switch (update_type) {
-    case 'add':
-      initialNode.addOut(
-        predicate.getNamespacedTerm(),
-        object.getNamespacedTerm(),
-      );
-      break;
-    case 'delete':
-      initialNode.deleteOut(
-        predicate.getNamespacedTerm(),
-        object.getNamespacedTerm(),
-      );
-      break;
-    case 'replace':
-      console.log('we are here');
-      initialNode.deleteOut(
-        predicate.getNamespacedTerm(),
-        object.getNamespacedTerm(),
-      );
-      initialNode.addOut(
-        predicate.getNamespacedTerm(),
-        new_object.getNamespacedTerm(),
-      );
-      console.log('this happened');
-      break;
-    default:
-      throw new Error('Invalid update type');
-  }
-  return dataset;
 };
 
 /**
@@ -130,6 +126,6 @@ export const updatePredicatedObject = (
  * @param {object} [factory=rdf] - Optional RDF data factory, defaults to 'rdf'.
  * @returns {object} The term node from the dataset.
  */
-export const retrieveTermNode = (dataset, term, factory = rdf) => {
+const retrieveTermNode = (dataset, term, factory = rdf) => {
   return grapoi({dataset, factory, term: term.getNamespacedTerm()});
 };

@@ -1,50 +1,47 @@
-import {readFile, writeFile} from '../../utilities/fileManagement';
+import {readFile, readJson, writeFile} from '../../utilities/fileManagement';
 import {parseTurtle, serializeTurtle} from '../../utilities/rdfHandling';
 import {
   getFirstAttributeValue,
   NamespacedTerm,
   updatePredicatedObject,
 } from '../../utilities/graphManagement';
+import {ProfileDataField} from './ProfileModel';
 
-class ProfileDataField {
-  constructor(key, key_namespace, title) {
-    this.key = key;
-    this.key_namespace = key_namespace;
-    this.value = null;
-    this.value_namespace = null;
-    this.title = title;
-  }
-
-  setValue(value) {
-    this.value = value;
-  }
-}
-
+// config
 const dataFields = [
-  new ProfileDataField('owns', 'ff', 'Owns'),
-  new ProfileDataField('hasName', 'ff', 'Name'),
-  new ProfileDataField('hasSurname', 'ff', 'Surname'),
-  new ProfileDataField('hasBirthday', 'ff', 'Birthday'),
-  new ProfileDataField('hasResidence', 'ff', 'Residence'),
-  new ProfileDataField('hasDrivingLicense', 'ff', 'Driving License'),
-  new ProfileDataField('hasChildren', 'ff', 'Children'),
+  'name',
+  'surname',
+  'birthday',
+  'residence',
+  'drivers_license',
 ];
 
 export const fetchProfileScreenData = async () => {
+  //
+  // fetch content information for each data field
+  const userHydrationPath = 'user-profile-hydration.json';
+  const userHydrationJson = await readJson(userHydrationPath);
+  let data = dataFields.map(key => {
+    const newDataField = new ProfileDataField(key);
+    newDataField.setName(userHydrationJson[key].name);
+    newDataField.setDisplayName(userHydrationJson[key].display_name);
+    newDataField.setNamespace(userHydrationJson[key].namespace);
+    return newDataField;
+  });
+  //
+  // fetch user data from the user profile
   const userPath = 'user-profile.ttl';
   const userString = await readFile(userPath);
   const userGraph = await parseTurtle(userString);
-  const data = dataFields.map(field => {
-    field.setValue(
-      getFirstAttributeValue(
-        userGraph,
-        new NamespacedTerm('ff', 'user-profile'),
-        new NamespacedTerm(field.key_namespace, field.key),
-      ),
+  data = data.map(entry => {
+    const value = getFirstAttributeValue(
+      userGraph,
+      entry.name,
+      entry.namespace,
     );
-    return field;
+    entry.setValue(value);
+    return entry;
   });
-  console.log(data);
   return data;
 };
 

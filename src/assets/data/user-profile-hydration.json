@@ -1,0 +1,27 @@
+{
+  "name": {
+    "namespace": "ff",
+    "name": "hasName",
+    "display_name": "Name"
+  },
+  "surname": {
+    "namespace": "ff",
+    "name": "hasSurname",
+    "display_name": "Nachname"
+  },
+  "birthday": {
+    "namespace": "ff",
+    "name": "hasBirthday",
+    "display_name": "Geburtstag"
+  },
+  "residence": {
+    "namespace": "ff",
+    "name": "hasResidence",
+    "display_name": "Wohnort"
+  },
+  "drivers_license": {
+    "namespace": "ff",
+    "name": "hasDrivingLicense",
+    "display_name": "Führerschein"
+  }
+}
