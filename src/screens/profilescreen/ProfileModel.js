@@ -5,11 +5,11 @@ export class ProfileDataField {
     this.displayName = null;
     this.namespace = null;
     this.name = null;
-    this.value = null;
+    this.object = null;
   }
 
-  setValue(value) {
-    this.value = value;
+  setObject(value) {
+    this.object = value;
   }
 
   setDisplayName(value) {

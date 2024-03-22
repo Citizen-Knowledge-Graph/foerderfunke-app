@@ -1,9 +1,6 @@
 import {readFile, readJson, writeFile} from '../../utilities/fileManagement';
 import {parseTurtle, serializeTurtle} from '../../utilities/rdfHandling';
-import {
-  getFirstAttributeValue,
-  updatePredicatedObject,
-} from '../../utilities/graphManagement';
+import {getFirstOut, updateOut} from '../../utilities/graphManagement';
 import {ProfileDataField} from './ProfileModel';
 
 // config
@@ -33,12 +30,7 @@ export const fetchProfileScreenData = async () => {
   const userString = await readFile(userPath);
   const userGraph = await parseTurtle(userString);
   data = data.map(entry => {
-    const value = getFirstAttributeValue(
-      userGraph,
-      entry.name,
-      entry.namespace,
-    );
-    entry.setValue(value);
+    entry.setObject(getFirstOut(userGraph, entry.name, entry.namespace));
     return entry;
   });
   return data;
@@ -48,15 +40,15 @@ export const updateUserProfile = async (entry, updateValue) => {
   const userPath = 'user-profile.ttl';
   const userString = await readFile(userPath);
   const userGraph = await parseTurtle(userString);
-  const updatedGraph = updatePredicatedObject(
+  const updatedGraph = updateOut(
     'replace',
     userGraph,
     entry.name,
     entry.namespace,
-    entry.value,
+    entry.object,
     updateValue,
   );
   const updatedGraphString = await serializeTurtle(updatedGraph);
   console.log('new ttl: ', updatedGraphString);
-  await writeFile('user-profile.tt', updatedGraphString);
+  await writeFile('user-profile.ttl', updatedGraphString);
 };

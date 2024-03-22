@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TextInput} from 'react-native';
 import ModalUpdateButton from '../generic/ModalUpdateButton';
 
 const UpdateProfileListItem = ({currentEntry, setModalVisible}) => {
-  const [inputText, setInputText] = useState(currentEntry.value);
+  const [inputText, setInputText] = useState(currentEntry.object.value);
   const [updateValue, setUpdateValue] = useState('');
 
   useEffect(() => {

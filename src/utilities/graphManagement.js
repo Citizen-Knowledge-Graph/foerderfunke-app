@@ -1,5 +1,6 @@
 import grapoi from 'grapoi';
 import rdf from 'rdf-ext';
+import {updateFromTerm} from './termManagement';
 
 const namespaces = {
   ff: rdf.namespace('https://foerderfunke.org/default#'),
@@ -7,7 +8,7 @@ const namespaces = {
   xsd: rdf.namespace('http://www.w3.org/2001/XMLSchema#'),
 };
 
-export class NamespacedTerm {
+class NamespacedTerm {
   constructor(namespace, term) {
     this.namespace = namespace;
     this.term = term;
@@ -19,6 +20,13 @@ export class NamespacedTerm {
     } else {
       return namespaces[this.namespace](this.term);
     }
+  }
+}
+
+export class ResponseObject {
+  constructor(value, object) {
+    this.value = value;
+    this.object = object;
   }
 }
 
@@ -37,7 +45,7 @@ export class NamespacedTerm {
  * @returns {any} The value of the object from the first target node if available,
  * otherwise `undefined`.
  */
-export const getFirstAttributeValue = (
+export const getFirstOut = (
   dataset,
   predicate,
   predicate_namespace,
@@ -49,7 +57,7 @@ export const getFirstAttributeValue = (
   const targetNodes = retrieveAttributes(dataset, termIri, predicateIri);
   const nodesArray = Array.from(targetNodes);
   return nodesArray.length > 0 && nodesArray[0].object
-    ? nodesArray[0].object.value
+    ? nodesArray[0].object
     : undefined;
 };
 
@@ -65,50 +73,36 @@ export const getFirstAttributeValue = (
  * @param {string} term_namespace - Namespace of starting node.
  * @param {string} predicate - The predicate to be used for filtering the target nodes.
  * @param {string} predicate_namespace - Namespace of predicate.
- * @param {string} object - The object to be updated or deleted.
- * @param {string | null} [replace_object=null] - The new object to replace the existing one, required if update_type is 'replace'.
+ * @param {Object} object - The object to be updated or deleted.
+ * @param {string | null} [update_value=null] - The new object to replace the existing one, required if update_type is 'replace'.
  * @throws {Error} Throws an error if an invalid update type is provided.
  */
-export const updatePredicatedObject = (
+export const updateOut = (
   update_type,
   dataset,
   predicate,
   predicate_namespace,
   object,
-  replace_object = null,
+  update_value = null,
   term = 'user-profile',
   term_namespace = 'ff',
 ) => {
   const termIri = new NamespacedTerm(term_namespace, term);
   const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
-  const objectIri = new NamespacedTerm('literal', object);
-  const replaceIri = replace_object
-    ? new NamespacedTerm('literal', object)
-    : null;
   const initialNode = retrieveTermNode(dataset, termIri);
+  const replaceObject = updateFromTerm(object, update_value);
 
   switch (update_type) {
     case 'add':
-      initialNode.addOut(
-        predicateIri.getNamespacedTerm(),
-        objectIri.getNamespacedTerm(),
-      );
+      initialNode.addOut(predicateIri.getNamespacedTerm(), object);
       break;
     case 'delete':
-      initialNode.deleteOut(
-        predicateIri.getNamespacedTerm(),
-        objectIri.getNamespacedTerm(),
-      );
+      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
       break;
     case 'replace':
-      initialNode.deleteOut(
-        predicateIri.getNamespacedTerm(),
-        objectIri.getNamespacedTerm(),
-      );
-      initialNode.addOut(
-        predicateIri.getNamespacedTerm(),
-        replaceIri.getNamespacedTerm(),
-      );
+      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
+      initialNode.addOut(predicateIri.getNamespacedTerm(), replaceObject);
+
       break;
     default:
       throw new Error('Invalid update type');
