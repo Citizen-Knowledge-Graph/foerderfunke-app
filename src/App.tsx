@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { SchemeStackNavigator } from './AppNavigation';
+import {NavigationContainer} from '@react-navigation/native';
+import {SchemeStackNavigator} from './AppNavigation';
 import AppStartup from './AppStartup';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './storage/store';
 
 const App = () => {
