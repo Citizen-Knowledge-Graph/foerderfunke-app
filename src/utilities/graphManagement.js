@@ -49,7 +49,7 @@ export const getFirstOut = (
   dataset,
   predicate,
   predicate_namespace,
-  term = 'user-profile',
+  term = 'mainPerson',
   term_namespace = 'ff',
 ) => {
   const termIri = new NamespacedTerm(term_namespace, term);
@@ -84,7 +84,7 @@ export const updateOut = (
   predicate_namespace,
   object,
   update_value = null,
-  term = 'user-profile',
+  term = 'mainPerson',
   term_namespace = 'ff',
 ) => {
   const termIri = new NamespacedTerm(term_namespace, term);

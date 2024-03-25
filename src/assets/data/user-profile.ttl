@@ -14,7 +14,7 @@ ff:CarA
     ff:carAge  5 ;
     ff:carType "Electric" .
 
-ff:user-profile
+ff:mainPerson
     a                    ff:Person, ff:Citizen ;
     ff:hasName           "Max" ;
     ff:hasSurname        "Mustermann" ;
