@@ -1,4 +1,4 @@
-import RNFS from 'react-native-fs';
+import * as FileSystem from 'expo-file-system';
 
 const BUNDLE_DATA_PATH = '/assets/data/';
 
@@ -15,9 +15,11 @@ const BUNDLE_DATA_PATH = '/assets/data/';
 const setAbsolutePath = (relativeFilePath, filesystem) => {
   switch (filesystem) {
     case 'device':
-      return RNFS.DocumentDirectoryPath + `/${relativeFilePath}`;
+      return FileSystem.documentDirectory + `/${relativeFilePath}`;
     case 'bundle':
-      return RNFS.MainBundlePath + BUNDLE_DATA_PATH + `${relativeFilePath}`;
+      return (
+        FileSystem.bundleDirectory + BUNDLE_DATA_PATH + `${relativeFilePath}`
+      );
     default:
       throw new Error('No valid filesystem provided');
   }
@@ -34,16 +36,15 @@ const setAbsolutePath = (relativeFilePath, filesystem) => {
  * @returns {Promise<string|null>} A promise that resolves to the file's contents, or null if the file does not exist or an error occurs.
  */
 export const readFile = async (relativeFilePath, filesystem = 'device') => {
-  const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem);
+  const absoluteFilePath = setAbsolutePath(relativeFilePath, 'bundle');
 
   try {
-    const fileExists = await RNFS.exists(absoluteFilePath);
-    if (!fileExists) {
+    const fileExists = await FileSystem.getInfoAsync(absoluteFilePath);
+    if (!fileExists.exists) {
       console.log(`File does not exist: ${relativeFilePath}`);
       return null;
     }
-    const fileContents = await RNFS.readFile(absoluteFilePath, 'utf8');
-    return fileContents;
+    return await FileSystem.readAsStringAsync(absoluteFilePath);
   } catch (error) {
     console.error(`Error reading file: ${relativeFilePath}`, error);
     return null;
@@ -69,7 +70,7 @@ export const writeFile = async (
   const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem);
 
   try {
-    await RNFS.writeFile(absoluteFilePath, content, 'utf8');
+    await FileSystem.writeAsStringAsync(absoluteFilePath, content);
     console.log(`File written successfully: ${relativeFilePath}`);
     return true;
   } catch (error) {
@@ -114,10 +115,10 @@ export const ensureDirectoryExists = async relativeDirectoryPath => {
     'device',
   );
 
-  const directoryExists = await RNFS.exists(absoluteDirectoryPath);
-  if (!directoryExists) {
+  const directoryExists = await FileSystem.getInfoAsync(absoluteDirectoryPath);
+  if (!directoryExists.exists) {
     try {
-      await RNFS.mkdir(absoluteDirectoryPath);
+      await FileSystem.makeDirectoryAsync(absoluteDirectoryPath);
       console.log(`Directory created at: ${relativeDirectoryPath}`);
     } catch (error) {
       console.error(`Error creating directory: ${error.message}`);
@@ -140,9 +141,9 @@ export const copyFileToDevice = async relativeFileName => {
   const deviceFilePath = setAbsolutePath(relativeFileName, 'device');
 
   try {
-    const fileExists = await RNFS.exists(deviceFilePath);
-    if (!fileExists) {
-      await RNFS.copyFile(bundleFilePath, deviceFilePath);
+    const fileExists = await FileSystem.getInfoAsync(deviceFilePath);
+    if (!fileExists.exists) {
+      await FileSystem.copyAsync({from: bundleFilePath, to: deviceFilePath});
       console.log(`${relativeFileName} copied to DocumentDirectoryPath`);
     } else {
       console.log(`${relativeFileName} already exists on device`);
@@ -167,12 +168,14 @@ export const copyDirectoryToDevice = async relativeDirectoryPath => {
 
   try {
     await ensureDirectoryExists(relativeDirectoryPath);
-    const items = await RNFS.readDir(bundleDirPath);
+    const items = await FileSystem.readDirectoryAsync(bundleDirPath);
     for (let item of items) {
-      const relativeItemPath = `${relativeDirectoryPath}/${item.name}`;
-      if (item.isDirectory()) {
+      const relativeItemPath = `${relativeDirectoryPath}/${item}`;
+      const itemType = await FileSystem.getInfoAsync(relativeItemPath);
+
+      if (itemType.isDirectory) {
         await copyDirectoryToDevice(relativeItemPath);
-      } else if (item.isFile()) {
+      } else {
         await copyFileToDevice(relativeItemPath);
       }
     }

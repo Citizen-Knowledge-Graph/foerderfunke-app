@@ -17,7 +17,7 @@ const fetchDirectoryToDevice = async directory => {
 const fetchDataToDevice = async () => {
   // Fetch user profile
   await fetchFileToDevice('user-profile.ttl');
-  await fetchFileToDevice('user-profile-hydration.json');
+  await fetchFileToDevice('user-profile-hydration.txt');
 
   // Fetch query registry
   await fetchFileToDevice('query-registry.json');

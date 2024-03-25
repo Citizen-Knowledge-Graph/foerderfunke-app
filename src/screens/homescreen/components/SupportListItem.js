@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {colors} from '../../../assets/styles/colors';
-import {fontSizes, fontColors, fontWeights} from '../../../assets/styles/fonts';
+import {colors} from '../../../styles/colors';
+import {fontSizes, fontColors, fontWeights} from '../../../styles/fonts';
 import {useNavigation} from '@react-navigation/native';
 
 const SupportListItem = ({scheme}) => {

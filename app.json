@@ -3,5 +3,8 @@
   "displayName": "FoerderFunke",
   "ios": {
     "bundleIdentifier": "com.anonymous.foerderfunke"
-  }
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ]
 }

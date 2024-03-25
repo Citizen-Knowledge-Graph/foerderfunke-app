@@ -15,7 +15,7 @@ const dataFields = [
 export const fetchProfileScreenData = async () => {
   //
   // fetch content information for each data field
-  const userHydrationPath = 'user-profile-hydration.json';
+  const userHydrationPath = 'user-profile-hydration.txt';
   const userHydrationJson = await readJson(userHydrationPath);
   let data = dataFields.map(key => {
     const newDataField = new ProfileDataField(key);

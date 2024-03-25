@@ -1,11 +1,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {SchemeStackNavigator} from './AppNavigation';
-import AppStartup from './AppStartup';
+import {SchemeStackNavigator} from './src/AppNavigation';
+import AppStartup from './src/AppStartup';
 import {Provider} from 'react-redux';
-import store from './storage/store';
+import store from './src/storage/store';
 
-const App = () => {
+export default function App() {
   return (
     <Provider store={store}>
       <AppStartup>
@@ -15,6 +15,4 @@ const App = () => {
       </AppStartup>
     </Provider>
   );
-};
-
-export default App;
+}

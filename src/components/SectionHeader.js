@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
-import {fontSizes, fontWeights} from '../assets/styles/fonts';
+import {fontSizes, fontWeights} from '../styles/fonts';
 
 const SectionHeader = ({title}) => {
   return <Text style={styles.sectionHeader}>{title}</Text>;

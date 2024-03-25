@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {colors} from '../../../assets/styles/colors';
-import {fontColors, fontSizes, fontWeights} from '../../../assets/styles/fonts';
+import {colors} from '../../../styles/colors';
+import {fontColors, fontSizes, fontWeights} from '../../../styles/fonts';
 import TextBoxHeader from '../../../components/TextBoxHeader';
 
 const SchemeInfo = ({schemeScreenData}) => {
