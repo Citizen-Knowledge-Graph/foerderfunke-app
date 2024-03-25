@@ -1,4 +1,7 @@
 {
   "name": "FoerderFunke",
-  "displayName": "FoerderFunke"
+  "displayName": "FoerderFunke",
+  "ios": {
+    "bundleIdentifier": "com.anonymous.foerderfunke"
+  }
 }
