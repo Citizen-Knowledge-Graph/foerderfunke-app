@@ -1,5 +1,21 @@
 # FörderFunke App
 
+## Expo Setup
+
+Run for ios:
+
+```bash
+npx expo run:ios
+````
+
+Run with Expo Go App:
+
+```bash
+npx expo start
+````
+
+## React Native CLI
+
 ### First-time setup on macOS
 
 ```bash
