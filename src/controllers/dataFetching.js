@@ -1,5 +1,5 @@
 import { writeFile, fetchZipAsset } from '../utilities/fileManagement';
-import { unzip_from_base64 } from '../utilities/zipHandling';
+import { unzipFromBase64 } from '../utilities/zipHandling';
 
 // Fetch all data and copy it to device
 const fetchDataToDevice = async () => {
@@ -7,7 +7,8 @@ const fetchDataToDevice = async () => {
   const binaryData = await fetchZipAsset(require('../../assets/data.zip'));
 
   // Unzip data
-  const unzippedData = await unzip_from_base64(binaryData);
+  const unzippedData = await unzipFromBase64(binaryData);
+  g;
 
   // Write unzipped data to device
   for (const file of unzippedData) {

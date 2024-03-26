@@ -7,7 +7,7 @@ class UnZipFile {
   }
 }
 
-export const unzip_from_base64 = async (base64String) => {
+export const unzipFromBase64 = async (base64String) => {
   const zip = new JSZip();
   const unzipContent = await zip.loadAsync(base64String);
 
