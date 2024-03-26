@@ -7,7 +7,7 @@ const fetchDataToDevice = async () => {
   const binaryData = await fetchZipAsset(require('../../assets/data.zip'));
 
   // Unzip data
-  const unzippedData = await unzipFromBase64(binaryData)g;
+  const unzippedData = await unzipFromBase64(binaryData);
 
   // Write unzipped data to device
   for (const file of unzippedData) {
