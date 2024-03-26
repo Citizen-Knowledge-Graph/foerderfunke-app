@@ -1,5 +1,5 @@
-const {getDefaultConfig} = require('expo/metro-config');
-const {mergeConfig} = require('@react-native/metro-config');
+const { getDefaultConfig } = require("expo/metro-config");
+const { mergeConfig } = require("@react-native/metro-config");
 
 /**
  * Metro configuration
@@ -8,17 +8,8 @@ const {mergeConfig} = require('@react-native/metro-config');
  * @type {import("metro-config").MetroConfig}
  */
 const config = {
-  // Extend the existing resolver configuration
   resolver: {
-    // Extend the array of file extensions that Metro will handle
-    sourceExts: [
-      // Include default file extensions
-      ...getDefaultConfig(__dirname).resolver.sourceExts,
-      // Add your custom file extensions here
-      'ttl', // Example: Adding .svg files
-      'json', // Example: Adding .svg files
-      'txt',
-    ],
+    sourceExts: [...getDefaultConfig(__dirname).resolver.sourceExts, "zip"],
   },
 };
 
