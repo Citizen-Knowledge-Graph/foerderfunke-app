@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {StyleSheet} from 'react-native';
-import {fontColors, fontSizes} from '../assets/styles/fonts';
+import {fontColors, fontSizes} from '../styles/fonts';
 import SectionHeader from './SectionHeader';
 
 // Component

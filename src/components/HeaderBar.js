@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, StatusBar, Button} from 'react-native';
+import {View, StyleSheet, StatusBar, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const HeaderBar = ({backButton}) => {

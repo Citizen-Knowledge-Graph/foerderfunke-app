@@ -4,6 +4,7 @@
 
 # Xcode
 #
+ios/
 build/
 *.pbxuser
 !default.pbxuser
@@ -64,3 +65,8 @@ yarn-error.log
 
 # testing
 /coverage
+
+# Expo
+.expo
+dist/
+web-build/

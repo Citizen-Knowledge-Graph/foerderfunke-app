@@ -1,27 +1,6 @@
-import RNFS from 'react-native-fs';
-
-const BUNDLE_DATA_PATH = '/assets/data/';
-
-/**
- * Constructs the absolute file path based on the provided filesystem.
- *
- * This function takes a relative file path and a filesystem type ('device' or 'bundle') and constructs the absolute path based on the filesystem.
- *
- * @param {string} relativeFilePath - The relative path of the file.
- * @param {string} filesystem - The type of filesystem ('device' or 'bundle').
- * @returns {string} The absolute file path.
- * @throws {Error} If an invalid filesystem is provided.
- */
-const setAbsolutePath = (relativeFilePath, filesystem) => {
-  switch (filesystem) {
-    case 'device':
-      return RNFS.DocumentDirectoryPath + `/${relativeFilePath}`;
-    case 'bundle':
-      return RNFS.MainBundlePath + BUNDLE_DATA_PATH + `${relativeFilePath}`;
-    default:
-      throw new Error('No valid filesystem provided');
-  }
-};
+import * as FileSystem from 'expo-file-system';
+import { Asset } from 'expo-asset';
+import base64 from 'react-native-base64';
 
 /**
  * Asynchronously reads a file's contents from the specified filesystem.
@@ -30,20 +9,18 @@ const setAbsolutePath = (relativeFilePath, filesystem) => {
  * reads the file from the specified path, and returns its contents as a string.
  *
  * @param {string} relativeFilePath - The relative path of the file to be read.
- * @param {string} [filesystem='device'] - The filesystem type ('device' by default).
  * @returns {Promise<string|null>} A promise that resolves to the file's contents, or null if the file does not exist or an error occurs.
  */
-export const readFile = async (relativeFilePath, filesystem = 'device') => {
-  const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem);
+export const readFile = async (relativeFilePath) => {
+  const absoluteFilePath = FileSystem.documentDirectory + relativeFilePath;
 
   try {
-    const fileExists = await RNFS.exists(absoluteFilePath);
-    if (!fileExists) {
+    const fileExists = await FileSystem.getInfoAsync(absoluteFilePath);
+    if (!fileExists.exists) {
       console.log(`File does not exist: ${relativeFilePath}`);
       return null;
     }
-    const fileContents = await RNFS.readFile(absoluteFilePath, 'utf8');
-    return fileContents;
+    return await FileSystem.readAsStringAsync(absoluteFilePath);
   } catch (error) {
     console.error(`Error reading file: ${relativeFilePath}`, error);
     return null;
@@ -58,18 +35,26 @@ export const readFile = async (relativeFilePath, filesystem = 'device') => {
  *
  * @param {string} relativeFilePath - The relative path of the file to be written.
  * @param {string} content - The content to be written to the file.
- * @param {string} [filesystem='device'] - The filesystem type ('device' by default).
+ * @param {boolean} create_directory - Whether to create the directory if it does not exist.
  * @returns {Promise<boolean>} A promise that resolves to true if the file is written successfully, or rejects if an error occurs.
  */
 export const writeFile = async (
   relativeFilePath,
   content,
-  filesystem = 'device',
+  create_directory = false
 ) => {
-  const absoluteFilePath = setAbsolutePath(relativeFilePath, filesystem);
+  const absoluteFilePath = FileSystem.documentDirectory + relativeFilePath;
+
+  if (create_directory) {
+    const directory = relativeFilePath.substring(
+      0,
+      relativeFilePath.lastIndexOf('/')
+    );
+    await ensureDirectoryExists(directory);
+  }
 
   try {
-    await RNFS.writeFile(absoluteFilePath, content, 'utf8');
+    await FileSystem.writeAsStringAsync(absoluteFilePath, content);
     console.log(`File written successfully: ${relativeFilePath}`);
     return true;
   } catch (error) {
@@ -86,11 +71,10 @@ export const writeFile = async (
  * null if an error occurs during reading or parsing.
  *
  * @param {string} relativeFilePath - The relative path of the JSON file to be read.
- * @param {string} [filesystem="device"] - The filesystem type ('device' by default). Specifies where to read the file from.
  * @returns {Promise<Object|null>} A promise that resolves to the parsed JSON object, or null if an error occurs.
  */
-export const readJson = async (relativeFilePath, filesystem = 'device') => {
-  const stringObject = await readFile(relativeFilePath, filesystem);
+export const readJson = async (relativeFilePath) => {
+  const stringObject = await readFile(relativeFilePath);
 
   try {
     return JSON.parse(stringObject);
@@ -108,16 +92,16 @@ export const readJson = async (relativeFilePath, filesystem = 'device') => {
  * @param {string} relativeDirectoryPath - The relative path of the directory to check or create.
  * @returns {Promise<void>} A promise that resolves when the directory has been checked or created.
  */
-export const ensureDirectoryExists = async relativeDirectoryPath => {
-  const absoluteDirectoryPath = setAbsolutePath(
-    relativeDirectoryPath,
-    'device',
-  );
+export const ensureDirectoryExists = async (relativeDirectoryPath) => {
+  const absoluteDirectoryPath =
+    FileSystem.documentDirectory + relativeDirectoryPath;
 
-  const directoryExists = await RNFS.exists(absoluteDirectoryPath);
-  if (!directoryExists) {
+  const directoryExists = await FileSystem.getInfoAsync(absoluteDirectoryPath);
+  if (!directoryExists.exists) {
     try {
-      await RNFS.mkdir(absoluteDirectoryPath);
+      await FileSystem.makeDirectoryAsync(absoluteDirectoryPath, {
+        intermediates: true,
+      });
       console.log(`Directory created at: ${relativeDirectoryPath}`);
     } catch (error) {
       console.error(`Error creating directory: ${error.message}`);
@@ -125,61 +109,10 @@ export const ensureDirectoryExists = async relativeDirectoryPath => {
   }
 };
 
-/**
- * Asynchronously copies a file from the bundle to the device directory.
- *
- * This function checks if the specified file exists in the device directory,
- * and if not, copies it from the bundle directory to the device directory.
- *
- * @param {string} relativeFileName - The relative name of the file to be copied.
- * @returns {Promise<void>} A promise that resolves when the file has been copied or if it already exists.
- */
-export const copyFileToDevice = async relativeFileName => {
-  // configure file paths
-  const bundleFilePath = setAbsolutePath(relativeFileName, 'bundle');
-  const deviceFilePath = setAbsolutePath(relativeFileName, 'device');
-
-  try {
-    const fileExists = await RNFS.exists(deviceFilePath);
-    if (!fileExists) {
-      await RNFS.copyFile(bundleFilePath, deviceFilePath);
-      console.log(`${relativeFileName} copied to DocumentDirectoryPath`);
-    } else {
-      console.log(`${relativeFileName} already exists on device`);
-    }
-  } catch (error) {
-    console.error(`Error copying ${bundleFilePath}: `, error);
-  }
-};
-
-/**
- * Recursively copies a directory from the bundle to the device directory.
- *
- * This function checks if the specified directory and its subdirectories exist on the device,
- * and if not, creates them. It then copies all files from the bundle to the device directory,
- * applying the process recursively to subdirectories.
- *
- * @param {string} relativeDirectoryPath - The relative path of the directory to be copied.
- * @returns {Promise<void>} A promise that resolves when the entire directory has been copied.
- */
-export const copyDirectoryToDevice = async relativeDirectoryPath => {
-  const bundleDirPath = setAbsolutePath(relativeDirectoryPath, 'bundle');
-
-  try {
-    await ensureDirectoryExists(relativeDirectoryPath);
-    const items = await RNFS.readDir(bundleDirPath);
-    for (let item of items) {
-      const relativeItemPath = `${relativeDirectoryPath}/${item.name}`;
-      if (item.isDirectory()) {
-        await copyDirectoryToDevice(relativeItemPath);
-      } else if (item.isFile()) {
-        await copyFileToDevice(relativeItemPath);
-      }
-    }
-  } catch (error) {
-    console.error(
-      `Error copying directory ${bundleDirPath} to device: `,
-      error,
-    );
-  }
+export const fetchZipAsset = async (zip_module) => {
+  const asset = await Asset.loadAsync(zip_module);
+  const fileContent = await FileSystem.readAsStringAsync(asset[0].localUri, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
+  return base64.decode(fileContent);
 };

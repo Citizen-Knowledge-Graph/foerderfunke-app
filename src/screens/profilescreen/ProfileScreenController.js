@@ -1,7 +1,7 @@
-import {readFile, readJson, writeFile} from '../../utilities/fileManagement';
-import {parseTurtle, serializeTurtle} from '../../utilities/rdfHandling';
-import {getFirstOut, updateOut} from '../../utilities/graphManagement';
-import {ProfileDataField} from './ProfileScreenModel';
+import { readFile, readJson, writeFile } from '../../utilities/fileManagement';
+import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
+import { getFirstOut, updateOut } from '../../utilities/graphManagement';
+import { ProfileDataField } from './ProfileScreenModel';
 
 // config
 const dataFields = [
@@ -17,7 +17,7 @@ export const fetchProfileScreenData = async () => {
   // fetch content information for each data field
   const userHydrationPath = 'user-profile-hydration.json';
   const userHydrationJson = await readJson(userHydrationPath);
-  let data = dataFields.map(key => {
+  let data = dataFields.map((key) => {
     const newDataField = new ProfileDataField(key);
     newDataField.setName(userHydrationJson[key].name);
     newDataField.setDisplayName(userHydrationJson[key].display_name);
@@ -29,7 +29,7 @@ export const fetchProfileScreenData = async () => {
   const userPath = 'user-profile.ttl';
   const userString = await readFile(userPath);
   const userGraph = await parseTurtle(userString);
-  data = data.map(entry => {
+  data = data.map((entry) => {
     entry.setObject(getFirstOut(userGraph, entry.name, entry.namespace));
     return entry;
   });
@@ -46,7 +46,7 @@ export const updateUserProfile = async (entry, updateValue) => {
     entry.name,
     entry.namespace,
     entry.object,
-    updateValue,
+    updateValue
   );
   const updatedGraphString = await serializeTurtle(updatedGraph);
   await writeFile('user-profile.ttl', updatedGraphString);

@@ -1,41 +1,19 @@
-import {
-  copyFileToDevice,
-  copyDirectoryToDevice,
-} from '../utilities/fileManagement';
-
-// Fetch individual file and copy it to device
-const fetchFileToDevice = async relativefilename => {
-  await copyFileToDevice(relativefilename);
-};
-
-// Fetch entire directory to device
-const fetchDirectoryToDevice = async directory => {
-  await copyDirectoryToDevice(directory);
-};
+import { writeFile, fetchZipAsset } from '../utilities/fileManagement';
+import { unzip_from_base64 } from '../utilities/zipHandling';
 
 // Fetch all data and copy it to device
 const fetchDataToDevice = async () => {
-  // Fetch user profile
-  await fetchFileToDevice('user-profile.ttl');
-  await fetchFileToDevice('user-profile-hydration.json');
+  // Fetch zipped data and wrangle to binary
+  const binaryData = await fetchZipAsset(require('../../assets/data.zip'));
 
-  // Fetch query registry
-  await fetchFileToDevice('query-registry.json');
+  // Unzip data
+  const unzippedData = await unzip_from_base64(binaryData);
 
-  // Fetch entity registry
-  await fetchFileToDevice('entity-registry.json');
-
-  // Fetch guide registry
-  await fetchFileToDevice('guides-registry.json');
-
-  // Fetch queries
-  await fetchDirectoryToDevice('queries');
-
-  // Fetch guides
-  await fetchDirectoryToDevice('guides');
-
-  // Fetch entity validation
-  await fetchDirectoryToDevice('entity-validation');
+  // Write unzipped data to device
+  for (const file of unzippedData) {
+    console.log(file.filename);
+    await writeFile(file.filename, file.fileContent, true);
+  }
 };
 
 export default fetchDataToDevice;

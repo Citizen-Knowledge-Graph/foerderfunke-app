@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import ScreenHeader from './ScreenHeader';
-import {colors} from '../assets/styles/colors';
+import {colors} from '../styles/colors';
 import PrimaryContainer from './PrimaryContainer';
 
 // Component
