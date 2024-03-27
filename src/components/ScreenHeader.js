@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, StyleSheet, View, Button} from 'react-native';
-import {fontSizes} from '../styles/fonts';
-import {useNavigation} from '@react-navigation/native'; // Import useNavigation
+import { StyleSheet, View, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { SizableText } from 'tamagui';
 
-const SectionHeader = ({screenName, backButton}) => {
+const SectionHeader = ({ screenName, backButton }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
   return (
@@ -17,7 +17,7 @@ const SectionHeader = ({screenName, backButton}) => {
           />
         </View>
       ) : null}
-      <Text style={styles.sectionHeader}>{screenName}</Text>
+      <SizableText size="$md">{screenName}</SizableText>
     </View>
   );
 };
@@ -32,10 +32,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     paddingRight: 16,
-  },
-  sectionHeader: {
-    fontSize: fontSizes.title,
-    fontWeight: 'bold',
   },
 });
 
