@@ -1,25 +1,25 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {colors} from '../../../styles/colors';
-import {fontSizes, fontColors, fontWeights} from '../../../styles/fonts';
-import {useNavigation} from '@react-navigation/native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { fontSizes, fontColors, fontWeights } from '../../../styles/fonts';
+import { useNavigation } from '@react-navigation/native';
+import { Card, YGroup, Text } from 'tamagui';
 
-const SupportListItem = ({scheme}) => {
+const SupportListItem = ({ scheme }) => {
   const navigation = useNavigation();
 
   const handleListItemPress = () => {
-    navigation.navigate('SchemeStackScreen', {scheme: scheme.key});
+    navigation.navigate('SchemeStackScreen', { scheme: scheme.key });
   };
 
   return (
     <TouchableOpacity onPress={handleListItemPress}>
-      <View style={styles.listItem}>
-        <View style={styles.listItemContent}>
-          <Text style={styles.listItemTitle}>{scheme.title}</Text>
-          <Text style={styles.listItemDescription}>{scheme.description}</Text>
-        </View>
-        <Text style={styles.listItemTime}>{scheme.time}</Text>
-      </View>
+      <YGroup.Item>
+        <Card size="$md">
+          <Card.Header padded>
+            <Text>Sony A7IV</Text>
+          </Card.Header>
+        </Card>
+      </YGroup.Item>
     </TouchableOpacity>
   );
 };
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     marginBottom: 16,
-    backgroundColor: colors.light_blue,
   },
   listItemContent: {
     flex: 1,
