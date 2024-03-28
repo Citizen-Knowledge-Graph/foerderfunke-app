@@ -1,41 +1,35 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {colors} from '../../../styles/colors';
-import {fontColors, fontSizes, fontWeights} from '../../../styles/fonts';
-import TextBoxHeader from '../../../components/TextBoxHeader';
+import { View } from 'react-native';
+import { Card, SizableText, styled } from 'tamagui';
 
-const SchemeInfo = ({schemeScreenData}) => {
+const SchemeInfo = ({ schemeScreenData }) => {
   return (
     <View>
-      <View style={styles.imagePlaceholder}>
-        <Text style={styles.imagePlaceholderTitle}>Image Placeholder</Text>
-      </View>
-      <TextBoxHeader
-        title={schemeScreenData.data.title}
-        text={schemeScreenData.data.description_long}
-      />
-      <TextBoxHeader
-        title={schemeScreenData.data.title}
-        text={schemeScreenData.data.description_long}
-      />
+      <InfoItem>
+        <SizableText size="$6" color={'black'} fontWeight={'500'}>
+          Erklärung
+        </SizableText>
+        <SizableText size="$5" color={'black'}>
+          {schemeScreenData.data.description_long}}
+        </SizableText>
+      </InfoItem>
+      <InfoItem>
+        <SizableText size="$6" color={'black'} fontWeight={'500'}>
+          Antragstellung
+        </SizableText>
+        <SizableText size="$5" color={'black'}>
+          {schemeScreenData.data.description_long}}
+        </SizableText>
+      </InfoItem>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  imagePlaceholder: {
-    height: 200,
-    backgroundColor: colors.red,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    padding: 16,
-    borderRadius: 5,
-  },
-  imagePlaceholderTitle: {
-    fontSize: fontSizes.large,
-    fontWeight: fontWeights.bold,
-    color: fontColors.tertiary,
-  },
+const InfoItem = styled(Card, {
+  paddingVertical: 8,
+  marginVertical: 8,
+  backgroundColor: '#FFFFFF',
+  borderRadius: 0,
 });
 
 export default SchemeInfo;

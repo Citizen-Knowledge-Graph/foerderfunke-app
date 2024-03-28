@@ -1,41 +1,42 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { SizableText } from 'tamagui';
+import { SizableText, Button, styled, Card, XStack } from 'tamagui';
+import { ChevronLeft } from '@tamagui/lucide-icons';
 
 const SectionHeader = ({ screenName, backButton }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
   return (
-    <View style={styles.sectionHeaderContainer}>
+    <SectionHeaderContainer>
       {backButton ? (
-        <View style={styles.backButton}>
-          <Button
-            color="#000"
-            title="Back"
-            onPress={() => navigation.goBack()}
-          />
-        </View>
+        <BackButton
+          icon={<ChevronLeft size="$2" color={'black'} />}
+          onPress={() => navigation.goBack()}
+        />
       ) : null}
       <SizableText size="$9" color={'black'} fontWeight={'500'}>
         {screenName}
       </SizableText>
-    </View>
+    </SectionHeaderContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionHeaderContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-    paddingBottom: 8,
-    marginVertical: 8,
+const BackButton = styled(Button, {
+  paddingRight: 8,
+  paddingLeft: 0,
+  backgroundColor: '#FFFFFF',
+  borderRadius: 0,
+  borderWidth: 0,
+  pressStyle: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 0,
   },
-  backButton: {
-    paddingRight: 16,
-  },
+});
+
+const SectionHeaderContainer = styled(XStack, {
+  paddingHorizontal: 16,
+  marginVertical: 8,
 });
 
 export default SectionHeader;
