@@ -1,14 +1,14 @@
 import React from 'react';
 import SupportListItem from './SupportListItem';
-import { YGroup } from 'tamagui';
+import { View } from 'react-native';
 
 const SupportList = ({ homeScreenData }) => {
   return (
-    <YGroup alignSelf="flex-start" size="$md">
+    <View>
       {homeScreenData.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />
       ))}
-    </YGroup>
+    </View>
   );
 };
 

@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
-import { fontSizes, fontColors, fontWeights } from '../../../styles/fonts';
+import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Text, Card, Paragraph } from 'tamagui';
-import { ListItem } from '../../../../tamagui.config';
+import { SizableText, Paragraph, styled, Card } from 'tamagui';
 
 const SupportListItem = ({ scheme }) => {
   const navigation = useNavigation();
@@ -15,41 +13,23 @@ const SupportListItem = ({ scheme }) => {
   return (
     <TouchableOpacity onPress={handleListItemPress}>
       <ListItem>
-        <Text>{scheme.title}</Text>
-        <Paragraph>{scheme.description}</Paragraph>
+        <SizableText size="$6" color={'black'} fontWeight={'500'}>
+          {scheme.title}
+        </SizableText>
+        <Paragraph size="$4" color={'black'}>
+          {scheme.description}
+        </Paragraph>
       </ListItem>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  listItem: {
-    flexDirection: 'row',
-    height: 125,
-    padding: 16,
-    alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 16,
-  },
-  listItemContent: {
-    flex: 1,
-  },
-  listItemTitle: {
-    fontSize: fontSizes.large,
-    fontWeight: fontWeights.bold,
-    color: fontColors.tertiary,
-  },
-  listItemDescription: {
-    fontSize: fontSizes.medium,
-    color: fontColors.quaternary,
-    fontWeight: fontWeights.semi_bold,
-  },
+const ListItem = styled(Card, {
+  paddingVertical: 8,
+  marginVertical: 8,
+  backgroundColor: '#FFFFFF',
+  borderTopWidth: 1,
+  borderRadius: 0,
 });
 
 export default SupportListItem;
-
-// <Card size="$md">
-//   <Card.Header padded>
-//     <Text>Sony A7IV</Text>
-//   </Card.Header>
-// </Card>

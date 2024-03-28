@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ScreenView from '../../components/ScreenView';
 import SupportList from './components/SupportList';
-import {useSelector} from 'react-redux';
-import {fetchHomeScreenData} from './HomeScreenController';
+import { useSelector } from 'react-redux';
+import { fetchHomeScreenData } from './HomeScreenController';
 
 const HomeScreen = () => {
   const [homeScreenData, setHomeScreenData] = useState(null);
-  const validationState = useSelector(state => state.validationReducer);
+  const validationState = useSelector((state) => state.validationReducer);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +22,7 @@ const HomeScreen = () => {
   }, [validationState]);
 
   return (
-    <ScreenView screenName={'Deine Förderungen'}>
+    <ScreenView screenName={'Förderungenmöglichkeiten'}>
       {homeScreenData && <SupportList homeScreenData={homeScreenData} />}
     </ScreenView>
   );

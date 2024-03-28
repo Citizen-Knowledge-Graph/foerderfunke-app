@@ -40,11 +40,6 @@ export const Main = styled(YStack, {
   alignItems: 'center',
 });
 
-export const ListItem = styled(Card, {
-  padding: 16,
-  backgroundColor: '#FFFFFF',
-});
-
 export const Title = styled(Text, {
   fontSize: 60,
   fontWeight: 'bold',

@@ -1,49 +1,33 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {colors} from '../../../styles/colors';
-import {fontSizes, fontColors, fontWeights} from '../../../styles/fonts';
+import { View, TouchableOpacity } from 'react-native';
+import { Card, styled, SizableText } from 'tamagui';
 
-const ProfileListItem = ({entry, onOpenModal, setCurrentEntry}) => {
+const ProfileListItem = ({ entry, onOpenModal, setCurrentEntry }) => {
   return (
     <TouchableOpacity
       onPress={() => {
         onOpenModal(true);
         setCurrentEntry(entry);
-      }}>
-      <View style={styles.userItem}>
-        <View style={styles.userItemContent}>
-          <Text style={styles.userItemKey}>{entry.displayName}</Text>
-          <Text style={styles.userItemValue}>{entry.object.value}</Text>
+      }}
+    >
+      <ListItem>
+        <View>
+          <SizableText color={'black'}>{entry.displayName}</SizableText>
+          <SizableText size="$6" fontWeight={'500'} color={'black'}>
+            {entry.object.value}
+          </SizableText>
         </View>
-      </View>
+      </ListItem>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  userItemContent: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-  },
-  userItem: {
-    height: 50,
-    borderRadius: 5,
-    marginTop: 16,
-    backgroundColor: colors.beige,
-  },
-  userItemKey: {
-    color: fontColors.secondary,
-    fontWeight: fontWeights.semi_bold,
-    fontSize: fontSizes.medium,
-  },
-  userItemValue: {
-    color: fontColors.primary,
-    fontWeight: fontWeights.bold,
-    fontSize: fontSizes.medium,
-  },
+const ListItem = styled(Card, {
+  paddingVertical: 8,
+  marginVertical: 8,
+  backgroundColor: '#FFFFFF',
+  borderTopWidth: 1,
+  borderRadius: 0,
 });
 
 export default ProfileListItem;
