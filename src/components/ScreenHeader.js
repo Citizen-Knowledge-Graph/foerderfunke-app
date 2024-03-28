@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { SizableText } from 'tamagui';
+import { Subtitle } from '../../tamagui.config';
 
 const SectionHeader = ({ screenName, backButton }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
@@ -17,7 +17,7 @@ const SectionHeader = ({ screenName, backButton }) => {
           />
         </View>
       ) : null}
-      <SizableText size="$md">{screenName}</SizableText>
+      <Subtitle color={'black'}>{screenName}</Subtitle>
     </View>
   );
 };
