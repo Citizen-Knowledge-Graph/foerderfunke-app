@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { H2 } from 'tamagui';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Title, Main } from '../../tamagui.config';
+import { colorTokens } from '@tamagui/themes';
 
 // Screen
 const StartScreen = ({ navigation }) => {
@@ -10,9 +11,9 @@ const StartScreen = ({ navigation }) => {
       onPress={() => navigation.navigate('MainTabNavigator')}
       activeOpacity={0.7} // Optional: for better touch feedback
     >
-      <View style={styles.container}>
-        <H2 size="$sm">FörderFunke</H2>
-      </View>
+      <Main>
+        <Title color={colorTokens.dark.blue.blue5}>FörderFunke</Title>
+      </Main>
     </TouchableOpacity>
   );
 };

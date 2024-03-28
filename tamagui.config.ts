@@ -1,81 +1,112 @@
-import { createFont, createTamagui, createTokens } from 'tamagui';
+import { createAnimations } from '@tamagui/animations-react-native';
+import { createInterFont } from '@tamagui/font-inter';
+import { shorthands } from '@tamagui/shorthands';
+import { themes, tokens } from '@tamagui/themes';
+import { createTamagui, styled, Text, YStack, Card } from 'tamagui';
 
-const interFont = createFont({
-  family: 'Inter, Helvetica, Arial, sans-serif',
-  size: {
-    sm: 16,
-    md: 28,
-    true: 40,
-    lg: 40,
+const animations = createAnimations({
+  bouncy: {
+    type: 'spring',
+    damping: 10,
+    mass: 0.9,
+    stiffness: 100,
   },
-  lineHeight: {
-    sm: 24,
-    md: 36,
-    true: 48,
-    lg: 48,
+  lazy: {
+    type: 'spring',
+    damping: 20,
+    stiffness: 60,
   },
-  weight: {
-    sm: '300',
-    true: '300',
-    lg: '600',
-  },
-  letterSpacing: {
-    sm: 0,
-    true: 0,
-    md: 2,
-    lg: 5,
-  },
-  face: {
-    300: { normal: 'InterLight', italic: 'InterItalic' },
-    600: { normal: 'InterBold' },
+  quick: {
+    type: 'spring',
+    damping: 20,
+    mass: 1.2,
+    stiffness: 250,
   },
 });
 
-// Set up our tokens
-const size = {
-  sm: 0,
-  md: 5,
-  true: 5,
-  lg: 10,
-};
+const headingFont = createInterFont();
 
-export const tokens = createTokens({
-  size,
-  space: { ...size },
-  radius: { sm: 0, md: 3, lg: 5 },
-  zIndex: { sm: 0, md: 100, lg: 200 },
-  color: {
-    white: '#fff',
-    black: '#000',
+const bodyFont = createInterFont();
+
+export const Container = styled(YStack, {
+  padding: 24,
+  maxWidth: 960,
+});
+
+export const Main = styled(YStack, {
+  flex: 1,
+  padding: 16,
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+export const ListItem = styled(Card, {
+  padding: 16,
+  backgroundColor: '#FFFFFF',
+});
+
+export const Title = styled(Text, {
+  fontSize: 60,
+  fontWeight: 'bold',
+});
+
+export const Subtitle = styled(Text, {
+  color: '#38434D',
+  fontSize: 36,
+});
+
+export const Button = styled(YStack, {
+  alignItems: 'center',
+  backgroundColor: '#6366F1',
+  borderRadius: 24,
+  justifyContent: 'center',
+  padding: 16,
+  shadowColor: '#000',
+  shadowOffset: {
+    height: 2,
+    width: 0,
   },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+  hoverStyle: {
+    backgroundColor: '#5a5fcf',
+  },
+});
+
+export const ButtonText = styled(Text, {
+  color: '#FFFFFF',
+  fontSize: 16,
+  fontWeight: '600',
+  textAlign: 'center',
 });
 
 const config = createTamagui({
+  light: {
+    color: {
+      background: 'gray',
+      text: 'black',
+    },
+  },
+  defaultFont: 'body',
+  animations,
+  shouldAddPrefersColorThemes: true,
+  themeClassNameOnRoot: true,
+  shorthands,
   fonts: {
-    heading: interFont,
-    body: interFont,
+    body: bodyFont,
+    heading: headingFont,
   },
+  themes,
   tokens,
-  themes: {
-    light: {
-      bg: '#f2f2f2',
-      color: tokens.color.black,
-    },
-    dark: {
-      bg: '#111',
-      color: tokens.color.white,
-    },
-  },
 });
 
 type AppConfig = typeof config;
 
+// Enable auto-completion of props shorthand (ex: jc="center") for Tamagui templates.
+// Docs: https://tamagui.dev/docs/core/configuration
+
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
-
-  interface TypeOverride {
-    groupNames(): 'a' | 'b' | 'c';
-  }
 }
 
 export default config;
