@@ -20,17 +20,19 @@ const createValidationReport = async (shapes, profile) => {
 const runValidation = async (dispatch) => {
   const userProfilePath = 'user-profile.ttl';
   const datafieldsPath = 'datafields.ttl';
-  const entityValidationRegistryPath = 'entity-registry.json';
+  // const entityValidationRegistryPath = 'entity-registry.json';
   const queryRegistryPath = 'query-registry.json';
 
   const userProfileString = await readFile(userProfilePath);
   const datafieldsString = await readFile(datafieldsPath);
 
-  let result = await validateUserProfile(userProfileString, datafieldsString);
-  console.log(result);
+  if (!(await validateUserProfile(userProfileString, datafieldsString))) {
+    console.error('Invalid user profile');
+  }
 
   const userProfile = await parseTurtle(userProfileString);
 
+  /*
   // load user validation to shapes
   const entityValidationRegistry = await readJson(
     entityValidationRegistryPath,
@@ -52,6 +54,7 @@ const runValidation = async (dispatch) => {
   if (!entityReport.conforms) {
     console.error('Entity validation failed');
   }
+  */
 
   // load query registry
   const queryRegistry = await readJson(queryRegistryPath);
