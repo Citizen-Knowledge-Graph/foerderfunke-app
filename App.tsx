@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { SchemeStackNavigator } from './src/AppNavigation';
 import AppStartup from './src/AppStartup';

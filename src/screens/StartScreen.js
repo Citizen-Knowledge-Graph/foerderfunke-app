@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Title, Main } from '../../tamagui.config';
+import { Main, Subtitle } from '../../tamagui.config';
 import { colorTokens } from '@tamagui/themes';
 
 // Screen
@@ -12,7 +12,7 @@ const StartScreen = ({ navigation }) => {
       activeOpacity={0.7} // Optional: for better touch feedback
     >
       <Main>
-        <Title color={colorTokens.dark.blue.blue5}>FörderFunke</Title>
+        <Subtitle color={colorTokens.dark.blue.blue5}>FörderFunke</Subtitle>
       </Main>
     </TouchableOpacity>
   );

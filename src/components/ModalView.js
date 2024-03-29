@@ -1,8 +1,8 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { Modal, StyleSheet, View, TouchableOpacity } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const ModalView = ({children, modalVisible, setModalVisible}) => {
+const ModalView = ({ children, modalVisible, setModalVisible }) => {
   return (
     <Modal
       animationType="slide"
@@ -10,12 +10,14 @@ const ModalView = ({children, modalVisible, setModalVisible}) => {
       visible={modalVisible}
       onRequestClose={() => {
         setModalVisible(!modalVisible);
-      }}>
+      }}
+    >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => setModalVisible(false)}>
+            onPress={() => setModalVisible(false)}
+          >
             <FontAwesomeIcon name={'close'} size={16} />
           </TouchableOpacity>
           {children}

@@ -1,8 +1,8 @@
-import { createAnimations } from '@tamagui/animations-react-native';
 import { createInterFont } from '@tamagui/font-inter';
 import { shorthands } from '@tamagui/shorthands';
 import { themes, tokens } from '@tamagui/themes';
-import { createTamagui, styled, Text, YStack, Card } from 'tamagui';
+import { createTamagui, styled, Text, YStack } from 'tamagui';
+import { createAnimations } from '@tamagui/animations-react-native';
 
 const animations = createAnimations({
   bouncy: {
@@ -96,9 +96,6 @@ const config = createTamagui({
 });
 
 type AppConfig = typeof config;
-
-// Enable auto-completion of props shorthand (ex: jc="center") for Tamagui templates.
-// Docs: https://tamagui.dev/docs/core/configuration
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}

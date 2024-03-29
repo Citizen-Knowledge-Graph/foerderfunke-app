@@ -16,7 +16,7 @@ const SupportListItem = ({ scheme }) => {
         <SizableText size="$6" color={'black'} fontWeight={'500'}>
           {scheme.title}
         </SizableText>
-        <Paragraph size="$4" color={'black'}>
+        <Paragraph size="$4" color={'black'} fontWeight={'300'}>
           {scheme.description}
         </Paragraph>
       </ListItem>

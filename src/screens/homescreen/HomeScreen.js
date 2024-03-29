@@ -22,7 +22,7 @@ const HomeScreen = () => {
   }, [validationState]);
 
   return (
-    <ScreenView screenName={'Förderungenmöglichkeiten'}>
+    <ScreenView screenName={'Fördermöglichkeiten'}>
       {homeScreenData && <SupportList homeScreenData={homeScreenData} />}
     </ScreenView>
   );
