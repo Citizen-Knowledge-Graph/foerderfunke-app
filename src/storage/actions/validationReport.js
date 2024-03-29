@@ -2,14 +2,14 @@
 export const VALIDATION_REPORT = 'VALIDATION_REPORT';
 
 // action creator
-const validationReportAction = (key, report) => {
+const validationReportAction = (key, conforms) => {
   const serializableReport = {
-    conforms: report._conforms(),
+    conforms: conforms,
   };
 
   return {
     type: VALIDATION_REPORT,
-    payload: {key, report: serializableReport},
+    payload: { key, report: serializableReport },
   };
 };
 

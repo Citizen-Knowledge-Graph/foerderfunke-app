@@ -1,36 +1,22 @@
-import rdfDataModel from '@rdfjs/data-model';
-import Validator from 'shacl-engine/Validator.js';
 import { readFile, readJson } from '../utilities/fileManagement.js';
-import {
-  combineTurtleStringsIntoDataset,
-  parseTurtle,
-} from '../utilities/rdfHandling.js';
 import validationReportAction from '../storage/actions/validationReport.js';
-import { validateUserProfile } from '@foerderfunke/matching-engine';
-
-/**
- * Create report for profile
- */
-const createValidationReport = async (shapes, profile) => {
-  const validator = new Validator(shapes, { factory: rdfDataModel });
-  return await validator.validate({ dataset: profile });
-};
+import { validateOne, validateUserProfile } from '@foerderfunke/matching-engine';
 
 // run validation
 const runValidation = async (dispatch) => {
   const userProfilePath = 'user-profile.ttl';
   const datafieldsPath = 'datafields.ttl';
+  const materializationPath = 'materialization.ttl';
   // const entityValidationRegistryPath = 'entity-registry.json';
   const queryRegistryPath = 'query-registry.json';
 
   const userProfileString = await readFile(userProfilePath);
   const datafieldsString = await readFile(datafieldsPath);
+  const materializationString = await readFile(materializationPath);
 
   if (!(await validateUserProfile(userProfileString, datafieldsString))) {
     console.error('Invalid user profile');
   }
-
-  const userProfile = await parseTurtle(userProfileString);
 
   /*
   // load user validation to shapes
@@ -64,11 +50,11 @@ const runValidation = async (dispatch) => {
     if (queryRegistry.hasOwnProperty(key)) {
       console.log('Running validation for: ', key);
 
-      const constraintsPath = queryRegistry[key].path + '/' + key + '.ttl';
-      const queryString = await readFile(constraintsPath);
-      const queryProfile = await parseTurtle(queryString);
-      const report = await createValidationReport(queryProfile, userProfile);
-      dispatch(validationReportAction(key, report));
+      const queryPath = queryRegistry[key].path + '/' + key + '.ttl';
+      const queryString = await readFile(queryPath);
+
+      let report = await validateOne(userProfileString, queryString, datafieldsString, materializationString);
+      dispatch(validationReportAction(key, report.result));
     }
   }
 };
