@@ -1,17 +1,17 @@
 {
   "name": {
-    "namespace": "ff",
-    "name": "hasName",
-    "display_name": "Name"
+    "namespace": "foaf",
+    "name": "firstName",
+    "display_name": "Vorname"
   },
   "surname": {
-    "namespace": "ff",
-    "name": "hasSurname",
+    "namespace": "foaf",
+    "name": "lastName",
     "display_name": "Nachname"
   },
   "birthday": {
-    "namespace": "ff",
-    "name": "hasBirthday",
+    "namespace": "foaf",
+    "name": "birthday",
     "display_name": "Geburtstag"
   },
   "residence": {
