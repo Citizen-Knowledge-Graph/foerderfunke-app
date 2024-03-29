@@ -2,15 +2,18 @@
 
 ## Expo Setup
 
-Run for ios:
+Run for iOS:
 
 ```bash
-npx expo run:ios
+# npm run zip
+# npx expo run:ios
+npm run expo:ios
 ````
 
 Run with Expo Go App:
 
 ```bash
+npm run zip
 npx expo start
 ````
 

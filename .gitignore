@@ -70,3 +70,5 @@ yarn-error.log
 .expo
 dist/
 web-build/
+
+assets/data.zip
