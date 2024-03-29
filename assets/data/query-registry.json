@@ -23,5 +23,10 @@
     "title": "Wohngeld",
     "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben.",
     "path": "queries/citizen-wohngeld"
+  },
+  "kinderzuschlag": {
+    "title": "Kinderzuschlag",
+    "description": "Sie haben Anspruch auf den Kinderzuschlag.",
+    "path": "queries/kinderzuschlag"
   }
 }
