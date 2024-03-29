@@ -23,15 +23,5 @@
     "title": "Wohngeld",
     "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben.",
     "path": "queries/citizen-wohngeld"
-  },
-  "municipality-sportfield-funding": {
-    "title": "Förderung einer neuen Sportanlange",
-    "description": "Ihre Gemeinde hat Anspruch auf die Förderung neuer Sportanlagen.",
-    "path": "queries/municipality-sportfield-funding"
-  },
-  "ngo-sustainability-funding": {
-    "title": "Förderung für nachhaltige NGOs",
-    "description": "Ihre NGO hat Anspruch auf eine Förderung.",
-    "path": "queries/ngo-sustainability-funding"
   }
 }
