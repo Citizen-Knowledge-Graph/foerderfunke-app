@@ -6,7 +6,6 @@ import {
   parseTurtle,
 } from '../utilities/rdfHandling.js';
 import validationReportAction from '../storage/actions/validationReport.js';
-import { validateUserProfile } from '@foerderfunke/matching-engine';
 
 /**
  * Create report for profile
@@ -20,10 +19,6 @@ const createValidationReport = async (shapes, profile) => {
 const runValidation = async dispatch => {
   // set up filepaths
   const userProfilePath = 'user-profile.ttl';
-
-  let report = validateUserProfile(userProfilePath);
-  console.log(report);
-
   const enitityValidationRegistryPath = 'entity-registry.json';
   const queryRegistryPath = 'query-registry.json';
 
