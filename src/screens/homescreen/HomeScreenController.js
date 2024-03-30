@@ -6,10 +6,6 @@ export const fetchHomeScreenData = async (validationState) => {
   const schemeRegistry = await readJson(registryPath);
   const homeScreenData = new HomeScreenData();
 
-  console.log('validation state: ', validationState);
-
-  console.log('scheme registry: ', schemeRegistry);
-
   Object.keys(validationState).map((scheme) => {
     let newScheme = new SchemeData(scheme);
     newScheme.setTitle(schemeRegistry[scheme].title);
@@ -20,6 +16,5 @@ export const fetchHomeScreenData = async (validationState) => {
       homeScreenData.addNonEligible(newScheme);
     }
   });
-  console.log('home screen data: ', homeScreenData);
-  return homeScreenData;
+g  return homeScreenData;
 };
