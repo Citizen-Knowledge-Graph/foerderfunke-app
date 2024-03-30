@@ -16,5 +16,5 @@ export const fetchHomeScreenData = async (validationState) => {
       homeScreenData.addNonEligible(newScheme);
     }
   });
-g  return homeScreenData;
+  return homeScreenData;
 };
