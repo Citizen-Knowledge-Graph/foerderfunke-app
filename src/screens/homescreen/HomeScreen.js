@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
 import ScreenView from '../../components/ScreenView';
 import SupportList from './components/SupportList';
 import { useSelector } from 'react-redux';
-import { fetchHomeScreenData, fetchNonEligibles } from './HomeScreenController';
+import { fetchHomeScreenData } from './HomeScreenController';
 
 const HomeScreen = () => {
-  const [eligibles, setEligibles] = useState(null);
-  const [nonEligibles, setNonEligibles] = useState(null);
+  const [homeScreenData, setHomeScreenData] = useState(null);
   const validationState = useSelector((state) => state.validationReducer);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const newHomeScreenData = await fetchHomeScreenData(validationState);
-        setEligibles(newHomeScreenData);
-        const nonEligiblesData = await fetchNonEligibles(validationState);
-        setNonEligibles(nonEligiblesData);
+        setHomeScreenData(newHomeScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);
       }
@@ -27,10 +23,7 @@ const HomeScreen = () => {
 
   return (
     <ScreenView screenName={'Fördermöglichkeiten'}>
-      {eligibles && <SupportList homeScreenData={eligibles} />}
-      <Text>Not eligible:</Text>
-      {nonEligibles &&
-        nonEligibles.map((item) => <Text key={item.key}>{item.key}</Text>)}
+      {homeScreenData && <SupportList homeScreenData={homeScreenData} />}
     </ScreenView>
   );
 };

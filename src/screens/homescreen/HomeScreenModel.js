@@ -1,4 +1,19 @@
 export class HomeScreenData {
+  constructor() {
+    this.eligible = [];
+    this.nonEligible = [];
+  }
+
+  addEligible(value) {
+    this.eligible.push(value);
+  }
+
+  addNonEligible(value) {
+    this.nonEligible.push(value);
+  }
+}
+
+export class SchemeData {
   constructor(key) {
     this.key = key;
     this.title = null;

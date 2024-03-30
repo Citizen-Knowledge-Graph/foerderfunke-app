@@ -1,31 +1,25 @@
 import { readJson } from '../../utilities/fileManagement';
-import { HomeScreenData } from './HomeScreenModel';
+import { HomeScreenData, SchemeData } from './HomeScreenModel';
 
 export const fetchHomeScreenData = async (validationState) => {
   const registryPath = 'query-registry.json';
   const schemeRegistry = await readJson(registryPath);
+  const homeScreenData = new HomeScreenData();
 
-  return Object.keys(validationState)
-    .map((scheme) => {
-      if (validationState[scheme]) {
-        let newDataField = new HomeScreenData(scheme);
-        newDataField.setTitle(schemeRegistry[scheme].title);
-        newDataField.setDescription(schemeRegistry[scheme].description);
-        console.log('new datafield: ', newDataField);
-        return newDataField;
-      }
-    })
-    .filter((item) => item !== undefined);
-};
+  console.log('validation state: ', validationState);
 
-export const fetchNonEligibles = async (validationState) => {
-  return Object.keys(validationState)
-    .map((scheme) => {
-      if (!validationState[scheme].conforms) {
-        return {
-          key: scheme,
-        };
-      }
-    })
-    .filter((item) => item !== undefined);
+  console.log('scheme registry: ', schemeRegistry);
+
+  Object.keys(validationState).map((scheme) => {
+    let newScheme = new SchemeData(scheme);
+    newScheme.setTitle(schemeRegistry[scheme].title);
+    newScheme.setDescription(schemeRegistry[scheme].description);
+    if (validationState[scheme].conforms) {
+      homeScreenData.addEligible(newScheme);
+    } else {
+      homeScreenData.addNonEligible(newScheme);
+    }
+  });
+  console.log('home screen data: ', homeScreenData);
+  return homeScreenData;
 };

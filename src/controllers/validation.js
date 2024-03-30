@@ -63,7 +63,8 @@ const runValidation = async (dispatch) => {
         materializationString,
         false
       );
-      dispatch(validationReportAction(key, report.conforms));
+      console.log(report);
+      dispatch(validationReportAction(key, report.result));
     }
   }
 };
