@@ -48,13 +48,13 @@ const runValidation = async (dispatch) => {
   // iterate through queries gitregistry
   for (let key in queryRegistry) {
     if (queryRegistry.hasOwnProperty(key)) {
-      console.log('Running validation for: ', key);
+      console.log('Running validation for:', key);
 
       const queryPath = queryRegistry[key].path + '/' + key + '.ttl';
       const queryString = await readFile(queryPath);
 
-      let report = await validateOne(userProfileString, queryString, datafieldsString, materializationString);
-      dispatch(validationReportAction(key, report.result));
+      let report = await validateOne(userProfileString, queryString, datafieldsString, materializationString, false);
+      dispatch(validationReportAction(key, report.conforms));
     }
   }
 };
