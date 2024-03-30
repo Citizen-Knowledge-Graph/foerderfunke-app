@@ -7,7 +7,7 @@ export const fetchHomeScreenData = async (validationState) => {
 
   return Object.keys(validationState)
     .map((scheme) => {
-      if (validationState[scheme].conforms) {
+      if (validationState[scheme]) {
         let newDataField = new HomeScreenData(scheme);
         newDataField.setTitle(schemeRegistry[scheme].title);
         newDataField.setDescription(schemeRegistry[scheme].description);

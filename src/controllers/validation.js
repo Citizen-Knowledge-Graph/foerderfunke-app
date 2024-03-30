@@ -1,6 +1,9 @@
 import { readFile, readJson } from '../utilities/fileManagement.js';
 import validationReportAction from '../storage/actions/validationReport.js';
-import { validateOne, validateUserProfile } from '@foerderfunke/matching-engine';
+import {
+  validateOne,
+  validateUserProfile,
+} from '@foerderfunke/matching-engine';
 
 // run validation
 const runValidation = async (dispatch) => {
@@ -53,7 +56,13 @@ const runValidation = async (dispatch) => {
       const queryPath = queryRegistry[key].path + '/' + key + '.ttl';
       const queryString = await readFile(queryPath);
 
-      let report = await validateOne(userProfileString, queryString, datafieldsString, materializationString, false);
+      let report = await validateOne(
+        userProfileString,
+        queryString,
+        datafieldsString,
+        materializationString,
+        false
+      );
       dispatch(validationReportAction(key, report.conforms));
     }
   }
