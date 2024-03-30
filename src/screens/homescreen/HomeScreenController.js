@@ -1,12 +1,12 @@
-import {readJson} from '../../utilities/fileManagement';
-import {HomeScreenData} from './HomeScreenModel';
+import { readJson } from '../../utilities/fileManagement';
+import { HomeScreenData } from './HomeScreenModel';
 
-export const fetchHomeScreenData = async validationState => {
+export const fetchHomeScreenData = async (validationState) => {
   const registryPath = 'query-registry.json';
   const schemeRegistry = await readJson(registryPath);
 
   return Object.keys(validationState)
-    .map(scheme => {
+    .map((scheme) => {
       if (validationState[scheme].conforms) {
         let newDataField = new HomeScreenData(scheme);
         newDataField.setTitle(schemeRegistry[scheme].title);
@@ -15,5 +15,17 @@ export const fetchHomeScreenData = async validationState => {
         return newDataField;
       }
     })
-    .filter(item => item !== undefined);
+    .filter((item) => item !== undefined);
+};
+
+export const fetchNonEligibles = async (validationState) => {
+  return Object.keys(validationState)
+    .map((scheme) => {
+      if (!validationState[scheme].conforms) {
+        return {
+          key: scheme,
+        };
+      }
+    })
+    .filter((item) => item !== undefined);
 };
