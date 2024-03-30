@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-native';
+import { Button, Share } from 'react-native';
 import ScreenView from '../../components/ScreenView';
 import UserProfile from './components/UserProfile';
 import { useSelector } from 'react-redux';
 import { fetchProfileScreenData } from './ProfileScreenController';
-import Share from 'react-native-share';
-import * as FileSystem from 'expo-file-system';
+import { readFile } from '../../utilities/fileManagement';
 
 // Component
 const ProfileScreen = () => {
@@ -27,17 +26,14 @@ const ProfileScreen = () => {
 
   const shareFile = async () => {
     const userProfilePath = 'user-profile.ttl';
-    const absoluteFilePath = FileSystem.documentDirectory + userProfilePath;
-    const shareOptions = {
-      url: `file://${absoluteFilePath}`,
-      type: 'text/turtle',
-    };
+    const userProfileString = await readFile(userProfilePath);
     try {
-      await Share.open(shareOptions)
-        .then((res) => console.log('Share was successful', res))
-        .catch((err) => console.log('Error sharing the file', err));
-    } catch (error) {
-      console.error(`Error accessing file: ${absoluteFilePath}`, error);
+      const result = await Share.share({
+        message: userProfileString,
+        title: 'User profile in turtle format'
+      });
+    } catch (err) {
+      console.error(`Error sharing the content of ${userProfilePath}`, err)
     }
   };
 
