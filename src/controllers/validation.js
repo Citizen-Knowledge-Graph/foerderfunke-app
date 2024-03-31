@@ -64,7 +64,7 @@ const runValidation = async (dispatch) => {
         false
       );
       console.log(report);
-      dispatch(validationReportAction(key, report.result));
+      dispatch(validationReportAction(key, report.conforms));
     }
   }
 };

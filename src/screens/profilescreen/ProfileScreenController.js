@@ -2,6 +2,7 @@ import { readFile, readJson, writeFile } from '../../utilities/fileManagement';
 import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
 import { getFirstOut, updateOut } from '../../utilities/graphManagement';
 import { ProfileDataField } from './ProfileScreenModel';
+import { Share } from 'react-native';
 
 // config
 const dataFields = [
@@ -50,4 +51,17 @@ export const updateUserProfile = async (entry, updateValue) => {
   );
   const updatedGraphString = await serializeTurtle(updatedGraph);
   await writeFile('user-profile.ttl', updatedGraphString);
+};
+
+export const shareFile = async () => {
+  const userProfilePath = 'user-profile.ttl';
+  const userProfileString = await readFile(userProfilePath);
+  try {
+    await Share.share({
+      message: userProfileString,
+      title: 'User profile in turtle format',
+    });
+  } catch (err) {
+    console.error(`Error sharing the content of ${userProfilePath}`, err);
+  }
 };

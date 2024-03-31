@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Button, View } from 'react-native';
+import { shareFile } from '../ProfileScreenController';
 
 import ProfileList from './ProfileList';
 
@@ -8,6 +9,7 @@ const UserProfile = ({ profileScreenData }) => {
   return (
     <View>
       <ProfileList profileScreenData={profileScreenData} />
+      <Button onPress={shareFile} title="Export" />
     </View>
   );
 };
