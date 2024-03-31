@@ -2,11 +2,11 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Card, styled, SizableText } from 'tamagui';
 
-const ProfileListItem = ({ entry, onOpenModal, setCurrentEntry }) => {
+const ProfileListItem = ({ entry, handleOpenPress, setCurrentEntry }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        onOpenModal(true);
+        handleOpenPress();
         setCurrentEntry(entry);
       }}
     >

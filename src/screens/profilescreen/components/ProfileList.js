@@ -1,26 +1,26 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { useCallback, useRef, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import ProfileListItem from './ProfileListItem';
-import ModalView from '../../../components/ModalView';
+import BottomView from './BottomView';
 import UpdateProfileListItem from './UpdateProfileListItem';
+import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 
-const ProfileList = ({profileScreenData}) => {
+const ProfileList = ({ profileScreenData }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentEntry, setCurrentEntry] = useState(null);
 
+  const bottomSheetModalRef = useRef(null);
+
+  const handleOpenPress = () => bottomSheetModalRef.current.present();
+
   return (
     <View style={styles.container}>
-      <ModalView modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <UpdateProfileListItem
-          currentEntry={currentEntry}
-          setModalVisible={setModalVisible}
-        />
-      </ModalView>
+      <BottomView bottomSheetModalRef={bottomSheetModalRef} />
       {profileScreenData.map((entry, index) => (
         <ProfileListItem
           key={index}
           entry={entry}
-          onOpenModal={setModalVisible}
+          handleOpenPress={handleOpenPress}
           setCurrentEntry={setCurrentEntry}
         />
       ))}
