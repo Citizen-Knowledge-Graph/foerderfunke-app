@@ -1,12 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import ProfileListItem from './ProfileListItem';
 import BottomView from './BottomView';
-import UpdateProfileListItem from './UpdateProfileListItem';
-import { useBottomSheetModal } from '@gorhom/bottom-sheet';
 
 const ProfileList = ({ profileScreenData }) => {
-  const [modalVisible, setModalVisible] = useState(false);
   const [currentEntry, setCurrentEntry] = useState(null);
 
   const bottomSheetModalRef = useRef(null);
@@ -15,7 +12,10 @@ const ProfileList = ({ profileScreenData }) => {
 
   return (
     <View style={styles.container}>
-      <BottomView bottomSheetModalRef={bottomSheetModalRef} />
+      <BottomView
+        bottomSheetModalRef={bottomSheetModalRef}
+        currentEntry={currentEntry}
+      />
       {profileScreenData.map((entry, index) => (
         <ProfileListItem
           key={index}

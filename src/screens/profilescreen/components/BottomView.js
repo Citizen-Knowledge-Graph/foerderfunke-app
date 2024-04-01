@@ -1,5 +1,6 @@
-import React, { useMemo, useCallback } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useMemo, useCallback, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { Card, styled, Button, SizableText, View } from 'tamagui';
 import { ChevronDown } from '@tamagui/lucide-icons';
 import {
@@ -10,9 +11,16 @@ import {
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
 
-const BottomView = ({ bottomSheetModalRef }) => {
-  // variables
-  const snapPoints = useMemo(() => ['65%'], []);
+import { colorTokens } from '@tamagui/themes';
+import { performUpdate } from '../../../storage/actions/userReport';
+
+const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
+  const [inputText, setInputText] = useState(currentEntry?.object.value);
+  const [updateValue, setUpdateValue] = useState('');
+
+  const dispatch = useDispatch();
+
+  const snapPoints = useMemo(() => ['50%'], []);
   const { dismiss } = useBottomSheetModal();
 
   const renderBackdrop = useCallback(
@@ -26,6 +34,10 @@ const BottomView = ({ bottomSheetModalRef }) => {
     []
   );
 
+  useEffect(() => {
+    setUpdateValue(inputText);
+  }, [inputText]);
+
   return (
     <BottomSheetModal
       ref={bottomSheetModalRef}
@@ -37,11 +49,47 @@ const BottomView = ({ bottomSheetModalRef }) => {
     >
       <BottomSheetView>
         <UpdateCard>
-          <Button onPress={() => dismiss()} backgroundColor="orange">
-            Close
+          <Button
+            size="$4"
+            circular
+            icon={<ChevronDown size="$2" />}
+            onPress={() => dismiss()}
+            marginVertical={16}
+            backgroundColor={colorTokens.light.gray.gray8}
+          />
+          <SizableText size="$6" color={'black'} fontWeight={'500'}>
+            Update your Userprofile
+          </SizableText>
+          <View borderBottomWidth={1}>
+            <SizableText size="$6" color={'black'} marginTop={16}>
+              {currentEntry?.displayName}
+            </SizableText>
+          </View>
+          <BottomSheetTextInput
+            backgroundColor={colorTokens.light.gray.gray4}
+            borderRadius={5}
+            padding={16}
+            minWidth={200}
+            fontSize={18}
+            marginVertical={16}
+            textAlign="center"
+            onChangeText={(text) => setInputText(text)}
+          >
+            {currentEntry?.object?.value}
+          </BottomSheetTextInput>
+          <Button
+            size="$4"
+            onPress={() => {
+              dispatch(performUpdate(currentEntry, updateValue));
+              dismiss();
+            }}
+            marginVertical={16}
+            backgroundColor={colorTokens.light.purple.purple8}
+            color={colorTokens.light.gray.gray1}
+            fontSize={18}
+          >
+            Update
           </Button>
-          <SizableText color={'black'}>Awesome 🎉</SizableText>
-          <BottomSheetTextInput>Here</BottomSheetTextInput>
         </UpdateCard>
       </BottomSheetView>
     </BottomSheetModal>
@@ -53,6 +101,8 @@ const UpdateCard = styled(Card, {
   backgroundColor: 'white',
   borderRadius: 0,
   height: '100%',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
 });
 
 export default BottomView;
