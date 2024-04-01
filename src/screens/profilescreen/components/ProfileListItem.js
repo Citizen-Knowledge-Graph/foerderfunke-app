@@ -1,24 +1,39 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { Card, styled, SizableText } from 'tamagui';
+import { View } from 'react-native';
+import { Card, styled, SizableText, Button } from 'tamagui';
+import { Edit3 } from '@tamagui/lucide-icons';
+import { colorTokens } from '@tamagui/themes';
 
 const ProfileListItem = ({ entry, handleOpenPress, setCurrentEntry }) => {
   return (
-    <TouchableOpacity
-      onPress={() => {
-        handleOpenPress();
-        setCurrentEntry(entry);
-      }}
-    >
-      <ListItem>
+    <ListItem>
+      <View
+        flexDirection={'row'}
+        justifyContent={'space-between'}
+        alignItems={'center'}
+      >
         <View>
           <SizableText color={'black'}>{entry.displayName}</SizableText>
           <SizableText size="$6" fontWeight={'500'} color={'black'}>
             {entry.object.value}
           </SizableText>
         </View>
-      </ListItem>
-    </TouchableOpacity>
+        <Button
+          width={24}
+          height={24}
+          backgroundColor={'white'}
+          icon={<Edit3 size="$1" color={'black'} />}
+          pressStyle={{
+            backgroundColor: colorTokens.light.gray.gray8,
+            borderColor: 'white',
+          }}
+          onPress={() => {
+            setCurrentEntry(entry);
+            handleOpenPress();
+          }}
+        />
+      </View>
+    </ListItem>
   );
 };
 

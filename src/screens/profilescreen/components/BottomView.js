@@ -16,7 +16,10 @@ import { performUpdate } from '../../../storage/actions/userReport';
 
 const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
   const [inputText, setInputText] = useState(currentEntry?.object.value);
-  const [updateValue, setUpdateValue] = useState('');
+
+  useEffect(() => {
+    setInputText(currentEntry?.object.value);
+  }, [currentEntry]);
 
   const dispatch = useDispatch();
 
@@ -33,10 +36,6 @@ const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
     ),
     []
   );
-
-  useEffect(() => {
-    setUpdateValue(inputText);
-  }, [inputText]);
 
   return (
     <BottomSheetModal
@@ -80,7 +79,7 @@ const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
           <Button
             size="$4"
             onPress={() => {
-              dispatch(performUpdate(currentEntry, updateValue));
+              dispatch(performUpdate(currentEntry, inputText));
               dismiss();
             }}
             marginVertical={16}
