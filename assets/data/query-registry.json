@@ -28,5 +28,10 @@
     "title": "Kinderzuschlag",
     "description": "Sie haben Anspruch auf den Kinderzuschlag.",
     "path": "queries/kinderzuschlag"
+  },
+  "bildungsgutschein": {
+    "title": "Bildungsgutschein",
+    "description": "Sie haben möglicherweise Anspruch auf einen Bildungsgutschein.",
+    "path": "queries/bildungsgutschein"
   }
 }
