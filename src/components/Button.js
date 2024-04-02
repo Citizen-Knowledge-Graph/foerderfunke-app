@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const BasicButton = ({title}) => {
+const BasicButton = ({ title }) => {
   return (
     <View style={styles.buttonContainer}>
       <Text style={styles.buttonText}>{title}</Text>

@@ -9,7 +9,7 @@ export function updateFromTerm(originalObject, newValue, factory = rdf) {
     return factory.literal(
       newValue,
       originalObject.datatype.language ||
-        factory.namedNode(originalObject.datatype.value),
+        factory.namedNode(originalObject.datatype.value)
     );
   }
 

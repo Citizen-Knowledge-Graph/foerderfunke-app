@@ -1,11 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, ScrollView} from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import ScreenHeader from './ScreenHeader';
-import {colors} from '../styles/colors';
+import { colors } from '../styles/colors';
 import PrimaryContainer from './PrimaryContainer';
 
 // Component
-const ScreenView = ({screenName, children, backButton}) => {
+const ScreenView = ({ screenName, children, backButton }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScreenHeader screenName={screenName} backButton={backButton} />

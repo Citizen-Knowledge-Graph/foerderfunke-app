@@ -13,10 +13,10 @@ const SupportListItem = ({ scheme }) => {
   return (
     <TouchableOpacity onPress={handleListItemPress}>
       <ListItem>
-        <SizableText size="$6" color={'black'} fontWeight={'500'}>
+        <SizableText size='$6' color={'black'} fontWeight={'500'}>
           {scheme.title}
         </SizableText>
-        <Paragraph size="$4" color={'black'} fontWeight={'300'}>
+        <Paragraph size='$4' color={'black'} fontWeight={'300'}>
           {scheme.description}
         </Paragraph>
       </ListItem>

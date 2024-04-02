@@ -1,4 +1,4 @@
-import {DataFactory, Parser, Writer} from 'n3';
+import { DataFactory, Parser, Writer } from 'n3';
 import rdf from 'rdf-ext';
 
 /**
@@ -35,7 +35,7 @@ const parseQuads = (content, parser) => {
  * @param {string} content - The Turtle content to be parsed.
  * @returns {Promise<Object>} A Promise that resolves to an RDF dataset containing the parsed quads.
  */
-export const parseTurtle = async content => {
+export const parseTurtle = async (content) => {
   const parser = new Parser();
   const quads = await parseQuads(content, parser);
   return rdf.dataset(quads);
@@ -51,9 +51,9 @@ export const parseTurtle = async content => {
  *
  * @returns {string} Serialized dataset in canonical N-Quads format.
  */
-export const serializeTurtle = async dataset => {
-  const writer = new Writer({format: 'Turtle'});
-  dataset._quads.forEach(({subject, predicate, object, graph}) => {
+export const serializeTurtle = async (dataset) => {
+  const writer = new Writer({ format: 'Turtle' });
+  dataset._quads.forEach(({ subject, predicate, object, graph }) => {
     writer.addQuad(
       DataFactory.namedNode(subject.value),
       DataFactory.namedNode(predicate.value),
@@ -62,7 +62,7 @@ export const serializeTurtle = async dataset => {
         : DataFactory.namedNode(object.value),
       graph.value
         ? DataFactory.namedNode(graph.value)
-        : DataFactory.defaultGraph(),
+        : DataFactory.defaultGraph()
     );
   });
 
@@ -83,7 +83,7 @@ export const serializeTurtle = async dataset => {
  * @returns {Promise<DatasetCore>} A Promise that resolves to a combined RDF/JS
  * dataset containing all parsed triples.
  */
-export const combineTurtleStringsIntoDataset = async turtleStrings => {
+export const combineTurtleStringsIntoDataset = async (turtleStrings) => {
   const combinedDataset = rdf.dataset();
 
   for (const turtleString of turtleStrings) {

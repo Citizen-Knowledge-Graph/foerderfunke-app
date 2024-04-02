@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, StyleSheet, StatusBar, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { View, StyleSheet, StatusBar, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const HeaderBar = ({backButton}) => {
+const HeaderBar = ({ backButton }) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.headerContainer}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle='dark-content' />
       {backButton ? (
-        <Button title="Back" onPress={() => navigation.goBack()} />
+        <Button title='Back' onPress={() => navigation.goBack()} />
       ) : (
         <View style={styles.placeholderButton} />
       )}

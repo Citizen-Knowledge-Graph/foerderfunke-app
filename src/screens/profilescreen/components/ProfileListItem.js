@@ -14,7 +14,7 @@ const ProfileListItem = ({ entry, handleOpenPress, setCurrentEntry }) => {
       >
         <View>
           <SizableText color={'black'}>{entry.displayName}</SizableText>
-          <SizableText size="$6" fontWeight={'500'} color={'black'}>
+          <SizableText size='$6' fontWeight={'500'} color={'black'}>
             {entry.object.value}
           </SizableText>
         </View>
@@ -22,7 +22,7 @@ const ProfileListItem = ({ entry, handleOpenPress, setCurrentEntry }) => {
           width={24}
           height={24}
           backgroundColor={'white'}
-          icon={<Edit3 size="$1" color={'black'} />}
+          icon={<Edit3 size='$1' color={'black'} />}
           pressStyle={{
             backgroundColor: colorTokens.light.gray.gray8,
             borderColor: 'white',

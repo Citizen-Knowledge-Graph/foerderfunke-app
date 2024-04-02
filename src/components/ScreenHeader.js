@@ -11,11 +11,11 @@ const SectionHeader = ({ screenName, backButton }) => {
     <SectionHeaderContainer>
       {backButton ? (
         <BackButton
-          icon={<ChevronLeft size="$2" color={'black'} />}
+          icon={<ChevronLeft size='$2' color={'black'} />}
           onPress={() => navigation.goBack()}
         />
       ) : null}
-      <SizableText size="$9" color={'black'} fontWeight={'500'}>
+      <SizableText size='$9' color={'black'} fontWeight={'500'}>
         {screenName}
       </SizableText>
     </SectionHeaderContainer>

@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {performUpdate} from '../storage/actions/userReport';
-import {useDispatch} from 'react-redux';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { performUpdate } from '../storage/actions/userReport';
+import { useDispatch } from 'react-redux';
 
-const ModalUpdateButton = ({entry, updateValue, setModalVisible}) => {
+const ModalUpdateButton = ({ entry, updateValue, setModalVisible }) => {
   const dispatch = useDispatch();
 
   return (
@@ -12,7 +12,8 @@ const ModalUpdateButton = ({entry, updateValue, setModalVisible}) => {
       onPress={() => {
         setModalVisible(false);
         dispatch(performUpdate(entry, updateValue));
-      }}>
+      }}
+    >
       <View style={styles.updateButton}>
         <Text style={styles.updateButtonText}>Update Profile</Text>
       </View>

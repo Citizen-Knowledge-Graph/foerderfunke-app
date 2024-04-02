@@ -54,7 +54,7 @@ export const getFirstOut = (
   predicate,
   predicate_namespace,
   term = 'mainPerson',
-  term_namespace = 'ff',
+  term_namespace = 'ff'
 ) => {
   const termIri = new NamespacedTerm(term_namespace, term);
   const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
@@ -89,7 +89,7 @@ export const updateOut = (
   object,
   update_value = null,
   term = 'mainPerson',
-  term_namespace = 'ff',
+  term_namespace = 'ff'
 ) => {
   const termIri = new NamespacedTerm(term_namespace, term);
   const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
@@ -141,5 +141,5 @@ const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
  * @returns {object} The term node from the dataset.
  */
 const retrieveTermNode = (dataset, term, factory = rdf) => {
-  return grapoi({dataset, factory, term: term.getNamespacedTerm()});
+  return grapoi({ dataset, factory, term: term.getNamespacedTerm() });
 };

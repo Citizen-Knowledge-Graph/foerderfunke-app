@@ -1,4 +1,4 @@
-import {VALIDATION_REPORT} from '../actions/validationReport';
+import { VALIDATION_REPORT } from '../actions/validationReport';
 
 const validationReducer = (state = {}, action) => {
   switch (action.type) {

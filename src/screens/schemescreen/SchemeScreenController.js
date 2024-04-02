@@ -1,4 +1,4 @@
-import {readJson} from '../../utilities/fileManagement';
+import { readJson } from '../../utilities/fileManagement';
 
 class SchemeGuideData {
   constructor(key, data) {
@@ -7,7 +7,7 @@ class SchemeGuideData {
   }
 }
 
-export const fetchSchemeScreenData = async scheme => {
+export const fetchSchemeScreenData = async (scheme) => {
   const registryPath = 'query-registry.json';
   const registry = await readJson(registryPath);
   const schemePath = `${registry[scheme].path}/${scheme}-hydration.json`;

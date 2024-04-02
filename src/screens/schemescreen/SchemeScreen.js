@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ScreenView from '../../components/ScreenView';
 import SchemeInfo from './components/SchemeInfo';
-import {fetchSchemeScreenData} from './SchemeScreenController';
+import { fetchSchemeScreenData } from './SchemeScreenController';
 
-const SchemeScreen = ({route}) => {
-  const {scheme} = route.params;
+const SchemeScreen = ({ route }) => {
+  const { scheme } = route.params;
   const [schemeScreenData, setSchemeScreenData] = useState(null);
 
   useEffect(() => {

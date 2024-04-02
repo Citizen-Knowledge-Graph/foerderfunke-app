@@ -1,4 +1,4 @@
-import {readJson} from '../utilities/fileManagement';
+import { readJson } from '../utilities/fileManagement';
 import store from '../storage/store';
 
 const fetchHydrationData = async (key, hydrationType) => {

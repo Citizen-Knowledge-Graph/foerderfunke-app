@@ -1,5 +1,5 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import StartScreen from './screens/StartScreen';
@@ -14,19 +14,19 @@ export const SchemeStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="StartStackScreen"
+        name='StartStackScreen'
         component={StartScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="MainTabNavigator"
+        name='MainTabNavigator'
         component={BottomTabNavigator}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SchemeStackScreen"
+        name='SchemeStackScreen'
         component={SchemeScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -38,7 +38,7 @@ const Tab = createBottomTabNavigator();
 export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         tabBarStyle: {
           backgroundColor: '#fff',
           borderTopWidth: 0,
@@ -46,7 +46,7 @@ export const BottomTabNavigator = () => {
         },
         tabBarActiveTintColor: '#000',
         tabBarInactiveTintColor: '#8e8e93',
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home';
@@ -55,18 +55,19 @@ export const BottomTabNavigator = () => {
           }
           return <FontAwesomeIcon name={iconName} size={size} color={color} />;
         },
-      })}>
+      })}
+    >
       <Tab.Screen
-        name="Home"
+        name='Home'
         component={HomeScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           headerShown: false,
         })}
       />
       <Tab.Screen
-        name="Profile"
+        name='Profile'
         component={ProfileScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           headerShown: false,
         })}
       />

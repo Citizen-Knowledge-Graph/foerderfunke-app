@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 // Component
-const PrimaryContainer = ({children, style}) => {
+const PrimaryContainer = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
 };
 

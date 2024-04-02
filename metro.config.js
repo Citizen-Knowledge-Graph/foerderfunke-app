@@ -1,5 +1,5 @@
-const { getDefaultConfig } = require("expo/metro-config");
-const { mergeConfig } = require("@react-native/metro-config");
+const { getDefaultConfig } = require('expo/metro-config');
+const { mergeConfig } = require('@react-native/metro-config');
 
 /**
  * Metro configuration
@@ -9,7 +9,7 @@ const { mergeConfig } = require("@react-native/metro-config");
  */
 const config = {
   resolver: {
-    sourceExts: [...getDefaultConfig(__dirname).resolver.sourceExts, "zip"],
+    sourceExts: [...getDefaultConfig(__dirname).resolver.sourceExts, 'zip'],
   },
 };
 

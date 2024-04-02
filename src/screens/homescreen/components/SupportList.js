@@ -12,7 +12,7 @@ const SupportList = ({ homeScreenData }) => {
         <SupportListItem key={index} scheme={scheme} />
       ))}
       <NonEligibleHeader>
-        <SizableText size="$7" color={'black'} fontWeight={'600'}>
+        <SizableText size='$7' color={'black'} fontWeight={'600'}>
           Nicht verfügbare Förderungen
         </SizableText>
       </NonEligibleHeader>

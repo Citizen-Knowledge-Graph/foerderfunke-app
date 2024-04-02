@@ -5,7 +5,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 const ModalView = ({ children, modalVisible, setModalVisible }) => {
   return (
     <Modal
-      animationType="slide"
+      animationType='slide'
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => {

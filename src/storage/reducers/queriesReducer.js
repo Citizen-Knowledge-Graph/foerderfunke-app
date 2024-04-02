@@ -1,4 +1,4 @@
-import {QUERIES_REPORT} from '../actions/queriesReport';
+import { QUERIES_REPORT } from '../actions/queriesReport';
 
 const queriesReducer = (state = {}, action) => {
   switch (action.type) {

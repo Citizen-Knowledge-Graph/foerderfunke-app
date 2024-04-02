@@ -9,7 +9,7 @@ const UserProfile = ({ profileScreenData }) => {
   return (
     <View>
       <ProfileList profileScreenData={profileScreenData} />
-      <Button onPress={shareFile} title="Export" />
+      <Button onPress={shareFile} title='Export' />
     </View>
   );
 };

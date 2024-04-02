@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {StyleSheet} from 'react-native';
-import {fontSizes} from '../styles/fonts';
+import { Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { fontSizes } from '../styles/fonts';
 
 // Styles
 const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 // Component
-const TextBox = ({text}) => {
+const TextBox = ({ text }) => {
   return (
     <View>
       <Text style={styles.title}>{text}</Text>

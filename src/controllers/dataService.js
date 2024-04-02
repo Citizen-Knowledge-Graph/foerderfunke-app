@@ -1,10 +1,10 @@
 import queriesReportAction from '../storage/actions/queriesReport';
 import guidesReportAction from '../storage/actions/guidesReport';
 import userReportAction from '../storage/actions/userReport';
-import {readFile, readJson} from '../utilities/fileManagement';
-import {parseTurtle} from '../utilities/rdfHandling';
+import { readFile, readJson } from '../utilities/fileManagement';
+import { parseTurtle } from '../utilities/rdfHandling';
 
-const loadUserProfile = async dispatch => {
+const loadUserProfile = async (dispatch) => {
   // file configuration
   const userProfilePath = 'user-profile.ttl';
 
@@ -16,7 +16,7 @@ const loadUserProfile = async dispatch => {
   dispatch(userReportAction(userProfilePath.replace('.ttl', ''), userProfile));
 };
 
-const loadQueryRegistry = async dispatch => {
+const loadQueryRegistry = async (dispatch) => {
   // file configuration
   const registryPath = 'query-registry.json';
 
@@ -25,11 +25,11 @@ const loadQueryRegistry = async dispatch => {
 
   // load registry into redux store
   dispatch(
-    queriesReportAction(registryPath.replace('.json', ''), registryJson),
+    queriesReportAction(registryPath.replace('.json', ''), registryJson)
   );
 };
 
-const loadGuidesRegistry = async dispatch => {
+const loadGuidesRegistry = async (dispatch) => {
   // file configuration
   const guidesPath = 'guides-registry.json';
 
@@ -40,7 +40,7 @@ const loadGuidesRegistry = async dispatch => {
   dispatch(guidesReportAction(guidesPath.replace('.json', ''), guidesJson));
 };
 
-const loadDataIntoRedux = async dispatch => {
+const loadDataIntoRedux = async (dispatch) => {
   // load user profile
   await loadUserProfile(dispatch);
 

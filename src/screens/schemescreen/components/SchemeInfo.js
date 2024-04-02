@@ -7,18 +7,18 @@ const SchemeInfo = ({ schemeScreenData }) => {
   return (
     <View>
       <InfoItem>
-        <SizableText size="$6" color={'black'} fontWeight={500}>
+        <SizableText size='$6' color={'black'} fontWeight={500}>
           Erklärung
         </SizableText>
-        <SizableText size="$5" color={'black'}>
+        <SizableText size='$5' color={'black'}>
           {schemeScreenData.data.description_long}
         </SizableText>
       </InfoItem>
       <InfoItem>
-        <SizableText size="$6" color={'black'} fontWeight={500}>
+        <SizableText size='$6' color={'black'} fontWeight={500}>
           Antragstellung
         </SizableText>
-        <SizableText size="$5" color={'black'}>
+        <SizableText size='$5' color={'black'}>
           {schemeScreenData.data.description_long}
         </SizableText>
       </InfoItem>

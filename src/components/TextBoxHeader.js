@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {StyleSheet} from 'react-native';
-import {fontColors, fontSizes} from '../styles/fonts';
+import { Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { fontColors, fontSizes } from '../styles/fonts';
 import SectionHeader from './SectionHeader';
 
 // Component
-const TextBoxHeader = ({title, text}) => {
+const TextBoxHeader = ({ title, text }) => {
   return (
     <View style={styles.container}>
       <SectionHeader title={title} />
