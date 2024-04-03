@@ -1,7 +1,8 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { SizableText, Paragraph, styled, Card } from 'tamagui';
+import { SizableText, Paragraph, styled, Card, View } from 'tamagui';
+import { colorTokens } from '@tamagui/themes';
 
 const SupportListItem = ({ scheme }) => {
   const navigation = useNavigation();
@@ -12,24 +13,34 @@ const SupportListItem = ({ scheme }) => {
 
   return (
     <TouchableOpacity onPress={handleListItemPress}>
-      <ListItem>
-        <SizableText size='$6' color={'black'} fontWeight={'500'}>
+      <View style={styles.listItem}>
+        <SizableText size='$5' style={styles.listItemHeader}>
           {scheme.title}
         </SizableText>
-        <Paragraph size='$4' color={'black'} fontWeight={'300'}>
+        <Paragraph size='$4' style={styles.listItemParagraph}>
           {scheme.description}
         </Paragraph>
-      </ListItem>
+      </View>
     </TouchableOpacity>
   );
 };
 
-const ListItem = styled(Card, {
-  paddingVertical: 8,
-  marginVertical: 8,
-  backgroundColor: '#FFFFFF',
-  borderTopWidth: 1,
-  borderRadius: 0,
+const styles = StyleSheet.create({
+  listItem: {
+    paddingVertical: 8,
+    marginVertical: 8,
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderRadius: 0,
+  },
+  listItemHeader: {
+    color: 'black',
+    fontWeight: '500',
+  },
+  listItemParagraph: {
+    color: 'black',
+    fontWeight: '300',
+  },
 });
 
 export default SupportListItem;

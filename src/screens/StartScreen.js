@@ -3,11 +3,10 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Main, Subtitle } from '../../tamagui.config';
 import { colorTokens } from '@tamagui/themes';
 
-// Screen
 const StartScreen = ({ navigation }) => {
   return (
     <TouchableOpacity
-      style={{ flex: 1 }}
+      style={styles.container}
       onPress={() => navigation.navigate('MainTabNavigator')}
       activeOpacity={0.7} // Optional: for better touch feedback
     >
@@ -18,13 +17,9 @@ const StartScreen = ({ navigation }) => {
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
   },
 });
 

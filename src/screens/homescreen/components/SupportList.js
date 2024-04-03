@@ -1,7 +1,7 @@
 import React from 'react';
 import SupportListItem from './SupportListItem';
-import { View } from 'react-native';
-import { SizableText, Card, styled } from 'tamagui';
+import { StyleSheet, View } from 'react-native';
+import { SizableText } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 
 const SupportList = ({ homeScreenData }) => {
@@ -11,11 +11,11 @@ const SupportList = ({ homeScreenData }) => {
       {homeScreenData.eligible.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />
       ))}
-      <NonEligibleHeader>
+      <View style={styles.nonEligibleHeader}>
         <SizableText size='$7' color={'black'} fontWeight={'600'}>
           Nicht verfügbare Förderungen
         </SizableText>
-      </NonEligibleHeader>
+      </View>
       {homeScreenData.nonEligible.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />
       ))}
@@ -23,11 +23,13 @@ const SupportList = ({ homeScreenData }) => {
   );
 };
 
-const NonEligibleHeader = styled(Card, {
-  padding: 8,
-  marginVertical: 8,
-  backgroundColor: colorTokens.light.red.red6,
-  borderRadius: 0,
+const styles = StyleSheet.create({
+  nonEligibleHeader: {
+    borderRadius: 8,
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: colorTokens.light.red.red6,
+  },
 });
 
 export default SupportList;
