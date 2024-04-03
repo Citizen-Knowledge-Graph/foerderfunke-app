@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { SizableText, Paragraph, styled, Card, View } from 'tamagui';
-import { colorTokens } from '@tamagui/themes';
+import { SizableText, Paragraph, View } from 'tamagui';
 
 const SupportListItem = ({ scheme }) => {
   const navigation = useNavigation();
