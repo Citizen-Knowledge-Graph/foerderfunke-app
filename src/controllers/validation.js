@@ -10,7 +10,6 @@ const runValidation = async (dispatch) => {
   const userProfilePath = 'user-profile.ttl';
   const datafieldsPath = 'datafields.ttl';
   const materializationPath = 'materialization.ttl';
-  // const entityValidationRegistryPath = 'entity-registry.json';
   const queryRegistryPath = 'query-registry.json';
 
   const userProfileString = await readFile(userProfilePath);
@@ -20,30 +19,6 @@ const runValidation = async (dispatch) => {
   if (!(await validateUserProfile(userProfileString, datafieldsString))) {
     console.error('Invalid user profile');
   }
-
-  /*
-  // load user validation to shapes
-  const entityValidationRegistry = await readJson(
-    entityValidationRegistryPath,
-  );
-
-  // iterate through entity registry
-  const entityShapesArray = [];
-  for (let key in entityValidationRegistry) {
-    if (entityValidationRegistry.hasOwnProperty(key)) {
-      const constraintsPath = entityValidationRegistry[key].path;
-      const entityString = await readFile(constraintsPath);
-      entityShapesArray.push(entityString);
-    }
-  }
-
-  // run validation for entity shapes
-  const entityShapes = await combineTurtleStringsIntoDataset(entityShapesArray);
-  const entityReport = await createValidationReport(entityShapes, userProfile);
-  if (!entityReport.conforms) {
-    console.error('Entity validation failed');
-  }
-  */
 
   // load query registry
   const queryRegistry = await readJson(queryRegistryPath);
