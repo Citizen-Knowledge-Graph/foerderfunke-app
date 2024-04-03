@@ -1,7 +1,6 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import ScreenHeader from './ScreenHeader';
-import { colors } from '../styles/colors';
 import PrimaryContainer from './PrimaryContainer';
 
 // Component
@@ -19,7 +18,7 @@ const ScreenView = ({ screenName, children, backButton }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
   },
   scrollView: {
     flex: 1,
