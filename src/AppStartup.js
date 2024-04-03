@@ -2,10 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import fetchDataToDevice from './controllers/dataFetching';
 import runValidation from './controllers/validation';
-import * as FileSystem from 'expo-file-system';
-import { Asset } from 'expo-asset';
-import JSZip from 'jszip';
-import base64 from 'react-native-base64';
 
 const AppStartup = ({ children }) => {
   const dispatch = useDispatch();
