@@ -33,5 +33,10 @@
     "title": "Bildungsgutschein",
     "description": "Sie haben möglicherweise Anspruch auf einen Bildungsgutschein.",
     "path": "queries/bildungsgutschein"
+  },
+  "arbeitslosengeld": {
+    "title": "Arbeitslosengeld",
+    "description": "Sie haben möglicherweise Anspruch auf Arbeitslosengeld.",
+    "path": "queries/arbeitslosengeld"
   }
 }
