@@ -17,8 +17,8 @@ export const performUpdate = (entry, updateValue) => async (dispatch) => {
   try {
     await updateUserProfile(entry, updateValue);
     dispatch(updateSuccess());
-    console.log('update succeeded');
+    console.log('User update succeeded');
   } catch (error) {
-    console.error('Update failed:', error);
+    console.error('User update failed:', error);
   }
 };

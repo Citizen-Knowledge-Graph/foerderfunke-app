@@ -10,12 +10,9 @@ const ProfileScreen = () => {
   const selectedUser = useSelector((state) => state.selectUserReducer);
 
   useEffect(() => {
-    console.log('rerunning effect');
-
     const fetchData = async () => {
       try {
         const newProfileScreenData = await fetchProfileScreenData(selectedUser);
-        console.log('new data:', newProfileScreenData);
         setProfileScreenData(newProfileScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);

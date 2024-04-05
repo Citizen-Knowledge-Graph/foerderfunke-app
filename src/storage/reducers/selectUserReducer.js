@@ -1,6 +1,10 @@
 import { SELECT_USER_REPORT } from '../actions/selectUserReport';
 
-const selectUserReducer = (state = {}, action) => {
+const initialState = {
+  userId: 'profile-a',
+};
+
+const selectUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case SELECT_USER_REPORT:
       return {

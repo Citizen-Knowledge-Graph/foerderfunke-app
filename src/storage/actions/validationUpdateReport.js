@@ -17,8 +17,8 @@ export const performValidationUpdate = () => async (dispatch) => {
   try {
     await runValidation(dispatch);
     dispatch(updateSuccess());
-    console.log('update succeeded');
+    console.log('Validation update succeeded');
   } catch (error) {
-    console.error('Update failed:', error);
+    console.error('Validation update failed:', error);
   }
 };

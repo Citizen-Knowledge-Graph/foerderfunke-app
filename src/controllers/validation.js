@@ -12,7 +12,13 @@ const runValidation = async (dispatch) => {
   const selectedUser = getSelectedUser();
   const userRegistryPath = 'user-registry.json';
   const userRegistry = await readJson(userRegistryPath);
-  const userProfilePath = userRegistry[selectedUser.userId].path;
+  let userProfilePath;
+  try {
+    userProfilePath = userRegistry[selectedUser.userId].path;
+  } catch (error) {
+    console.error('User not found in registry:', selectedUser.userId);
+  }
+
   const userProfileString = await readFile(userProfilePath);
 
   // fetch queries
