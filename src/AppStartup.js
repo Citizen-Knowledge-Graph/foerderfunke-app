@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import fetchDataToDevice from './controllers/dataFetching';
 import runValidation from './controllers/validation';
 import selectUser from './storage/actions/selectUserReport';
+import { performValidationUpdate } from './storage/actions/validationUpdateReport';
 
 const AppStartup = ({ children }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const AppStartup = ({ children }) => {
       dispatch(selectUser(initialUser));
 
       // Run initial validation
-      await runValidation(dispatch);
+      dispatch(performValidationUpdate());
     };
 
     initializeData();
@@ -27,7 +28,7 @@ const AppStartup = ({ children }) => {
 
   // re-run validation on user change
   useEffect(() => {
-    runValidation(dispatch);
+    dispatch(performValidationUpdate());
   }, [dispatch, selectedUser]);
 
   return <>{children}</>;

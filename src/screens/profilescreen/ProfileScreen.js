@@ -10,6 +10,8 @@ const ProfileScreen = () => {
   const selectedUser = useSelector((state) => state.selectUserReducer);
 
   useEffect(() => {
+    console.log('rerunning effect');
+
     const fetchData = async () => {
       try {
         const newProfileScreenData = await fetchProfileScreenData(selectedUser);

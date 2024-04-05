@@ -1,7 +1,11 @@
 import { readJson } from '../../utilities/fileManagement';
 import { HomeScreenData, SchemeData } from './HomeScreenModel';
+import { getValidationState } from '../../storage/store';
 
-export const fetchHomeScreenData = async (validationState) => {
+export const fetchHomeScreenData = async () => {
+  // retrieve validation state
+  const validationState = getValidationState();
+
   const registryPath = 'query-registry.json';
   const schemeRegistry = await readJson(registryPath);
   const homeScreenData = new HomeScreenData();
