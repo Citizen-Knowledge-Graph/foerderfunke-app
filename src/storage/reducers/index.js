@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import validationReducer from './validationReducer';
-import queriesReducer from './queriesReducer';
-import userReducer from './userReducer';
+import userUpdateReducer from './userUpdateReducer';
+import selectUserReducer from './selectUserReducer';
 
 const rootReducer = combineReducers({
   validationReducer: validationReducer,
-  queriesReducer: queriesReducer,
-  userReducer: userReducer,
+  userReducer: userUpdateReducer,
+  selectUserReducer: selectUserReducer,
 });
 
 export default rootReducer;

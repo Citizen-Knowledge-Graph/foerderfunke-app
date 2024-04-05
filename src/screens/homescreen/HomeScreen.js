@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 import { fetchHomeScreenData } from './HomeScreenController';
 
 const HomeScreen = () => {
-  const [homeScreenData, setHomeScreenData] = useState(null);
   const validationState = useSelector((state) => state.validationReducer);
+  const [homeScreenData, setHomeScreenData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -4,15 +4,21 @@ import {
   validateOne,
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
+import { getSelectedUser } from '../storage/store';
 
 // run validation
 const runValidation = async (dispatch) => {
-  const userProfilePath = 'user-profile.ttl';
+  // fetch selected user
+  const selectedUser = getSelectedUser();
+  const userRegistryPath = 'user-registry.json';
+  const userRegistry = await readJson(userRegistryPath);
+  const userProfilePath = userRegistry[selectedUser.userId].path;
+  const userProfileString = await readFile(userProfilePath);
+
+  // fetch queries
   const datafieldsPath = 'datafields.ttl';
   const materializationPath = 'materialization.ttl';
   const queryRegistryPath = 'query-registry.json';
-
-  const userProfileString = await readFile(userProfilePath);
   const datafieldsString = await readFile(datafieldsPath);
   const materializationString = await readFile(materializationPath);
 

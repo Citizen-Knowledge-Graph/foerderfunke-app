@@ -8,3 +8,5 @@ const store = configureStore({
 });
 
 export default store;
+
+export const getSelectedUser = () => store.getState().selectUserReducer;

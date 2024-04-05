@@ -10,7 +10,7 @@ import {
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
 import { colorTokens } from '@tamagui/themes';
-import { performUpdate } from '../../../storage/actions/userReport';
+import { performUpdate } from '../../../storage/actions/userUpdateReport';
 
 const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
   const [inputText, setInputText] = useState('');
@@ -37,7 +37,7 @@ const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
     >
       <BottomSheetView>
         <UpdateCard>
-          <DismissButton onPress={dismiss} />
+          <DismissButton onPress={() => dismiss()} />
           <UserProfile currentEntry={currentEntry} />
           <ProfileTextInput value={inputText} onChangeText={setInputText} />
           <UpdateButton

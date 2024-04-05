@@ -16,7 +16,7 @@ const ProfileList = ({ profileScreenData }) => {
         bottomSheetModalRef={bottomSheetModalRef}
         currentEntry={currentEntry}
       />
-      {profileScreenData.map((entry, index) => (
+      {profileScreenData.profileData.map((entry, index) => (
         <ProfileListItem
           key={index}
           entry={entry}
