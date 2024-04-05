@@ -2,7 +2,7 @@
   "profile-a": {
     "name": "Profile A",
     "description": "This is profile A",
-    "path": "user-profiles/user-profile.ttl"
+    "path": "user-profiles/user-profile-a.ttl"
   },
   "profile-b": {
     "name": "Profile B",

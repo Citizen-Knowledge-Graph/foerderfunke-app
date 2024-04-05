@@ -13,7 +13,7 @@ const dataFields = [
   'drivers_license',
 ];
 
-export const fetchProfileScreenData = async () => {
+export const fetchProfileScreenData = async (selectedUser) => {
   let profileScreenData = new ProfileScreenData();
   //
   // fetch content information for each data field
@@ -27,9 +27,13 @@ export const fetchProfileScreenData = async () => {
     profileScreenData.addProfileDataField(newDataField);
   });
   //
+  // fetch user profile paths
+  const userRegistryPath = 'user-registry.json';
+  const userRegistry = await readJson(userRegistryPath);
+  const userProfilePath = userRegistry[selectedUser.userId].path;
+  //
   // fetch user data from the user profile
-  const userPath = 'user-profile.ttl';
-  const userString = await readFile(userPath);
+  const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
   profileScreenData.profileData.forEach((entry) => {
     entry.setObject(getFirstOut(userGraph, entry.name, entry.namespace));

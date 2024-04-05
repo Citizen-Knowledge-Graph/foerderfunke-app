@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import ScreenView from '../../components/ScreenView';
 import UserProfile from './components/UserProfile';
-import { useSelector } from 'react-redux';
 import { fetchProfileScreenData } from './ProfileScreenController';
+import { useSelector } from 'react-redux';
 
 // Component
 const ProfileScreen = () => {
   const [profileScreenData, setProfileScreenData] = useState(null);
-  const userState = useSelector((state) => state.userReducer);
+  const selectedUser = useSelector((state) => state.selectUserReducer);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newProfileScreenData = await fetchProfileScreenData();
+        const newProfileScreenData = await fetchProfileScreenData(selectedUser);
+        console.log('new data:', newProfileScreenData);
         setProfileScreenData(newProfileScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);
@@ -20,7 +21,7 @@ const ProfileScreen = () => {
     };
 
     fetchData();
-  }, [userState]);
+  }, [selectedUser]);
 
   return (
     <ScreenView screenName={'Profile'}>
