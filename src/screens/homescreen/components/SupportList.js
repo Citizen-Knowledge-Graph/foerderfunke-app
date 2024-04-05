@@ -5,6 +5,7 @@ import { SizableText } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 
 const SupportList = ({ homeScreenData }) => {
+  console.log('rerendering SupportList');
   return (
     <View>
       {homeScreenData.eligible.map((scheme, index) => (

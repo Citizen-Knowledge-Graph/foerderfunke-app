@@ -6,7 +6,7 @@ import validationUpdateReducer from './validationUpdateReducer';
 
 const rootReducer = combineReducers({
   validationReducer: validationReducer,
-  userReducer: userUpdateReducer,
+  userUpdateReducer: userUpdateReducer,
   selectUserReducer: selectUserReducer,
   validationUpdateReducer: validationUpdateReducer,
 });

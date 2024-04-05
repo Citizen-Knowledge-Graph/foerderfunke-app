@@ -2,20 +2,23 @@ import React, { useState } from 'react';
 import { Select, Adapt, Sheet } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 import { Check, ChevronDown } from '@tamagui/lucide-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import selectUser from '../../../storage/actions/selectUserReport';
 
 const UserSelection = ({ alternativeUserProfiles }) => {
+  const selectedUser = useSelector((state) => state.selectUserReducer);
+
   return (
     <SelectDemoItem
       id='select-demo-1'
+      selectedUser={selectedUser}
       alternativeUserProfiles={alternativeUserProfiles}
     />
   );
 };
 
 export function SelectDemoItem(props) {
-  const [val, setVal] = useState(null);
+  const [val, setVal] = useState(props.selectedUser.userId);
   const dispatch = useDispatch();
 
   return (
@@ -67,7 +70,7 @@ export function SelectDemoItem(props) {
       <Select.Content zIndex={200000}>
         <Select.Viewport minWidth={200}>
           <Select.Group>
-            <Select.Label>User Profiles</Select.Label>
+            <Select.Label>User Profile</Select.Label>
             {props.alternativeUserProfiles.map((item, i) => {
               return (
                 <Select.Item index={i} key={item} value={item.toLowerCase()}>

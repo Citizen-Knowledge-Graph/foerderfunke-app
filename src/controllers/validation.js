@@ -1,15 +1,13 @@
 import { readFile, readJson } from '../utilities/fileManagement.js';
-import validationReportAction from '../storage/actions/validationReport.js';
 import {
   validateOne,
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
-import { getSelectedUser } from '../storage/store';
+import validationReportAction from '../storage/actions/validationReport';
 
 // run validation
-const runValidation = async (dispatch) => {
+const runValidation = async (dispatch, selectedUser) => {
   // fetch selected user
-  const selectedUser = getSelectedUser();
   const userRegistryPath = 'user-registry.json';
   const userRegistry = await readJson(userRegistryPath);
   let userProfilePath;

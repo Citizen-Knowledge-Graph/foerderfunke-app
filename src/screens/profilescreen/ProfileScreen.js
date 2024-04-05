@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 const ProfileScreen = () => {
   const [profileScreenData, setProfileScreenData] = useState(null);
   const selectedUser = useSelector((state) => state.selectUserReducer);
+  const userUpdate = useSelector((state) => state.userUpdateReducer);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +21,7 @@ const ProfileScreen = () => {
     };
 
     fetchData();
-  }, [selectedUser]);
+  }, [selectedUser, userUpdate]);
 
   return (
     <ScreenView screenName={'Profile'}>

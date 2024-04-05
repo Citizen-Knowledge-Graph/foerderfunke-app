@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchDataToDevice from './controllers/dataFetching';
-import selectUser from './storage/actions/selectUserReport';
 import { performValidationUpdate } from './storage/actions/validationUpdateReport';
 
 const AppStartup = ({ children }) => {
   const dispatch = useDispatch();
   const selectedUser = useSelector((state) => state.selectUserReducer);
+  const userUpdate = useSelector((state) => state.userUpdateReducer);
 
   // initialize data on app startup
   useEffect(() => {
@@ -20,8 +20,8 @@ const AppStartup = ({ children }) => {
 
   // run validation on user change
   useEffect(() => {
-    dispatch(performValidationUpdate());
-  }, [dispatch, selectedUser]);
+    dispatch(performValidationUpdate(selectedUser));
+  }, [dispatch, selectedUser, userUpdate]);
 
   return <>{children}</>;
 };

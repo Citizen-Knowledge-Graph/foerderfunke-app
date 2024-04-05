@@ -1,4 +1,3 @@
-// Data Interface
 export class ProfileScreenData {
   constructor() {
     this.profileData = [];

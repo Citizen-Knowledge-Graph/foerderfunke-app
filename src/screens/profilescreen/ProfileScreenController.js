@@ -50,9 +50,14 @@ export const fetchProfileScreenData = async (selectedUser) => {
   return profileScreenData;
 };
 
-export const updateUserProfile = async (entry, updateValue) => {
-  const userPath = 'user-profile.ttl';
-  const userString = await readFile(userPath);
+export const updateUserProfile = async (selectedUser, entry, updateValue) => {
+  //
+  // fetch user profile paths
+  const userRegistryPath = 'user-registry.json';
+  const userRegistry = await readJson(userRegistryPath);
+  const userProfilePath = userRegistry[selectedUser.userId].path;
+
+  const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
   const updatedGraph = updateOut(
     'replace',
@@ -63,7 +68,7 @@ export const updateUserProfile = async (entry, updateValue) => {
     updateValue
   );
   const updatedGraphString = await serializeTurtle(updatedGraph);
-  await writeFile('user-profile.ttl', updatedGraphString);
+  await writeFile(userProfilePath, updatedGraphString);
 };
 
 export const shareFile = async () => {

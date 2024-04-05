@@ -1,4 +1,7 @@
-import { INITIATE_UPDATE, UPDATE_SUCCESS } from '../actions/userUpdateReport';
+import {
+  INITIATE_USER_UPDATE,
+  UPDATE_USER_SUCCESS,
+} from '../actions/userUpdateReport';
 
 const initialState = {
   status: 'idle',
@@ -6,9 +9,9 @@ const initialState = {
 
 const userUpdateReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INITIATE_UPDATE:
+    case INITIATE_USER_UPDATE:
       return { ...state, status: 'updating' };
-    case UPDATE_SUCCESS:
+    case UPDATE_USER_SUCCESS:
       return { ...state, status: 'updated' };
     default:
       return state;
