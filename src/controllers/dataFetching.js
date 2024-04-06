@@ -20,8 +20,9 @@ const fetchDataToDevice = async () => {
 
   for (const file of unzippedData) {
     if (!file.filename.endsWith('.ttl')) continue;
-    console.log('from repo main.zip:', file.filename);
-    await writeFile(file.filename, file.fileContent, true);
+    let filename = file.filename.split('/').pop(); // remove "requirement-profiles-main/" from the beginning
+    console.log('from repo main.zip:', filename);
+    await writeFile(filename, file.fileContent, true);
   }
 };
 
