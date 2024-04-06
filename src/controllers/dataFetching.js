@@ -19,6 +19,7 @@ const fetchDataToDevice = async () => {
   unzippedData = await unzipFromBase64(binaryData);
 
   for (const file of unzippedData) {
+    if (!file.filename.endsWith('.ttl')) continue;
     console.log('from repo main.zip:', file.filename);
     await writeFile(file.filename, file.fileContent, true);
   }
