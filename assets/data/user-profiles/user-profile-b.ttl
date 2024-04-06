@@ -32,6 +32,3 @@ ff:mainPerson a ff:Citizen, schema:Person ;
     ff:hasEmploymentStatus "Angestellt" ;
     schema:children        ff:child1 ;
     schema:children        ff:child2 .
-# ff:hasGesamtbedarf 2773 ;
-# ff:hasGesamtverfuegung 2550 ;
-# ff:hasGesamtverfuegungPlusKinderzuschlag 3134 .

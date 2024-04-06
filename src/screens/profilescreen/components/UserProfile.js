@@ -5,7 +5,6 @@ import { shareFile } from '../ProfileScreenController';
 import ProfileList from './ProfileList';
 import UserSelection from './UserSelection';
 
-// Component
 const UserProfile = ({ profileScreenData }) => {
   console.log('rerendering UserProfile');
   return (
