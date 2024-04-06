@@ -109,9 +109,13 @@ export const ensureDirectoryExists = async (relativeDirectoryPath) => {
   }
 };
 
-export const fetchZipAsset = async (zip_module) => {
+export const fetchZipAssetFromModule = async (zip_module) => {
   const asset = await Asset.loadAsync(zip_module);
-  const fileContent = await FileSystem.readAsStringAsync(asset[0].localUri, {
+  return fetchZipAssetFromFileUri(asset[0].localUri);
+};
+
+export const fetchZipAssetFromFileUri = async (fileUri) => {
+  const fileContent = await FileSystem.readAsStringAsync(fileUri, {
     encoding: FileSystem.EncodingType.Base64,
   });
   return base64.decode(fileContent);
