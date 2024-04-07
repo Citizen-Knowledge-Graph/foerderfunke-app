@@ -154,3 +154,9 @@ export const deleteAllFiles = async () => {
     await FileSystem.deleteAsync(path);
   }
 };
+
+export const fileExists = async (relativeFilePath) => {
+  const absoluteFilePath = FileSystem.documentDirectory + relativeFilePath;
+  const fileInfo = await FileSystem.getInfoAsync(absoluteFilePath);
+  return fileInfo.exists;
+};
