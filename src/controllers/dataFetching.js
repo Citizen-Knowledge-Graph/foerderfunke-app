@@ -7,6 +7,8 @@ import { unzipFromBase64 } from '../utilities/zipHandling';
 import * as FileSystem from 'expo-file-system';
 
 const fetchDataToDevice = async () => {
+  // 1. Local data.zip
+
   let binaryData = await fetchZipAssetFromModule(
     require('../../assets/data.zip')
   );
@@ -16,6 +18,8 @@ const fetchDataToDevice = async () => {
     console.log('from data.zip:', file.filename);
     await writeFile(file.filename, file.fileContent, true);
   }
+
+  // 2. Download from requirement-profiles repo
 
   const downloadUrl =
     'https://github.com/Citizen-Knowledge-Graph/requirement-profiles/archive/main.zip';
@@ -32,7 +36,7 @@ const fetchDataToDevice = async () => {
     if (!file.filename.endsWith('.ttl')) {
       continue;
     }
-    let filename = file.filename.split('/').pop(); // remove "requirement-profiles-main/" from the beginning
+    let filename = file.filename.slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
     console.log('from repo main.zip:', filename);
     await writeFile(filename, file.fileContent, true);
   }
