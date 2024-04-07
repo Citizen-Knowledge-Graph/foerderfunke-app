@@ -4,12 +4,12 @@ import {
   fetchZipAssetFromFileUri,
   listAllFiles,
   deleteAllFiles,
-} from "../utilities/fileManagement";
+} from '../utilities/fileManagement';
 import { unzipFromBase64 } from '../utilities/zipHandling';
 import * as FileSystem from 'expo-file-system';
 
 const fetchDataToDevice = async () => {
-  // 1. Delete all files
+  // 1. Delete all files: clean slate
 
   await deleteAllFiles();
 
@@ -20,8 +20,8 @@ const fetchDataToDevice = async () => {
   );
   let unzippedData = await unzipFromBase64(binaryData);
 
+  console.log('Adding files from data.zip:');
   for (const file of unzippedData) {
-    console.log('from data.zip:', file.filename);
     await writeFile(file.filename, file.fileContent, true);
   }
 
@@ -38,16 +38,16 @@ const fetchDataToDevice = async () => {
   binaryData = await fetchZipAssetFromFileUri(actualLocation);
   unzippedData = await unzipFromBase64(binaryData);
 
+  console.log('Adding files from repo main.zip:');
   for (const file of unzippedData) {
     if (!file.filename.endsWith('.ttl') || file.filename.includes('/dev/')) {
       continue;
     }
     let filename = file.filename.split('/').slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
-    console.log('from repo main.zip:', filename);
     await writeFile(filename, file.fileContent, true);
   }
 
-  console.log(await listAllFiles(true));
+  console.log('All files in app storage:', await listAllFiles(true));
 };
 
 export default fetchDataToDevice;
