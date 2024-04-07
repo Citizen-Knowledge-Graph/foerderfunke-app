@@ -47,6 +47,9 @@ const fetchDataToDevice = async () => {
     await writeFile(filename, file.fileContent, true);
   }
 
+  // delete main.zip
+  await FileSystem.deleteAsync(actualLocation);
+
   console.log('All files in app storage:', await listAllFiles(true));
 };
 
