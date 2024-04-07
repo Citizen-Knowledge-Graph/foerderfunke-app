@@ -1,42 +1,34 @@
 {
   "citizen-child-allowance": {
     "title": "Kindergeld",
-    "description": "Sie haben Anspruch auf Kindergeld.",
-    "path": "queries/citizen-child-allowance"
+    "description": "Sie haben Anspruch auf Kindergeld."
   },
   "citizen-ecar-bonus": {
     "title": "Unterstützung für den Kauf eines Elektroautos",
-    "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto.",
-    "path": "queries/citizen-ecar-bonus"
+    "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto."
   },
   "citizen-insulation-bonus": {
     "title": "Förderung einer neuen Wärmedämmung",
-    "description": "Sie haben Anspruch auf eine Förderung einer neuen Hausdämmung.",
-    "path": "queries/citizen-insulation-bonus"
+    "description": "Sie haben Anspruch auf eine Förderung einer neuen Hausdämmung."
   },
   "citizen-solar-funding": {
     "title": "Förderung einer neuen Solaranlange",
-    "description": "Sie haben Anspruch auf eine Förderung neuer Solaranlagen.",
-    "path": "queries/citizen-solar-funding"
+    "description": "Sie haben Anspruch auf eine Förderung neuer Solaranlagen."
   },
   "citizen-wohngeld": {
     "title": "Wohngeld",
-    "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben.",
-    "path": "queries/citizen-wohngeld"
+    "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben."
   },
   "kinderzuschlag": {
     "title": "Kinderzuschlag",
-    "description": "Sie haben Anspruch auf den Kinderzuschlag.",
-    "path": "queries/kinderzuschlag"
+    "description": "Sie haben Anspruch auf den Kinderzuschlag."
   },
   "bildungsgutschein": {
     "title": "Bildungsgutschein",
-    "description": "Sie haben möglicherweise Anspruch auf einen Bildungsgutschein.",
-    "path": "queries/bildungsgutschein"
+    "description": "Sie haben möglicherweise Anspruch auf einen Bildungsgutschein."
   },
   "arbeitslosengeld": {
     "title": "Arbeitslosengeld",
-    "description": "Sie haben möglicherweise Anspruch auf Arbeitslosengeld.",
-    "path": "queries/arbeitslosengeld"
+    "description": "Sie haben möglicherweise Anspruch auf Arbeitslosengeld."
   }
 }

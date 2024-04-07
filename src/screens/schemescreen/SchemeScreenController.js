@@ -7,10 +7,8 @@ class SchemeGuideData {
   }
 }
 
-export const fetchSchemeScreenData = async (scheme) => {
-  const registryPath = 'query-registry.json';
-  const registry = await readJson(registryPath);
-  const schemePath = `${registry[scheme].path}/${scheme}-hydration.json`;
+export const fetchSchemeScreenData = async (queryId) => {
+  const schemePath = `requirement-profile-hydrations/${queryId}-hydration.json`;
   const schemeData = await readJson(schemePath);
-  return new SchemeGuideData(scheme, schemeData);
+  return new SchemeGuideData(queryId, schemeData);
 };

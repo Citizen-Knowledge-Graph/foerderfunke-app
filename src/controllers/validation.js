@@ -33,12 +33,12 @@ const runValidation = async (dispatch, selectedUser) => {
   // load query registry
   const queryRegistry = await readJson(queryRegistryPath);
 
-  // iterate through queries gitregistry
-  for (let key in queryRegistry) {
-    if (queryRegistry.hasOwnProperty(key)) {
-      console.log('Running validation for:', key);
+  // iterate through queries in registry
+  for (let queryId in queryRegistry) {
+    if (queryRegistry.hasOwnProperty(queryId)) {
+      console.log('Running validation for:', queryId);
 
-      const queryPath = queryRegistry[key].path + '/' + key + '.ttl';
+      const queryPath = 'shacl/' + queryId + '.ttl';
       const queryString = await readFile(queryPath);
 
       let report = await validateOne(
@@ -48,7 +48,7 @@ const runValidation = async (dispatch, selectedUser) => {
         materializationString,
         false
       );
-      dispatch(validationReportAction(key, report.conforms));
+      dispatch(validationReportAction(queryId, report.conforms));
     }
   }
 };
