@@ -36,7 +36,7 @@ const fetchDataToDevice = async () => {
     if (!file.filename.endsWith('.ttl') || file.filename.includes('/dev/')) {
       continue;
     }
-    let filename = file.filename.slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
+    let filename = file.filename.split('/').slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
     console.log('from repo main.zip:', filename);
     await writeFile(filename, file.fileContent, true);
   }
