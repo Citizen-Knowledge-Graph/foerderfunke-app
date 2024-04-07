@@ -2,12 +2,18 @@ import {
   writeFile,
   fetchZipAssetFromModule,
   fetchZipAssetFromFileUri,
-} from '../utilities/fileManagement';
+  listAllFiles,
+  deleteAllFiles,
+} from "../utilities/fileManagement";
 import { unzipFromBase64 } from '../utilities/zipHandling';
 import * as FileSystem from 'expo-file-system';
 
 const fetchDataToDevice = async () => {
-  // 1. Local data.zip
+  // 1. Delete all files
+
+  await deleteAllFiles();
+
+  // 2. Unpack local data.zip
 
   let binaryData = await fetchZipAssetFromModule(
     require('../../assets/data.zip')
@@ -19,7 +25,7 @@ const fetchDataToDevice = async () => {
     await writeFile(file.filename, file.fileContent, true);
   }
 
-  // 2. Download from requirement-profiles repo
+  // 3. Download from requirement-profiles repo
 
   const downloadUrl =
     'https://github.com/Citizen-Knowledge-Graph/requirement-profiles/archive/main.zip';
@@ -40,6 +46,8 @@ const fetchDataToDevice = async () => {
     console.log('from repo main.zip:', filename);
     await writeFile(filename, file.fileContent, true);
   }
+
+  console.log(await listAllFiles(true));
 };
 
 export default fetchDataToDevice;
