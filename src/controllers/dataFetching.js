@@ -71,7 +71,7 @@ const downloadAndUnpackRequirementsProfileRepo = async () => {
 
   console.log('Adding files from repo main.zip:');
   for (const file of unzippedData) {
-    if (!file.filename.endsWith('.ttl') || file.filename.includes('/dev/')) {
+    if (!file.filename.endsWith('.ttl')) {
       continue;
     }
     let filename = file.filename.split('/').slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
