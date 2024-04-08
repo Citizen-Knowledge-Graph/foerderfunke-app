@@ -2,8 +2,6 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 @prefix fim:    <https://schema.fim.fitko.net/fields/baukasten/> .
 @prefix ff:     <https://foerderfunke.org/default#> .
-@prefix schema: <http://schema.org/> .
-@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
 
 ff:this a ff:CitizenProfile .
 
@@ -15,11 +13,11 @@ ff:CarA a ff:Car ;
     ff:carAge  5 ;
     ff:carType "Electric" .
 
-ff:mainPerson a ff:Citizen, schema:Person ;
-    foaf:firstName         "Erika" ;
-    foaf:lastName          "Mustermann" ;
+ff:mainPerson a ff:Citizen ;
+    ff:hasFirstNames       "Erika" ;
+    ff:hasFamilyName       "Mustermann" ;
     ff:owns                ff:HouseA ;
-    foaf:birthday          "1992-05-17"^^xsd:date ;
+    ff:hasBirthday         "1992-05-17"^^xsd:date ;
     ff:hasResidence        "Berlin" ;
     ff:hasDrivingLicense   true ;
     ff:owns                ff:CarA ;
@@ -30,5 +28,5 @@ ff:mainPerson a ff:Citizen, schema:Person ;
     ff:hasIncomeBrutto     2700 ;
     ff:hasIncomeNetto      1600 ;
     ff:hasEmploymentStatus "Angestellt" ;
-    schema:children        ff:child1 ;
-    schema:children        ff:child2 .
+    ff:hasChild            ff:child1 ;
+    ff:hasChild            ff:child2 .
