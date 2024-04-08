@@ -4,6 +4,7 @@ import {
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
 import validationReportAction from '../storage/actions/validationReport';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // run validation
 const runValidation = async (dispatch, selectedUser) => {
@@ -20,8 +21,9 @@ const runValidation = async (dispatch, selectedUser) => {
   const userProfileString = await readFile(userProfilePath);
 
   // fetch queries
-  const datafieldsPath = 'datafields.ttl';
-  const materializationPath = 'materialization.ttl';
+
+  let datafieldsPath = await AsyncStorage.getItem('datafields-file');
+  let materializationPath = await AsyncStorage.getItem('materialization-file');
   const queryRegistryPath = 'query-registry.json';
   const datafieldsString = await readFile(datafieldsPath);
   const materializationString = await readFile(materializationPath);
@@ -32,13 +34,16 @@ const runValidation = async (dispatch, selectedUser) => {
 
   // load query registry
   const queryRegistry = await readJson(queryRegistryPath);
+  let requirementProfilesFolder = await AsyncStorage.getItem(
+    'requirement-profiles-folder'
+  );
 
   // iterate through queries in registry
   for (let queryId in queryRegistry) {
     if (queryRegistry.hasOwnProperty(queryId)) {
       console.log('Running validation for:', queryId);
 
-      const queryPath = 'shacl/' + queryId + '.ttl';
+      const queryPath = requirementProfilesFolder + queryId + '.ttl';
       const queryString = await readFile(queryPath);
 
       let report = await validateOne(

@@ -8,6 +8,7 @@ import {
 import { unzipFromBase64 } from '../utilities/zipHandling';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/src/utils';
 
 const fetchDataToDevice = async () => {
   // 1. Delete all files: clean slate
@@ -75,10 +76,28 @@ const downloadAndUnpackRequirementsProfileRepo = async () => {
     }
     let filename = file.filename.split('/').slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
     await writeFile(filename, file.fileContent, true);
+    if (filename === 'manifest.ttl') {
+      await storeIdToPathPairs(file.fileContent);
+    }
   }
 
   // delete main.zip
   await FileSystem.deleteAsync(actualLocation);
+};
+
+const storeIdToPathPairs = async (manifestContent) => {
+  let query = `
+    PREFIX ff: <https://foerderfunke.org/default#>
+    PREFIX schema: <http://schema.org/>
+    SELECT ?id ?path WHERE {
+        ?doc a ?type ;
+             schema:identifier ?id ;
+             ff:relativePath ?path .
+    }`;
+  let pairs = await runSparqlSelectQueryOnRdfString(query, manifestContent);
+  for (let pair of pairs) {
+    await AsyncStorage.setItem(pair.id, pair.path);
+  }
 };
 
 export default fetchDataToDevice;
