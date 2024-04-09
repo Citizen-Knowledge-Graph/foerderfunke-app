@@ -12,13 +12,14 @@ const AppStartup = ({ children }) => {
   // initialize data on app startup
   useEffect(() => {
     const initializeData = async () => {
-      // Fetch data from bundle to device - this will be API call later
-      await fetchDataToDevice();
-      setDataFetched(true);
+      if (!dataFetched) {
+        await fetchDataToDevice();
+        setDataFetched(true);
+      }
     };
 
     initializeData();
-  }, [dispatch]);
+  }, [dispatch, dataFetched]);
 
   // run validation on user change
   useEffect(() => {

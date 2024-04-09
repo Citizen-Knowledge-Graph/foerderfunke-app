@@ -31,7 +31,9 @@ const fetchDataToDevice = async () => {
 
   await downloadAndUnpackRequirementsProfileRepo();
 
-  let storedLatestCommit = await AsyncStorage.getItem('requirement-profiles-repo-latest-commit');
+  let storedLatestCommit = await AsyncStorage.getItem(
+    'requirement-profiles-repo-latest-commit'
+  );
   if (storedLatestCommit == null) {
     // await downloadAndUnpackRequirementsProfileRepo();
     // store latest commit TODO
@@ -48,11 +50,15 @@ const fetchDataToDevice = async () => {
     // TODO
     */
   }
-  let commitsUrl = 'https://api.github.com/repos/Citizen-Knowledge-Graph/requirement-profiles/commits?per_page=1';
+  let commitsUrl =
+    'https://api.github.com/repos/Citizen-Knowledge-Graph/requirement-profiles/commits?per_page=1';
   let response = await fetch(commitsUrl);
   let latestCommit = (await response.json()).map((commit) => commit.sha)[0];
   console.log('Latest commit:', latestCommit);
-  await AsyncStorage.setItem('requirement-profiles-repo-latest-commit', latestCommit);
+  await AsyncStorage.setItem(
+    'requirement-profiles-repo-latest-commit',
+    latestCommit
+  );
 
   console.log('All files in app storage:', await listAllFiles(true));
 };
