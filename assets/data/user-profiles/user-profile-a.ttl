@@ -32,14 +32,14 @@ ff:mainPerson a ff:Citizen ;
     ff:hasChild             ff:child1 ;
     ff:hasChild             ff:child2 .
 
-ff:child1 a ff:Child, ff:Citizen ;
+ff:child1 a ff:Child ;
     ff:hasFirstNames     "Maria" ;
     ff:hasLastName       "Mustermann" ;
     ff:hasBirthday       "2013-01-23"^^xsd:date ;
     ff:hasMaritalStatus  "LD" ; # ledig
     ff:receiveKindergeld 250 .
 
-ff:child2 a ff:Child, ff:Citizen ;
+ff:child2 a ff:Child ;
     ff:hasBirthday        "2008-02-15"^^xsd:date ;
     ff:hasMaritalStatus   "LD" ;
     ff:receiveKindergeld  250 .
