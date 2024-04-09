@@ -121,6 +121,41 @@ export const fetchZipAssetFromFileUri = async (fileUri) => {
   return base64.decode(fileContent);
 };
 
+const collectFilesRecursively = async (path, list, shortenToRelativePath) => {
+  try {
+    const fileInfo = await FileSystem.getInfoAsync(path);
+    if (fileInfo.isDirectory) {
+      const filesInDir = await FileSystem.readDirectoryAsync(path);
+      for (const file of filesInDir) {
+        await collectFilesRecursively(
+          `${path}/${file}`,
+          list,
+          shortenToRelativePath
+        );
+      }
+    } else {
+      list.push(
+        shortenToRelativePath
+          ? path.replace(FileSystem.documentDirectory, '')
+          : path
+      );
+    }
+  } catch (err) {
+    console.error(`Error accessing path: ${path}`, err);
+  }
+};
+
+export const listAllFiles = async (shortenToRelativePath = false) => {
+  const rootDirectory = FileSystem.documentDirectory.slice(0, -1); // remove trailing slash
+  if (!rootDirectory) {
+    console.error('Unable to access document directory.');
+    return [];
+  }
+  let list = [];
+  await collectFilesRecursively(rootDirectory, list, shortenToRelativePath);
+  return list;
+};
+
 export const deleteAllFiles = async () => {
   const rootDirectory = FileSystem.documentDirectory;
   const files = await FileSystem.readDirectoryAsync(rootDirectory);

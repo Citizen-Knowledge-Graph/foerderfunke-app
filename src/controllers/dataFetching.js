@@ -2,9 +2,13 @@ import {
   writeFile,
   fetchZipAssetFromModule,
   fetchZipAssetFromFileUri,
-  listAllFiles,
   deleteAllFiles,
+  listAllFiles,
 } from '../utilities/fileManagement';
+import {
+  fetchLatestCommitHash,
+  downloadRepoZip,
+} from '../utilities/gitManagement';
 import { unzipFromBase64 } from '../utilities/zipHandling';
 import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,65 +16,39 @@ import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/s
 
 const fetchDataToDevice = async () => {
   // 1. Delete all files: clean slate
-
   await deleteAllFiles();
 
   // 2. Unpack local data.zip
-
   let binaryData = await fetchZipAssetFromModule(
     require('../../assets/data.zip')
   );
   let unzippedData = await unzipFromBase64(binaryData);
-
   console.log('Adding files from data.zip:');
   for (const file of unzippedData) {
     await writeFile(file.filename, file.fileContent, true);
   }
 
-  // 3. Download from requirement-profiles repo OR update/add/delete files that changed since we last checked
-
-  await downloadAndUnpackRequirementsProfileRepo();
-
+  // 3. Download from requirement-profiles repo
+  const latestCommit = await fetchLatestCommitHash(
+    'https://api.github.com/repos/Citizen-Knowledge-Graph/requirement-profiles/commits?per_page=1'
+  );
   let storedLatestCommit = await AsyncStorage.getItem(
     'requirement-profiles-repo-latest-commit'
   );
-  if (storedLatestCommit == null) {
-    // await downloadAndUnpackRequirementsProfileRepo();
-    // store latest commit TODO
-  } else {
-    // check if latest commit is different to stored one, if yes, extract changed files and download them one by one
-    /*
-    url = `https://api.github.com/repos/Citizen-Knowledge-Graph/requirement-profiles/compare/${firstCommit}...${latestCommit}`;
-    response = await fetch(url);
-    let changedFiles = (await response.json()).files.map(file => ({
-      filename: file.filename,
-      status: file.status,
-    }));
-    changedFiles = changedFiles.filter((file) => file.filename.endsWith('.ttl'));
-    // TODO
-    */
+  if (storedLatestCommit === null || storedLatestCommit !== latestCommit) {
+    await downloadAndUnpackRequirementsProfileRepo();
+    await AsyncStorage.setItem(
+      'requirement-profiles-repo-latest-commit',
+      latestCommit
+    );
   }
-  let commitsUrl =
-    'https://api.github.com/repos/Citizen-Knowledge-Graph/requirement-profiles/commits?per_page=1';
-  let response = await fetch(commitsUrl);
-  let latestCommit = (await response.json()).map((commit) => commit.sha)[0];
-  console.log('Latest commit:', latestCommit);
-  await AsyncStorage.setItem(
-    'requirement-profiles-repo-latest-commit',
-    latestCommit
-  );
-
   console.log('All files in app storage:', await listAllFiles(true));
 };
 
 const downloadAndUnpackRequirementsProfileRepo = async () => {
   const downloadUrl =
     'https://github.com/Citizen-Knowledge-Graph/requirement-profiles/archive/main.zip';
-  const targetLocation = FileSystem.documentDirectory + 'main.zip';
-  const { uri: actualLocation } = await FileSystem.downloadAsync(
-    downloadUrl,
-    targetLocation
-  );
+  const actualLocation = await downloadRepoZip(downloadUrl);
 
   let binaryData = await fetchZipAssetFromFileUri(actualLocation);
   let unzippedData = await unzipFromBase64(binaryData);
