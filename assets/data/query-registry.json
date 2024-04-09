@@ -1,21 +1,21 @@
 {
-  "citizen-child-allowance": {
+  "dev-kindergeld": {
     "title": "Kindergeld",
     "description": "Sie haben Anspruch auf Kindergeld."
   },
-  "citizen-ecar-bonus": {
+  "dev-eauto": {
     "title": "Unterstützung für den Kauf eines Elektroautos",
     "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto."
   },
-  "citizen-insulation-bonus": {
+  "dev-daemmung": {
     "title": "Förderung einer neuen Wärmedämmung",
     "description": "Sie haben Anspruch auf eine Förderung einer neuen Hausdämmung."
   },
-  "citizen-solar-funding": {
+  "dev-solar": {
     "title": "Förderung einer neuen Solaranlange",
     "description": "Sie haben Anspruch auf eine Förderung neuer Solaranlagen."
   },
-  "citizen-wohngeld": {
+  "dev-wohngeld": {
     "title": "Wohngeld",
     "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben."
   },
