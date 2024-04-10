@@ -1,4 +1,3 @@
-import Config from 'react-native-config';
 import {
   writeFile,
   fetchZipAssetFromModule,
@@ -14,13 +13,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/src/utils';
 
 const fetchDataToDevice = async () => {
-  if (Config.REACT_APP_CONFIG_MODE === 'offline') {
-    console.log('Fetching data from local assets');
-    await fetchLocalData();
-  } else {
-    console.log('Fetching data from remote repo');
-    await fetchRemoteData();
-  }
+  console.log('Fetching data from local assets');
+  await fetchLocalData();
+  console.log('Fetching data from remote repo');
+  await fetchRemoteData();
   console.log('All files in app storage:', await listAllFiles(true));
 };
 
@@ -43,7 +39,6 @@ const fetchRemoteData = async () => {
   let storedLatestCommit = await AsyncStorage.getItem('latest-commit-stored');
   if (storedLatestCommit === null || storedLatestCommit !== latestCommit) {
     console.log('Data needs to be updated');
-    await deleteAllFiles();
 
     const binaryData = await fetchZipAssetFromRepository(repo, archivePath);
     let unzippedData = await unzipFromBase64(binaryData);

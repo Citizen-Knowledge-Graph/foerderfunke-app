@@ -5,7 +5,6 @@ import {
 } from '@foerderfunke/matching-engine';
 import validationReportAction from '../storage/actions/validationReport';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as FileSystem from 'expo-file-system';
 
 // run validation
 const runValidation = async (dispatch, selectedUser) => {
@@ -29,29 +28,30 @@ const runValidation = async (dispatch, selectedUser) => {
     console.error('Invalid user profile');
   }
 
-  // fetch queries
-  const requirementProfilesFolder = await AsyncStorage.getItem(
+  // load query registry
+  const queryRegistryPath = 'query-registry.json';
+  const queryRegistry = await readJson(queryRegistryPath);
+  let requirementProfilesFolder = await AsyncStorage.getItem(
     'requirement-profiles-folder'
-  );
-  const queries = await FileSystem.readDirectoryAsync(
-    FileSystem.documentDirectory + requirementProfilesFolder
   );
 
   // iterate through queries in registry
-  for (let queryFile of queries) {
-    console.log('Running validation for:', queryFile);
+  for (let queryId in queryRegistry) {
+    if (queryRegistry.hasOwnProperty(queryId)) {
+      console.log('Running validation for:', queryId);
 
-    const queryPath = requirementProfilesFolder + queryFile;
-    const queryString = await readFile(queryPath);
+      const queryPath = requirementProfilesFolder + queryId + '.ttl';
+      const queryString = await readFile(queryPath);
 
-    let report = await validateOne(
-      userProfileString,
-      queryString,
-      datafieldsString,
-      materializationString,
-      false
-    );
-    dispatch(validationReportAction(queryFile, report.conforms));
+      let report = await validateOne(
+        userProfileString,
+        queryString,
+        datafieldsString,
+        materializationString,
+        false
+      );
+      dispatch(validationReportAction(queryId, report.conforms));
+    }
   }
 };
 
