@@ -5,6 +5,7 @@
   "scripts": {
     "zip": "node -e \"const { zip } = require('zip-a-folder'); (async () => { await zip('./assets/data', './assets/data.zip'); })();\"",
     "expo:ios": "npm run zip && expo run:ios",
+    "expo:ios-offline": "REACT_APP_CONFIG_MODE=offline npm run zip && expo run:ios",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
@@ -35,6 +36,7 @@
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-base64": "^0.2.1",
+    "react-native-config": "^1.5.1",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-reanimated": "^3.6.2",

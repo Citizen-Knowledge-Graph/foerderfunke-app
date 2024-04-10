@@ -1,6 +1,10 @@
 import * as FileSystem from 'expo-file-system';
 
-export const fetchLatestCommitHash = async (url) => {
+export const fetchLatestCommitHash = async (
+  repo_url,
+  commit_suffix = 'commits?per_page=1'
+) => {
+  const url = repo_url + '/' + commit_suffix;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -21,14 +25,12 @@ export const fetchLatestCommitHash = async (url) => {
   }
 };
 
-export const downloadRepoZip = async (
-  downloadUrl,
-  targetLocation = 'main.zip'
-) => {
-  const absoluteTargetLocation = `${FileSystem.documentDirectory}${targetLocation}`;
+export const downloadRepoArchive = async (repoUrl, branch = 'main') => {
+  const archiveUrl = `${repoUrl}/archive/${branch}.zip`;
+  const absoluteTargetLocation = `${FileSystem.documentDirectory}${branch}.zip`;
   try {
     const { uri: actualLocation } = await FileSystem.downloadAsync(
-      downloadUrl,
+      archiveUrl,
       absoluteTargetLocation
     );
     console.log('Downloaded zip to:', actualLocation);
