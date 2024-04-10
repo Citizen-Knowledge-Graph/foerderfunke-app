@@ -3,15 +3,10 @@ import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
 import { getFirstOut, updateOut } from '../../utilities/graphManagement';
 import { ProfileDataField, ProfileScreenData } from './ProfileScreenModel';
 import { Share } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // config
-const dataFields = [
-  'name',
-  'surname',
-  'birthday',
-  'residence',
-  'drivers_license',
-];
+const dataFields = ['name', 'surname', 'birthday', 'residence'];
 
 export const fetchProfileScreenData = async (selectedUser) => {
   let profileScreenData = new ProfileScreenData();
@@ -28,19 +23,24 @@ export const fetchProfileScreenData = async (selectedUser) => {
   });
   //
   // fetch user profile paths
-  const userRegistryPath = 'user-registry.json';
-  const userRegistry = await readJson(userRegistryPath);
-  const userProfilePath = userRegistry[selectedUser.userId].path;
+  let userProfileExamplesPath = await AsyncStorage.getItem(
+    'user-profile-examples-folder'
+  );
+  const userProfilePath =
+    userProfileExamplesPath + selectedUser.userId + '.ttl';
   //
   // fetch user data from the user profile
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
   profileScreenData.profileData.forEach((entry) => {
-    entry.setObject(getFirstOut(userGraph, entry.name, entry.namespace));
+    const newObject = getFirstOut(userGraph, entry.name, entry.namespace);
+    console.log(newObject);
+    entry.setObject(newObject);
   });
+  console.log('Profile data:', profileScreenData.profileData);
   //
   // fetch user profile meta data
-  const alternativeUserProfilesPath = 'user-registry.json';
+  const alternativeUserProfilesPath = 'user-profile-examples-registry.json';
   const alternativeUserProfilesJson = await readJson(
     alternativeUserProfilesPath
   );
@@ -53,9 +53,11 @@ export const fetchProfileScreenData = async (selectedUser) => {
 export const updateUserProfile = async (selectedUser, entry, updateValue) => {
   //
   // fetch user profile paths
-  const userRegistryPath = 'user-registry.json';
-  const userRegistry = await readJson(userRegistryPath);
-  const userProfilePath = userRegistry[selectedUser.userId].path;
+  let userProfileExamplesPath = await AsyncStorage.getItem(
+    'user-profile-examples-folder'
+  );
+  const userProfilePath =
+    userProfileExamplesPath + selectedUser.userId + '.ttl';
 
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);

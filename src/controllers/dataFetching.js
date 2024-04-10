@@ -21,7 +21,6 @@ const fetchDataToDevice = async () => {
 };
 
 const fetchLocalData = async () => {
-  await deleteAllFiles();
   let binaryData = await fetchZipAssetFromModule(
     require('../../assets/data.zip')
   );
