@@ -2,16 +2,14 @@ import Config from 'react-native-config';
 import {
   writeFile,
   fetchZipAssetFromModule,
-  fetchZipAssetFromFileUri,
   deleteAllFiles,
   listAllFiles,
 } from '../utilities/fileManagement';
 import {
   fetchLatestCommitHash,
-  downloadRepoArchive,
+  fetchZipAssetFromRepository,
 } from '../utilities/gitManagement';
 import { unzipFromBase64 } from '../utilities/zipHandling';
-import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/src/utils';
 
@@ -38,37 +36,29 @@ const fetchLocalData = async () => {
 };
 
 const fetchRemoteData = async () => {
-  const repoUrl =
-    'https://api.github.com/repos/Citizen-Knowledge-Graph/requirement-profiles';
-  const latestCommit = await fetchLatestCommitHash(repoUrl);
+  const repo = 'Citizen-Knowledge-Graph/requirement-profiles';
+  const archivePath = 'zip-archive/archive.zip';
+
+  const latestCommit = await fetchLatestCommitHash(repo);
   let storedLatestCommit = await AsyncStorage.getItem('latest-commit-stored');
   if (storedLatestCommit === null || storedLatestCommit !== latestCommit) {
+    console.log('Data needs to be updated');
     await deleteAllFiles();
-    await downloadAndUnpackRepo(repoUrl);
+
+    const binaryData = await fetchZipAssetFromRepository(repo, archivePath);
+    let unzippedData = await unzipFromBase64(binaryData);
+    for (const file of unzippedData) {
+      console.log('Writing file:', file.filename);
+      await writeFile(file.filename, file.fileContent, true);
+      if (file.filename === 'manifest.ttl') {
+        await storeIdToPathPairs(file.fileContent);
+      }
+    }
+
     await AsyncStorage.setItem('latest-commit-stored', latestCommit);
+  } else {
+    console.log('Data already up to date');
   }
-};
-
-const downloadAndUnpackRepo = async (repoUrl) => {
-  const actualLocation = await downloadRepoArchive(repoUrl);
-
-  let binaryData = await fetchZipAssetFromFileUri(actualLocation);
-  let unzippedData = await unzipFromBase64(binaryData);
-
-  console.log('Adding files from repo main.zip:');
-  for (const file of unzippedData) {
-    if (!file.filename.endsWith('.ttl')) {
-      continue;
-    }
-    let filename = file.filename.split('/').slice(1).join('/'); // remove "requirement-profiles-main/" from the beginning
-    await writeFile(filename, file.fileContent, true);
-    if (filename === 'manifest.ttl') {
-      await storeIdToPathPairs(file.fileContent);
-    }
-  }
-
-  // delete main.zip
-  await FileSystem.deleteAsync(actualLocation);
 };
 
 const storeIdToPathPairs = async (manifestContent) => {

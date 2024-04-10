@@ -1,10 +1,9 @@
 import * as FileSystem from 'expo-file-system';
+import { fetchZipAssetFromFileUri } from './fileManagement';
 
-export const fetchLatestCommitHash = async (
-  repo_url,
-  commit_suffix = 'commits?per_page=1'
-) => {
-  const url = repo_url + '/' + commit_suffix;
+export const fetchLatestCommitHash = async (repo) => {
+  const url =
+    'https://api.github.com/repos/' + repo + '/' + 'commits?per_page=1';
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -25,18 +24,21 @@ export const fetchLatestCommitHash = async (
   }
 };
 
-export const downloadRepoArchive = async (repoUrl, branch = 'main') => {
-  const archiveUrl = `${repoUrl}/archive/${branch}.zip`;
-  const absoluteTargetLocation = `${FileSystem.documentDirectory}${branch}.zip`;
+export const fetchZipAssetFromRepository = async (repository, zipPath) => {
+  const baseURL = 'https://github.com';
+  const absoluteArchivePath = `${baseURL}/${repository}/raw/${zipPath}`;
+  const temporaryTargetLocation = `${FileSystem.documentDirectory}main.zip`;
+
   try {
-    const { uri: actualLocation } = await FileSystem.downloadAsync(
-      archiveUrl,
-      absoluteTargetLocation
+    const downloadResult = await FileSystem.downloadAsync(
+      absoluteArchivePath,
+      temporaryTargetLocation
     );
-    console.log('Downloaded zip to:', actualLocation);
-    return actualLocation;
+    console.log('Downloaded zip to:', downloadResult.uri);
+
+    return await fetchZipAssetFromFileUri(downloadResult.uri);
   } catch (error) {
     console.error('Failed to download zip:', error);
-    return null;
+    throw error;
   }
 };
