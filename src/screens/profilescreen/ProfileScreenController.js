@@ -33,11 +33,8 @@ export const fetchProfileScreenData = async (selectedUser) => {
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
   profileScreenData.profileData.forEach((entry) => {
-    const newObject = getFirstOut(userGraph, entry.name, entry.namespace);
-    console.log(newObject);
-    entry.setObject(newObject);
+    entry.setObject(getFirstOut(userGraph, entry.name, entry.namespace));
   });
-  console.log('Profile data:', profileScreenData.profileData);
   //
   // fetch user profile meta data
   const alternativeUserProfilesPath = 'user-profile-examples-registry.json';
