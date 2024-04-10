@@ -1,7 +1,6 @@
 import {
   writeFile,
   fetchZipAssetFromModule,
-  deleteAllFiles,
   listAllFiles,
 } from '../utilities/fileManagement';
 import {
@@ -21,37 +20,36 @@ const fetchDataToDevice = async () => {
 };
 
 const fetchLocalData = async () => {
-  let binaryData = await fetchZipAssetFromModule(
-    require('../../assets/data.zip')
-  );
+  const modulePath = require('../../assets/data.zip');
+  let binaryData = await fetchZipAssetFromModule(modulePath);
   let unzippedData = await unzipFromBase64(binaryData);
-  for (const file of unzippedData) {
-    await writeFile(file.filename, file.fileContent, true);
-  }
+  await processFiles(unzippedData);
 };
 
 const fetchRemoteData = async () => {
   const repo = 'Citizen-Knowledge-Graph/requirement-profiles';
   const archivePath = 'zip-archive/archive.zip';
-
   const latestCommit = await fetchLatestCommitHash(repo);
-  let storedLatestCommit = await AsyncStorage.getItem('latest-commit-stored');
+  const storedLatestCommit = await AsyncStorage.getItem('latest-commit-stored');
+
   if (storedLatestCommit === null || storedLatestCommit !== latestCommit) {
     console.log('Data needs to be updated');
-
     const binaryData = await fetchZipAssetFromRepository(repo, archivePath);
     let unzippedData = await unzipFromBase64(binaryData);
-    for (const file of unzippedData) {
-      console.log('Writing file:', file.filename);
-      await writeFile(file.filename, file.fileContent, true);
-      if (file.filename === 'manifest.ttl') {
-        await storeIdToPathPairs(file.fileContent);
-      }
-    }
-
+    await processFiles(unzippedData, true);
     await AsyncStorage.setItem('latest-commit-stored', latestCommit);
   } else {
     console.log('Data already up to date');
+  }
+};
+
+const processFiles = async (files, checkManifest = false) => {
+  for (const file of files) {
+    console.log('Writing file:', file.filename);
+    await writeFile(file.filename, file.fileContent, true);
+    if (checkManifest && file.filename === 'manifest.ttl') {
+      await storeIdToPathPairs(file.fileContent);
+    }
   }
 };
 

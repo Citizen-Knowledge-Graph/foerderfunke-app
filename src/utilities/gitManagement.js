@@ -2,8 +2,7 @@ import * as FileSystem from 'expo-file-system';
 import { fetchZipAssetFromFileUri } from './fileManagement';
 
 export const fetchLatestCommitHash = async (repo) => {
-  const url =
-    'https://api.github.com/repos/' + repo + '/' + 'commits?per_page=1';
+  const url = `https://api.github.com/repos/${repo}/commits?per_page=1`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
