@@ -72,6 +72,7 @@ const storeIdToPathPairs = async (manifestContent) => {
     }`;
   let pairs = await runSparqlSelectQueryOnRdfString(query, manifestContent);
   for (let pair of pairs) {
+    console.log('Storing:', pair.id, pair.path);
     await AsyncStorage.setItem(pair.id, pair.path);
   }
 };

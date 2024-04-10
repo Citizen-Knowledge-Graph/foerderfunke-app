@@ -28,7 +28,7 @@ export const fetchZipAssetFromRepository = async (repository, zipPath) => {
   const baseURL = 'https://github.com';
   const absoluteArchivePath = `${baseURL}/${repository}/raw/${zipPath}`;
   const temporaryTargetLocation = `${FileSystem.documentDirectory}main.zip`;
-
+  console.log('Downloading zip from:', absoluteArchivePath);
   try {
     const downloadResult = await FileSystem.downloadAsync(
       absoluteArchivePath,

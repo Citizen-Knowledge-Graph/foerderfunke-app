@@ -1,7 +1,7 @@
 import { SELECT_USER_REPORT } from '../actions/selectUserReport';
 
 const initialState = {
-  userId: 'profile-a',
+  userId: 'kinderzuschlag-user-profile',
 };
 
 const selectUserReducer = (state = initialState, action) => {

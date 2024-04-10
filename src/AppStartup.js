@@ -19,7 +19,7 @@ const AppStartup = ({ children }) => {
     };
 
     initializeData();
-  }, [dispatch, dataFetched]);
+  }, [dispatch, dataFetched, selectedUser]);
 
   // run validation on user change
   useEffect(() => {
