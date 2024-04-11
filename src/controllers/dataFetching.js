@@ -9,13 +9,15 @@ import {
 } from '../utilities/gitManagement';
 import { unzipFromBase64 } from '../utilities/zipHandling';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/src/utils';
+import { validateResources } from '../AppData';
 
 const fetchDataToDevice = async () => {
   console.log('Fetching data from local assets');
   await fetchLocalData();
   console.log('Fetching data from remote repo');
   await fetchRemoteData();
+  console.log('Validate all required resources have been set');
+  await validateResources();
   console.log('All files in app storage:', await listAllFiles(true));
 };
 
@@ -47,25 +49,6 @@ const processFiles = async (files, checkManifest = false) => {
   for (const file of files) {
     console.log('Writing file:', file.filename);
     await writeFile(file.filename, file.fileContent, true);
-    if (checkManifest && file.filename === 'manifest.ttl') {
-      await storeIdToPathPairs(file.fileContent);
-    }
-  }
-};
-
-const storeIdToPathPairs = async (manifestContent) => {
-  let query = `
-    PREFIX ff: <https://foerderfunke.org/default#>
-    PREFIX schema: <http://schema.org/>
-    SELECT ?id ?path WHERE {
-        ?doc a ?type ;
-             schema:identifier ?id ;
-             ff:relativePath ?path .
-    }`;
-  let pairs = await runSparqlSelectQueryOnRdfString(query, manifestContent);
-  for (let pair of pairs) {
-    console.log('Storing:', pair.id, pair.path);
-    await AsyncStorage.setItem(pair.id, pair.path);
   }
 };
 

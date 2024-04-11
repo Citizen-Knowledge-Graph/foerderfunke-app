@@ -10,18 +10,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const runValidation = async (dispatch, selectedUser) => {
   // fetch selected user
   let userProfileExamplesPath = await AsyncStorage.getItem(
-    'user-profile-examples-folder'
+    'user-profile-examples'
   );
   const userProfilePath =
     userProfileExamplesPath + selectedUser.userId + '.ttl';
   const userProfileString = await readFile(userProfilePath);
 
   // fetch datafields and materialization
-  const datafieldsPath = await AsyncStorage.getItem('datafields-file');
+  const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
-  const materializationPath = await AsyncStorage.getItem(
-    'materialization-file'
-  );
+  const materializationPath = await AsyncStorage.getItem('materialization');
   const materializationString = await readFile(materializationPath);
 
   if (!(await validateUserProfile(userProfileString, datafieldsString))) {
@@ -29,18 +27,16 @@ const runValidation = async (dispatch, selectedUser) => {
   }
 
   // load query registry
-  const queryRegistryPath = 'query-registry.json';
+  const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const queryRegistry = await readJson(queryRegistryPath);
-  let requirementProfilesFolder = await AsyncStorage.getItem(
-    'requirement-profiles-folder'
-  );
+  let requirementProfiles = await AsyncStorage.getItem('requirement-profiles');
 
   // iterate through queries in registry
   for (let queryId in queryRegistry) {
     if (queryRegistry.hasOwnProperty(queryId)) {
       console.log('Running validation for:', queryId);
 
-      const queryPath = requirementProfilesFolder + queryId + '.ttl';
+      const queryPath = requirementProfiles + queryId + '.ttl';
       const queryString = await readFile(queryPath);
 
       let report = await validateOne(

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchDataToDevice from './controllers/dataFetching';
 import { performValidationUpdate } from './storage/actions/validationUpdateReport';
+import { setResourceLocations } from './AppData';
 
 const AppStartup = ({ children }) => {
   const dispatch = useDispatch();
@@ -12,6 +13,10 @@ const AppStartup = ({ children }) => {
   // initialize data on app startup
   useEffect(() => {
     const initializeData = async () => {
+      // set resource locations
+      await setResourceLocations();
+
+      // fetch data to device
       if (!dataFetched) {
         await fetchDataToDevice();
         setDataFetched(true);

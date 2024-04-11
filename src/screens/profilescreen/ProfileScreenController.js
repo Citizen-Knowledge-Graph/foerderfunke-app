@@ -12,7 +12,9 @@ export const fetchProfileScreenData = async (selectedUser) => {
   let profileScreenData = new ProfileScreenData();
   //
   // fetch content information for each data field
-  const userHydrationPath = 'user-profile-hydration.json';
+  const userHydrationPath = await AsyncStorage.getItem(
+    'user-profile-hydration'
+  );
   const userHydrationJson = await readJson(userHydrationPath);
   dataFields.map((key) => {
     const newDataField = new ProfileDataField(key);
@@ -23,11 +25,8 @@ export const fetchProfileScreenData = async (selectedUser) => {
   });
   //
   // fetch user profile paths
-  let userProfileExamplesPath = await AsyncStorage.getItem(
-    'user-profile-examples-folder'
-  );
-  const userProfilePath =
-    userProfileExamplesPath + selectedUser.userId + '.ttl';
+  let userProfileExamples = await AsyncStorage.getItem('user-profile-examples');
+  const userProfilePath = userProfileExamples + selectedUser.userId + '.ttl';
   //
   // fetch user data from the user profile
   const userString = await readFile(userProfilePath);
