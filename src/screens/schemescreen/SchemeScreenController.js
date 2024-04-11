@@ -1,4 +1,5 @@
 import { fileExists, readJson } from '../../utilities/fileManagement';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class SchemeGuideData {
   constructor(key, data) {
@@ -8,7 +9,10 @@ class SchemeGuideData {
 }
 
 export const fetchSchemeScreenData = async (queryId) => {
-  const schemePath = `requirement-profile-hydrations/${queryId}-hydration.json`;
+  const hydrationsPath = await AsyncStorage.getItem(
+    'requirement-profile-hydration'
+  );
+  const schemePath = `${hydrationsPath}/${queryId}-hydration.json`;
   let schemeData;
   if (await fileExists(schemePath)) {
     schemeData = await readJson(schemePath);

@@ -50,7 +50,7 @@ export const updateUserProfile = async (selectedUser, entry, updateValue) => {
   //
   // fetch user profile paths
   let userProfileExamplesPath = await AsyncStorage.getItem(
-    'user-profile-examples-folder'
+    'user-profile-examples'
   );
   const userProfilePath =
     userProfileExamplesPath + selectedUser.userId + '.ttl';

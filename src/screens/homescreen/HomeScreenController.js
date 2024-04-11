@@ -1,13 +1,14 @@
 import { readJson } from '../../utilities/fileManagement';
 import { HomeScreenData, SchemeData } from './HomeScreenModel';
 import { getValidationState } from '../../storage/store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const fetchHomeScreenData = async () => {
   // retrieve validation state
   const validationState = getValidationState();
 
-  const registryPath = 'query-registry.json';
-  const schemeRegistry = await readJson(registryPath);
+  const queryRegistryPath = await AsyncStorage.getItem('query-registry');
+  const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
 
   Object.keys(validationState).map((scheme) => {

@@ -66,12 +66,12 @@ Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Men
 
 We are using the [matching-engine](https://github.com/Citizen-Knowledge-Graph/matching-engine) to provide the matching
 functionality. The matching engine is a separate
-application that provide a set of functions to match user profiles with requirement profiles.
+application that provides a set of functions to match user profiles with requirement profiles.
 
 ### Data
 
 The application assumes that data is available in a specific setup. To build the setup we
-currently combined data that is shipped alongside the application and data that is fetched
+currently combine data that is shipped alongside the application and data that is fetched
 from a dedicated data repository.
 
 The data repository is available [here](https://github.com/Citizen-Knowledge-Graph/requirement-profiles)
@@ -103,9 +103,13 @@ The data repository is available [here](https://github.com/Citizen-Knowledge-Gra
       be displayed in the app.
     * Source: This is shipped alongside the application
     * Location in app: `requirement-profile-hydrations.json`
+* User Profile Hydration
+    * This is used to provide additional information about a user profile that will be displayed in the app.
+    * Source: This is shipped alongside the application
+    * Location in app: `user-profile-hydration.json`
 
 #### Implicit contract
 
 We do not have an explicit contract exchanged between application and data repository. Instead, the application
-fetches a zipped archive of the data repository, extracts and relies on the data being available in the above
-mentioned structure.
+fetches a zipped archive of the data repository, extracts the content and relies on the data being available in the
+above mentioned structure.

@@ -9,6 +9,7 @@ const requiredResources = [
   'materialization',
   'query-registry',
   'user-profile-hydration',
+  'requirement-profile-hydration',
 ];
 
 // Set resource locations
@@ -21,6 +22,10 @@ export const setResourceLocations = async () => {
   await AsyncStorage.setItem(
     'user-profile-hydration',
     'user-profile-hydration.json'
+  );
+  await AsyncStorage.setItem(
+    'requirement-profile-hydration',
+    'requirement-profile-hydrations/'
   );
 };
 
