@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SizableText, Button, styled, Card, XStack } from 'tamagui';
 import { ChevronLeft } from '@tamagui/lucide-icons';
