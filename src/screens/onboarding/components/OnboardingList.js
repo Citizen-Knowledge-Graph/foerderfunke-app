@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { XStack, YStack, Button } from 'tamagui';
 import FullScreenView from './FullScreenView';
@@ -10,12 +10,43 @@ const { height } = Dimensions.get('window');
 const OnboardingList = ({ onboardingScreenData }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
+  const scrollViewRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracks the current screen index
+
+  const scrollToNext = () => {
+    if (currentIndex < onboardingScreenData.length - 1) {
+      const newIndex = currentIndex + 1;
+      setCurrentIndex(newIndex);
+      scrollViewRef.current?.scrollTo({
+        y: newIndex * height,
+        animated: true,
+      });
+    }
+  };
+
+  const scrollToPrev = () => {
+    if (currentIndex > 0) {
+      const newIndex = currentIndex - 1;
+      setCurrentIndex(newIndex);
+      scrollViewRef.current?.scrollTo({
+        y: newIndex * height,
+        animated: true,
+      });
+    }
+  };
+
   return (
-    <FullScreenView>
+    <FullScreenView ref={scrollViewRef}>
       <XStack alignSelf='center' backgroundColor={'white'}>
         <YStack flex={1}>
           {onboardingScreenData.map((entry, index) => (
-            <InputCard key={index} entry={entry} />
+            <InputCard
+              key={index}
+              entry={entry}
+              scrollToPrev={scrollToPrev}
+              scrollToNext={scrollToNext}
+              currentIndex={currentIndex}
+            />
           ))}
           <YStack
             flex={1}

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import PrimaryContainer from '../../../components/PrimaryContainer';
 
 // Component
-const FullScreenView = ({ children }) => {
+const FullScreenView = forwardRef(({ children }, ref) => {
   return (
-    <ScrollView style={styles.scrollView} pagingEnabled={true}>
+    <ScrollView ref={ref} style={styles.scrollView} pagingEnabled={true}>
       <PrimaryContainer>{children}</PrimaryContainer>
     </ScrollView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   scrollView: {
