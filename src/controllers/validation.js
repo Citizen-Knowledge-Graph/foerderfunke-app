@@ -46,7 +46,7 @@ const runValidation = async (dispatch, selectedUser) => {
         materializationString,
         false
       );
-      dispatch(validationReportAction(queryId, report.conforms));
+      dispatch(validationReportAction(queryId, report.result));
     }
   }
 };

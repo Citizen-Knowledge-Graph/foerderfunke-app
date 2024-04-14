@@ -2,6 +2,7 @@ import { readJson } from '../../utilities/fileManagement';
 import { HomeScreenData, SchemeData } from './HomeScreenModel';
 import { getValidationState } from '../../storage/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ValidationResult } from '@foerderfunke/matching-engine';
 
 export const fetchHomeScreenData = async () => {
   // retrieve validation state
@@ -15,10 +16,14 @@ export const fetchHomeScreenData = async () => {
     let newScheme = new SchemeData(scheme);
     newScheme.setTitle(schemeRegistry[scheme].title);
     newScheme.setDescription(schemeRegistry[scheme].description);
-    if (validationState[scheme].conforms) {
+    if (validationState[scheme].result === ValidationResult.ELIGIBLE) {
       homeScreenData.addEligible(newScheme);
-    } else {
+    }
+    if (validationState[scheme].result === ValidationResult.INELIGIBLE) {
       homeScreenData.addNonEligible(newScheme);
+    }
+    if (validationState[scheme].result === ValidationResult.UNDETERMINABLE) {
+      homeScreenData.addMissingData(newScheme);
     }
   });
   return homeScreenData;

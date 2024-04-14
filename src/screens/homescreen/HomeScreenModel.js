@@ -2,6 +2,7 @@ export class HomeScreenData {
   constructor() {
     this.eligible = [];
     this.nonEligible = [];
+    this.missingData = [];
   }
 
   addEligible(value) {
@@ -10,6 +11,10 @@ export class HomeScreenData {
 
   addNonEligible(value) {
     this.nonEligible.push(value);
+  }
+
+  addMissingData(value) {
+    this.missingData.push(value);
   }
 }
 

@@ -19,6 +19,14 @@ const SupportList = ({ homeScreenData }) => {
       {homeScreenData.nonEligible.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />
       ))}
+      <View style={styles.nonEligibleHeader}>
+        <SizableText size='$7' color={'black'} fontWeight={'600'}>
+          Möglicherweise verfügbare Förderungen
+        </SizableText>
+      </View>
+      {homeScreenData.missingData.map((scheme, index) => (
+        <SupportListItem key={index} scheme={scheme} />
+      ))}
     </View>
   );
 };
