@@ -11,14 +11,12 @@ import {
 } from '@gorhom/bottom-sheet';
 import { colorTokens } from '@tamagui/themes';
 import { performUpdate } from '../../../storage/actions/userUpdateReport';
-import { useSelector } from 'react-redux';
 
 const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
   const [inputText, setInputText] = useState('');
   const dispatch = useDispatch();
   const snapPoints = useMemo(() => ['50%'], []);
   const { dismiss } = useBottomSheetModal();
-  const selectedUser = useSelector((state) => state.selectUserReducer);
 
   useEffect(() => {
     setInputText(currentEntry?.object?.value || '');
@@ -44,7 +42,7 @@ const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
           <ProfileTextInput value={inputText} onChangeText={setInputText} />
           <UpdateButton
             onPress={() => {
-              dispatch(performUpdate(selectedUser, currentEntry, inputText));
+              dispatch(performUpdate(currentEntry, inputText));
               dismiss();
             }}
           />

@@ -12,11 +12,13 @@ export const updateUserSuccess = () => ({
 });
 
 export const performUpdate =
-  (selectedUser, entry, updateValue) => async (dispatch) => {
+  (entry, updateValue) => async (dispatch, getState) => {
+    const { selectUserReducer } = getState();
+
     dispatch(initiateUserUpdate());
 
     try {
-      await updateUserProfile(selectedUser, entry, updateValue);
+      await updateUserProfile(selectUserReducer, entry, updateValue);
       dispatch(updateUserSuccess());
       console.log('User update succeeded');
     } catch (error) {
