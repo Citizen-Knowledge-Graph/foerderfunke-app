@@ -1,11 +1,13 @@
+import React, { useState } from 'react';
+import { TextInput, Dimensions, StyleSheet } from 'react-native';
 import { Card, SizableText, YStack, Button, View, XStack } from 'tamagui';
-import { Dimensions, StyleSheet } from 'react-native';
-import React from 'react';
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
 
 const { height } = Dimensions.get('window');
 
 const InputCard = ({ entry, scrollToPrev, scrollToNext, currentIndex }) => {
+  const [inputValue, setInputValue] = useState('');
+
   return (
     <Card style={styles.fullScreenContainer}>
       <YStack
@@ -26,7 +28,10 @@ const InputCard = ({ entry, scrollToPrev, scrollToNext, currentIndex }) => {
             <View style={{ height: 60, width: 60 }} />
           )}
         </XStack>
-        <SizableText style={styles.titleText}> {entry.title} </SizableText>
+        <YStack gap={15}>
+          <SizableText style={styles.titleText}> {entry.title} </SizableText>
+          <TextInput size='$4' style={styles.inputField} />
+        </YStack>
         <XStack justifyContent={'center'}>
           <Button
             icon={<ChevronDown size='$2' color={'black'} />}
@@ -48,6 +53,14 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     color: 'black',
+  },
+  inputField: {
+    height: 40,
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 10,
   },
   navigationButton: {
     height: 60,
