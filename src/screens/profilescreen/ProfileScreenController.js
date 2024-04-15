@@ -6,7 +6,12 @@ import { Share } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // config
-const dataFields = ['name', 'surname', 'birthday', 'residence'];
+const dataFields = [
+  'ff:hasFirstNames',
+  'ff:hasFamilyName',
+  'ff:hasBirthday',
+  'ff:hasResidence',
+];
 
 export const fetchProfileScreenData = async (selectedUser) => {
   let profileScreenData = new ProfileScreenData();
@@ -19,8 +24,6 @@ export const fetchProfileScreenData = async (selectedUser) => {
   dataFields.map((key) => {
     const newDataField = new ProfileDataField(key);
     newDataField.setDisplayName(userHydrationJson[key].display_name);
-    newDataField.setName(userHydrationJson[key].name);
-    newDataField.setNamespace(userHydrationJson[key].namespace);
     profileScreenData.addProfileDataField(newDataField);
   });
   //
@@ -32,7 +35,7 @@ export const fetchProfileScreenData = async (selectedUser) => {
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
   profileScreenData.profileData.forEach((entry) => {
-    entry.setObject(getFirstOut(userGraph, entry.name, entry.namespace));
+    entry.setObject(getFirstOut(userGraph, entry.key));
   });
   //
   // fetch user profile meta data

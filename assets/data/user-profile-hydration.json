@@ -1,27 +1,17 @@
 {
-  "name": {
-    "namespace": "ff",
-    "name": "hasFirstNames",
+  "ff:hasFirstNames": {
     "display_name": "Vorname"
   },
-  "surname": {
-    "namespace": "ff",
-    "name": "hasFamilyName",
+  "ff:hasFamilyName": {
     "display_name": "Nachname"
   },
-  "birthday": {
-    "namespace": "ff",
-    "name": "hasBirthday",
+  "ff:hasBirthday": {
     "display_name": "Geburtstag"
   },
-  "residence": {
-    "namespace": "ff",
-    "name": "hasResidence",
+  "ff:hasResidence": {
     "display_name": "Wohnort"
   },
-  "drivers_license": {
-    "namespace": "ff",
-    "name": "hasDrivingLicense",
+  "ff:hasDrivingLicense": {
     "display_name": "Führerschein"
   }
 }
