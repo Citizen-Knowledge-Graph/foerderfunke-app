@@ -12,19 +12,17 @@ const namespaces = {
   foaf: rdf.namespace('http://xmlns.com/foaf/0.1/'),
 };
 
-class NamespacedTerm {
-  constructor(namespace, term) {
-    this.namespace = namespace;
-    this.term = term;
+function expandIdentifier(abbreviatedId) {
+  const [namespace, value] = abbreviatedId.split(':');
+  if (!value) {
+    throw new Error(
+      'Identifier must include a namespace and a value separated by a colon.'
+    );
   }
-
-  getNamespacedTerm() {
-    if (this.namespace === 'literal') {
-      return namespaces.xsd(this.term);
-    } else {
-      return namespaces[this.namespace](this.term);
-    }
+  if (!namespaces.hasOwnProperty(namespace)) {
+    throw new Error(`Unknown namespace '${namespace}'`);
   }
+  return namespaces[namespace](value);
 }
 
 export class ResponseObject {
@@ -35,7 +33,13 @@ export class ResponseObject {
 }
 
 export const getFirstOut = (dataset, predicate, term = 'ff:mainPerson') => {
-  const targetNodes = retrieveAttributes(dataset, term, predicate);
+  const expandedPredicate = expandIdentifier(predicate);
+  const expandedTerm = expandIdentifier(term);
+  const targetNodes = retrieveAttributes(
+    dataset,
+    expandedTerm,
+    expandedPredicate
+  );
   const nodesArray = Array.from(targetNodes);
   return nodesArray.length > 0 && nodesArray[0].object
     ? nodesArray[0].object
@@ -46,27 +50,26 @@ export const updateOut = (
   update_type,
   dataset,
   predicate,
-  predicate_namespace,
   object,
   update_value = null,
-  term = 'mainPerson',
-  term_namespace = 'ff'
+  term = 'ff:mainPerson'
 ) => {
-  const termIri = new NamespacedTerm(term_namespace, term);
-  const predicateIri = new NamespacedTerm(predicate_namespace, predicate);
-  const initialNode = retrieveTermNode(dataset, termIri);
+  const expandedPredicate = expandIdentifier(predicate);
+  const expandedTerm = expandIdentifier(term);
+
+  const initialNode = retrieveTermNode(dataset, expandedTerm);
   const replaceObject = updateFromTerm(object, update_value);
 
   switch (update_type) {
     case 'add':
-      initialNode.addOut(predicateIri.getNamespacedTerm(), object);
+      initialNode.addOut(expandedPredicate, object);
       break;
     case 'delete':
-      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
+      initialNode.deleteOut(expandedPredicate, object);
       break;
     case 'replace':
-      initialNode.deleteOut(predicateIri.getNamespacedTerm(), object);
-      initialNode.addOut(predicateIri.getNamespacedTerm(), replaceObject);
+      initialNode.deleteOut(expandedPredicate, object);
+      initialNode.addOut(expandedPredicate, replaceObject);
 
       break;
     default:
@@ -75,11 +78,11 @@ export const updateOut = (
   return dataset;
 };
 
-const retrieveAttributes = (dataset, term, predicate, factory = rdf) => {
+const retrieveAttributes = (dataset, term, predicate) => {
   const initialNode = retrieveTermNode(dataset, term);
   return initialNode.out(predicate).quads();
 };
 
 const retrieveTermNode = (dataset, term, factory = rdf) => {
-  return grapoi({ dataset, factory, term: term.getNamespacedTerm() });
+  return grapoi({ dataset, factory, term: term });
 };
