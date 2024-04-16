@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import ScreenView from '../../components/ScreenView';
 import { Button, YStack } from 'tamagui';
 
