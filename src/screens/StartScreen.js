@@ -7,7 +7,7 @@ const StartScreen = ({ navigation }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('OnboardingStackScreen')}
+      onPress={() => navigation.navigate('JourneyStackScreen')}
       activeOpacity={0.7} // Optional: for better touch feedback
     >
       <Main>

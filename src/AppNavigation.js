@@ -6,6 +6,7 @@ import StartScreen from './screens/StartScreen';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/profilescreen/ProfileScreen';
 import SchemeScreen from './screens/schemescreen/SchemeScreen';
+import JourneyScreen from './screens/journeyscreen/JourneyScreen';
 import OnboardingScreen from './screens/onboarding/OnboardingScreen';
 
 // Stack Navigation
@@ -17,6 +18,11 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name='StartStackScreen'
         component={StartScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='JourneyStackScreen'
+        component={JourneyScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
