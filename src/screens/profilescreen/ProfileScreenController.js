@@ -63,8 +63,7 @@ export const updateUserProfile = async (selectedUser, entry, updateValue) => {
   const updatedGraph = updateOut(
     'replace',
     userGraph,
-    entry.name,
-    entry.namespace,
+    entry.key,
     entry.object,
     updateValue
   );

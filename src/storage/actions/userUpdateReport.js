@@ -18,6 +18,9 @@ export const performUpdate =
     dispatch(initiateUserUpdate());
 
     try {
+      console.log('Selected user:', selectUserReducer);
+      console.log('Entry:', entry);
+      console.log('Update value:', updateValue);
       await updateUserProfile(selectUserReducer, entry, updateValue);
       dispatch(updateUserSuccess());
       console.log('User update succeeded');
