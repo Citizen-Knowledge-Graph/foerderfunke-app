@@ -42,7 +42,9 @@ const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
           <ProfileTextInput value={inputText} onChangeText={setInputText} />
           <UpdateButton
             onPress={() => {
-              dispatch(performUpdate(currentEntry, inputText));
+              dispatch(
+                performUpdate(currentEntry.key, currentEntry.object, inputText)
+              );
               dismiss();
             }}
           />

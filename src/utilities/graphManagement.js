@@ -25,13 +25,6 @@ function expandIdentifier(abbreviatedId) {
   return namespaces[namespace](value);
 }
 
-export class ResponseObject {
-  constructor(value, object) {
-    this.value = value;
-    this.object = object;
-  }
-}
-
 export const getFirstOut = (dataset, predicate, term = 'ff:mainPerson') => {
   const expandedPredicate = expandIdentifier(predicate);
   const expandedTerm = expandIdentifier(term);
@@ -47,7 +40,6 @@ export const getFirstOut = (dataset, predicate, term = 'ff:mainPerson') => {
 };
 
 export const updateOut = (
-  update_type,
   dataset,
   predicate,
   object,
@@ -56,25 +48,24 @@ export const updateOut = (
 ) => {
   const expandedPredicate = expandIdentifier(predicate);
   const expandedTerm = expandIdentifier(term);
-
   const initialNode = retrieveTermNode(dataset, expandedTerm);
   const replaceObject = updateFromTerm(object, update_value);
 
-  switch (update_type) {
-    case 'add':
-      initialNode.addOut(expandedPredicate, object);
-      break;
-    case 'delete':
-      initialNode.deleteOut(expandedPredicate, object);
-      break;
-    case 'replace':
-      initialNode.deleteOut(expandedPredicate, object);
-      initialNode.addOut(expandedPredicate, replaceObject);
+  initialNode.deleteOut(expandedPredicate, object);
+  initialNode.addOut(expandedPredicate, replaceObject);
 
-      break;
-    default:
-      throw new Error('Invalid update type');
-  }
+  return dataset;
+};
+
+export const addOut = (dataset, predicate, value, term = 'ff:mainPerson') => {
+  const expandedPredicate = expandIdentifier(predicate);
+  const expandedTerm = expandIdentifier(term);
+  const initialNode = retrieveTermNode(dataset, expandedTerm);
+  const newValue = rdf.blankNode(value);
+
+  initialNode.deleteList(expandedPredicate); // ensure that we have no duplicates
+  initialNode.addOut(expandedPredicate, newValue);
+
   return dataset;
 };
 

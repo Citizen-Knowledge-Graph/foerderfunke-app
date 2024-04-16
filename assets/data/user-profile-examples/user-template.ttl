@@ -1,0 +1,4 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ff:  <https://foerderfunke.org/default#> .
+
+ff:mainPerson a ff:Citizen .

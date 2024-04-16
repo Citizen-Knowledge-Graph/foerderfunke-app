@@ -4,6 +4,7 @@ import { Card, SizableText, YStack, Button, View, XStack } from 'tamagui';
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
 import { performUpdate } from '../../../storage/actions/userUpdateReport';
 import { useDispatch } from 'react-redux';
+import { performAdd } from '../../../storage/actions/addUserField';
 
 const { height } = Dimensions.get('window');
 
@@ -44,7 +45,7 @@ const InputCard = ({ entry, scrollToPrev, scrollToNext, currentIndex }) => {
             icon={<ChevronDown size='$2' color={'black'} />}
             title='Next'
             onPress={() => {
-              //dispatch(performUpdate(entry, inputText));
+              dispatch(performAdd(entry.datafield, inputText));
               scrollToNext();
             }}
             style={styles.navigationButton}

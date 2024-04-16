@@ -49,7 +49,12 @@ export const fetchProfileScreenData = async (selectedUser) => {
   return profileScreenData;
 };
 
-export const updateUserProfile = async (selectedUser, entry, updateValue) => {
+export const updateUserProfile = async (
+  selectedUser,
+  field,
+  object,
+  updateValue
+) => {
   //
   // fetch user profile paths
   let userProfileExamplesPath = await AsyncStorage.getItem(
@@ -60,13 +65,7 @@ export const updateUserProfile = async (selectedUser, entry, updateValue) => {
 
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
-  const updatedGraph = updateOut(
-    'replace',
-    userGraph,
-    entry.key,
-    entry.object,
-    updateValue
-  );
+  const updatedGraph = updateOut(userGraph, field, object, updateValue);
   const updatedGraphString = await serializeTurtle(updatedGraph);
   await writeFile(userProfilePath, updatedGraphString);
 };

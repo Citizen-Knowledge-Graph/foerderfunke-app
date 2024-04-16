@@ -12,16 +12,17 @@ export const updateUserSuccess = () => ({
 });
 
 export const performUpdate =
-  (entry, updateValue) => async (dispatch, getState) => {
+  (field, object, updateValue) => async (dispatch, getState) => {
     const { selectUserReducer } = getState();
 
     dispatch(initiateUserUpdate());
 
     try {
       console.log('Selected user:', selectUserReducer);
-      console.log('Entry:', entry);
+      console.log('Field:', field);
+      console.log('Object:', object);
       console.log('Update value:', updateValue);
-      await updateUserProfile(selectUserReducer, entry, updateValue);
+      await updateUserProfile(selectUserReducer, field, object, updateValue);
       dispatch(updateUserSuccess());
       console.log('User update succeeded');
     } catch (error) {
