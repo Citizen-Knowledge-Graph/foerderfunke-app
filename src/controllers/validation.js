@@ -1,6 +1,6 @@
 import { readFile, readJson } from '../utilities/fileManagement.js';
 import {
-  validateOne,
+  validateAll,
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
 import validationReportAction from '../storage/actions/validationReport';
@@ -29,25 +29,31 @@ const runValidation = async (dispatch, selectedUser) => {
   // load query registry
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const queryRegistry = await readJson(queryRegistryPath);
-  let requirementProfiles = await AsyncStorage.getItem('requirement-profiles');
+  let requirementProfilesPath = await AsyncStorage.getItem('requirement-profiles');
 
   // iterate through queries in registry
+  let requirementProfiles = {};
+
   for (let queryId in queryRegistry) {
-    if (queryRegistry.hasOwnProperty(queryId)) {
-      console.log('Running validation for:', queryId);
-
-      const queryPath = requirementProfiles + queryId + '.ttl';
-      const queryString = await readFile(queryPath);
-
-      let report = await validateOne(
-        userProfileString,
-        queryString,
-        datafieldsString,
-        materializationString,
-        false
-      );
-      dispatch(validationReportAction(queryId, report.result));
+    if (!queryRegistry.hasOwnProperty(queryId)) {
+      continue;
     }
+    const queryPath = requirementProfilesPath + queryId + '.ttl';
+    requirementProfiles[queryId] = await readFile(queryPath);
+  }
+
+  console.log('Running validations for:', Object.keys(requirementProfiles));
+
+  let validateAllReport = await validateAll(
+    userProfileString,
+    requirementProfiles,
+    datafieldsString,
+    materializationString,
+    false
+  );
+
+  for (let report of validateAllReport.reports) {
+    dispatch(validationReportAction(report.filename, report.result));
   }
 };
 
