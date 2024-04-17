@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { TextInput, Dimensions, StyleSheet } from 'react-native';
 import { Card, SizableText, YStack, Button, View, XStack } from 'tamagui';
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
-import { performUpdate } from '../../../storage/actions/userUpdateReport';
 import { useDispatch } from 'react-redux';
 import { performAdd } from '../../../storage/actions/addUserField';
+import { colorTokens } from '@tamagui/themes';
 
 const { height } = Dimensions.get('window');
 
@@ -32,22 +32,26 @@ const InputCard = ({ entry, scrollToPrev, scrollToNext, currentIndex }) => {
             <View style={{ height: 60, width: 60 }} />
           )}
         </XStack>
-        <YStack gap={15}>
+        <YStack gap={30}>
           <SizableText style={styles.titleText}> {entry.title} </SizableText>
           <TextInput
             size='$4'
             style={styles.inputField}
             onChangeText={setInputText}
           />
+          <Button
+            size='$4'
+            onPress={() => dispatch(performAdd(entry.datafield, inputText))}
+            style={styles.addProfileFiledButton}
+          >
+            Add To Profile
+          </Button>
         </YStack>
         <XStack justifyContent={'center'}>
           <Button
             icon={<ChevronDown size='$2' color={'black'} />}
             title='Next'
-            onPress={() => {
-              dispatch(performAdd(entry.datafield, inputText));
-              scrollToNext();
-            }}
+            onPress={scrollToNext}
             style={styles.navigationButton}
           />
         </XStack>
@@ -72,6 +76,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     marginBottom: 10,
+  },
+  addProfileFiledButton: {
+    fontSize: 16,
+    fontWeight: 400,
+    borderWidth: 0,
+    backgroundColor: colorTokens.light.blue.blue8,
   },
   navigationButton: {
     height: 60,

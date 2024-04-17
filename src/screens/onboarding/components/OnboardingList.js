@@ -35,7 +35,7 @@ const OnboardingList = ({ onboardingScreenData }) => {
     }
   };
 
-  const handleScroll = (event) => {
+  const handleScroll = (event, entry) => {
     const newY = event.nativeEvent.contentOffset.y;
     const newIndex = Math.round(newY / height);
     if (newIndex !== currentIndex) {
