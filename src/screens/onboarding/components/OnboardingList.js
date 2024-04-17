@@ -14,7 +14,7 @@ const OnboardingList = ({ onboardingScreenData }) => {
   const [currentIndex, setCurrentIndex] = useState(0); // Tracks the current screen index
 
   const scrollToNext = () => {
-    if (currentIndex < onboardingScreenData.length - 1) {
+    if (currentIndex < onboardingScreenData.length) {
       const newIndex = currentIndex + 1;
       setCurrentIndex(newIndex);
       scrollViewRef.current?.scrollTo({
@@ -35,8 +35,16 @@ const OnboardingList = ({ onboardingScreenData }) => {
     }
   };
 
+  const handleScroll = (event) => {
+    const newY = event.nativeEvent.contentOffset.y;
+    const newIndex = Math.round(newY / height);
+    if (newIndex !== currentIndex) {
+      setCurrentIndex(newIndex);
+    }
+  };
+
   return (
-    <FullScreenView ref={scrollViewRef}>
+    <FullScreenView ref={scrollViewRef} handleScroll={handleScroll}>
       <XStack alignSelf='center' backgroundColor={'white'}>
         <YStack flex={1}>
           {onboardingScreenData.map((entry, index) => (
