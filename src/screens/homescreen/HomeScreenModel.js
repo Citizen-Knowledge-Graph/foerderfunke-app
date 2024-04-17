@@ -23,6 +23,7 @@ export class SchemeData {
     this.key = key;
     this.title = null;
     this.description = null;
+    this.details = null;
   }
 
   setTitle(value) {
@@ -31,5 +32,9 @@ export class SchemeData {
 
   setDescription(value) {
     this.description = value;
+  }
+
+  setDetails(value) {
+    this.details = value;
   }
 }

@@ -16,6 +16,7 @@ export const fetchHomeScreenData = async () => {
     let newScheme = new SchemeData(scheme);
     newScheme.setTitle(schemeRegistry[scheme].title);
     newScheme.setDescription(schemeRegistry[scheme].description);
+    newScheme.setDetails(validationState[scheme].details);
     if (validationState[scheme].result === ValidationResult.ELIGIBLE) {
       homeScreenData.addEligible(newScheme);
     }

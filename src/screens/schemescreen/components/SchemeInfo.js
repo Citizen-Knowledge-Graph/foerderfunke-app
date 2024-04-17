@@ -1,11 +1,18 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Card, SizableText, styled } from 'tamagui';
-import { getTokens } from '@tamagui/core';
 
 const SchemeInfo = ({ schemeScreenData }) => {
   return (
     <View>
+      <InfoItem>
+        <SizableText size='$6' color={'black'} fontWeight={500}>
+          Begründung
+        </SizableText>
+        <SizableText size='$5' color={'black'}>
+          {schemeScreenData.details}
+        </SizableText>
+      </InfoItem>
       <InfoItem>
         <SizableText size='$6' color={'black'} fontWeight={500}>
           Erklärung

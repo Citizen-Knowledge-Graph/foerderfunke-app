@@ -4,13 +4,14 @@ import SchemeInfo from './components/SchemeInfo';
 import { fetchSchemeScreenData } from './SchemeScreenController';
 
 const SchemeScreen = ({ route }) => {
-  const { scheme } = route.params;
+  const { scheme, details } = route.params;
   const [schemeScreenData, setSchemeScreenData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newSchemeScreenData = await fetchSchemeScreenData(scheme);
+        let newSchemeScreenData = await fetchSchemeScreenData(scheme);
+        newSchemeScreenData.details = details;
         setSchemeScreenData(newSchemeScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);

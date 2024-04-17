@@ -2,9 +2,10 @@
 export const VALIDATION_REPORT = 'VALIDATION_REPORT';
 
 // action creator
-const validationReportAction = (key, result) => {
+const validationReportAction = (key, result, details) => {
   const serializableReport = {
     result: result,
+    details: details,
   };
 
   return {

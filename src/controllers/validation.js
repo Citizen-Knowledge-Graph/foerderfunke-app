@@ -2,6 +2,7 @@ import { readFile, readJson } from '../utilities/fileManagement.js';
 import {
   validateAll,
   validateUserProfile,
+  ValidationResult,
 } from '@foerderfunke/matching-engine';
 import validationReportAction from '../storage/actions/validationReport';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -53,7 +54,14 @@ const runValidation = async (dispatch, selectedUser) => {
   );
 
   for (let report of validateAllReport.reports) {
-    dispatch(validationReportAction(report.filename, report.result));
+    let details = '';
+    if (report.result === ValidationResult.INELIGIBLE) {
+      details = JSON.stringify(report.violations);
+    }
+    if (report.result === ValidationResult.UNDETERMINABLE) {
+      details = JSON.stringify(report.missingUserInput);
+    }
+    dispatch(validationReportAction(report.filename, report.result, details));
   }
 };
 
