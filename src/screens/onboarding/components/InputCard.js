@@ -41,7 +41,10 @@ const InputCard = ({ entry, scrollToPrev, scrollToNext, currentIndex }) => {
           />
           <Button
             size='$4'
-            onPress={() => dispatch(performAdd(entry.datafield, inputText))}
+            onPress={() => {
+              dispatch(performAdd(entry.datafield, inputText));
+              scrollToNext();
+            }}
             style={styles.addProfileFiledButton}
           >
             Add To Profile
