@@ -1,7 +1,8 @@
 {
   "title": "Kindergeld",
   "sub_title": "Sie haben Anspruch auf Kindergeld.",
-  "description_long": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "description_long": "Kindergeld ist eine finanzielle Unterstützung, die vom deutschen Staat an Familien gezahlt wird, um die Grundversorgung ihrer Kinder zu sichern.",
+  "application": "Um Kindergeld in Deutschland zu beantragen, müssen Sie das entsprechende Formular bei der Familienkasse der Bundesagentur für Arbeit ausfüllen und zusammen mit den erforderlichen Nachweisen einreichen",
   "steps": [
     "Besuchen Sie website x",
     "Besorgen Sie Unterlagen y",

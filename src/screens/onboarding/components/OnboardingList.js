@@ -8,13 +8,15 @@ import InputCard from './InputCard';
 const { height } = Dimensions.get('window');
 
 const OnboardingList = ({ onboardingScreenData }) => {
+  console.log('onboardingScreenData: ', onboardingScreenData);
+
   const navigation = useNavigation(); // Use the useNavigation hook
 
   const scrollViewRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Tracks the current screen index
 
   const scrollToNext = () => {
-    if (currentIndex < onboardingScreenData.length) {
+    if (currentIndex < onboardingScreenData.onboadingCards.length) {
       const newIndex = currentIndex + 1;
       setCurrentIndex(newIndex);
       scrollViewRef.current?.scrollTo({
@@ -47,7 +49,7 @@ const OnboardingList = ({ onboardingScreenData }) => {
     <FullScreenView ref={scrollViewRef} handleScroll={handleScroll}>
       <XStack alignSelf='center' backgroundColor={'white'}>
         <YStack flex={1}>
-          {onboardingScreenData.map((entry, index) => (
+          {onboardingScreenData.onboadingCards.map((entry, index) => (
             <InputCard
               key={index}
               entry={entry}

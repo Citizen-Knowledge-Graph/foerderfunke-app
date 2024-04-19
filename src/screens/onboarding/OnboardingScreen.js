@@ -4,7 +4,7 @@ import { fetchOnboardingScreenData } from './OnboardingController';
 
 // Component
 const OnboardingScreen = () => {
-  const [onboardingScreenData, setOnboardingScreenData] = useState([]);
+  const [onboardingScreenData, setOnboardingScreenData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {

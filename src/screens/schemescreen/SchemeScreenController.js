@@ -21,6 +21,7 @@ export const fetchSchemeScreenData = async (queryId) => {
       title: 'no title yet',
       sub_title: 'no subtitle yet',
       description_long: 'no long description yet',
+      application: 'no application yet',
     };
   }
   return new SchemeGuideData(queryId, schemeData);
