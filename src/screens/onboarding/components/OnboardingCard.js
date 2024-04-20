@@ -5,7 +5,12 @@ import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
 import { useDispatch } from 'react-redux';
 import { performAdd } from '../../../storage/actions/addUserField';
 import { colorTokens } from '@tamagui/themes';
-import { DateInput, IntegerInput, StringInput } from './InputSections';
+import {
+  DateInput,
+  IntegerInput,
+  SelectInput,
+  StringInput,
+} from './InputSections';
 
 const { height } = Dimensions.get('window');
 
@@ -15,7 +20,7 @@ const OnboardingCard = ({
   scrollToNext,
   currentIndex,
 }) => {
-  const { datatype } = onboardingCard.inputConstraints;
+  const { datatype, possibleValues } = onboardingCard.inputConstraints;
   const [inputData, setInputData] = useState();
   const dispatch = useDispatch();
 
@@ -28,6 +33,9 @@ const OnboardingCard = ({
       case 'http://www.w3.org/2001/XMLSchema#date':
         return <DateInput setInputData={setInputData} />; // Modify as needed to handle state properly
       default:
+        if (possibleValues.length > 0) {
+          return <SelectInput />;
+        }
         return <SizableText color={'black'}>Unsupported data type</SizableText>;
     }
   };

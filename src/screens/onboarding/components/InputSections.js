@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Platform, StyleSheet, TextInput } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Button, View } from 'tamagui';
+import { Adapt, Button, Select, Sheet, View } from 'tamagui';
+import { Check, ChevronDown } from '@tamagui/lucide-icons';
 
 export const StringInput = ({ setInputData }) => (
   <TextInput size='$4' style={styles.inputField} onChangeText={setInputData} />
@@ -22,6 +23,50 @@ export const IntegerInput = ({ setInputData }) => {
       keyboardType='numeric'
       placeholder='Enter an integer'
     />
+  );
+};
+
+export const SelectInput = ({ setInputData }) => {
+  const testList = ['option1', 'option2'];
+
+  return (
+    <Select defaultValue=''>
+      <Select.Trigger iconAfter={<ChevronDown size='$1' color={'white'} />}>
+        <Select.Value placeholder='Select...' />
+      </Select.Trigger>
+
+      <Adapt>
+        {/* or <Select.Sheet> */}
+        <Sheet>
+          <Sheet.Frame>
+            <Sheet.ScrollView>
+              <Adapt.Contents />
+            </Sheet.ScrollView>
+          </Sheet.Frame>
+          <Sheet.Overlay />
+        </Sheet>
+      </Adapt>
+
+      <Select.Content>
+        <Select.ScrollUpButton />
+        <Select.Viewport>
+          <Select.Group>
+            <Select.Label />
+            {testList.map((item, i) => {
+              return (
+                <Select.Item index={i} key={item} value={item.toLowerCase()}>
+                  <Select.ItemText>{item}</Select.ItemText>
+                  <Select.ItemIndicator marginLeft='auto'>
+                    <Check size={16} />
+                  </Select.ItemIndicator>
+                </Select.Item>
+              );
+            })}
+          </Select.Group>
+        </Select.Viewport>
+        <Select.ScrollDownButton />
+      </Select.Content>
+    </Select>
   );
 };
 

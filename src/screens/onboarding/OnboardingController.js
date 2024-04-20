@@ -57,7 +57,7 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
     datatypeList.length > 0 && datatypeList[0].datatype
       ? datatypeList[0].datatype
       : 'no datatype provided';
-  console.log('datatype', datatype);
+
   const inValuesQuery = `
     PREFIX ff: <https://foerderfunke.org/default#>
     PREFIX sh: <http://www.w3.org/ns/shacl#>
