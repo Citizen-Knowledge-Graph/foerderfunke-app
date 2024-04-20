@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { XStack, YStack, Button } from 'tamagui';
 import FullScreenView from './FullScreenView';
 import { useNavigation } from '@react-navigation/native';
-import InputCard from './InputCard';
+import OnboardingCard from './OnboardingCard';
 
 const { height } = Dimensions.get('window');
 
@@ -49,10 +49,10 @@ const OnboardingList = ({ onboardingScreenData }) => {
     <FullScreenView ref={scrollViewRef} handleScroll={handleScroll}>
       <XStack alignSelf='center' backgroundColor={'white'}>
         <YStack flex={1}>
-          {onboardingScreenData.onboadingCards.map((entry, index) => (
-            <InputCard
+          {onboardingScreenData.onboadingCards.map((onboardingCard, index) => (
+            <OnboardingCard
               key={index}
-              entry={entry}
+              onboardingCard={onboardingCard}
               scrollToPrev={scrollToPrev}
               scrollToNext={scrollToNext}
               currentIndex={currentIndex}

@@ -3,7 +3,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
 import { addOut } from '../../utilities/graphManagement';
 import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/src/utils';
-import { OnboardingScreenData, OnboardingCard } from './OnboardingModel';
+import {
+  OnboardingScreenData,
+  OnboardingCard,
+  InputConstraints,
+} from './OnboardingModel';
 
 export const fetchOnboardingScreenData = async () => {
   const onboardingScreenData = new OnboardingScreenData();
@@ -17,12 +21,12 @@ export const fetchOnboardingScreenData = async () => {
       datafieldsString,
       card.datafield
     );
+    const newInputConstraints = new InputConstraints(datatype, possibleValues);
     const newOnboardingCard = new OnboardingCard(
       card.datafield,
       card.title,
       card.description,
-      datatype,
-      possibleValues
+      newInputConstraints
     );
     onboardingScreenData.addOnboardingCard(newOnboardingCard);
   }
@@ -45,11 +49,15 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
             sh:datatype ?datatype .
     }`;
 
-  const datatype = await runSparqlSelectQueryOnRdfString(
+  const datatypeList = await runSparqlSelectQueryOnRdfString(
     datatypeQuery,
     datafieldsString
   );
-
+  const datatype =
+    datatypeList.length > 0 && datatypeList[0].datatype
+      ? datatypeList[0].datatype
+      : 'no datatype provided';
+  console.log('datatype', datatype);
   const inValuesQuery = `
     PREFIX ff: <https://foerderfunke.org/default#>
     PREFIX sh: <http://www.w3.org/ns/shacl#>
