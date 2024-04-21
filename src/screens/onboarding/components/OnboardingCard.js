@@ -34,7 +34,7 @@ const OnboardingCard = ({
         return <DateInput setInputData={setInputData} />; // Modify as needed to handle state properly
       default:
         if (possibleValues.length > 0) {
-          return <SelectInput />;
+          return <SelectInput options={possibleValues} />;
         }
         return <SizableText color={'black'}>Unsupported data type</SizableText>;
     }
@@ -47,6 +47,7 @@ const OnboardingCard = ({
         alignSelf={'center'}
         justifyContent={'space-between'}
         paddingVertical={60}
+        zIndex={1}
       >
         <XStack justifyContent={'center'}>
           {currentIndex > 0 ? (
@@ -67,7 +68,11 @@ const OnboardingCard = ({
               {onboardingCard.title}{' '}
             </SizableText>
           </XStack>
-          <XStack justifyContent={'center'} style={styles.inputField}>
+          <XStack
+            justifyContent={'center'}
+            zIndex={1000}
+            style={styles.inputField}
+          >
             {renderInputField()}
           </XStack>
           <XStack justifyContent={'center'}>

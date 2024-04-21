@@ -30,17 +30,26 @@ export const IntegerInput = ({ setInputData }) => {
   );
 };
 
-export const SelectInput = (props) => {
+export const SelectInput = ({ title, options }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Pear', value: 'pear' },
-  ]);
+  const [items, setItems] = useState(
+    options.map((obj) => ({
+      label: obj.item,
+      value: obj.item,
+    }))
+  );
+
+  console.log('options:', options);
 
   return (
-    <View>
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 15,
+      }}
+    >
       <DropDownPicker
         open={open}
         value={value}
@@ -48,7 +57,6 @@ export const SelectInput = (props) => {
         setOpen={setOpen}
         setValue={setValue}
         setItems={setItems}
-        placeholder={'Choose a fruit.'}
         listMode='SCROLLVIEW'
       />
     </View>
