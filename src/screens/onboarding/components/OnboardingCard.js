@@ -61,21 +61,27 @@ const OnboardingCard = ({
           )}
         </XStack>
         <YStack gap={30}>
-          <SizableText style={styles.titleText}>
-            {' '}
-            {onboardingCard.title}{' '}
-          </SizableText>
-          {renderInputField()}
-          <Button
-            size='$4'
-            onPress={() => {
-              dispatch(performAdd(onboardingCard.datafield, inputData));
-              scrollToNext();
-            }}
-            style={styles.addProfileFiledButton}
-          >
-            Add To Profile
-          </Button>
+          <XStack justifyContent={'center'}>
+            <SizableText style={styles.titleText}>
+              {' '}
+              {onboardingCard.title}{' '}
+            </SizableText>
+          </XStack>
+          <XStack justifyContent={'center'} style={styles.inputField}>
+            {renderInputField()}
+          </XStack>
+          <XStack justifyContent={'center'}>
+            <Button
+              size='$4'
+              onPress={() => {
+                dispatch(performAdd(onboardingCard.datafield, inputData));
+                scrollToNext();
+              }}
+              style={styles.addProfileFiledButton}
+            >
+              Add To Profile
+            </Button>
+          </XStack>
         </YStack>
         <XStack justifyContent={'center'}>
           <Button
@@ -94,24 +100,22 @@ const styles = StyleSheet.create({
   fullScreenContainer: {
     height: height,
     backgroundColor: 'white',
+    paddingHorizontal: 16,
   },
   titleText: {
     fontSize: 24,
     color: 'black',
   },
   inputField: {
-    height: 40,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    fontSize: 24,
     textAlign: 'center',
-    marginBottom: 10,
+    paddingHorizontal: 32,
   },
   addProfileFiledButton: {
+    color: 'black',
     fontSize: 16,
     fontWeight: 400,
     borderWidth: 0,
-    backgroundColor: colorTokens.light.blue.blue8,
+    backgroundColor: colorTokens.light.blue.blue5,
   },
   navigationButton: {
     height: 60,
