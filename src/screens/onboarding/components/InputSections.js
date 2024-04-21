@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Adapt, Select, Sheet } from 'tamagui';
-import { Check, ChevronDown } from '@tamagui/lucide-icons';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { View } from 'tamagui';
 
 export const StringInput = ({ setInputData }) => (
   <TextInput
@@ -30,47 +30,28 @@ export const IntegerInput = ({ setInputData }) => {
   );
 };
 
-export const SelectInput = ({ setInputData }) => {
-  const testList = ['option1', 'option2'];
+export const SelectInput = (props) => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+    { label: 'Pear', value: 'pear' },
+  ]);
 
   return (
-    <Select width={'100%'} defaultValue=''>
-      <Select.Trigger iconAfter={<ChevronDown size='$1' color={'white'} />}>
-        <Select.Value placeholder='Select...' />
-      </Select.Trigger>
-
-      <Adapt>
-        {/* or <Select.Sheet> */}
-        <Sheet>
-          <Sheet.Frame>
-            <Sheet.ScrollView>
-              <Adapt.Contents />
-            </Sheet.ScrollView>
-          </Sheet.Frame>
-          <Sheet.Overlay />
-        </Sheet>
-      </Adapt>
-
-      <Select.Content>
-        <Select.ScrollUpButton />
-        <Select.Viewport>
-          <Select.Group>
-            <Select.Label />
-            {testList.map((item, i) => {
-              return (
-                <Select.Item index={i} key={item} value={item.toLowerCase()}>
-                  <Select.ItemText>{item}</Select.ItemText>
-                  <Select.ItemIndicator marginLeft='auto'>
-                    <Check size={16} />
-                  </Select.ItemIndicator>
-                </Select.Item>
-              );
-            })}
-          </Select.Group>
-        </Select.Viewport>
-        <Select.ScrollDownButton />
-      </Select.Content>
-    </Select>
+    <View>
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder={'Choose a fruit.'}
+        listMode='SCROLLVIEW'
+      />
+    </View>
   );
 };
 
