@@ -30,7 +30,7 @@ export const IntegerInput = ({ setInputData }) => {
   );
 };
 
-export const SelectInput = ({ title, options }) => {
+export const SelectInput = ({ title, options, setInputData }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(
@@ -39,8 +39,6 @@ export const SelectInput = ({ title, options }) => {
       value: obj.item,
     }))
   );
-
-  console.log('options:', options);
 
   return (
     <View
@@ -57,6 +55,10 @@ export const SelectInput = ({ title, options }) => {
         setOpen={setOpen}
         setValue={setValue}
         setItems={setItems}
+        onSelectItem={(item) => {
+          setInputData(item.value);
+          console.log('Selected item: ', item);
+        }}
         listMode='SCROLLVIEW'
       />
     </View>

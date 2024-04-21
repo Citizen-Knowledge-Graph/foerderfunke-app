@@ -34,7 +34,13 @@ const OnboardingCard = ({
         return <DateInput setInputData={setInputData} />; // Modify as needed to handle state properly
       default:
         if (possibleValues.length > 0) {
-          return <SelectInput options={possibleValues} />;
+          return (
+            <SelectInput
+              title={onboardingCard.title}
+              options={possibleValues}
+              setInputData={setInputData}
+            />
+          );
         }
         return <SizableText color={'black'}>Unsupported data type</SizableText>;
     }
