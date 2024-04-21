@@ -6,26 +6,29 @@ import { ValidationResult } from '@foerderfunke/matching-engine';
 
 export const fetchHomeScreenData = async () => {
   // retrieve validation state
-  const validationState = getValidationState();
+  const validationReports = getValidationState().payload.validateAllReport.reports;
 
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
 
-  Object.keys(validationState).map((scheme) => {
-    let newScheme = new SchemeData(scheme);
-    newScheme.setTitle(schemeRegistry[scheme].title);
-    newScheme.setDescription(schemeRegistry[scheme].description);
-    newScheme.setDetails(validationState[scheme].details);
-    if (validationState[scheme].result === ValidationResult.ELIGIBLE) {
+  for (let report of validationReports) {
+    let id = report.filename;
+    let newScheme = new SchemeData(id);
+    newScheme.setTitle(schemeRegistry[id].title);
+    newScheme.setDescription(schemeRegistry[id].description);
+    if (report.result === ValidationResult.ELIGIBLE) {
+      newScheme.setDetails('');
       homeScreenData.addEligible(newScheme);
     }
-    if (validationState[scheme].result === ValidationResult.INELIGIBLE) {
+    if (report.result === ValidationResult.INELIGIBLE) {
+      newScheme.setDetails(JSON.stringify(report.violations));
       homeScreenData.addNonEligible(newScheme);
     }
-    if (validationState[scheme].result === ValidationResult.UNDETERMINABLE) {
+    if (report.result === ValidationResult.UNDETERMINABLE) {
+      newScheme.setDetails(JSON.stringify(report.missingUserInput));
       homeScreenData.addMissingData(newScheme);
     }
-  });
+  }
   return homeScreenData;
 };

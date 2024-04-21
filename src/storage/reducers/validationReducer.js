@@ -5,7 +5,7 @@ const validationReducer = (state = {}, action) => {
     case VALIDATION_REPORT:
       return {
         ...state,
-        [action.payload.key]: action.payload.report,
+        payload: action.payload.report,
       };
     default:
       return state;

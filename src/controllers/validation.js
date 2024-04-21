@@ -53,16 +53,7 @@ const runValidation = async (dispatch, selectedUser) => {
     false
   );
 
-  for (let report of validateAllReport.reports) {
-    let details = '';
-    if (report.result === ValidationResult.INELIGIBLE) {
-      details = JSON.stringify(report.violations);
-    }
-    if (report.result === ValidationResult.UNDETERMINABLE) {
-      details = JSON.stringify(report.missingUserInput);
-    }
-    dispatch(validationReportAction(report.filename, report.result, details));
-  }
+  dispatch(validationReportAction(validateAllReport));
 };
 
 export default runValidation;
