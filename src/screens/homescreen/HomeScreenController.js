@@ -6,13 +6,13 @@ import { ValidationResult } from '@foerderfunke/matching-engine';
 
 export const fetchHomeScreenData = async () => {
   // retrieve validation state
-  const validationReports = getValidationState().payload.validateAllReport.reports;
+  const validateAllReport = getValidationState().payload.validateAllReport;
 
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
 
-  for (let report of validationReports) {
+  for (let report of validateAllReport.reports) {
     let id = report.filename;
     let newScheme = new SchemeData(id);
     newScheme.setTitle(schemeRegistry[id].title);
@@ -30,5 +30,7 @@ export const fetchHomeScreenData = async () => {
       homeScreenData.addMissingData(newScheme);
     }
   }
+
+  homeScreenData.setMissingUserInputsAggregated(validateAllReport.missingUserInputsAggregated);
   return homeScreenData;
 };

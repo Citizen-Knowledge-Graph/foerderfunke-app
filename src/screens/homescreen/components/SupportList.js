@@ -16,6 +16,16 @@ const SupportList = ({ homeScreenData }) => {
           Möglicherweise verfügbare Förderungen
         </SizableText>
       </View>
+      <View>
+        <SizableText size='$5' color={'blue'} fontWeight={'300'}>
+          Fehlende Datenpunkte
+        </SizableText>
+        {Object.keys(homeScreenData.missingUserInputsAggregated).map((key) => (
+          <SizableText size='$4' color={'gray'} fontWeight={'300'}>
+            - {homeScreenData.missingUserInputsAggregated[key].predicate.split('#')[1]}
+          </SizableText>
+        ))}
+      </View>
       {homeScreenData.missingData.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />
       ))}

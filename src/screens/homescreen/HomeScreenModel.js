@@ -3,6 +3,7 @@ export class HomeScreenData {
     this.eligible = [];
     this.nonEligible = [];
     this.missingData = [];
+    this.missingUserInputsAggregated = [];
   }
 
   addEligible(value) {
@@ -15,6 +16,10 @@ export class HomeScreenData {
 
   addMissingData(value) {
     this.missingData.push(value);
+  }
+
+  setMissingUserInputsAggregated(value) {
+    this.missingUserInputsAggregated = value;
   }
 }
 
