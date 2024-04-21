@@ -82,7 +82,12 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
   return { datatype, possibleValues };
 };
 
-export const addUserProfileField = async (selectedUser, field, value) => {
+export const addUserProfileField = async (
+  selectedUser,
+  field,
+  constraints,
+  value
+) => {
   //
   // fetch user profile paths
   let userProfileExamplesPath = await AsyncStorage.getItem(
@@ -93,7 +98,7 @@ export const addUserProfileField = async (selectedUser, field, value) => {
 
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
-  const updatedGraph = addOut(userGraph, field, value);
+  const updatedGraph = addOut(userGraph, field, constraints, value);
   const updatedGraphString = await serializeTurtle(updatedGraph);
   console.log('new graph', updatedGraphString);
   await writeFile(userProfilePath, updatedGraphString);

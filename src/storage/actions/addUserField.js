@@ -11,19 +11,20 @@ export const addUserFieldSuccess = () => ({
   type: ADD_USER_FIELD_SUCCESS,
 });
 
-export const performAdd = (field, value) => async (dispatch, getState) => {
-  const { selectUserReducer } = getState();
+export const performAdd =
+  (field, constraints, value) => async (dispatch, getState) => {
+    const { selectUserReducer } = getState();
 
-  dispatch(initiateAddUserField());
+    dispatch(initiateAddUserField());
 
-  try {
-    console.log('Selected user:', selectUserReducer);
-    console.log('Field:', field);
-    console.log('New value:', value);
-    await addUserProfileField(selectUserReducer, field, value);
-    dispatch(addUserFieldSuccess());
-    console.log('User update succeeded');
-  } catch (error) {
-    console.error('User update failed:', error);
-  }
-};
+    try {
+      console.log('Selected user:', selectUserReducer);
+      console.log('Field:', field);
+      console.log('New value:', value);
+      await addUserProfileField(selectUserReducer, field, constraints, value);
+      dispatch(addUserFieldSuccess());
+      console.log('User update succeeded');
+    } catch (error) {
+      console.error('User update failed:', error);
+    }
+  };

@@ -82,11 +82,25 @@ export const updateOut = (
   return dataset;
 };
 
-export const addOut = (dataset, predicate, value, term = 'ff:mainPerson') => {
+export const addOut = (
+  dataset,
+  predicate,
+  constraints,
+  value,
+  term = 'ff:mainPerson'
+) => {
   const expandedPredicate = expandIdentifier(predicate);
   const expandedTerm = expandIdentifier(term);
   const initialNode = retrieveTermNode(dataset, expandedTerm);
-  const newValue = rdf.blankNode(value);
+
+  const newValue = rdf.literal(
+    value,
+    rdf.namedNode(
+      constraints.datatype !== 'no datatype provided'
+        ? constraints.datatype
+        : 'http://www.w3.org/2001/XMLSchema#string'
+    )
+  );
 
   initialNode.deleteList(expandedPredicate); // ensure that we have no duplicates
   initialNode.addOut(expandedPredicate, newValue);

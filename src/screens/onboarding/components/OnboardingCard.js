@@ -85,7 +85,13 @@ const OnboardingCard = ({
             <Button
               size='$4'
               onPress={() => {
-                dispatch(performAdd(onboardingCard.datafield, inputData));
+                dispatch(
+                  performAdd(
+                    onboardingCard.datafield,
+                    onboardingCard.inputConstraints,
+                    inputData
+                  )
+                );
                 scrollToNext();
               }}
               style={styles.addProfileFiledButton}

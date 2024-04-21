@@ -57,7 +57,6 @@ export const SelectInput = ({ title, options, setInputData }) => {
         setItems={setItems}
         onSelectItem={(item) => {
           setInputData(item.value);
-          console.log('Selected item: ', item);
         }}
         listMode='SCROLLVIEW'
       />
@@ -70,8 +69,15 @@ export const DateInput = ({ setInputData }) => {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // getMonth() returns 0-11; add 1 for 1-12
+    const day = currentDate.getDate();
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
+
     setDateInternal(currentDate);
-    setInputData(currentDate); // Assuming setDate is a prop for lifting state up
+    setInputData(formattedDate);
   };
 
   return (
