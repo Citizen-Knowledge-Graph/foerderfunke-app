@@ -15,7 +15,7 @@ const ProfileListItem = ({ entry, handleOpenPress, setCurrentEntry }) => {
         <View>
           <SizableText color={'black'}>{entry.displayName}</SizableText>
           <SizableText size='$6' fontWeight={'500'} color={'black'}>
-            {entry.object.value}
+            {entry.object?.value}
           </SizableText>
         </View>
         <Button
