@@ -31,6 +31,8 @@ export const fetchHomeScreenData = async () => {
     }
   }
 
-  homeScreenData.setMissingUserInputsAggregated(validateAllReport.missingUserInputsAggregated);
+  homeScreenData.setMissingUserInputsAggregated(
+    validateAllReport.missingUserInputsAggregated
+  );
   return homeScreenData;
 };

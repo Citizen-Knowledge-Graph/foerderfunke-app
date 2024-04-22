@@ -1,7 +1,7 @@
 import React from 'react';
 import SupportListItem from './SupportListItem';
 import { StyleSheet, View } from 'react-native';
-import { SizableText } from 'tamagui';
+import { SizableText, ListItem } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 
 const SupportList = ({ homeScreenData }) => {
@@ -20,11 +20,24 @@ const SupportList = ({ homeScreenData }) => {
         <SizableText size='$5' color={'blue'} fontWeight={'300'}>
           Fehlende Datenpunkte
         </SizableText>
-        {Object.keys(homeScreenData.missingUserInputsAggregated).map((key) => (
-          <SizableText size='$4' color={'gray'} fontWeight={'300'}>
-            - {homeScreenData.missingUserInputsAggregated[key].predicate.split('#')[1]}
-          </SizableText>
-        ))}
+        {Object.keys(homeScreenData.missingUserInputsAggregated).map(
+          (key, index) => (
+            <SizableText
+              key={index}
+              size='$4'
+              color={'gray'}
+              g
+              fontWeight={'300'}
+            >
+              -{' '}
+              {
+                homeScreenData.missingUserInputsAggregated[key].predicate.split(
+                  '#'
+                )[1]
+              }
+            </SizableText>
+          )
+        )}
       </View>
       {homeScreenData.missingData.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />
