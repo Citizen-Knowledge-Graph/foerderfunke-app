@@ -1,7 +1,8 @@
 {
   "title": "Kinderzuschlag",
   "sub_title": "Sie haben Anspruch auf den Kinderzuschlag",
-  "description_long": "...",
+  "description_long": "Der Kinderzuschlag ist eine finanzielle Unterstützung in Deutschland, die an Familien mit niedrigem Einkommen gezahlt wird, um sicherzustellen, dass Kinder alles Notwendige für ihr Wachstum und ihre Entwicklung haben. Er wird zusätzlich zum Kindergeld gewährt und soll verhindern, dass Familien wegen der Kosten für ihre Kinder auf Grundsicherungsleistungen angewiesen sind.",
+  "application": "Um den Kinderzuschlag in Deutschland zu beantragen, müssen Sie das entsprechende Formular von der Website der Familienkasse der Bundesagentur für Arbeit herunterladen oder dort anfordern. Nachdem Sie das Formular ausgefüllt und alle erforderlichen Nachweise (wie Einkommensbescheinigungen und Mietkosten) beigefügt haben, reichen Sie es bei der zuständigen Familienkasse ein.",
   "steps": [
     "Schritt 1",
     "Schritt 2"
