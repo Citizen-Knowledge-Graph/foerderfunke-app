@@ -1,7 +1,7 @@
 import React from 'react';
 import SupportListItem from './SupportListItem';
 import { StyleSheet, View } from 'react-native';
-import { SizableText, ListItem } from 'tamagui';
+import { SizableText } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 
 const SupportList = ({ homeScreenData }) => {
