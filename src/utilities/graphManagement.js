@@ -114,8 +114,5 @@ const retrieveAttributes = (dataset, term, predicate) => {
 };
 
 const retrieveTermNode = (dataset, term, factory = rdf) => {
-  console.log('we are here with term: ', term);
-  const startingNode = grapoi({ dataset, factory, term: term });
-
-  return startingNode;
+  return grapoi({ dataset, factory, term: term });
 };
