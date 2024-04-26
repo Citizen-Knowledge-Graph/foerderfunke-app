@@ -16,7 +16,7 @@ const LoadingScreen = () => {
 
   useEffect(() => {
     spin.value = withRepeat(
-      withTiming(360, { duration: 2000, easing: Easing.linear }),
+      withTiming(360, { duration: 2500, easing: Easing.linear }),
       -1,
       false
     );

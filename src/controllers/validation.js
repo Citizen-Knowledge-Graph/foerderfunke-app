@@ -2,7 +2,6 @@ import { readFile, readJson } from '../utilities/fileManagement.js';
 import {
   validateAll,
   validateUserProfile,
-  ValidationResult,
 } from '@foerderfunke/matching-engine';
 import validationReportAction from '../storage/actions/validationReport';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -30,7 +29,9 @@ const runValidation = async (dispatch, selectedUser) => {
   // load query registry
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const queryRegistry = await readJson(queryRegistryPath);
-  let requirementProfilesPath = await AsyncStorage.getItem('requirement-profiles');
+  let requirementProfilesPath = await AsyncStorage.getItem(
+    'requirement-profiles'
+  );
 
   // iterate through queries in registry
   let requirementProfiles = {};

@@ -33,5 +33,35 @@
     "datafield": "ff:hasMaritalStatus",
     "title": "What is your relationship status?",
     "description": "We will use this to personalize your experience"
+  },
+  {
+    "datafield": "ff:paysRentCold",
+    "title": "How much rent do you pay - cold?",
+    "description": "We will use this to personalize your experience"
+  },
+  {
+    "datafield": "ff:hasLivingArea",
+    "title": "How large is your living area in square meters?",
+    "description": "We will use this to personalize your experience"
+  },
+  {
+    "datafield": "ff:receivesWohngeld",
+    "title": "How much if any Wohngeld do you receive?",
+    "description": "We will use this to personalize your experience"
+  },
+  {
+    "datafield": "ff:hasIncomeBrutto",
+    "title": "What is your income BEFORE taxes?",
+    "description": "We will use this to personalize your experience"
+  },
+  {
+    "datafield": "ff:hasIncomeNetto",
+    "title": "What is your income AFTER taxes?",
+    "description": "We will use this to personalize your experience"
+  },
+  {
+    "datafield": "ff:hasChild",
+    "title": "How many if any children do you have?",
+    "description": "We will use this to personalize your experience"
   }
 ]

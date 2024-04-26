@@ -70,8 +70,7 @@ const OnboardingCard = ({
         <YStack gap={30}>
           <XStack justifyContent={'center'}>
             <SizableText style={styles.titleText}>
-              {' '}
-              {onboardingCard.title}{' '}
+              {onboardingCard.title}
             </SizableText>
           </XStack>
           <XStack
