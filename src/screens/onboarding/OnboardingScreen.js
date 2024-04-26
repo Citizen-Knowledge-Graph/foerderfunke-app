@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import OnboardingList from './components/OnboardingList';
 import { fetchOnboardingScreenData } from './OnboardingController';
+import LoadingScreen from '../LoadingScreen';
 
 // Component
 const OnboardingScreen = () => {
@@ -23,7 +24,9 @@ const OnboardingScreen = () => {
     <>
       {onboardingScreenData ? (
         <OnboardingList onboardingScreenData={onboardingScreenData} />
-      ) : null}
+      ) : (
+        <LoadingScreen />
+      )}
     </>
   );
 };
