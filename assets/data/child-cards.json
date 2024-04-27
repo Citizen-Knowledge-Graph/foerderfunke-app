@@ -1,0 +1,17 @@
+[
+  {
+    "datafield": "ff:hasBirthday",
+    "title": "When was your child born?",
+    "linkedData": []
+  },
+  {
+    "datafield": "ff:hasMaritalStatus",
+    "title": "What is your child's marital status?",
+    "linkedData": []
+  },
+  {
+    "datafield": "ff:receiveKindergeld",
+    "title": "How much Kindergeld do you receive for your child?",
+    "linkedData": []
+  }
+]

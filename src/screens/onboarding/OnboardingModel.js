@@ -9,10 +9,10 @@ export class OnboardingScreenData {
 }
 
 export class OnboardingCard {
-  constructor(datafield, title, description, inputConstraints) {
+  constructor(datafield, title, linkedData, inputConstraints) {
     this.datafield = datafield;
     this.title = title;
-    this.description = description;
+    this.linkedData = linkedData;
     this.inputConstraints = inputConstraints;
   }
 }

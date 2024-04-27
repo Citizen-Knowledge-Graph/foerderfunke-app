@@ -2,66 +2,68 @@
   {
     "datafield": "ff:hasFirstNames",
     "title": "Tell us your first name",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasFamilyName",
     "title": "Tell us your family name",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasBirthday",
     "title": "When is your birthday?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasGender",
     "title": "What is your gender",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasBirthPlace",
     "title": "Where were you born?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasResidence",
     "title": "Where do you live?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasMaritalStatus",
     "title": "What is your relationship status?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:paysRentCold",
     "title": "How much rent do you pay - cold?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasLivingArea",
     "title": "How large is your living area in square meters?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:receivesWohngeld",
     "title": "How much if any Wohngeld do you receive?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasIncomeBrutto",
     "title": "What is your income BEFORE taxes?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
     "datafield": "ff:hasIncomeNetto",
     "title": "What is your income AFTER taxes?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": []
   },
   {
-    "datafield": "ff:hasChild",
+    "datafield": "ff:hasNumberOfChildren",
     "title": "How many if any children do you have?",
-    "description": "We will use this to personalize your experience"
+    "linkedData": [
+      "child-cards.json"
+    ]
   }
 ]

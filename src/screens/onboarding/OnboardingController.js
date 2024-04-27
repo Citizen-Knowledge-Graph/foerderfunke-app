@@ -14,8 +14,8 @@ export const fetchOnboardingScreenData = async () => {
   //
   // fetch onboarding cards
   const onbardingCards = await readJson('onboarding-cards.json');
-  let datafieldsPath = await AsyncStorage.getItem('datafields');
-  let datafieldsString = await readFile(datafieldsPath);
+  const datafieldsPath = await AsyncStorage.getItem('datafields');
+  const datafieldsString = await readFile(datafieldsPath);
   for (let card of onbardingCards) {
     const { datatype, possibleValues } = await fetchDatafieldProperties(
       datafieldsString,
@@ -25,11 +25,48 @@ export const fetchOnboardingScreenData = async () => {
     const newOnboardingCard = new OnboardingCard(
       card.datafield,
       card.title,
-      card.description,
+      card.linkedData,
       newInputConstraints
     );
     onboardingScreenData.addOnboardingCard(newOnboardingCard);
   }
+  return onboardingScreenData;
+};
+
+export const updateOnboardingScreenData = async (
+  onboardingScreenData,
+  linkedData,
+  postition,
+  count
+) => {
+  const newOnbardingCards = await readJson(linkedData);
+  const datafieldsPath = await AsyncStorage.getItem('datafields');
+  const datafieldsString = await readFile(datafieldsPath);
+
+  for (let i = 0; i < count; i++) {
+    for (let card of newOnbardingCards) {
+      const { datatype, possibleValues } = await fetchDatafieldProperties(
+        datafieldsString,
+        card.datafield
+      );
+      const newInputConstraints = new InputConstraints(
+        datatype,
+        possibleValues
+      );
+      const newOnboardingCard = new OnboardingCard(
+        card.datafield,
+        card.title,
+        card.description,
+        newInputConstraints
+      );
+      onboardingScreenData.onboadingCards.splice(
+        postition,
+        0,
+        newOnboardingCard
+      );
+    }
+  }
+
   return onboardingScreenData;
 };
 

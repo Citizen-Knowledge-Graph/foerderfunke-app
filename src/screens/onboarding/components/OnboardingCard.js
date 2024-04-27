@@ -20,6 +20,7 @@ const OnboardingCard = ({
   scrollToNext,
   currentIndex,
 }) => {
+  //const mainTerm = onboardingCard.mainTerm;
   const { datatype, possibleValues } = onboardingCard.inputConstraints;
   const [inputData, setInputData] = useState();
   const dispatch = useDispatch();
