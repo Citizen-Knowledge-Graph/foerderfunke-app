@@ -5,12 +5,7 @@ import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
 import { useDispatch } from 'react-redux';
 import { performAdd } from '../../../storage/actions/addUserField';
 import { colorTokens } from '@tamagui/themes';
-import {
-  DateInput,
-  IntegerInput,
-  SelectInput,
-  StringInput,
-} from './InputSections';
+import InputField from './InputField';
 
 const { height } = Dimensions.get('window');
 
@@ -20,32 +15,9 @@ const OnboardingCard = ({
   scrollToNext,
   currentIndex,
 }) => {
-  //const mainTerm = onboardingCard.mainTerm;
   const { datatype, possibleValues } = onboardingCard.inputConstraints;
   const [inputData, setInputData] = useState();
   const dispatch = useDispatch();
-
-  const renderInputField = () => {
-    switch (datatype) {
-      case 'http://www.w3.org/2001/XMLSchema#string':
-        return <StringInput setInputData={setInputData} />;
-      case 'http://www.w3.org/2001/XMLSchema#integer':
-        return <IntegerInput setInputData={setInputData} />; // Modify as needed to handle state properly
-      case 'http://www.w3.org/2001/XMLSchema#date':
-        return <DateInput setInputData={setInputData} />; // Modify as needed to handle state properly
-      default:
-        if (possibleValues.length > 0) {
-          return (
-            <SelectInput
-              title={onboardingCard.title}
-              options={possibleValues}
-              setInputData={setInputData}
-            />
-          );
-        }
-        return <SizableText color={'black'}>Unsupported data type</SizableText>;
-    }
-  };
 
   return (
     <Card style={styles.fullScreenContainer}>
@@ -79,7 +51,12 @@ const OnboardingCard = ({
             zIndex={1000}
             style={styles.inputField}
           >
-            {renderInputField()}
+            <InputField
+              datatype={datatype}
+              possibleValues={possibleValues}
+              setInputData={setInputData}
+              title={onboardingCard.title}
+            />
           </XStack>
           <XStack justifyContent={'center'}>
             <Button
