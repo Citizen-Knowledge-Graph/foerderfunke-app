@@ -1,68 +1,83 @@
 [
   {
     "datafield": "ff:hasFirstNames",
+    "term": "ff:mainPerson",
     "title": "Tell us your first name",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasFamilyName",
+    "term": "ff:mainPerson",
     "title": "Tell us your family name",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasBirthday",
+    "term": "ff:mainPerson",
     "title": "When is your birthday?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasGender",
+    "term": "ff:mainPerson",
     "title": "What is your gender",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasBirthPlace",
+    "term": "ff:mainPerson",
     "title": "Where were you born?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasResidence",
+    "term": "ff:mainPerson",
     "title": "Where do you live?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasMaritalStatus",
+    "term": "ff:mainPerson",
     "title": "What is your relationship status?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:paysRentCold",
+    "term": "ff:mainPerson",
     "title": "How much rent do you pay - cold?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasLivingArea",
+    "term": "ff:mainPerson",
     "title": "How large is your living area in square meters?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:receivesWohngeld",
+    "term": "ff:mainPerson",
     "title": "How much if any Wohngeld do you receive?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasIncomeBrutto",
+    "term": "ff:mainPerson",
     "title": "What is your income BEFORE taxes?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
     "datafield": "ff:hasIncomeNetto",
+    "term": "ff:mainPerson",
     "title": "What is your income AFTER taxes?",
-    "linkedData": []
+    "linkedClass": []
   },
   {
-    "datafield": "ff:hasNumberOfChildren",
-    "title": "How many if any children do you have?",
-    "linkedData": [
+    "datafield": "ff:hasChild",
+    "term": "ff:mainPerson",
+    "title": "Do you have a child?",
+    "repeatable": true,
+    "repeatQuestion": "Do you want to add another child?",
+    "linkedClass": [
       "child-cards.json"
     ]
   }

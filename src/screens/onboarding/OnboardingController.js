@@ -24,8 +24,9 @@ export const fetchOnboardingScreenData = async () => {
     const newInputConstraints = new InputConstraints(datatype, possibleValues);
     const newOnboardingCard = new OnboardingCard(
       card.datafield,
+      card.term,
       card.title,
-      card.linkedData,
+      card.linkedClass,
       newInputConstraints
     );
     onboardingScreenData.addOnboardingCard(newOnboardingCard);
@@ -123,7 +124,8 @@ export const addUserProfileField = async (
   selectedUser,
   field,
   constraints,
-  value
+  value,
+  term
 ) => {
   //
   // fetch user profile paths
@@ -135,7 +137,7 @@ export const addUserProfileField = async (
 
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
-  const updatedGraph = addOut(userGraph, field, constraints, value);
+  const updatedGraph = addOut(userGraph, field, constraints, value, term);
   const updatedGraphString = await serializeTurtle(updatedGraph);
   console.log('new graph', updatedGraphString);
   await writeFile(userProfilePath, updatedGraphString);
