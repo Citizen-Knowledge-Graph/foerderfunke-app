@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { Card, SizableText, YStack, Button, View, XStack } from 'tamagui';
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
-import { useDispatch } from 'react-redux';
-import { performAdd } from '../../../storage/actions/addUserField';
 import { colorTokens } from '@tamagui/themes';
 import InputField from './InputField';
+import useAddOnboardingData from '../hooks/useAddOnboardingData';
 
 const { height } = Dimensions.get('window');
 
@@ -17,7 +16,7 @@ const OnboardingCard = ({
 }) => {
   const { datatype, possibleValues } = onboardingCard.inputConstraints;
   const [inputData, setInputData] = useState();
-  const dispatch = useDispatch();
+  const handleAddData = useAddOnboardingData(onboardingCard, inputData);
 
   return (
     <Card style={styles.fullScreenContainer}>
@@ -62,13 +61,7 @@ const OnboardingCard = ({
             <Button
               size='$4'
               onPress={() => {
-                dispatch(
-                  performAdd(
-                    onboardingCard.datafield,
-                    onboardingCard.inputConstraints,
-                    inputData
-                  )
-                );
+                handleAddData();
                 scrollToNext();
               }}
               style={styles.addProfileFiledButton}
