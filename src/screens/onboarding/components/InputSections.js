@@ -30,7 +30,7 @@ export const IntegerInput = ({ setInputData }) => {
   );
 };
 
-export const SelectInput = ({ title, options, setInputData }) => {
+export const SelectInput = ({ options, setInputData }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(

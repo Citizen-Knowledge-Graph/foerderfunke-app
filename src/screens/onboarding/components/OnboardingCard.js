@@ -14,7 +14,6 @@ const OnboardingCard = ({
   scrollToNext,
   currentIndex,
 }) => {
-  const { datatype, possibleValues } = onboardingCard.inputConstraints;
   const [inputData, setInputData] = useState();
   const handleAddData = useAddOnboardingData(onboardingCard, inputData);
 
@@ -51,10 +50,8 @@ const OnboardingCard = ({
             style={styles.inputField}
           >
             <InputField
-              datatype={datatype}
-              possibleValues={possibleValues}
+              onboardingCard={onboardingCard}
               setInputData={setInputData}
-              title={onboardingCard.title}
             />
           </XStack>
           <XStack justifyContent={'center'}>

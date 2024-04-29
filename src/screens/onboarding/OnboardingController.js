@@ -17,16 +17,18 @@ export const fetchOnboardingScreenData = async () => {
   const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
   for (let card of onbardingCards) {
-    const { datatype, possibleValues } = await fetchDatafieldProperties(
-      datafieldsString,
-      card.datafield
+    const { datatype, possibleValues, objectClass } =
+      await fetchDatafieldProperties(datafieldsString, card.datafield);
+    const newInputConstraints = new InputConstraints(
+      datatype,
+      possibleValues,
+      objectClass
     );
-    const newInputConstraints = new InputConstraints(datatype, possibleValues);
     const newOnboardingCard = new OnboardingCard(
       card.datafield,
       card.term,
       card.title,
-      card.linkedClass,
+      card.linkedOnboarding,
       newInputConstraints
     );
     onboardingScreenData.addOnboardingCard(newOnboardingCard);
@@ -46,12 +48,11 @@ export const updateOnboardingScreenData = async (
 
   for (let i = 0; i < count; i++) {
     for (let card of newOnbardingCards) {
-      const { datatype, possibleValues } = await fetchDatafieldProperties(
-        datafieldsString,
-        card.datafield
-      );
+      const { datatype, possibleValues, objectClass } =
+        await fetchDatafieldProperties(datafieldsString, card.datafield);
       const newInputConstraints = new InputConstraints(
         datatype,
+        objectClass,
         possibleValues
       );
       const newOnboardingCard = new OnboardingCard(
@@ -117,7 +118,25 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
     inValuesQuery,
     datafieldsString
   );
-  return { datatype, possibleValues };
+
+  const objectClassQuery = `
+    PREFIX ff: <https://foerderfunke.org/default#>
+    PREFIX sh: <http://www.w3.org/ns/shacl#>
+    
+    SELECT ?class
+    WHERE {
+      ?shape a sh:NodeShape ;
+             sh:property ?propertyShape .
+
+      ?propertyShape sh:path ${datafield} ;
+             sh:class ?class .
+    }`;
+  const objectClass = await runSparqlSelectQueryOnRdfString(
+    objectClassQuery,
+    datafieldsString
+  );
+
+  return { datatype, possibleValues, objectClass };
 };
 
 export const addUserProfileField = async (

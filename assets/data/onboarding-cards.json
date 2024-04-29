@@ -3,73 +3,73 @@
     "datafield": "ff:hasFirstNames",
     "term": "ff:mainPerson",
     "title": "Tell us your first name",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasFamilyName",
     "term": "ff:mainPerson",
     "title": "Tell us your family name",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasBirthday",
     "term": "ff:mainPerson",
     "title": "When is your birthday?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasGender",
     "term": "ff:mainPerson",
     "title": "What is your gender",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasBirthPlace",
     "term": "ff:mainPerson",
     "title": "Where were you born?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasResidence",
     "term": "ff:mainPerson",
     "title": "Where do you live?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasMaritalStatus",
     "term": "ff:mainPerson",
     "title": "What is your relationship status?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:paysRentCold",
     "term": "ff:mainPerson",
     "title": "How much rent do you pay - cold?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasLivingArea",
     "term": "ff:mainPerson",
     "title": "How large is your living area in square meters?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:receivesWohngeld",
     "term": "ff:mainPerson",
     "title": "How much if any Wohngeld do you receive?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasIncomeBrutto",
     "term": "ff:mainPerson",
     "title": "What is your income BEFORE taxes?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasIncomeNetto",
     "term": "ff:mainPerson",
     "title": "What is your income AFTER taxes?",
-    "linkedClass": []
+    "linkedOnboarding": []
   },
   {
     "datafield": "ff:hasChild",
@@ -77,7 +77,7 @@
     "title": "Do you have a child?",
     "repeatable": true,
     "repeatQuestion": "Do you want to add another child?",
-    "linkedClass": [
+    "linkedOnboarding": [
       "child-cards.json"
     ]
   }

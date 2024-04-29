@@ -7,8 +7,30 @@ import {
 } from './InputSections';
 import { SizableText } from 'tamagui';
 
-const InputField = ({ datatype, possibleValues, setInputData, title }) => {
-  switch (datatype) {
+const InputField = ({ onboardingCard, setInputData }) => {
+  // check for selection
+  if (
+    onboardingCard.inputConstraints.possibleValues &&
+    onboardingCard.inputConstraints.possibleValues.length > 0
+  ) {
+    return (
+      <SelectInput
+        title={onboardingCard.title}
+        options={onboardingCard.inputConstraints.possibleValues}
+        setInputData={setInputData}
+      />
+    );
+  }
+
+  // check for object class
+  if (
+    onboardingCard.inputConstraints.objectClass &&
+    onboardingCard.inputConstraints.objectClass.length > 0
+  ) {
+    return <SizableText color={'black'}>yes or no</SizableText>;
+  }
+
+  switch (onboardingCard.inputConstraints.datatype) {
     case 'http://www.w3.org/2001/XMLSchema#string':
       return <StringInput setInputData={setInputData} />;
     case 'http://www.w3.org/2001/XMLSchema#integer':
@@ -16,15 +38,6 @@ const InputField = ({ datatype, possibleValues, setInputData, title }) => {
     case 'http://www.w3.org/2001/XMLSchema#date':
       return <DateInput setInputData={setInputData} />;
     default:
-      if (possibleValues && possibleValues.length > 0) {
-        return (
-          <SelectInput
-            title={title}
-            options={possibleValues}
-            setInputData={setInputData}
-          />
-        );
-      }
       return <SizableText color={'black'}>Unsupported data type</SizableText>;
   }
 };
