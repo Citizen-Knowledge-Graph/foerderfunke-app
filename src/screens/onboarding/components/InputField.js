@@ -10,8 +10,8 @@ import { SizableText } from 'tamagui';
 const InputField = ({ onboardingCard, setInputData }) => {
   // check for selection
   if (
-    onboardingCard.inputConstraints.possibleValues &&
-    onboardingCard.inputConstraints.possibleValues.length > 0
+    onboardingCard.inputConstraints?.possibleValues &&
+    onboardingCard.inputConstraints?.possibleValues.length > 0
   ) {
     return (
       <SelectInput
@@ -24,13 +24,12 @@ const InputField = ({ onboardingCard, setInputData }) => {
 
   // check for object class
   if (
-    onboardingCard.inputConstraints.objectClass &&
-    onboardingCard.inputConstraints.objectClass.length > 0
+    onboardingCard.inputConstraints?.objectClass !== 'no object class provided'
   ) {
     return <SizableText color={'black'}>yes or no</SizableText>;
   }
 
-  switch (onboardingCard.inputConstraints.datatype) {
+  switch (onboardingCard.inputConstraints?.datatype) {
     case 'http://www.w3.org/2001/XMLSchema#string':
       return <StringInput setInputData={setInputData} />;
     case 'http://www.w3.org/2001/XMLSchema#integer':

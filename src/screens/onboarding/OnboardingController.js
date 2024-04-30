@@ -28,46 +28,58 @@ export const fetchOnboardingScreenData = async () => {
       card.datafield,
       card.term,
       card.title,
-      card.linkedOnboarding,
+      card.linkedOnboarding ? card.linkedOnboarding : null,
       newInputConstraints
     );
+    console.log(newOnboardingCard);
     onboardingScreenData.addOnboardingCard(newOnboardingCard);
   }
   return onboardingScreenData;
 };
 
-export const updateOnboardingScreenData = async (
+export const onboardingManager = async (
   onboardingScreenData,
-  linkedData,
-  postition,
-  count
+  onboardingCard,
+  update,
+  index
 ) => {
-  const newOnbardingCards = await readJson(linkedData);
+  // if no update required proceed without updating
+  if (!update) {
+    return onboardingScreenData;
+  }
+
+  // otherwise fetch additional cards
+  const additionalOnboardingCards = [];
+  const newOnboardingCards = await readJson(
+    onboardingCard.linkedOnboarding.path
+  );
   const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
-
-  for (let i = 0; i < count; i++) {
-    for (let card of newOnbardingCards) {
-      const { datatype, possibleValues, objectClass } =
-        await fetchDatafieldProperties(datafieldsString, card.datafield);
-      const newInputConstraints = new InputConstraints(
-        datatype,
-        objectClass,
-        possibleValues
-      );
-      const newOnboardingCard = new OnboardingCard(
-        card.datafield,
-        card.title,
-        card.description,
-        newInputConstraints
-      );
-      onboardingScreenData.onboadingCards.splice(
-        postition,
-        0,
-        newOnboardingCard
-      );
-    }
+  for (let card of newOnboardingCards) {
+    const { datatype, possibleValues, objectClass } =
+      await fetchDatafieldProperties(datafieldsString, card.datafield);
+    const newInputConstraints = new InputConstraints(
+      datatype,
+      possibleValues,
+      objectClass
+    );
+    const newOnboardingCard = new OnboardingCard(
+      card.datafield,
+      card.term,
+      card.title,
+      card.linkedOnboarding ? card.linkedOnboarding : null,
+      newInputConstraints
+    );
+    console.log(newOnboardingCard);
+    additionalOnboardingCards.push(newOnboardingCard);
   }
+
+  // update onboarding screen data
+  onboardingScreenData.onboadingCards.splice(
+    index,
+    0,
+    additionalOnboardingCards
+  );
 
   return onboardingScreenData;
 };
@@ -131,10 +143,15 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
       ?propertyShape sh:path ${datafield} ;
              sh:class ?class .
     }`;
-  const objectClass = await runSparqlSelectQueryOnRdfString(
+  const objectClassList = await runSparqlSelectQueryOnRdfString(
     objectClassQuery,
     datafieldsString
   );
+  const objectClass =
+    objectClassList.length > 0 && objectClassList[0].class
+      ? objectClassList[0].class
+      : 'no object class provided';
+  console.log('object class', objectClass);
 
   return { datatype, possibleValues, objectClass };
 };

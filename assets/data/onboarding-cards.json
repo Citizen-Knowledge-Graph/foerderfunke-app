@@ -2,83 +2,71 @@
   {
     "datafield": "ff:hasFirstNames",
     "term": "ff:mainPerson",
-    "title": "Tell us your first name",
-    "linkedOnboarding": []
+    "title": "Tell us your first name"
   },
   {
     "datafield": "ff:hasFamilyName",
     "term": "ff:mainPerson",
-    "title": "Tell us your family name",
-    "linkedOnboarding": []
+    "title": "Tell us your family name"
   },
   {
     "datafield": "ff:hasBirthday",
     "term": "ff:mainPerson",
-    "title": "When is your birthday?",
-    "linkedOnboarding": []
+    "title": "When is your birthday?"
   },
   {
     "datafield": "ff:hasGender",
     "term": "ff:mainPerson",
-    "title": "What is your gender",
-    "linkedOnboarding": []
+    "title": "What is your gender"
   },
   {
     "datafield": "ff:hasBirthPlace",
     "term": "ff:mainPerson",
-    "title": "Where were you born?",
-    "linkedOnboarding": []
+    "title": "Where were you born?"
   },
   {
     "datafield": "ff:hasResidence",
     "term": "ff:mainPerson",
-    "title": "Where do you live?",
-    "linkedOnboarding": []
+    "title": "Where do you live?"
   },
   {
     "datafield": "ff:hasMaritalStatus",
     "term": "ff:mainPerson",
-    "title": "What is your relationship status?",
-    "linkedOnboarding": []
+    "title": "What is your relationship status?"
   },
   {
     "datafield": "ff:paysRentCold",
     "term": "ff:mainPerson",
-    "title": "How much rent do you pay - cold?",
-    "linkedOnboarding": []
+    "title": "How much rent do you pay - cold?"
   },
   {
     "datafield": "ff:hasLivingArea",
     "term": "ff:mainPerson",
-    "title": "How large is your living area in square meters?",
-    "linkedOnboarding": []
+    "title": "How large is your living area in square meters?"
   },
   {
     "datafield": "ff:receivesWohngeld",
     "term": "ff:mainPerson",
-    "title": "How much if any Wohngeld do you receive?",
-    "linkedOnboarding": []
+    "title": "How much if any Wohngeld do you receive?"
   },
   {
     "datafield": "ff:hasIncomeBrutto",
     "term": "ff:mainPerson",
-    "title": "What is your income BEFORE taxes?",
-    "linkedOnboarding": []
+    "title": "What is your income BEFORE taxes?"
   },
   {
     "datafield": "ff:hasIncomeNetto",
     "term": "ff:mainPerson",
-    "title": "What is your income AFTER taxes?",
-    "linkedOnboarding": []
+    "title": "What is your income AFTER taxes?"
   },
   {
     "datafield": "ff:hasChild",
     "term": "ff:mainPerson",
     "title": "Do you have a child?",
-    "repeatable": true,
-    "repeatQuestion": "Do you want to add another child?",
-    "linkedOnboarding": [
-      "child-cards.json"
-    ]
+    "linkedOnboarding": {
+      "path": "child-cards.json",
+      "repeatable": true,
+      "repeatQuestion": "Do you want to add another child?"
+    }
   }
 ]
