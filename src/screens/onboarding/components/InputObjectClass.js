@@ -13,8 +13,13 @@ const ObjectInput = ({ setInputData }) => (
 const RadioItem = ({ value, id, label }) => {
   return (
     <XStack alignItems='flex-start' gap='$5'>
-      <RadioGroup.Item value={value} id={id} size='$5'>
-        <RadioGroup.Indicator />
+      <RadioGroup.Item
+        backgroundColor={'white'}
+        value={value}
+        id={id}
+        size='$5'
+      >
+        <RadioGroup.Indicator backgroundColor={'black'} />
       </RadioGroup.Item>
       <SizableText color={'black'} size='$5'>
         {label}
