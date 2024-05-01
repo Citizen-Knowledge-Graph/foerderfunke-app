@@ -9,28 +9,28 @@ import ObjectInput from './InputObjectClass';
 import { SizableText } from 'tamagui';
 
 const InputField = ({ onboardingCard, setInputData }) => {
+  const { datatype, possibleValues, objectClass } =
+    onboardingCard.inputConstraints;
+
   // check for selection
-  if (
-    onboardingCard.inputConstraints?.possibleValues &&
-    onboardingCard.inputConstraints?.possibleValues.length > 0
-  ) {
+  if (possibleValues && possibleValues.length > 0) {
     return (
       <SelectInput
         title={onboardingCard.title}
-        options={onboardingCard.inputConstraints.possibleValues}
+        options={possibleValues}
         setInputData={setInputData}
       />
     );
   }
 
   // check for object class
-  if (
-    onboardingCard.inputConstraints?.objectClass !== 'no object class provided'
-  ) {
-    return <ObjectInput />;
+  if (objectClass !== 'no object class provided') {
+    return (
+      <ObjectInput setInputData={setInputData} objectClass={objectClass} />
+    );
   }
 
-  switch (onboardingCard.inputConstraints?.datatype) {
+  switch (datatype) {
     case 'http://www.w3.org/2001/XMLSchema#string':
       return <StringInput setInputData={setInputData} />;
     case 'http://www.w3.org/2001/XMLSchema#integer':

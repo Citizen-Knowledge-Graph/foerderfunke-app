@@ -1,14 +1,21 @@
 import React from 'react';
 import { RadioGroup, XStack, YStack, SizableText } from 'tamagui';
 
-const ObjectInput = ({ setInputData }) => (
-  <RadioGroup name='form'>
-    <YStack alignItems='flex-start' gap='$5'>
-      <RadioItem value='yes' id='1' label='Yes' />
-      <RadioItem value='no' id='2' label='No' />
-    </YStack>
-  </RadioGroup>
-);
+const ObjectInput = ({ setInputData, objectClass }) => {
+  const handleValueChange = (value) => {
+    setInputData(value);
+    console.log('Value:', value);
+  };
+
+  return (
+    <RadioGroup onValueChange={handleValueChange} name='form'>
+      <YStack alignItems='flex-start' gap='$5'>
+        <RadioItem value={objectClass} id='1' label='Yes' />
+        <RadioItem value={null} id='2' label='No' />
+      </YStack>
+    </RadioGroup>
+  );
+};
 
 const RadioItem = ({ value, id, label }) => {
   return (
