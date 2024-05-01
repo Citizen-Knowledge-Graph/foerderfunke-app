@@ -1,49 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { XStack, YStack, Button } from 'tamagui';
 import FullScreenView from './FullScreenView';
 import { useNavigation } from '@react-navigation/native';
 import OnboardingCard from './OnboardingCard';
+import { useScrollHandler } from '../hooks/useScrollHandler';
 
 const { height } = Dimensions.get('window');
 
 const OnboardingList = ({ onboardingScreenData }) => {
-  console.log('onboardingScreenData: ', onboardingScreenData);
+  console.log('We are rending the OnboardingList component');
 
   const navigation = useNavigation(); // Use the useNavigation hook
-
-  const scrollViewRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0); // Tracks the current screen index
-
-  const scrollToNext = () => {
-    if (currentIndex < onboardingScreenData.onboadingCards.length) {
-      const newIndex = currentIndex + 1;
-      setCurrentIndex(newIndex);
-      scrollViewRef.current?.scrollTo({
-        y: newIndex * height,
-        animated: true,
-      });
-    }
-  };
-
-  const scrollToPrev = () => {
-    if (currentIndex > 0) {
-      const newIndex = currentIndex - 1;
-      setCurrentIndex(newIndex);
-      scrollViewRef.current?.scrollTo({
-        y: newIndex * height,
-        animated: true,
-      });
-    }
-  };
-
-  const handleScroll = (event, entry) => {
-    const newY = event.nativeEvent.contentOffset.y;
-    const newIndex = Math.round(newY / height);
-    if (newIndex !== currentIndex) {
-      setCurrentIndex(newIndex);
-    }
-  };
+  const {
+    scrollViewRef,
+    scrollToNext,
+    scrollToPrev,
+    handleScroll,
+    currentIndex,
+  } = useScrollHandler(onboardingScreenData, height);
 
   return (
     <FullScreenView ref={scrollViewRef} handleScroll={handleScroll}>

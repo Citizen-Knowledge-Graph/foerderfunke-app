@@ -17,13 +17,19 @@ export const fetchOnboardingScreenData = async () => {
   const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
   for (let card of onbardingCards) {
+    //
+    // fetch datafield properties
     const { datatype, possibleValues, objectClass } =
       await fetchDatafieldProperties(datafieldsString, card.datafield);
+    //
+    //
     const newInputConstraints = new InputConstraints(
       datatype,
       possibleValues,
       objectClass
     );
+    //
+    // create onboarding card
     const newOnboardingCard = new OnboardingCard(
       card.datafield,
       card.term,
