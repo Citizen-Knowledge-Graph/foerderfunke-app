@@ -5,6 +5,7 @@ import {
   DateInput,
   SelectInput,
 } from './InputSections';
+import ObjectInput from './InputObjectClass';
 import { SizableText } from 'tamagui';
 
 const InputField = ({ onboardingCard, setInputData }) => {
@@ -26,7 +27,7 @@ const InputField = ({ onboardingCard, setInputData }) => {
   if (
     onboardingCard.inputConstraints?.objectClass !== 'no object class provided'
   ) {
-    return <SizableText color={'black'}>yes or no</SizableText>;
+    return <ObjectInput />;
   }
 
   switch (onboardingCard.inputConstraints?.datatype) {
