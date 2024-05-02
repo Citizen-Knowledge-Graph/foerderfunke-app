@@ -9,6 +9,4 @@ const store = configureStore({
 
 export default store;
 
-export const getSelectedUser = () => store.getState().selectUserReducer;
-
 export const getValidationState = () => store.getState().validationReducer;

@@ -3,8 +3,12 @@ export class OnboardingScreenData {
     this.onboadingCards = [];
   }
 
-  addOnboardingCard(value) {
-    this.onboadingCards.push(value);
+  insertOnboardingCards(cards, index) {
+    this.onboadingCards = [
+      ...this.onboadingCards.slice(0, index),
+      ...cards,
+      ...this.onboadingCards.slice(index),
+    ];
   }
 }
 

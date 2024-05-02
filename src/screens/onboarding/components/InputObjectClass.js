@@ -1,10 +1,17 @@
 import React from 'react';
 import { RadioGroup, XStack, YStack, SizableText } from 'tamagui';
+import 'react-native-get-random-values';
+import { nanoid } from 'nanoid';
 
 const ObjectInput = ({ setInputData, objectClass }) => {
   const handleValueChange = (value) => {
-    setInputData(value);
-    console.log('Value:', value);
+    if (value) {
+      const objectId = objectClass.toLowerCase() + '_' + nanoid(4);
+      setInputData(objectId);
+      console.log('Value:', objectId);
+    } else {
+      setInputData(null);
+    }
   };
 
   return (

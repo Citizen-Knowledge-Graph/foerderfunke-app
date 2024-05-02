@@ -10,6 +10,8 @@ const requiredResources = [
   'query-registry',
   'user-profile-hydration',
   'requirement-profile-hydration',
+  'onboarding-cards',
+  'onboarding-registry',
 ];
 
 // Set resource locations
@@ -27,6 +29,8 @@ export const setResourceLocations = async () => {
     'requirement-profile-hydration',
     'requirement-profile-hydrations/'
   );
+  await AsyncStorage.setItem('onboarding-registry', 'onboarding-registry.json');
+  await AsyncStorage.setItem('onboarding-cards', 'onboarding-cards/');
 };
 
 // Validate the presence of all required resources

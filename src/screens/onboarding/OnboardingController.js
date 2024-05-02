@@ -9,14 +9,51 @@ import {
   InputConstraints,
 } from './OnboardingModel';
 
-export const fetchOnboardingScreenData = async () => {
+export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingScreenData = new OnboardingScreenData();
   //
-  // fetch onboarding cards
-  const onbardingCards = await readJson('onboarding-cards.json');
+  // fetch datafields
   const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
-  for (let card of onbardingCards) {
+  //
+  // fetch onboarding cards from registry
+  const onboardingRegistryPath = await AsyncStorage.getItem(
+    'onboarding-registry'
+  );
+  const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');
+  const onboardingRegistry = await readJson(onboardingRegistryPath);
+  //
+  // iterate through onboarding cards
+  for (let card of onboardingFlow.cards) {
+    const { name, index } = card;
+    const newOnboardingCards = await fetchOnboardingCards(
+      onboardingRegistry,
+      onboardingCardsPath,
+      name,
+      index,
+      datafieldsString
+    );
+    onboardingScreenData.insertOnboardingCards(newOnboardingCards, index);
+  }
+
+  return onboardingScreenData;
+};
+
+export const fetchOnboardingCards = async (
+  onboardingRegistry,
+  onboardingCardsPath,
+  name,
+  index,
+  datafieldsString
+) => {
+  //
+  // retrieve onboarding cards from registry
+  const cardsPath = onboardingCardsPath + onboardingRegistry[name];
+  const onboardingCards = await readJson(cardsPath);
+  //
+  // new onboarding cards
+  const newOnboardingCards = [];
+  for (let card of onboardingCards) {
     //
     // fetch datafield properties
     const { datatype, possibleValues, objectClass } =
@@ -37,57 +74,9 @@ export const fetchOnboardingScreenData = async () => {
       card.linkedOnboarding ? card.linkedOnboarding : null,
       newInputConstraints
     );
-    console.log(newOnboardingCard);
-    onboardingScreenData.addOnboardingCard(newOnboardingCard);
+    newOnboardingCards.push(newOnboardingCard);
   }
-  return onboardingScreenData;
-};
-
-export const onboardingManager = async (
-  onboardingScreenData,
-  onboardingCard,
-  update,
-  index
-) => {
-  // if no update required proceed without updating
-  if (!update) {
-    return onboardingScreenData;
-  }
-
-  // otherwise fetch additional cards
-  const additionalOnboardingCards = [];
-  const newOnboardingCards = await readJson(
-    onboardingCard.linkedOnboarding.path
-  );
-  const datafieldsPath = await AsyncStorage.getItem('datafields');
-  const datafieldsString = await readFile(datafieldsPath);
-  for (let card of newOnboardingCards) {
-    const { datatype, possibleValues, objectClass } =
-      await fetchDatafieldProperties(datafieldsString, card.datafield);
-    const newInputConstraints = new InputConstraints(
-      datatype,
-      possibleValues,
-      objectClass
-    );
-    const newOnboardingCard = new OnboardingCard(
-      card.datafield,
-      card.term,
-      card.title,
-      card.linkedOnboarding ? card.linkedOnboarding : null,
-      newInputConstraints
-    );
-    console.log(newOnboardingCard);
-    additionalOnboardingCards.push(newOnboardingCard);
-  }
-
-  // update onboarding screen data
-  onboardingScreenData.onboadingCards.splice(
-    index,
-    0,
-    additionalOnboardingCards
-  );
-
-  return onboardingScreenData;
+  return newOnboardingCards;
 };
 
 export const fetchDatafieldProperties = async (datafieldsString, datafield) => {

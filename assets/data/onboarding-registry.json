@@ -1,0 +1,4 @@
+{
+  "default": "onboarding-cards.json",
+  "https://foerderfunke.org/default#Child": "child-onboarding-cards.json"
+}

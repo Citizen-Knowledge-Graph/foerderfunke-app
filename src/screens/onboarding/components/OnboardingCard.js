@@ -16,6 +16,7 @@ const OnboardingCard = ({
 }) => {
   const [inputData, setInputData] = useState();
   const handleAddData = useAddOnboardingData(onboardingCard, inputData);
+  // const handleOnboardingManager = useOnboardingManager(objectClass, inputData, currentIndex);
 
   return (
     <Card style={styles.fullScreenContainer}>
