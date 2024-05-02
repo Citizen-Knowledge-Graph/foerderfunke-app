@@ -4,11 +4,7 @@ export class OnboardingScreenData {
   }
 
   insertOnboardingCards(cards, index) {
-    this.onboadingCards = [
-      ...this.onboadingCards.slice(0, index),
-      ...cards,
-      ...this.onboadingCards.slice(index),
-    ];
+    this.onboadingCards = [...this.onboadingCards, ...cards];
   }
 }
 
