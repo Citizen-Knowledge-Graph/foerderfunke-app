@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
 import { colorTokens } from '@tamagui/themes';
 import InputField from './InputField';
 import useAddOnboardingData from '../hooks/useAddOnboardingData';
+import useOnboardingManager from '../hooks/useOnboardingManager';
 
 const { height } = Dimensions.get('window');
 
@@ -16,7 +17,11 @@ const OnboardingCard = ({
 }) => {
   const [inputData, setInputData] = useState();
   const handleAddData = useAddOnboardingData(onboardingCard, inputData);
-  // const handleOnboardingManager = useOnboardingManager(objectClass, inputData, currentIndex);
+  const handleOnboardingManager = useOnboardingManager(
+    onboardingCard,
+    inputData,
+    currentIndex
+  );
 
   return (
     <Card style={styles.fullScreenContainer}>
@@ -60,6 +65,7 @@ const OnboardingCard = ({
               size='$4'
               onPress={() => {
                 handleAddData();
+                handleOnboardingManager();
                 scrollToNext();
               }}
               style={styles.addProfileFiledButton}

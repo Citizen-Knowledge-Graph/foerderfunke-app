@@ -22,10 +22,7 @@ const OnboardingScreen = () => {
     };
 
     fetchData();
-  }, []);
-
-  // useEffect(() => {
-  // updateData
+  }, [onboardingFlow]);
 
   return (
     <>

@@ -1,16 +1,17 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { performAdd } from '../../../storage/actions/addUserField';
+import updateOnboardingFlow from '../../../storage/actions/updateOnboardingFlow';
 
-function useOnboardingManager(objectClass, inputData, currentIndex) {
+function useOnboardingManager(onboardingCard, inputData, currentIndex) {
   const dispatch = useDispatch();
 
   return useCallback(() => {
-    dispatch(performOnboardingUpdate(objectClass, inputData, currentIndex));
-  }, [dispatch, objectClass, inputData, currentIndex]);
+    const { objectClass } = onboardingCard.inputConstraints;
+
+    if (objectClass && inputData) {
+      dispatch(updateOnboardingFlow(objectClass, currentIndex, inputData));
+    }
+  }, [onboardingCard.inputConstraints, inputData, dispatch, currentIndex]);
 }
 
 export default useOnboardingManager;
-
-// could I simply go straight to the onboarding controller here
-// then I would need to use the setOnboardingData function

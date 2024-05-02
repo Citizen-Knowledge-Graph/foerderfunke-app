@@ -1,0 +1,14 @@
+[
+  {
+    "datafield": "ff:hasBirthday",
+    "title": "When was your child born"
+  },
+  {
+    "datafield": "ff:hasMaritalStatus",
+    "title": "What is child's your marital status"
+  },
+  {
+    "datafield": "ff:receiveKindergeld",
+    "title": "Do you receive Kindergeld"
+  }
+]

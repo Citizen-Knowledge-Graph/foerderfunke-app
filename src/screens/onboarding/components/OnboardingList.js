@@ -9,8 +9,6 @@ import { useScrollHandler } from '../hooks/useScrollHandler';
 const { height } = Dimensions.get('window');
 
 const OnboardingList = ({ onboardingScreenData }) => {
-  console.log('We are rending the OnboardingList component');
-
   const navigation = useNavigation();
   const {
     scrollViewRef,

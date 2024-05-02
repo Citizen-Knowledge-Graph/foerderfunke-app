@@ -21,7 +21,7 @@ const runValidation = async (dispatch, selectedUser) => {
   const datafieldsString = await readFile(datafieldsPath);
   const materializationPath = await AsyncStorage.getItem('materialization');
   const materializationString = await readFile(materializationPath);
-
+  console.log(userProfileString);
   if (!(await validateUserProfile(userProfileString, datafieldsString))) {
     console.error('Invalid user profile');
   }

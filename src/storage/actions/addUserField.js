@@ -12,7 +12,7 @@ export const addUserFieldSuccess = () => ({
 });
 
 export const performAdd =
-  (field, constraints, value, term) => async (dispatch, getState) => {
+  (field, constraints, term, value) => async (dispatch, getState) => {
     const { selectUserReducer } = getState();
 
     dispatch(initiateAddUserField());
@@ -21,6 +21,7 @@ export const performAdd =
       console.log('Selected user:', selectUserReducer);
       console.log('Field:', field);
       console.log('New value:', value);
+      console.log('Term:', term);
       await addUserProfileField(
         selectUserReducer,
         field,

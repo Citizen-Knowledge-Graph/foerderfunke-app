@@ -13,11 +13,10 @@ export class OnboardingScreenData {
 }
 
 export class OnboardingCard {
-  constructor(datafield, term, title, linkedOnboarding, inputConstraints) {
+  constructor(datafield, term, title, inputConstraints) {
     this.datafield = datafield;
     this.term = term;
     this.title = title;
-    this.linkedOnboarding = linkedOnboarding;
     this.inputConstraints = inputConstraints;
   }
 }

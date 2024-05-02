@@ -24,18 +24,18 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingRegistry = await readJson(onboardingRegistryPath);
   //
   // iterate through onboarding cards
+  console.log('onboardingFlow', onboardingFlow.cards);
   for (let card of onboardingFlow.cards) {
-    const { name, index } = card;
+    const { name, index, term } = card;
     const newOnboardingCards = await fetchOnboardingCards(
       onboardingRegistry,
       onboardingCardsPath,
       name,
-      index,
+      term,
       datafieldsString
     );
     onboardingScreenData.insertOnboardingCards(newOnboardingCards, index);
   }
-
   return onboardingScreenData;
 };
 
@@ -43,7 +43,7 @@ export const fetchOnboardingCards = async (
   onboardingRegistry,
   onboardingCardsPath,
   name,
-  index,
+  term,
   datafieldsString
 ) => {
   //
@@ -51,7 +51,7 @@ export const fetchOnboardingCards = async (
   const cardsPath = onboardingCardsPath + onboardingRegistry[name];
   const onboardingCards = await readJson(cardsPath);
   //
-  // new onboarding cards
+  // populate onboarding cards
   const newOnboardingCards = [];
   for (let card of onboardingCards) {
     //
@@ -59,7 +59,7 @@ export const fetchOnboardingCards = async (
     const { datatype, possibleValues, objectClass } =
       await fetchDatafieldProperties(datafieldsString, card.datafield);
     //
-    //
+    // create input constraints
     const newInputConstraints = new InputConstraints(
       datatype,
       possibleValues,
@@ -69,9 +69,8 @@ export const fetchOnboardingCards = async (
     // create onboarding card
     const newOnboardingCard = new OnboardingCard(
       card.datafield,
-      card.term,
+      term,
       card.title,
-      card.linkedOnboarding ? card.linkedOnboarding : null,
       newInputConstraints
     );
     newOnboardingCards.push(newOnboardingCard);
@@ -145,8 +144,7 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
   const objectClass =
     objectClassList.length > 0 && objectClassList[0].class
       ? objectClassList[0].class
-      : 'no object class provided';
-  console.log('object class', objectClass);
+      : null;
 
   return { datatype, possibleValues, objectClass };
 };

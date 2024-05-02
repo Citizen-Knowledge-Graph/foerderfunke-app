@@ -14,6 +14,10 @@ const namespaces = {
 };
 
 function expandIdentifier(abbreviatedId) {
+  if (/^https?:\/\/.+$/.test(abbreviatedId)) {
+    return abbreviatedId;
+  }
+
   const [namespace, value] = abbreviatedId.split(':');
   if (!value) {
     return { value: namespace };
@@ -92,15 +96,23 @@ export const addOut = (
   const expandedPredicate = expandIdentifier(predicate);
   const expandedTerm = expandIdentifier(term);
   const initialNode = retrieveTermNode(dataset, expandedTerm);
+  console.log('constraints', constraints);
 
-  const newValue = rdf.literal(
-    value,
-    rdf.namedNode(
-      constraints.datatype !== 'no datatype provided'
-        ? constraints.datatype
-        : 'http://www.w3.org/2001/XMLSchema#string'
-    )
-  );
+  let newValue;
+  if (constraints.objectClass) {
+    console.log('this is the object class: :', constraints.objectClass);
+    console.log('adding this value here: :', value);
+    newValue = rdf.namedNode(value);
+  } else {
+    newValue = rdf.literal(
+      value,
+      rdf.namedNode(
+        constraints.datatype !== 'no datatype provided'
+          ? constraints.datatype
+          : 'http://www.w3.org/2001/XMLSchema#string'
+      )
+    );
+  }
 
   initialNode.deleteList(expandedPredicate); // ensure that we have no duplicates
   initialNode.addOut(expandedPredicate, newValue);

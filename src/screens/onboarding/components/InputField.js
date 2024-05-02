@@ -24,7 +24,7 @@ const InputField = ({ onboardingCard, setInputData }) => {
   }
 
   // check for object class
-  if (objectClass !== 'no object class provided') {
+  if (objectClass) {
     return (
       <ObjectInput setInputData={setInputData} objectClass={objectClass} />
     );

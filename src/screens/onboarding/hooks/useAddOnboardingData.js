@@ -6,13 +6,9 @@ function useAddOnboardingData(onboardingCard, inputData) {
   const dispatch = useDispatch();
 
   return useCallback(() => {
-    dispatch(
-      performAdd(
-        onboardingCard.datafield,
-        onboardingCard.inputConstraints,
-        inputData
-      )
-    );
+    const { datafield, term, inputConstraints } = onboardingCard;
+
+    dispatch(performAdd(datafield, inputConstraints, term, inputData));
   }, [dispatch, onboardingCard, inputData]);
 }
 
