@@ -113,3 +113,38 @@ The data repository is available [here](https://github.com/Citizen-Knowledge-Gra
 We do not have an explicit contract exchanged between application and data repository. Instead, the application
 fetches a zipped archive of the data repository, extracts the content and relies on the data being available in the
 above mentioned structure.
+
+### Dataflows and Screens
+
+The app is broadly organised into self-contained screens. Each screen is responsible for a specific task inside the
+application.
+
+Screens follow a simple structure.
+
+##### Screen Controller
+
+There is a screen controller that fetches all necessary data to render the screen. All data that
+appears inside the screen has to go through the controller. That means the only way data can change
+for a screen is via the `setScreenData` function.
+
+##### Screen Model
+
+Each screen has a screen model that describes all data that can appear as part of a screen. No other
+data objects are allowed for either rendering or logic of the screen.
+
+##### Screen Component
+
+This is the entry point for the screen rendering. It fetches data from the controller and only renders
+when the controller provides a non-falsy data object. It re-renders each time there is a change to the data
+provided by the controller.
+
+Data fetching can be triggered either by a react state change or a redux state change.
+
+#### Data Submission
+
+Some screen allow users to submit data which can trigger state updates across the application. Any data submission
+that creates a persistent change has to go through a redux action. I.e. we dispatch an action that either
+updates the state itself or triggers some changes to a secondary store. For the second scenario we use redux state to
+track the update status.
+
+
