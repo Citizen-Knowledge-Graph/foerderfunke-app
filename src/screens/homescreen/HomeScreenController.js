@@ -4,15 +4,15 @@ import { getValidationState } from '../../storage/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ValidationResult } from '@foerderfunke/matching-engine';
 
-export const fetchHomeScreenData = async () => {
-  // retrieve validation state
-  const validateAllReport = getValidationState().payload.validateAllReport;
-
+export const fetchHomeScreenData = async (validateAllReport) => {
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
+  const { missingUserInputsAggregated, reports } = validateAllReport.report;
 
-  for (let report of validateAllReport.reports) {
+  console.log(validateAllReport.report.reports);
+
+  for (let report of reports) {
     let id = report.filename;
     let newScheme = new SchemeData(id);
     newScheme.setTitle(schemeRegistry[id].title);
@@ -31,8 +31,6 @@ export const fetchHomeScreenData = async () => {
     }
   }
 
-  homeScreenData.setMissingUserInputsAggregated(
-    validateAllReport.missingUserInputsAggregated
-  );
+  homeScreenData.setMissingUserInputsAggregated(missingUserInputsAggregated);
   return homeScreenData;
 };

@@ -5,15 +5,13 @@ import { useSelector } from 'react-redux';
 import { fetchHomeScreenData } from './HomeScreenController';
 
 const HomeScreen = () => {
-  const validationUpdateState = useSelector(
-    (state) => state.validationUpdateReducer
-  );
   const [homeScreenData, setHomeScreenData] = useState(null);
+  const validationReports = useSelector((state) => state.validationReducer);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newHomeScreenData = await fetchHomeScreenData();
+        const newHomeScreenData = await fetchHomeScreenData(validationReports);
         setHomeScreenData(newHomeScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);
@@ -21,7 +19,7 @@ const HomeScreen = () => {
     };
 
     fetchData();
-  }, [validationUpdateState]);
+  }, [validationReports]);
 
   return (
     <ScreenView screenName={'Fördermöglichkeiten'}>
