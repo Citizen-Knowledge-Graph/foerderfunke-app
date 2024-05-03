@@ -1,6 +1,5 @@
 import { readJson } from '../../utilities/fileManagement';
 import { HomeScreenData, SchemeData } from './HomeScreenModel';
-import { getValidationState } from '../../storage/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ValidationResult } from '@foerderfunke/matching-engine';
 
@@ -8,9 +7,7 @@ export const fetchHomeScreenData = async (validateAllReport) => {
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
-  const { missingUserInputsAggregated, reports } = validateAllReport.report;
-
-  console.log(validateAllReport.report.reports);
+  const { missingUserInputsAggregated, reports } = validateAllReport;
 
   for (let report of reports) {
     let id = report.filename;

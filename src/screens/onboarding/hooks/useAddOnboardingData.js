@@ -1,15 +1,14 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { performAdd } from '../../../storage/actions/addUserField';
+import { useUserUpdateStore } from '../../../storage/zustand';
 
 function useAddOnboardingData(onboardingCard, inputData) {
-  const dispatch = useDispatch();
+  const addUserField = useUserUpdateStore((state) => state.addUserField);
 
   return useCallback(() => {
     const { datafield, term, inputConstraints } = onboardingCard;
 
-    dispatch(performAdd(datafield, inputConstraints, term, inputData));
-  }, [dispatch, onboardingCard, inputData]);
+    addUserField(datafield, inputConstraints, term, inputData);
+  }, [onboardingCard, addUserField, inputData]);
 }
 
 export default useAddOnboardingData;

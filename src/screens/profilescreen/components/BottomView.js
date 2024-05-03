@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Card, styled, Button, SizableText, View } from 'tamagui';
 import { ChevronDown } from '@tamagui/lucide-icons';
 import {
@@ -10,11 +9,11 @@ import {
   useBottomSheetModal,
 } from '@gorhom/bottom-sheet';
 import { colorTokens } from '@tamagui/themes';
-import { performUpdate } from '../../../storage/actions/userUpdateReport';
+import { useUserUpdateStore } from '../../../storage/zustand';
 
 const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
   const [inputText, setInputText] = useState('');
-  const dispatch = useDispatch();
+  const updateUserField = useUserUpdateStore((state) => state.updateUserField);
   const snapPoints = useMemo(() => ['50%'], []);
   const { dismiss } = useBottomSheetModal();
 
@@ -42,9 +41,7 @@ const BottomView = ({ bottomSheetModalRef, currentEntry }) => {
           <ProfileTextInput value={inputText} onChangeText={setInputText} />
           <UpdateButton
             onPress={() => {
-              dispatch(
-                performUpdate(currentEntry.key, currentEntry.object, inputText)
-              );
+              updateUserField(currentEntry.key, currentEntry.object, inputText);
               dismiss();
             }}
           />

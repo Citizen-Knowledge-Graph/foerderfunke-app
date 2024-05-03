@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ScreenView from '../../components/ScreenView';
 import SupportList from './components/SupportList';
-import { useSelector } from 'react-redux';
 import { fetchHomeScreenData } from './HomeScreenController';
+import { useValidationReportStore } from '../../storage/zustand';
 
 const HomeScreen = () => {
   const [homeScreenData, setHomeScreenData] = useState(null);
-  const validationReports = useSelector((state) => state.validationReducer);
+  const validationReports = useValidationReportStore(
+    (state) => state.validationReport
+  );
 
   useEffect(() => {
     const fetchData = async () => {

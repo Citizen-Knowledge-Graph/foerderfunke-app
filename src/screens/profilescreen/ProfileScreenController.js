@@ -13,7 +13,7 @@ const dataFields = [
   'ff:hasResidence',
 ];
 
-export const fetchProfileScreenData = async (selectedUser) => {
+export const fetchProfileScreenData = async (userId) => {
   let profileScreenData = new ProfileScreenData();
   //
   // fetch content information for each data field
@@ -29,7 +29,7 @@ export const fetchProfileScreenData = async (selectedUser) => {
   //
   // fetch user profile paths
   let userProfileExamples = await AsyncStorage.getItem('user-profile-examples');
-  const userProfilePath = userProfileExamples + selectedUser.userId + '.ttl';
+  const userProfilePath = userProfileExamples + userId + '.ttl';
   //
   // fetch user data from the user profile
   const userString = await readFile(userProfilePath);
@@ -49,24 +49,19 @@ export const fetchProfileScreenData = async (selectedUser) => {
   return profileScreenData;
 };
 
-export const updateUserProfile = async (
-  selectedUser,
-  field,
-  object,
-  updateValue
-) => {
+export const updateUserProfile = async (userId, field, object, updateValue) => {
   //
   // fetch user profile paths
   let userProfileExamplesPath = await AsyncStorage.getItem(
     'user-profile-examples'
   );
-  const userProfilePath =
-    userProfileExamplesPath + selectedUser.userId + '.ttl';
+  const userProfilePath = userProfileExamplesPath + userId + '.ttl';
 
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);
   const updatedGraph = updateOut(userGraph, field, object, updateValue);
   const updatedGraphString = await serializeTurtle(updatedGraph);
+  console.log(updatedGraphString);
   await writeFile(userProfilePath, updatedGraphString);
 };
 

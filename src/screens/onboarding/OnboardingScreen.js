@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import OnboardingList from './components/OnboardingList';
 import { fetchOnboardingScreenData } from './OnboardingController';
 import LoadingScreen from '../LoadingScreen';
-import { useSelector } from 'react-redux';
+import { useOnboardingStore } from '../../storage/zustand';
 
 // Component
 const OnboardingScreen = () => {
   const [onboardingScreenData, setOnboardingScreenData] = useState();
-  const onboardingFlow = useSelector((state) => state.onboardingReducer);
-
+  const onboardingFlow = useOnboardingStore((state) => state.cards);
+  console.log(onboardingFlow);
   useEffect(() => {
     const fetchData = async () => {
       try {

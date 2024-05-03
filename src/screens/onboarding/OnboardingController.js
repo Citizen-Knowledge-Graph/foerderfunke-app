@@ -24,8 +24,7 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingRegistry = await readJson(onboardingRegistryPath);
   //
   // iterate through onboarding cards
-  console.log('onboardingFlow', onboardingFlow.cards);
-  for (let card of onboardingFlow.cards) {
+  for (let card of onboardingFlow) {
     const { name, index, term } = card;
     const newOnboardingCards = await fetchOnboardingCards(
       onboardingRegistry,
@@ -150,7 +149,7 @@ export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
 };
 
 export const addUserProfileField = async (
-  selectedUser,
+  userId,
   field,
   constraints,
   value,
@@ -161,8 +160,7 @@ export const addUserProfileField = async (
   let userProfileExamplesPath = await AsyncStorage.getItem(
     'user-profile-examples'
   );
-  const userProfilePath =
-    userProfileExamplesPath + selectedUser.userId + '.ttl';
+  const userProfilePath = userProfileExamplesPath + userId + '.ttl';
 
   const userString = await readFile(userProfilePath);
   const userGraph = await parseTurtle(userString);

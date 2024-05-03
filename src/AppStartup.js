@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import fetchDataToDevice from './controllers/dataFetching';
-import { performValidationUpdate } from './storage/actions/validationUpdateReport';
 import { setResourceLocations } from './AppData';
+import { useUserStore, useUserUpdateStore } from './storage/zustand';
+import runValidation from './controllers/validation';
 
 const AppStartup = ({ children }) => {
-  const dispatch = useDispatch();
-  const selectedUser = useSelector((state) => state.selectUserReducer);
-  const userUpdate = useSelector((state) => state.userUpdateReducer);
+  const userId = useUserStore((state) => state.userId);
+  const userUpdate = useUserUpdateStore((state) => state.updateCounter);
   const [dataFetched, setDataFetched] = useState(false);
 
   // initialize data on app startup
@@ -24,14 +23,18 @@ const AppStartup = ({ children }) => {
     };
 
     initializeData();
-  }, [dispatch, dataFetched, selectedUser]);
+  }, [dataFetched, userId, userUpdate]);
 
   // run validation on user change
   useEffect(() => {
-    if (dataFetched) {
-      dispatch(performValidationUpdate(selectedUser));
-    }
-  }, [dispatch, selectedUser, userUpdate, dataFetched]);
+    const updateValidation = async () => {
+      if (dataFetched) {
+        await runValidation(userId);
+      }
+    };
+
+    updateValidation();
+  }, [userId, userUpdate, dataFetched]);
 
   return <>{children}</>;
 };

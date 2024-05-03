@@ -1,11 +1,10 @@
 import React from 'react';
 import ScreenView from '../../components/ScreenView';
 import { Button, YStack } from 'tamagui';
-import { useDispatch } from 'react-redux';
-import selectUser from '../../storage/actions/selectUserReport';
+import { useUserStore } from '../../storage/zustand';
 
 const JourneyScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
+  const updateUserId = useUserStore((state) => state.updateUserId);
 
   return (
     <ScreenView screenName={'Choose your Journey'}>
@@ -15,7 +14,7 @@ const JourneyScreen = ({ navigation }) => {
         </Button>
         <Button
           onPress={() => {
-            dispatch(selectUser('user-template'));
+            updateUserId('user-template');
             navigation.navigate('OnboardingStackScreen');
           }}
         >

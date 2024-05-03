@@ -3,17 +3,16 @@ import {
   validateAll,
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
-import validationReportAction from '../storage/actions/validationReport';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useValidationReportStore } from '../storage/zustand';
 
 // run validation
-const runValidation = async (dispatch, selectedUser) => {
+const runValidation = async (userId) => {
   // fetch selected user
   let userProfileExamplesPath = await AsyncStorage.getItem(
     'user-profile-examples'
   );
-  const userProfilePath =
-    userProfileExamplesPath + selectedUser.userId + '.ttl';
+  const userProfilePath = userProfileExamplesPath + userId + '.ttl';
   const userProfileString = await readFile(userProfilePath);
 
   // fetch datafields and materialization
@@ -54,7 +53,7 @@ const runValidation = async (dispatch, selectedUser) => {
     false
   );
 
-  dispatch(validationReportAction(validateAllReport));
+  useValidationReportStore.getState().updateValidationReport(validateAllReport);
 };
 
 export default runValidation;

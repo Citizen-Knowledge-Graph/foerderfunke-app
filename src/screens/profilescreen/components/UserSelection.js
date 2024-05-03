@@ -2,31 +2,30 @@ import React, { useState } from 'react';
 import { Select, Adapt, Sheet } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 import { Check, ChevronDown } from '@tamagui/lucide-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import selectUser from '../../../storage/actions/selectUserReport';
+import { useUserStore } from '../../../storage/zustand';
 
 const UserSelection = ({ alternativeUserProfiles }) => {
-  const selectedUser = useSelector((state) => state.selectUserReducer);
+  const userId = useUserStore((state) => state.userId);
 
   return (
     <SelectDemoItem
       id='select-demo-1'
-      selectedUser={selectedUser}
+      selectedUser={userId}
       alternativeUserProfiles={alternativeUserProfiles}
     />
   );
 };
 
 export function SelectDemoItem(props) {
-  const [val, setVal] = useState(props.selectedUser.userId);
-  const dispatch = useDispatch();
+  const { userId, updateUserId } = useUserStore();
+  const [val, setVal] = useState(userId);
 
   return (
     <Select
       value={val}
       onValueChange={(value) => {
         setVal(value);
-        dispatch(selectUser(value));
+        updateUserId(value);
       }}
       disablePreventBodyScroll
       {...props}

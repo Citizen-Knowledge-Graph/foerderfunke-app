@@ -1,17 +1,27 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import updateOnboardingFlow from '../../../storage/actions/updateOnboardingFlow';
+import { useOnboardingStore } from '../../../storage/zustand';
 
 function useOnboardingManager(onboardingCard, inputData, currentIndex) {
-  const dispatch = useDispatch();
+  const updateOnboardingFlow = useOnboardingStore(
+    (state) => state.updateOnboardingFlow
+  );
 
   return useCallback(() => {
     const { objectClass } = onboardingCard.inputConstraints;
 
     if (objectClass && inputData) {
-      dispatch(updateOnboardingFlow(objectClass, currentIndex, inputData));
+      updateOnboardingFlow({
+        name: objectClass,
+        index: currentIndex,
+        term: inputData,
+      });
     }
-  }, [onboardingCard.inputConstraints, inputData, dispatch, currentIndex]);
+  }, [
+    onboardingCard.inputConstraints,
+    inputData,
+    updateOnboardingFlow,
+    currentIndex,
+  ]);
 }
 
 export default useOnboardingManager;
