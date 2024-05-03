@@ -9,6 +9,8 @@ import { useValidationReportStore } from '../storage/zustand';
 // run validation
 const runValidation = async (userId) => {
   // fetch selected user
+  // const userProfile = UserStore.retrieveUserData(userId);
+
   let userProfileExamplesPath = await AsyncStorage.getItem(
     'user-profile-examples'
   );
@@ -16,10 +18,10 @@ const runValidation = async (userId) => {
   const userProfileString = await readFile(userProfilePath);
 
   // fetch datafields and materialization
+  // const dataFieldsString = DataFieldsStore.retrieveDataFields();
+
   const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
-  const materializationPath = await AsyncStorage.getItem('materialization');
-  const materializationString = await readFile(materializationPath);
   console.log(userProfileString);
   if (!(await validateUserProfile(userProfileString, datafieldsString))) {
     console.error('Invalid user profile');
@@ -44,6 +46,9 @@ const runValidation = async (userId) => {
   }
 
   console.log('Running validations for:', Object.keys(requirementProfiles));
+
+  const materializationPath = await AsyncStorage.getItem('materialization');
+  const materializationString = await readFile(materializationPath);
 
   let validateAllReport = await validateAll(
     userProfileString,

@@ -156,6 +156,17 @@ export const listAllFiles = async (shortenToRelativePath = false) => {
   return list;
 };
 
+export const readDirectory = async (relativeDirectoryPath) => {
+  const absoluteDirectoryPath =
+    FileSystem.documentDirectory + relativeDirectoryPath;
+  try {
+    return await FileSystem.readDirectoryAsync(absoluteDirectoryPath);
+  } catch (error) {
+    console.error(`Error reading directory: ${relativeDirectoryPath}`, error);
+    return null;
+  }
+};
+
 export const deleteAllFiles = async () => {
   const rootDirectory = FileSystem.documentDirectory;
   const files = await FileSystem.readDirectoryAsync(rootDirectory);

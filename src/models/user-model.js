@@ -1,15 +1,15 @@
 import { storage } from '../storage/mmkv';
 
-class UserStore {
+export class UserStore {
   // set a new field in the user data
-  setField(userId, field, value) {
-    let userProfile = this.retrieveUserData(userId);
+  static setField(userId, field, value) {
+    let userProfile = UserStore.retrieveUserData(userId);
     userProfile[field] = value;
-    this.storeUserData(userId, userProfile);
+    UserStore.storeUserData(userId, userProfile);
   }
 
   // store user data to mmkv
-  storeUserData(userId, userData) {
+  static storeUserData(userId, userData) {
     storage.set(userId, JSON.stringify(userData));
   }
 

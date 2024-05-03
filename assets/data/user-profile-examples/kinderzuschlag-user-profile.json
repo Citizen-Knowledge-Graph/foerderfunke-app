@@ -1,0 +1,16 @@
+{
+  "ff:hasFirstNames": "Max",
+  "ff:hasLastNames": "Mustermann",
+  "ff:hasBirthday": "1992-05-17",
+  "ff:paysRentCold": 900,
+  "ff:hasLivingArea": 80,
+  "ff:hasResidence": "Berlin",
+  "ff:hasParentingSetup": "ff:Elternpaar",
+  "ff:receivesWohngeld": 450,
+  "ff:hasIncomeBrutto": 2700,
+  "ff:hasIncomeNetto": 1600,
+  "ff:hasChildren": [
+    "ff:child1",
+    "ff:child2"
+  ]
+}
