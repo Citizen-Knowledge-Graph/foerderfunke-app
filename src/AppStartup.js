@@ -3,6 +3,8 @@ import fetchDataToDevice from './controllers/dataFetching';
 import { setResourceLocations } from './AppData';
 import { useUserStore, useUserUpdateStore } from './storage/zustand';
 import runValidation from './controllers/validation';
+import { initializeMMKVData, loadUserData } from './AppDataMMKV';
+import { UserStore } from './models/user-model';
 
 const AppStartup = ({ children }) => {
   const userId = useUserStore((state) => state.userId);
@@ -24,6 +26,16 @@ const AppStartup = ({ children }) => {
 
     initializeData();
   }, [dataFetched, userId, userUpdate]);
+
+  // initialise data to MMKV storage
+  useEffect(() => {
+    const initialiseMMKVData = async () => {
+      await loadUserData();
+      console.log(UserStore.retrieveUserData('kinderzuschlag-user-profile'));
+    };
+
+    initialiseMMKVData();
+  });
 
   // run validation on user change
   useEffect(() => {
