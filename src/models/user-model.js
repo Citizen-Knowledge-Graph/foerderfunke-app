@@ -14,7 +14,7 @@ export class UserStore {
   }
 
   // retrieve the user data from mmkv
-  retrieveUserData(userId) {
+  static retrieveUserData(userId) {
     const userString = storage.getString(userId);
     return JSON.parse(userString);
   }
