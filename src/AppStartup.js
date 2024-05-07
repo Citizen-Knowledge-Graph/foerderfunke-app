@@ -5,6 +5,7 @@ import { useUserStore, useUserUpdateStore } from './storage/zustand';
 import runValidation from './controllers/validation';
 import { initializeMMKVData, loadUserData } from './AppDataMMKV';
 import { UserStore } from './models/user-model';
+import { storage } from './storage/mmkv';
 
 const AppStartup = ({ children }) => {
   const userId = useUserStore((state) => state.userId);
@@ -32,6 +33,7 @@ const AppStartup = ({ children }) => {
     const initialiseMMKVData = async () => {
       await loadUserData();
       console.log(UserStore.retrieveUserData('kinderzuschlag-user-profile'));
+      console.log('all user ids: ', storage.getString('userIds'));
     };
 
     initialiseMMKVData();

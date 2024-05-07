@@ -9,7 +9,7 @@ export class ProfileScreenData {
   }
 
   addAlternativeUserProfile(value) {
-    this.alternativeUserProfiles.push(value);
+    this.alternativeUserProfiles = value;
   }
 }
 

@@ -11,11 +11,22 @@ export class UserStore {
   // store user data to mmkv
   static storeUserData(userId, userData) {
     storage.set(userId, JSON.stringify(userData));
+    const userIds = JSON.parse(storage.getString('userIds') || '[]');
+    if (!userIds.includes(userId)) {
+      userIds.push(userId);
+      console.log('userIds: ', userIds);
+      storage.set('userIds', JSON.stringify(userIds));
+    }
   }
 
   // retrieve the user data from mmkv
   static retrieveUserData(userId) {
     const userString = storage.getString(userId);
     return JSON.parse(userString);
+  }
+
+  // return all user ids
+  static retrieveAllUserIds() {
+    return JSON.parse(storage.getString('userIds') || '[]');
   }
 }

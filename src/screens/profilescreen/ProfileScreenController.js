@@ -4,6 +4,8 @@ import { getFirstOut, updateOut } from '../../utilities/graphManagement';
 import { ProfileDataField, ProfileScreenData } from './ProfileScreenModel';
 import { Share } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storage } from '../../storage/mmkv';
+import { UserStore } from '../../models/user-model';
 
 // config
 const dataFields = [
@@ -39,13 +41,11 @@ export const fetchProfileScreenData = async (userId) => {
   });
   //
   // fetch user profile meta data
-  const alternativeUserProfilesPath = 'user-profile-examples-registry.json';
-  const alternativeUserProfilesJson = await readJson(
-    alternativeUserProfilesPath
+  profileScreenData.addAlternativeUserProfile(UserStore.retrieveAllUserIds());
+  console.log(
+    'alternative user profiles: ',
+    profileScreenData.alternativeUserProfiles
   );
-  Object.keys(alternativeUserProfilesJson).map((key, value) => {
-    profileScreenData.addAlternativeUserProfile(key);
-  });
   return profileScreenData;
 };
 
