@@ -21,8 +21,13 @@ export const useValidationReportStore = create((set) => ({
 export const useUserUpdateStore = create((set) => ({
   updateCounter: 0,
   updateUserField: async (key, value) => {
-    console.log('STATE UPDATE: We are updating the user');
     const userId = useUserStore.getState().userId;
+    console.log(
+      'STATE UPDATE: We are updating the user with: ',
+      userId,
+      key,
+      value
+    );
     await updateUserProfile(userId, key, value);
     set((state) => ({ updateCounter: state.updateCounter + 1 }));
   },

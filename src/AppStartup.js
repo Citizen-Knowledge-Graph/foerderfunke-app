@@ -3,14 +3,13 @@ import fetchDataToDevice from './controllers/dataFetching';
 import { setResourceLocations } from './AppData';
 import { useUserStore, useUserUpdateStore } from './storage/zustand';
 import runValidation from './controllers/validation';
-import { initializeMMKVData, loadUserData } from './AppDataMMKV';
-import { UserStore } from './models/user-model';
-import { storage } from './storage/mmkv';
+import { loadUserData } from './AppDataMMKV';
 
 const AppStartup = ({ children }) => {
   const userId = useUserStore((state) => state.userId);
   const userUpdate = useUserUpdateStore((state) => state.updateCounter);
   const [dataFetched, setDataFetched] = useState(false);
+  const [mmkvDataInitialised, setMMKVDataInitialised] = useState(false);
 
   // initialize data on app startup
   useEffect(() => {
@@ -31,9 +30,10 @@ const AppStartup = ({ children }) => {
   // initialise data to MMKV storage
   useEffect(() => {
     const initialiseMMKVData = async () => {
-      await loadUserData();
-      console.log(UserStore.retrieveUserData('kinderzuschlag-user-profile'));
-      console.log('all user ids: ', storage.getString('userIds'));
+      if (!mmkvDataInitialised) {
+        await loadUserData();
+        setMMKVDataInitialised(true);
+      }
     };
 
     initialiseMMKVData();

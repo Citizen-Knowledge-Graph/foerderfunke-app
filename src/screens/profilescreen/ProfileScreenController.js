@@ -36,6 +36,7 @@ export const fetchProfileScreenData = async (userId) => {
   //
   // fetch user data from the user profile
   const userProfile = UserStore.retrieveUserData(userId);
+  console.log('Retrieved user profile:', userProfile);
   profileScreenData.profileData.forEach((entry) => {
     entry.setValue(userProfile[entry.key]);
   });
