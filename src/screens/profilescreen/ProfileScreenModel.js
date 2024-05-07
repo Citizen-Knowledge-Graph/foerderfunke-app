@@ -17,11 +17,11 @@ export class ProfileDataField {
   constructor(key) {
     this.key = key;
     this.displayName = null;
-    this.object = null;
+    this.value = null;
   }
 
-  setObject(value) {
-    this.object = value;
+  setValue(value) {
+    this.value = value;
   }
 
   setDisplayName(value) {

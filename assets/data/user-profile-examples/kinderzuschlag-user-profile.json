@@ -1,6 +1,6 @@
 {
   "ff:hasFirstNames": "Max",
-  "ff:hasLastNames": "Mustermann",
+  "ff:hasFamilyName": "Mustermann",
   "ff:hasBirthday": "1992-05-17",
   "ff:paysRentCold": 900,
   "ff:hasLivingArea": 80,

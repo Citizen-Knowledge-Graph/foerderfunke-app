@@ -1,10 +1,9 @@
 import { readFile, readJson, writeFile } from '../../utilities/fileManagement';
 import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
-import { getFirstOut, updateOut } from '../../utilities/graphManagement';
+import { updateOut } from '../../utilities/graphManagement';
 import { ProfileDataField, ProfileScreenData } from './ProfileScreenModel';
 import { Share } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { storage } from '../../storage/mmkv';
 import { UserStore } from '../../models/user-model';
 
 // config
@@ -13,6 +12,12 @@ const dataFields = [
   'ff:hasFamilyName',
   'ff:hasBirthday',
   'ff:hasResidence',
+  'ff:paysRentCold',
+  'ff:hasLivingArea',
+  'ff:hasParentingSetup',
+  'ff:receivesWohngeld',
+  'ff:hasIncomeBrutto',
+  'ff:hasIncomeNetto',
 ];
 
 export const fetchProfileScreenData = async (userId) => {
@@ -29,40 +34,21 @@ export const fetchProfileScreenData = async (userId) => {
     profileScreenData.addProfileDataField(newDataField);
   });
   //
-  // fetch user profile paths
-  let userProfileExamples = await AsyncStorage.getItem('user-profile-examples');
-  const userProfilePath = userProfileExamples + userId + '.ttl';
-  //
   // fetch user data from the user profile
-  const userString = await readFile(userProfilePath);
-  const userGraph = await parseTurtle(userString);
+  const userProfile = UserStore.retrieveUserData(userId);
   profileScreenData.profileData.forEach((entry) => {
-    entry.setObject(getFirstOut(userGraph, entry.key));
+    entry.setValue(userProfile[entry.key]);
   });
   //
   // fetch user profile meta data
   profileScreenData.addAlternativeUserProfile(UserStore.retrieveAllUserIds());
-  console.log(
-    'alternative user profiles: ',
-    profileScreenData.alternativeUserProfiles
-  );
   return profileScreenData;
 };
 
-export const updateUserProfile = async (userId, field, object, updateValue) => {
-  //
-  // fetch user profile paths
-  let userProfileExamplesPath = await AsyncStorage.getItem(
-    'user-profile-examples'
-  );
-  const userProfilePath = userProfileExamplesPath + userId + '.ttl';
-
-  const userString = await readFile(userProfilePath);
-  const userGraph = await parseTurtle(userString);
-  const updatedGraph = updateOut(userGraph, field, object, updateValue);
-  const updatedGraphString = await serializeTurtle(updatedGraph);
-  console.log(updatedGraphString);
-  await writeFile(userProfilePath, updatedGraphString);
+export const updateUserProfile = async (userId, field, updateValue) => {
+  console.log('Updating user profile');
+  UserStore.setField(userId, field, updateValue);
+  console.log('updated');
 };
 
 export const shareFile = async () => {

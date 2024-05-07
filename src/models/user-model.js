@@ -5,6 +5,7 @@ export class UserStore {
   static setField(userId, field, value) {
     let userProfile = UserStore.retrieveUserData(userId);
     userProfile[field] = value;
+    console.log('Updated user profile:', userId);
     UserStore.storeUserData(userId, userProfile);
   }
 
@@ -14,7 +15,6 @@ export class UserStore {
     const userIds = JSON.parse(storage.getString('userIds') || '[]');
     if (!userIds.includes(userId)) {
       userIds.push(userId);
-      console.log('userIds: ', userIds);
       storage.set('userIds', JSON.stringify(userIds));
     }
   }

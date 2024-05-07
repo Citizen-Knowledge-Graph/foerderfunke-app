@@ -13,5 +13,23 @@
   },
   "ff:hasDrivingLicense": {
     "display_name": "Führerschein"
+  },
+  "ff:paysRentCold": {
+    "display_name": "Kaltmiete"
+  },
+  "ff:hasLivingArea": {
+    "display_name": "Wohnfläche"
+  },
+  "ff:hasParentingSetup": {
+    "display_name": "Elternschaft"
+  },
+  "ff:hasIncomeBrutto": {
+    "display_name": "Einkommen brutto"
+  },
+  "ff:hasIncomeNetto": {
+    "display_name": "Einkommen netto"
+  },
+  "ff:receivesWohngeld": {
+    "display_name": "Erhält Wohngeld"
   }
 }
