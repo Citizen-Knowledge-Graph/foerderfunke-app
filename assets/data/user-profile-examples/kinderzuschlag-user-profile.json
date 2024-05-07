@@ -10,7 +10,9 @@
   "ff:hasIncomeBrutto": 2700,
   "ff:hasIncomeNetto": 1600,
   "ff:hasChildren": [
-    "ff:child1",
-    "ff:child2"
+    {
+      "ff:hasBirthday": "2022-05-17",
+      "ff:receivesKindergeld": 250,
+    }
   ]
 }
