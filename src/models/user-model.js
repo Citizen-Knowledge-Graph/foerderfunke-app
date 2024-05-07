@@ -5,15 +5,11 @@ export class UserStore {
   static setField(userId, field, value) {
     let userProfile = UserStore.retrieveUserData(userId);
     userProfile[field] = value;
-    console.log('Updated user profile:', userId, userProfile);
     UserStore.storeUserData(userId, userProfile);
-    console.log('ALL KEYS: ', storage.getAllKeys());
-    console.log('USER DATA: ', storage.getString(userId));
   }
 
   // store user data to mmkv
   static storeUserData(userId, userData) {
-    console.log('Storing user data for: ', userId);
     storage.set(userId, JSON.stringify(userData));
     const userIds = JSON.parse(storage.getString('userIds') || '[]');
     if (!userIds.includes(userId)) {
@@ -24,7 +20,6 @@ export class UserStore {
 
   // retrieve the user data from mmkv
   static retrieveUserData(userId) {
-    console.log('Fetching user data for: ', userId);
     const userString = storage.getString(userId);
     return JSON.parse(userString);
   }
