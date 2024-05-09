@@ -12,26 +12,20 @@ import {
 export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingScreenData = new OnboardingScreenData();
   //
-  // fetch datafields
-  const datafieldsPath = await AsyncStorage.getItem('datafields');
-  const datafieldsString = await readFile(datafieldsPath);
-  //
   // fetch onboarding cards from registry
   const onboardingRegistryPath = await AsyncStorage.getItem(
     'onboarding-registry'
   );
-  const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');
   const onboardingRegistry = await readJson(onboardingRegistryPath);
+  const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');
   //
   // iterate through onboarding cards
   for (let card of onboardingFlow) {
-    const { name, index, term } = card;
+    const { name, index } = card;
     const newOnboardingCards = await fetchOnboardingCards(
       onboardingRegistry,
       onboardingCardsPath,
-      name,
-      term,
-      datafieldsString
+      name
     );
     onboardingScreenData.insertOnboardingCards(newOnboardingCards, index);
   }
@@ -41,9 +35,7 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
 export const fetchOnboardingCards = async (
   onboardingRegistry,
   onboardingCardsPath,
-  name,
-  term,
-  datafieldsString
+  name
 ) => {
   //
   // retrieve onboarding cards from registry
@@ -54,98 +46,11 @@ export const fetchOnboardingCards = async (
   const newOnboardingCards = [];
   for (let card of onboardingCards) {
     //
-    // fetch datafield properties
-    const { datatype, possibleValues, objectClass } =
-      await fetchDatafieldProperties(datafieldsString, card.datafield);
-    //
-    // create input constraints
-    const newInputConstraints = new InputConstraints(
-      datatype,
-      possibleValues,
-      objectClass
-    );
-    //
     // create onboarding card
-    const newOnboardingCard = new OnboardingCard(
-      card.datafield,
-      term,
-      card.title,
-      newInputConstraints
-    );
+    const newOnboardingCard = new OnboardingCard(card.datafield, card.title);
     newOnboardingCards.push(newOnboardingCard);
   }
   return newOnboardingCards;
-};
-
-export const fetchDatafieldProperties = async (datafieldsString, datafield) => {
-  const datatypeQuery = `
-    PREFIX ff: <https://foerderfunke.org/default#>
-    PREFIX sh: <http://www.w3.org/ns/shacl#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    SELECT ?datatype
-    WHERE {
-      ?shape a sh:NodeShape ;
-             sh:targetClass ff:Citizen ;
-             sh:property ?prop .
-      
-      ?prop sh:path ${datafield} ;
-            sh:datatype ?datatype .
-    }`;
-
-  const datatypeList = await runSparqlSelectQueryOnRdfString(
-    datatypeQuery,
-    datafieldsString
-  );
-  const datatype =
-    datatypeList.length > 0 && datatypeList[0].datatype
-      ? datatypeList[0].datatype
-      : 'no datatype provided';
-
-  const inValuesQuery = `
-    PREFIX ff: <https://foerderfunke.org/default#>
-    PREFIX sh: <http://www.w3.org/ns/shacl#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    SELECT ?item
-    WHERE {
-      ?shape a sh:NodeShape ;
-             sh:targetClass ff:Citizen ;
-             sh:property ?prop .
-
-      ?prop sh:path ${datafield} ;
-            sh:in ?inList .
-            
-      # Traverse the RDF list
-      ?inList rdf:rest* / rdf:first ?item.
-    }`;
-  const possibleValues = await runSparqlSelectQueryOnRdfString(
-    inValuesQuery,
-    datafieldsString
-  );
-
-  const objectClassQuery = `
-    PREFIX ff: <https://foerderfunke.org/default#>
-    PREFIX sh: <http://www.w3.org/ns/shacl#>
-    
-    SELECT ?class
-    WHERE {
-      ?shape a sh:NodeShape ;
-             sh:property ?propertyShape .
-
-      ?propertyShape sh:path ${datafield} ;
-             sh:class ?class .
-    }`;
-  const objectClassList = await runSparqlSelectQueryOnRdfString(
-    objectClassQuery,
-    datafieldsString
-  );
-  const objectClass =
-    objectClassList.length > 0 && objectClassList[0].class
-      ? objectClassList[0].class
-      : null;
-
-  return { datatype, possibleValues, objectClass };
 };
 
 export const addUserProfileField = async (
