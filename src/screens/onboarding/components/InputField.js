@@ -11,9 +11,6 @@ import { SizableText } from 'tamagui';
 const InputField = ({ onboardingCard, setInputData }) => {
   const { datatype, options, objectClass } = onboardingCard;
 
-  console.log('onboardingCard', onboardingCard);
-  console.log('onboardingCard details', datatype, options, objectClass);
-
   // check for selection
   if (options && options.length > 0) {
     return (

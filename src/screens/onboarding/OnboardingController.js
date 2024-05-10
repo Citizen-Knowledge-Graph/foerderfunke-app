@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
 import { addOut } from '../../utilities/graphManagement';
 import { OnboardingScreenData, OnboardingCard } from './OnboardingModel';
+import { UserStore } from '../../models/user-model';
 
 export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingScreenData = new OnboardingScreenData();
@@ -55,24 +56,6 @@ export const fetchOnboardingCards = async (
   return newOnboardingCards;
 };
 
-export const addUserProfileField = async (
-  userId,
-  field,
-  constraints,
-  value,
-  term
-) => {
-  //
-  // fetch user profile paths
-  let userProfileExamplesPath = await AsyncStorage.getItem(
-    'user-profile-examples'
-  );
-  const userProfilePath = userProfileExamplesPath + userId + '.ttl';
-
-  const userString = await readFile(userProfilePath);
-  const userGraph = await parseTurtle(userString);
-  const updatedGraph = addOut(userGraph, field, constraints, value, term);
-  const updatedGraphString = await serializeTurtle(updatedGraph);
-  console.log('new graph', updatedGraphString);
-  await writeFile(userProfilePath, updatedGraphString);
+export const addUserProfileField = async (userId, field, newValue) => {
+  UserStore.setField(userId, field, newValue);
 };

@@ -5,9 +5,9 @@ function useAddOnboardingData(onboardingCard, inputData) {
   const addUserField = useUserUpdateStore((state) => state.addUserField);
 
   return useCallback(() => {
-    const { datafield, term, inputConstraints } = onboardingCard;
+    const { datafield } = onboardingCard;
 
-    addUserField(datafield, inputConstraints, term, inputData);
+    addUserField(datafield, inputData);
   }, [onboardingCard, addUserField, inputData]);
 }
 

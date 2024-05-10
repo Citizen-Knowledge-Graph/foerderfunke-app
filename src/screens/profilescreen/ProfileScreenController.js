@@ -47,9 +47,7 @@ export const fetchProfileScreenData = async (userId) => {
 };
 
 export const updateUserProfile = async (userId, field, updateValue) => {
-  console.log('Updating user profile');
   UserStore.setField(userId, field, updateValue);
-  console.log('updated');
 };
 
 export const shareFile = async () => {

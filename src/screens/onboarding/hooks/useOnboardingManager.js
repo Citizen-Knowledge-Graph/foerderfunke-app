@@ -7,7 +7,7 @@ function useOnboardingManager(onboardingCard, inputData, currentIndex) {
   );
 
   return useCallback(() => {
-    const { objectClass } = onboardingCard.inputConstraints;
+    const { objectClass } = onboardingCard;
 
     if (objectClass && inputData) {
       updateOnboardingFlow({
@@ -16,12 +16,7 @@ function useOnboardingManager(onboardingCard, inputData, currentIndex) {
         term: inputData,
       });
     }
-  }, [
-    onboardingCard.inputConstraints,
-    inputData,
-    updateOnboardingFlow,
-    currentIndex,
-  ]);
+  }, [onboardingCard, inputData, updateOnboardingFlow, currentIndex]);
 }
 
 export default useOnboardingManager;
