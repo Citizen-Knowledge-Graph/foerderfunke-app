@@ -42,7 +42,13 @@ export const fetchOnboardingCards = async (
   for (let card of onboardingCards) {
     //
     // create onboarding card
-    const newOnboardingCard = new OnboardingCard(card.datafield, card.title);
+    const newOnboardingCard = new OnboardingCard(
+      card.datafield,
+      card.title,
+      card.datatype,
+      card.options ? card.options : null,
+      card.objectClass ? card.objectClass : 'default'
+    );
     newOnboardingCards.push(newOnboardingCard);
   }
   return newOnboardingCards;

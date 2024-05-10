@@ -1,54 +1,74 @@
 [
   {
     "datafield": "ff:hasFirstNames",
-    "title": "Tell us your first name"
+    "title": "Tell us your first name",
+    "datatype": "string"
   },
   {
     "datafield": "ff:hasFamilyName",
-    "title": "Tell us your family name"
+    "title": "Tell us your family name",
+    "datatype": "string"
   },
   {
     "datafield": "ff:hasBirthday",
-    "title": "When is your birthday?"
+    "title": "When is your birthday?",
+    "datatype": "date"
   },
   {
     "datafield": "ff:hasGender",
-    "title": "What is your gender"
+    "title": "What is your gender",
+    "datatype": "string"
   },
   {
     "datafield": "ff:hasBirthPlace",
-    "title": "Where were you born?"
+    "title": "Where were you born?",
+    "datatype": "string"
   },
   {
     "datafield": "ff:hasResidence",
-    "title": "Where do you live?"
+    "title": "Where do you live?",
+    "datatype": "string"
   },
   {
     "datafield": "ff:hasMaritalStatus",
-    "title": "What is your relationship status?"
+    "title": "What is your relationship status?",
+    "datatype": "selection",
+    "options": [
+      "single",
+      "married",
+      "divorced",
+      "widowed"
+    ]
   },
   {
     "datafield": "ff:paysRentCold",
-    "title": "How much rent do you pay - cold?"
+    "title": "How much rent do you pay - cold?",
+    "datatype": "integer"
   },
   {
     "datafield": "ff:hasLivingArea",
-    "title": "How large is your living area in square meters?"
+    "title": "How large is your living area in square meters?",
+    "datatype": "integer"
   },
   {
     "datafield": "ff:receivesWohngeld",
-    "title": "How much if any Wohngeld do you receive?"
+    "title": "How much if any Wohngeld do you receive?",
+    "datatype": "integer"
   },
   {
     "datafield": "ff:hasIncomeBrutto",
-    "title": "What is your income BEFORE taxes?"
+    "title": "What is your income BEFORE taxes?",
+    "datatype": "integer"
   },
   {
     "datafield": "ff:hasIncomeNetto",
-    "title": "What is your income AFTER taxes?"
+    "title": "What is your income AFTER taxes?",
+    "datatype": "integer"
   },
   {
     "datafield": "ff:hasChild",
-    "title": "Do you have a child?"
+    "title": "Do you have a child?",
+    "datatype": "class",
+    "objectClass": "ff:Child"
   }
 ]
