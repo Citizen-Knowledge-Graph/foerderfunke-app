@@ -35,8 +35,8 @@ export const SelectInput = ({ options, setInputData }) => {
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(
     options.map((obj) => ({
-      label: obj.item,
-      value: obj.item,
+      label: obj,
+      value: obj,
     }))
   );
 

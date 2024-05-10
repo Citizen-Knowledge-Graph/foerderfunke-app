@@ -9,15 +9,17 @@ import ObjectInput from './InputObjectClass';
 import { SizableText } from 'tamagui';
 
 const InputField = ({ onboardingCard, setInputData }) => {
-  const { datatype, possibleValues, objectClass } =
-    onboardingCard.inputConstraints;
+  const { datatype, options, objectClass } = onboardingCard;
+
+  console.log('onboardingCard', onboardingCard);
+  console.log('onboardingCard details', datatype, options, objectClass);
 
   // check for selection
-  if (possibleValues && possibleValues.length > 0) {
+  if (options && options.length > 0) {
     return (
       <SelectInput
         title={onboardingCard.title}
-        options={possibleValues}
+        options={options}
         setInputData={setInputData}
       />
     );
@@ -31,11 +33,11 @@ const InputField = ({ onboardingCard, setInputData }) => {
   }
 
   switch (datatype) {
-    case 'http://www.w3.org/2001/XMLSchema#string':
+    case 'string':
       return <StringInput setInputData={setInputData} />;
-    case 'http://www.w3.org/2001/XMLSchema#integer':
+    case 'integer':
       return <IntegerInput setInputData={setInputData} />;
-    case 'http://www.w3.org/2001/XMLSchema#date':
+    case 'date':
       return <DateInput setInputData={setInputData} />;
     default:
       return <SizableText color={'black'}>Unsupported data type</SizableText>;
