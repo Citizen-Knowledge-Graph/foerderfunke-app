@@ -1,14 +1,23 @@
 [
   {
     "datafield": "ff:hasBirthday",
-    "title": "When was your child born"
+    "title": "When was your child born",
+    "datatype": "date"
   },
   {
     "datafield": "ff:hasMaritalStatus",
-    "title": "What is child's your marital status"
+    "title": "What is child's your marital status",
+    "datatype": "selection",
+    "options": [
+      "single",
+      "married",
+      "divorced",
+      "widowed"
+    ]
   },
   {
     "datafield": "ff:receiveKindergeld",
-    "title": "Do you receive Kindergeld"
+    "title": "Do you receive Kindergeld",
+    "datatype": "integer"
   }
 ]
