@@ -2,12 +2,7 @@ import { readFile, readJson, writeFile } from '../../utilities/fileManagement';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
 import { addOut } from '../../utilities/graphManagement';
-import { runSparqlSelectQueryOnRdfString } from '@foerderfunke/matching-engine/src/utils';
-import {
-  OnboardingScreenData,
-  OnboardingCard,
-  InputConstraints,
-} from './OnboardingModel';
+import { OnboardingScreenData, OnboardingCard } from './OnboardingModel';
 
 export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingScreenData = new OnboardingScreenData();
