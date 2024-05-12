@@ -29,6 +29,7 @@ const InputField = ({ onboardingCard, setInputData }) => {
     );
   }
 
+  // check for simple data types
   switch (datatype) {
     case 'string':
       return <StringInput setInputData={setInputData} />;

@@ -48,7 +48,10 @@ export const useUserUpdateStore = create((set) => ({
 export const useOnboardingStore = create((set) => ({
   cards: [{ name: 'default', index: 0 }],
   updateOnboardingFlow: (newCards) => {
+    console.log('current state:', useOnboardingStore.getState().cards);
+    console.log('we are adding this new card:', newCards);
     console.log('STATE UPDATE: We are updating the onboarding flow');
-    set((state) => ({ cards: state.cards.push(newCards) }));
+    set((state) => ({ cards: [...state.cards, newCards] }));
+    console.log('new state:', useOnboardingStore.getState().cards);
   },
 }));
