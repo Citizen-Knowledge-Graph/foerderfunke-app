@@ -3,9 +3,7 @@ import { storage } from '../storage/mmkv';
 export class UserStore {
   // set a new field in the user data
   static setField(userId, field, value) {
-    console.log('setting field', field, 'to', value, 'for user', userId);
     let userProfile = UserStore.retrieveUserData(userId);
-    console.log('userProfile', userProfile);
     userProfile[field] = value;
     UserStore.storeUserData(userId, userProfile);
   }

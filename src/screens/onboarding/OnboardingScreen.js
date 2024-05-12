@@ -8,7 +8,9 @@ import { useOnboardingStore } from '../../storage/zustand';
 const OnboardingScreen = () => {
   const [onboardingScreenData, setOnboardingScreenData] = useState();
   const onboardingFlow = useOnboardingStore((state) => state.cards);
-  console.log(onboardingFlow);
+
+  console.log(onboardingScreenData);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

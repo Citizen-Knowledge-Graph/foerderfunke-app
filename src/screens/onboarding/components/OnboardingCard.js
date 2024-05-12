@@ -64,6 +64,7 @@ const OnboardingCard = ({
             <Button
               size='$4'
               onPress={() => {
+                console.log('BUTTON IS PRESSED: Add to profile');
                 handleAddData();
                 handleOnboardingManager();
                 scrollToNext();

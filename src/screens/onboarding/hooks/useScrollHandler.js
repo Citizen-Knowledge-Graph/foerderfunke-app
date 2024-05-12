@@ -5,7 +5,7 @@ export const useScrollHandler = (onboardingScreenData, height) => {
   const scrollViewRef = useRef(null);
 
   const scrollToNext = () => {
-    if (currentIndex < onboardingScreenData.onboadingCards.length - 1) {
+    if (currentIndex < onboardingScreenData.onboadingCards.length) {
       const newIndex = currentIndex + 1;
       setCurrentIndex(newIndex);
       scrollViewRef.current?.scrollTo({
