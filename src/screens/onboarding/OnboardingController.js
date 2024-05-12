@@ -1,7 +1,5 @@
-import { readFile, readJson, writeFile } from '../../utilities/fileManagement';
+import { readJson } from '../../utilities/fileManagement';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
-import { addOut } from '../../utilities/graphManagement';
 import { OnboardingScreenData, OnboardingCard } from './OnboardingModel';
 import { UserStore } from '../../models/user-model';
 
