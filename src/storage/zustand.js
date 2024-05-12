@@ -46,9 +46,17 @@ export const useUserUpdateStore = create((set) => ({
 }));
 
 export const useOnboardingStore = create((set) => ({
-  cards: [{ name: 'default', index: 0 }],
+  cards: [{ name: 'default', index: 0, id: 'default' }],
   updateOnboardingFlow: (newCards) => {
     console.log('STATE UPDATE: We are updating the onboarding flow');
-    set((state) => ({ cards: [...state.cards, newCards] }));
+    set((state) => {
+      const exists = state.cards.some((card) => card.id === newCards.id);
+      if (!exists) {
+        const updatedCards = [...state.cards, newCards];
+        return { cards: updatedCards };
+      } else {
+        return { cards: state.cards }; // Return the unchanged state
+      }
+    });
   },
 }));
