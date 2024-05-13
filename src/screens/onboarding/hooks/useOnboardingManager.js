@@ -10,10 +10,13 @@ function useOnboardingManager(onboardingCard, inputData, currentIndex) {
     const { objectClass } = onboardingCard;
 
     if (objectClass && inputData) {
-      updateOnboardingFlow({
-        name: objectClass,
-        index: currentIndex,
-      });
+      updateOnboardingFlow(
+        {
+          name: objectClass,
+          index: currentIndex,
+        },
+        inputData
+      );
     }
   }, [onboardingCard, inputData, updateOnboardingFlow, currentIndex]);
 }

@@ -9,6 +9,7 @@ const FullScreenView = forwardRef(({ children, handleScroll }, ref) => {
       style={styles.scrollView}
       pagingEnabled={true}
       onMomentumScrollEnd={handleScroll}
+      scrollIndicatorInsets={{ right: 1 }}
     >
       <PrimaryContainer>{children}</PrimaryContainer>
     </ScrollView>
