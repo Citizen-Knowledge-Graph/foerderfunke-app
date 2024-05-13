@@ -67,7 +67,7 @@
   },
   {
     "datafield": "ff:hasChild",
-    "title": "Do you have a child?",
+    "title": "If any how many children do you want to add?",
     "datatype": "class",
     "objectClass": "ff:Child"
   }

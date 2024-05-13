@@ -1,9 +1,13 @@
-import React from 'react';
-import { RadioGroup, XStack, YStack, SizableText } from 'tamagui';
+import React, { useState } from 'react';
+import { RadioGroup, XStack, YStack, SizableText, View, Button } from 'tamagui';
 import 'react-native-get-random-values';
 import { nanoid } from 'nanoid';
+import { Plus, Minus } from '@tamagui/lucide-icons';
+import { colorTokens } from '@tamagui/themes';
 
 const ObjectInput = ({ setInputData, objectClass }) => {
+  const [counter, setCounter] = useState(0);
+
   const handleValueChange = (value) => {
     if (value) {
       const objectId = objectClass.toLowerCase() + '_' + nanoid(4);
@@ -15,12 +19,36 @@ const ObjectInput = ({ setInputData, objectClass }) => {
   };
 
   return (
-    <RadioGroup onValueChange={handleValueChange} name='form'>
-      <YStack alignItems='flex-start' gap='$5'>
-        <RadioItem value={objectClass} id='1' label='Yes' />
-        <RadioItem value={null} id='2' label='No' />
-      </YStack>
-    </RadioGroup>
+    <YStack>
+      <XStack
+        backgroundColor={colorTokens.light.purple.purple6}
+        padding={10}
+        borderRadius={10}
+        gap={20}
+        width={150}
+        justifyContent={'space-between'}
+      >
+        <Button
+          width={24}
+          height={24}
+          backgroundColor={'white'}
+          icon={<Minus size='$1' color={'black'} />}
+          onPress={() => {
+            if (counter > 0) {
+              setCounter(counter - 1);
+            }
+          }}
+        />
+        <SizableText color={'black'}>{counter}</SizableText>
+        <Button
+          width={24}
+          height={24}
+          backgroundColor={'white'}
+          icon={<Plus size='$1' color={'black'} />}
+          onPress={() => setCounter(counter + 1)}
+        />
+      </XStack>
+    </YStack>
   );
 };
 

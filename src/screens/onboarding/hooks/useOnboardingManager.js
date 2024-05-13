@@ -13,7 +13,6 @@ function useOnboardingManager(onboardingCard, inputData, currentIndex) {
       updateOnboardingFlow({
         name: objectClass,
         index: currentIndex,
-        id: inputData,
       });
     }
   }, [onboardingCard, inputData, updateOnboardingFlow, currentIndex]);

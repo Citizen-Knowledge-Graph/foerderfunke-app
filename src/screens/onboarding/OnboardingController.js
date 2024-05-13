@@ -45,6 +45,7 @@ export const fetchOnboardingCards = async (
     //
     // create onboarding card
     const newOnboardingCard = new OnboardingCard(
+      name,
       card.datafield,
       card.title,
       card.datatype,

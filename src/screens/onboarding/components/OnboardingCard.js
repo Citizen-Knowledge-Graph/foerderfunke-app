@@ -46,6 +46,11 @@ const OnboardingCard = ({
         </XStack>
         <YStack gap={30}>
           <XStack justifyContent={'center'}>
+            <SizableText style={styles.chapterText}>
+              {onboardingCard.group}
+            </SizableText>
+          </XStack>
+          <XStack justifyContent={'center'}>
             <SizableText style={styles.titleText}>
               {onboardingCard.title}
             </SizableText>
@@ -64,7 +69,6 @@ const OnboardingCard = ({
             <Button
               size='$4'
               onPress={() => {
-                console.log('BUTTON IS PRESSED: Add to profile');
                 handleAddData();
                 handleOnboardingManager();
                 scrollToNext();
@@ -96,6 +100,10 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
+    color: 'black',
+  },
+  chapterText: {
+    fontSize: 16,
     color: 'black',
   },
   inputField: {
