@@ -49,7 +49,10 @@ export const useOnboardingStore = create((set) => ({
   cards: [{ name: 'default', index: 0 }],
   updateOnboardingFlow: (newCards, count) => {
     console.log('STATE UPDATE: We are updating the onboarding flow');
-    const newCardsArray = Array.from({ length: count }, () => newCards);
-    set((state) => ({ cards: [...state.cards, newCardsArray] }));
+    const newCardsArray = Array.from({ length: count }, (_, index) => ({
+      ...newCards,
+      id: index,
+    }));
+    set((state) => ({ cards: [...state.cards, ...newCardsArray] }));
   },
 }));

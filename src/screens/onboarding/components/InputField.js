@@ -24,9 +24,7 @@ const InputField = ({ onboardingCard, setInputData }) => {
 
   // check for object class
   if (objectClass) {
-    return (
-      <ObjectInput setInputData={setInputData} objectClass={objectClass} />
-    );
+    return <ObjectInput setInputData={setInputData} />;
   }
 
   // check for simple data types

@@ -47,7 +47,7 @@ const OnboardingCard = ({
         <YStack gap={30}>
           <XStack justifyContent={'center'}>
             <SizableText style={styles.chapterText}>
-              {onboardingCard.group}
+              {onboardingCard.group} {onboardingCard.id}
             </SizableText>
           </XStack>
           <XStack justifyContent={'center'}>

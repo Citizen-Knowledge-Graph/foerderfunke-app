@@ -9,8 +9,9 @@ export class OnboardingScreenData {
 }
 
 export class OnboardingCard {
-  constructor(group, datafield, title, datatype, options, objectClass) {
+  constructor(group, id, datafield, title, datatype, options, objectClass) {
     this.group = group;
+    this.id = id;
     this.datafield = datafield;
     this.title = title;
     this.datatype = datatype;

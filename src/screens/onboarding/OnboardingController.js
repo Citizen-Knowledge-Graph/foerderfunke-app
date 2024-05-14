@@ -16,13 +16,14 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
   // iterate through onboarding cards
   console.log('onboardingFlow', onboardingFlow);
   for (let card of onboardingFlow) {
-    const { name, index } = card;
+    const { name, index, id } = card;
     console.log('name', name);
     console.log('index', index);
     const newOnboardingCards = await fetchOnboardingCards(
       onboardingRegistry,
       onboardingCardsPath,
-      name
+      name,
+      id
     );
     onboardingScreenData.insertOnboardingCards(newOnboardingCards, index);
   }
@@ -32,7 +33,8 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
 export const fetchOnboardingCards = async (
   onboardingRegistry,
   onboardingCardsPath,
-  name
+  name,
+  id
 ) => {
   //
   // retrieve onboarding cards from registry
@@ -46,6 +48,7 @@ export const fetchOnboardingCards = async (
     // create onboarding card
     const newOnboardingCard = new OnboardingCard(
       name,
+      id,
       card.datafield,
       card.title,
       card.datatype,
