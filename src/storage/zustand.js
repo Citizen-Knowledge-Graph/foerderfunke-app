@@ -53,6 +53,12 @@ export const useOnboardingStore = create((set) => ({
       ...newCards,
       id: index,
     }));
-    set((state) => ({ cards: [...state.cards, ...newCardsArray] }));
+    set((state) => {
+      const existingCards = state.cards.filter(
+        (card) => !newCardsArray.some((newCard) => newCard.name === card.name)
+      );
+
+      return { cards: [...existingCards, ...newCardsArray] };
+    });
   },
 }));
