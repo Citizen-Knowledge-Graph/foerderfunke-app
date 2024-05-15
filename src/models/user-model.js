@@ -5,6 +5,22 @@ export class UserStore {
   static setField(userId, field, value) {
     let userProfile = UserStore.retrieveUserData(userId);
     userProfile[field] = value;
+    console.log('user profile', userProfile);
+    UserStore.storeUserData(userId, userProfile);
+  }
+
+  // set a new field in the nested user data
+  static setNestedField(userId, group, id, field, value) {
+    console.log('setNestedField', userId, group, id, field, value);
+    let userProfile = UserStore.retrieveUserData(userId);
+    if (!userProfile[group]) {
+      userProfile[group] = [];
+    }
+    if (!userProfile[group][id]) {
+      userProfile[group][id] = {};
+    }
+    userProfile[group][id][field] = value;
+    console.log('user profile', userProfile);
     UserStore.storeUserData(userId, userProfile);
   }
 

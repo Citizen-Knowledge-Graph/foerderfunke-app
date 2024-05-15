@@ -7,12 +7,12 @@ function useOnboardingManager(onboardingCard, inputData, currentIndex) {
   );
 
   return useCallback(() => {
-    const { objectClass } = onboardingCard;
+    const { datatype, datafield } = onboardingCard;
 
-    if (objectClass && inputData) {
+    if (datatype === 'class') {
       updateOnboardingFlow(
         {
-          name: objectClass,
+          name: datafield,
           index: currentIndex,
         },
         inputData

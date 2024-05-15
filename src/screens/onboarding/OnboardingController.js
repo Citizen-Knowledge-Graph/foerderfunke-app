@@ -63,3 +63,13 @@ export const fetchOnboardingCards = async (
 export const addUserProfileField = async (userId, field, newValue) => {
   UserStore.setField(userId, field, newValue);
 };
+
+export const addNestedUserProfileField = async (
+  userId,
+  group,
+  id,
+  datafield,
+  newValue
+) => {
+  UserStore.setNestedField(userId, group, id, datafield, newValue);
+};

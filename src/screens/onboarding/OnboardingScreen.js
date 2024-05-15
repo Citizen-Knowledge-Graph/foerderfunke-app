@@ -9,8 +9,6 @@ const OnboardingScreen = () => {
   const [onboardingScreenData, setOnboardingScreenData] = useState();
   const onboardingFlow = useOnboardingStore((state) => state.cards);
 
-  console.log(onboardingScreenData);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
