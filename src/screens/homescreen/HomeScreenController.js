@@ -10,7 +10,6 @@ export const fetchHomeScreenData = async (validateAllReport) => {
   const { missingUserInputsAggregated, reports } = validateAllReport;
 
   for (let report of reports) {
-    console.log('Report:', report);
     let { rpUri, result, violations, missingUserInput } = report;
     let newScheme = new SchemeData(rpUri);
     const schemeData = schemeRegistry.filter(
@@ -34,6 +33,5 @@ export const fetchHomeScreenData = async (validateAllReport) => {
   }
 
   homeScreenData.setMissingUserInputsAggregated(missingUserInputsAggregated);
-  console.log('Home screen data:', missingUserInputsAggregated);
   return homeScreenData;
 };
