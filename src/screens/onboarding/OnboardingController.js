@@ -17,8 +17,6 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
   console.log('onboardingFlow', onboardingFlow);
   for (let card of onboardingFlow) {
     const { name, index, id } = card;
-    console.log('name', name);
-    console.log('index', index);
     const newOnboardingCards = await fetchOnboardingCards(
       onboardingRegistry,
       onboardingCardsPath,
