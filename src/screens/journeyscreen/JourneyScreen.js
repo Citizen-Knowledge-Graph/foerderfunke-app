@@ -9,12 +9,18 @@ const JourneyScreen = ({ navigation }) => {
   return (
     <ScreenView screenName={'Choose your Journey'}>
       <YStack gap={10}>
-        <Button onPress={() => navigation.navigate('MainTabNavigator')}>
+        <Button
+          onPress={() => {
+            navigation.removeListener;
+            navigation.navigate('MainTabNavigator');
+          }}
+        >
           Pre-defined User Profile
         </Button>
         <Button
           onPress={() => {
             updateUserId('user-template');
+            navigation.removeListener;
             navigation.navigate('OnboardingStackScreen');
           }}
         >

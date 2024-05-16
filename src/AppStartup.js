@@ -30,7 +30,7 @@ const AppStartup = ({ children }) => {
   // initialise data to MMKV storage
   useEffect(() => {
     const initialiseMMKVData = async () => {
-      if (!mmkvDataInitialised) {
+      if (dataFetched && !mmkvDataInitialised) {
         await loadUserData();
         setMMKVDataInitialised(true);
       }
@@ -48,7 +48,7 @@ const AppStartup = ({ children }) => {
     };
 
     updateValidation();
-  }, [userId, userUpdate, dataFetched]);
+  }, [userId, userUpdate, dataFetched, mmkvDataInitialised]);
 
   return <>{children}</>;
 };

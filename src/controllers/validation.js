@@ -12,7 +12,9 @@ import { UserStore } from '../models/user-model';
 const runValidation = async (userId) => {
   //
   // fetch selected user
+  console.log('User Id:', userId);
   const userProfile = UserStore.retrieveUserData(userId);
+  console.log('User profile:', userProfile);
   const userProfileString = await convertUserProfileToTurtle(userProfile);
 
   console.log('User profile:', userProfileString);
