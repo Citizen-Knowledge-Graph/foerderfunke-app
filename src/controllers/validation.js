@@ -41,7 +41,6 @@ const runValidation = async (userId) => {
     requirementProfiles[rpUri] = await readFile(queryPath);
   }
 
-  console.log('Requirement profiles:', requirementProfiles[0]);
   console.log('Running validations for:', Object.keys(requirementProfiles));
 
   const materializationPath = await AsyncStorage.getItem('materialization');

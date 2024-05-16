@@ -5,6 +5,7 @@
   "scripts": {
     "zip": "node -e \"const { zip } = require('zip-a-folder'); (async () => { await zip('./assets/data', './assets/data.zip'); })();\"",
     "expo:ios": "npm run zip && expo run:ios",
+    "go:ios": "npm run zip && npx expo start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",

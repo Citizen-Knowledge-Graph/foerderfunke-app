@@ -15,11 +15,6 @@
     "datatype": "date"
   },
   {
-    "datafield": "ff:hasGender",
-    "title": "What is your gender",
-    "datatype": "string"
-  },
-  {
     "datafield": "ff:hasBirthPlace",
     "title": "Where were you born?",
     "datatype": "string"
@@ -34,7 +29,7 @@
     "title": "What is your relationship status?",
     "datatype": "selection",
     "options": [
-      "single",
+      "LD",
       "married",
       "divorced",
       "widowed"
@@ -49,6 +44,15 @@
     "datafield": "ff:hasLivingArea",
     "title": "How large is your living area in square meters?",
     "datatype": "integer"
+  },
+  {
+    "datafield": "ff:parentingSetup",
+    "title": "What is your parenting setup?",
+    "datatype": "selection",
+    "options": [
+      "ff:Elternpaar",
+      "ff:Alleinerziehend"
+    ]
   },
   {
     "datafield": "ff:receivesWohngeld",

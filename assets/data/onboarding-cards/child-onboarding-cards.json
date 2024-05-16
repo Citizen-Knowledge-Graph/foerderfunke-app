@@ -9,7 +9,7 @@
     "title": "What is child's your marital status",
     "datatype": "selection",
     "options": [
-      "single",
+      "LD",
       "married",
       "divorced",
       "widowed"
