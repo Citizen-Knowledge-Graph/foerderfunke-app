@@ -8,26 +8,33 @@ export const fetchHomeScreenData = async (validateAllReport) => {
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
   const { missingUserInputsAggregated, reports } = validateAllReport;
+  console.log('*** reports ', reports);
 
   for (let report of reports) {
-    let id = report.filename;
-    let newScheme = new SchemeData(id);
-    newScheme.setTitle(schemeRegistry[id].title);
-    newScheme.setDescription(schemeRegistry[id].description);
-    if (report.result === ValidationResult.ELIGIBLE) {
+    let { rpUri, result, violations, missingUserInput } = report;
+    console.log('*** rpUri ', rpUri);
+    console.log('*** result ', result);
+    let newScheme = new SchemeData(rpUri);
+    const schemeData = schemeRegistry.filter(
+      (scheme) => scheme.rpUri === rpUri
+    );
+    const { title, description } = schemeData[0];
+    newScheme.setTitle(title);
+    newScheme.setDescription(description);
+    if (result === ValidationResult.ELIGIBLE) {
       newScheme.setDetails('');
       homeScreenData.addEligible(newScheme);
     }
-    if (report.result === ValidationResult.INELIGIBLE) {
-      newScheme.setDetails(JSON.stringify(report.violations));
+    if (result === ValidationResult.INELIGIBLE) {
+      newScheme.setDetails(JSON.stringify(violations));
       homeScreenData.addNonEligible(newScheme);
     }
-    if (report.result === ValidationResult.UNDETERMINABLE) {
-      newScheme.setDetails(JSON.stringify(report.missingUserInput));
+    if (result === ValidationResult.UNDETERMINABLE) {
+      newScheme.setDetails(JSON.stringify(missingUserInput));
       homeScreenData.addMissingData(newScheme);
     }
   }
-
+  console.log('homeScreenData', homeScreenData);
   homeScreenData.setMissingUserInputsAggregated(missingUserInputsAggregated);
   return homeScreenData;
 };

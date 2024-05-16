@@ -3,22 +3,20 @@ import {
   validateAll,
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
+import { convertUserProfileToTurtle } from '@foerderfunke/matching-engine/src/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useValidationReportStore } from '../storage/zustand';
+import { UserStore } from '../models/user-model';
 
 // run validation
 const runValidation = async (userId) => {
+  //
   // fetch selected user
-  // const userProfile = UserStore.retrieveUserData(userId);
-
-  let userProfileExamplesPath = await AsyncStorage.getItem(
-    'user-profile-examples'
-  );
-  const userProfilePath = userProfileExamplesPath + userId + '.ttl';
-  const userProfileString = await readFile(userProfilePath);
-
-  // fetch datafields and materialization
-  // const dataFieldsString = DataFieldsStore.retrieveDataFields();
+  console.log('Running validation for:', userId);
+  const userProfile = UserStore.retrieveUserData(userId);
+  console.log('User profile:', userProfile);
+  const userProfileString = await convertUserProfileToTurtle(userProfile);
+  console.log('User profile:', userProfileString);
 
   const datafieldsPath = await AsyncStorage.getItem('datafields');
   const datafieldsString = await readFile(datafieldsPath);
@@ -36,14 +34,13 @@ const runValidation = async (userId) => {
   // iterate through queries in registry
   let requirementProfiles = {};
 
-  for (let queryId in queryRegistry) {
-    if (!queryRegistry.hasOwnProperty(queryId)) {
-      continue;
-    }
-    const queryPath = requirementProfilesPath + queryId + '.ttl';
-    requirementProfiles[queryId] = await readFile(queryPath);
+  for (let requirementProfile in queryRegistry) {
+    const { fileName, rpUri } = queryRegistry[requirementProfile];
+    const queryPath = requirementProfilesPath + fileName;
+    requirementProfiles[rpUri] = await readFile(queryPath);
   }
 
+  console.log('Requirement profiles:', requirementProfiles[0]);
   console.log('Running validations for:', Object.keys(requirementProfiles));
 
   const materializationPath = await AsyncStorage.getItem('materialization');

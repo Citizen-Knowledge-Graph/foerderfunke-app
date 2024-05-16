@@ -20,24 +20,25 @@ const SupportList = ({ homeScreenData }) => {
         <SizableText size='$5' color={'blue'} fontWeight={'300'}>
           Fehlende Datenpunkte
         </SizableText>
-        {Object.keys(homeScreenData.missingUserInputsAggregated).map(
-          (key, index) => (
-            <SizableText
-              key={index}
-              size='$4'
-              color={'gray'}
-              g
-              fontWeight={'300'}
-            >
-              -{' '}
-              {
-                homeScreenData.missingUserInputsAggregated[key].predicate.split(
-                  '#'
-                )[1]
-              }
-            </SizableText>
-          )
-        )}
+        {homeScreenData.missingUserInputsAggregated.length > 0
+          ? Object.keys(homeScreenData.missingUserInputsAggregated).map(
+              (key, index) => (
+                <SizableText
+                  key={index}
+                  size='$4'
+                  color='gray'
+                  fontWeight='300'
+                >
+                  -{' '}
+                  {
+                    homeScreenData.missingUserInputsAggregated[
+                      key
+                    ].predicate.split('#')[1]
+                  }
+                </SizableText>
+              )
+            )
+          : null}
       </View>
       {homeScreenData.missingData.map((scheme, index) => (
         <SupportListItem key={index} scheme={scheme} />

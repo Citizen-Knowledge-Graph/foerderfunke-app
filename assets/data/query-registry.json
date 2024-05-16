@@ -1,34 +1,50 @@
-{
-  "dev-kindergeld": {
+[
+  {
+    "fileName": "dev-kindergeld.ttl",
+    "rpUri": "https://foerderfunke.org/default#kindergeldRP",
     "title": "Kindergeld",
     "description": "Sie haben Anspruch auf Kindergeld."
   },
-  "dev-eauto": {
+  {
+    "fileName": "dev-eauto.ttl",
+    "rpUri": "https://foerderfunke.org/default#eautoRP",
     "title": "Unterstützung für den Kauf eines Elektroautos",
     "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto."
   },
-  "dev-daemmung": {
+  {
+    "fileName": "dev-daemmung.ttl",
+    "rpUri": "https://foerderfunke.org/default#daemmungRP",
     "title": "Förderung einer neuen Wärmedämmung",
     "description": "Sie haben Anspruch auf eine Förderung einer neuen Hausdämmung."
   },
-  "dev-solar": {
+  {
+    "fileName": "dev-solar.ttl",
+    "rpUri": "https://foerderfunke.org/default#solarRP",
     "title": "Förderung einer neuen Solaranlange",
     "description": "Sie haben Anspruch auf eine Förderung neuer Solaranlagen."
   },
-  "dev-wohngeld": {
+  {
+    "fileName": "dev-wohngeld.ttl",
+    "rpUri": "https://foerderfunke.org/default#wohngelddevRP",
     "title": "Wohngeld",
     "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben."
   },
-  "kinderzuschlag": {
+  {
+    "fileName": "kinderzuschlag.ttl",
+    "rpUri": "https://foerderfunke.org/default#kinderzuschlagRP",
     "title": "Kinderzuschlag",
     "description": "Sie haben Anspruch auf den Kinderzuschlag."
   },
-  "bildungsgutschein": {
+  {
+    "fileName": "bildungsgutschein.ttl",
+    "rpUri": "https://foerderfunke.org/default#bildungsgutscheinRP",
     "title": "Bildungsgutschein",
     "description": "Sie haben möglicherweise Anspruch auf einen Bildungsgutschein."
   },
-  "arbeitslosengeld": {
+  {
+    "fileName": "arbeitslosengeld.ttl",
+    "rpUri": "https://foerderfunke.org/default#arbeitslosengeldRP",
     "title": "Arbeitslosengeld",
     "description": "Sie haben möglicherweise Anspruch auf Arbeitslosengeld."
   }
-}
+]
