@@ -13,7 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@foerderfunke/matching-engine": "^0.3.4",
+    "@foerderfunke/matching-engine": "^0.4.5",
     "@gorhom/bottom-sheet": "^4.6.1",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-community/datetimepicker": "^7.7.0",
