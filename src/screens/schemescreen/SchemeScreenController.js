@@ -12,7 +12,7 @@ export const fetchSchemeScreenData = async (queryId) => {
   const hydrationsPath = await AsyncStorage.getItem(
     'requirement-profile-hydration'
   );
-  const schemePath = `${hydrationsPath}/${queryId}-hydration.json`;
+  const schemePath = `${hydrationsPath}/${queryId.split('#')[1]}-hydration.json`;
   let schemeData;
   if (await fileExists(schemePath)) {
     schemeData = await readJson(schemePath);
