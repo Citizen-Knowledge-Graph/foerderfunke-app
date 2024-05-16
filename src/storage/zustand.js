@@ -13,6 +13,14 @@ export const useUserStore = create((set) => ({
   },
 }));
 
+export const useMetadataStore = create((set) => ({
+  metadata: {},
+  updateMetadata: (newMetadata) => {
+    console.log('STATE UPDATE: We are updating the metadata');
+    set((state) => ({ metadata: newMetadata }));
+  },
+}));
+
 export const useValidationReportStore = create((set) => ({
   validationReport: {},
   updateValidationReport: (newValidationReport) => {

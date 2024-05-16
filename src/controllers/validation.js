@@ -3,9 +3,13 @@ import {
   validateAll,
   validateUserProfile,
 } from '@foerderfunke/matching-engine';
-import { convertUserProfileToTurtle } from '@foerderfunke/matching-engine/src/utils';
+import {
+  convertUserProfileToTurtle,
+  extractDatafieldsMetadata,
+  extractRequirementProfilesMetadata,
+} from '@foerderfunke/matching-engine/src/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useValidationReportStore } from '../storage/zustand';
+import { useValidationReportStore, useMetadataStore } from '../storage/zustand';
 import { UserStore } from '../models/user-model';
 
 // run validation
@@ -51,6 +55,14 @@ const runValidation = async (userId) => {
   );
 
   useValidationReportStore.getState().updateValidationReport(validateAllReport);
+
+  // fetch metadata
+  let metadata = {
+    df: await extractDatafieldsMetadata(datafieldsString),
+    rp: await extractRequirementProfilesMetadata(Object.values(requirementProfiles)),
+  };
+
+  useMetadataStore.getState().updateMetadata(metadata);
 };
 
 export default runValidation;
