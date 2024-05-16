@@ -4,6 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import { SizableText } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 
+const getDatafieldLabel = (homeScreenData, missingUserInputsAggregatedKey) => {
+  const dfUri = homeScreenData.missingUserInputsAggregated[missingUserInputsAggregatedKey].dfUri;
+  return homeScreenData.metadata.df[dfUri]?.label ?? dfUri.split('#')[1];
+};
+
 const SupportList = ({ homeScreenData }) => {
   console.log('rerendering SupportList');
   return (
@@ -29,7 +34,7 @@ const SupportList = ({ homeScreenData }) => {
                   color='gray'
                   fontWeight='300'
                 >
-                  - {key}
+                  - {getDatafieldLabel(homeScreenData, key)}
                 </SizableText>
               )
             )

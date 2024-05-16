@@ -3,7 +3,7 @@ import { HomeScreenData, SchemeData } from './HomeScreenModel';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ValidationResult } from '@foerderfunke/matching-engine';
 
-export const fetchHomeScreenData = async (validateAllReport) => {
+export const fetchHomeScreenData = async (validateAllReport, metadata) => {
   const queryRegistryPath = await AsyncStorage.getItem('query-registry');
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
@@ -33,5 +33,6 @@ export const fetchHomeScreenData = async (validateAllReport) => {
   }
 
   homeScreenData.setMissingUserInputsAggregated(missingUserInputsAggregated);
+  homeScreenData.setMetadata(metadata);
   return homeScreenData;
 };

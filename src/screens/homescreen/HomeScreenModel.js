@@ -4,6 +4,7 @@ export class HomeScreenData {
     this.nonEligible = [];
     this.missingData = [];
     this.missingUserInputsAggregated = [];
+    this.metdata = {};
   }
 
   addEligible(value) {
@@ -20,6 +21,10 @@ export class HomeScreenData {
 
   setMissingUserInputsAggregated(value) {
     this.missingUserInputsAggregated = value;
+  }
+
+  setMetadata(value) {
+    this.metadata = value;
   }
 }
 
