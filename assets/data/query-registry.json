@@ -1,49 +1,49 @@
 [
   {
     "fileName": "dev-kindergeld.ttl",
-    "rpUri": "https://foerderfunke.org/default#kindergeldRP",
+    "rpUri": "https://foerderfunke.org/default#kindergeld",
     "title": "Kindergeld",
     "description": "Sie haben Anspruch auf Kindergeld."
   },
   {
     "fileName": "dev-eauto.ttl",
-    "rpUri": "https://foerderfunke.org/default#eautoRP",
+    "rpUri": "https://foerderfunke.org/default#eauto",
     "title": "Unterstützung für den Kauf eines Elektroautos",
     "description": "Sie haben Anspruch auf eine Förderung für ein neue E-Auto."
   },
   {
     "fileName": "dev-daemmung.ttl",
-    "rpUri": "https://foerderfunke.org/default#daemmungRP",
+    "rpUri": "https://foerderfunke.org/default#daemmung",
     "title": "Förderung einer neuen Wärmedämmung",
     "description": "Sie haben Anspruch auf eine Förderung einer neuen Hausdämmung."
   },
   {
     "fileName": "dev-solar.ttl",
-    "rpUri": "https://foerderfunke.org/default#solarRP",
-    "title": "Förderung einer neuen Solaranlange",
+    "rpUri": "https://foerderfunke.org/default#solar",
+    "title": "Förderung einer neuen Solaranlage",
     "description": "Sie haben Anspruch auf eine Förderung neuer Solaranlagen."
   },
   {
     "fileName": "dev-wohngeld.ttl",
-    "rpUri": "https://foerderfunke.org/default#wohngelddevRP",
+    "rpUri": "https://foerderfunke.org/default#wohngelddev",
     "title": "Wohngeld",
     "description": "Sie haben Anspruch auf eine Förderung ihrer Mietausgaben."
   },
   {
     "fileName": "kinderzuschlag.ttl",
-    "rpUri": "https://foerderfunke.org/default#kinderzuschlagRP",
+    "rpUri": "https://foerderfunke.org/default#kinderzuschlag",
     "title": "Kinderzuschlag",
     "description": "Sie haben Anspruch auf den Kinderzuschlag."
   },
   {
     "fileName": "bildungsgutschein.ttl",
-    "rpUri": "https://foerderfunke.org/default#bildungsgutscheinRP",
+    "rpUri": "https://foerderfunke.org/default#bildungsgutschein",
     "title": "Bildungsgutschein",
     "description": "Sie haben möglicherweise Anspruch auf einen Bildungsgutschein."
   },
   {
     "fileName": "arbeitslosengeld.ttl",
-    "rpUri": "https://foerderfunke.org/default#arbeitslosengeldRP",
+    "rpUri": "https://foerderfunke.org/default#arbeitslosengeld",
     "title": "Arbeitslosengeld",
     "description": "Sie haben möglicherweise Anspruch auf Arbeitslosengeld."
   }
