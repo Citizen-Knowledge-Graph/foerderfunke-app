@@ -42,7 +42,7 @@ const AppStartup = ({ children }) => {
   // run validation on user change
   useEffect(() => {
     const updateValidation = async () => {
-      if (dataFetched) {
+      if (dataFetched && mmkvDataInitialised) {
         await runValidation(userId);
       }
     };

@@ -20,7 +20,7 @@ const SupportList = ({ homeScreenData }) => {
         <SizableText size='$5' color={'blue'} fontWeight={'300'}>
           Fehlende Datenpunkte
         </SizableText>
-        {homeScreenData.missingUserInputsAggregated.length > 0
+        {Object.keys(homeScreenData.missingUserInputsAggregated).length > 0
           ? Object.keys(homeScreenData.missingUserInputsAggregated).map(
               (key, index) => (
                 <SizableText
@@ -29,12 +29,7 @@ const SupportList = ({ homeScreenData }) => {
                   color='gray'
                   fontWeight='300'
                 >
-                  -{' '}
-                  {
-                    homeScreenData.missingUserInputsAggregated[
-                      key
-                    ].predicate.split('#')[1]
-                  }
+                  - {key}
                 </SizableText>
               )
             )

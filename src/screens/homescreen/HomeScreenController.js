@@ -8,12 +8,9 @@ export const fetchHomeScreenData = async (validateAllReport) => {
   const schemeRegistry = await readJson(queryRegistryPath);
   const homeScreenData = new HomeScreenData();
   const { missingUserInputsAggregated, reports } = validateAllReport;
-  console.log('*** reports ', reports);
 
   for (let report of reports) {
     let { rpUri, result, violations, missingUserInput } = report;
-    console.log('*** rpUri ', rpUri);
-    console.log('*** result ', result);
     let newScheme = new SchemeData(rpUri);
     const schemeData = schemeRegistry.filter(
       (scheme) => scheme.rpUri === rpUri
@@ -34,7 +31,8 @@ export const fetchHomeScreenData = async (validateAllReport) => {
       homeScreenData.addMissingData(newScheme);
     }
   }
-  console.log('homeScreenData', homeScreenData);
+
   homeScreenData.setMissingUserInputsAggregated(missingUserInputsAggregated);
+  console.log('Home screen data:', missingUserInputsAggregated);
   return homeScreenData;
 };
