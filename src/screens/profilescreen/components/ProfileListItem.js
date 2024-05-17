@@ -5,6 +5,7 @@ import { Edit3 } from '@tamagui/lucide-icons';
 import { colorTokens } from '@tamagui/themes';
 
 const ProfileListItem = ({ entry, handleOpenPress, setCurrentEntry }) => {
+  console.log('ProfileListItem entry:', entry);
   return (
     <ListItem>
       <View

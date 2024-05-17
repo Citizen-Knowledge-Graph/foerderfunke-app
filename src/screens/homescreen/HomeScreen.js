@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import ScreenView from '../../components/ScreenView';
 import SupportList from './components/SupportList';
 import { fetchHomeScreenData } from './HomeScreenController';
-import { useValidationReportStore, useMetadataStore } from '../../storage/zustand';
+import {
+  useValidationReportStore,
+  useMetadataStore,
+} from '../../storage/zustand';
 
 const HomeScreen = () => {
   const [homeScreenData, setHomeScreenData] = useState(null);
@@ -14,7 +17,10 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newHomeScreenData = await fetchHomeScreenData(validationReports, metadata);
+        const newHomeScreenData = await fetchHomeScreenData(
+          validationReports,
+          metadata
+        );
         setHomeScreenData(newHomeScreenData);
       } catch (error) {
         console.error('Failed to fetch home screen data:', error);

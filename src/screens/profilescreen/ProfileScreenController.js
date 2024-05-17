@@ -14,7 +14,7 @@ const dataFields = [
   'ff:hasResidence',
   'ff:paysRentCold',
   'ff:hasLivingArea',
-  'ff:hasParentingSetup',
+  'ff:parentingSetup',
   'ff:receivesWohngeld',
   'ff:hasIncomeBrutto',
   'ff:hasIncomeNetto',

@@ -20,7 +20,7 @@
   "ff:hasLivingArea": {
     "display_name": "Wohnfläche"
   },
-  "ff:hasParentingSetup": {
+  "ff:parentingSetup": {
     "display_name": "Elternschaft"
   },
   "ff:hasIncomeBrutto": {
