@@ -14,7 +14,6 @@ export const fetchOnboardingScreenData = async (onboardingFlow) => {
   const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');
   //
   // iterate through onboarding cards
-  console.log('onboardingFlow', onboardingFlow);
   for (let card of onboardingFlow) {
     const { name, index, id } = card;
     const newOnboardingCards = await fetchOnboardingCards(
