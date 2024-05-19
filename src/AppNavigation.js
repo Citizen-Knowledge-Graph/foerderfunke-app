@@ -8,6 +8,7 @@ import ProfileScreen from './screens/profilescreen/ProfileScreen';
 import SchemeScreen from './screens/schemescreen/SchemeScreen';
 import JourneyScreen from './screens/journeyscreen/JourneyScreen';
 import OnboardingScreen from './screens/onboarding/OnboardingScreen';
+import ChoiceScreen from './screens/ChoiceScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();
@@ -23,6 +24,11 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name='JourneyStackScreen'
         component={JourneyScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='ChoiceStackScreen'
+        component={ChoiceScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

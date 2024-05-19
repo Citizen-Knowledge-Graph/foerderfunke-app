@@ -4,10 +4,14 @@ import ScreenHeader from './ScreenHeader';
 import PrimaryContainer from './PrimaryContainer';
 
 // Component
-const ScreenView = ({ screenName, children, backButton }) => {
+const ScreenView = ({ screenName, children, backButton, showName }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScreenHeader screenName={screenName} backButton={backButton} />
+      <ScreenHeader
+        screenName={screenName}
+        backButton={backButton}
+        showName={showName}
+      />
       <ScrollView style={styles.scrollView}>
         <PrimaryContainer>{children}</PrimaryContainer>
       </ScrollView>

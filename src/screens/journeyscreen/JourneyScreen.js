@@ -15,16 +15,16 @@ const JourneyScreen = ({ navigation }) => {
             navigation.navigate('MainTabNavigator');
           }}
         >
-          Pre-defined User Profile
+          I have been here before!
         </Button>
         <Button
           onPress={() => {
             updateUserId('user-template');
             navigation.removeListener;
-            navigation.navigate('OnboardingStackScreen');
+            navigation.navigate('ChoiceStackScreen');
           }}
         >
-          Build a new User Profile
+          You are new here!
         </Button>
       </YStack>
     </ScreenView>
