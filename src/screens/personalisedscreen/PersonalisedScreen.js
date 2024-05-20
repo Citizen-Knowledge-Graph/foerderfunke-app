@@ -4,6 +4,7 @@ import ScreenView from '../../components/ScreenView';
 import { SizableText, XStack, YStack, Card } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 import { Info } from '@tamagui/lucide-icons';
+import ProfileSections from './components/ProfileSections';
 
 const PersonalisedScreen = ({ navigation }) => {
   return (
@@ -35,13 +36,14 @@ const PersonalisedScreen = ({ navigation }) => {
                   <Info size='$1' color={'black'} />
                   <SizableText size='$6' style={styles.infoCardText}>
                     All data is stored locally on your device. It never leaves
-                    your device at least you decide otherwise.
+                    your device.
                   </SizableText>
                 </XStack>
               </YStack>
             </Card>
           </XStack>
         </YStack>
+        <ProfileSections />
       </YStack>
     </ScreenView>
   );
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
   },
   infoCard: {
     flex: 1,
-    padding: 20,
+    padding: 16,
     backgroundColor: colorTokens.light.blue.blue5,
   },
   infoCardText: {
