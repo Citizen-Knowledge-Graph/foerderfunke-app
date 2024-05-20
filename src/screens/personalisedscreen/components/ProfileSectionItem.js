@@ -2,9 +2,12 @@ import React from 'react';
 import { XStack, SizableText, Card, Button } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 import { StyleSheet } from 'react-native';
-import { ChevronRight, Edit3 } from '@tamagui/lucide-icons';
+import { ChevronRight } from '@tamagui/lucide-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileSectionItem = ({ icon, title, active }) => {
+  const navigation = useNavigation(); // Use the useNavigation hook
+
   const backgroundColor = active
     ? colorTokens.light.yellow.yellow8
     : colorTokens.light.gray.gray8;
@@ -29,6 +32,9 @@ const ProfileSectionItem = ({ icon, title, active }) => {
           backgroundColor: colorTokens.light.gray.gray8,
           borderColor: 'white',
         }}
+        onPress={() =>
+          navigation.navigate('ProfileInputStackScreen', { title })
+        }
       />
     </XStack>
   );

@@ -6,7 +6,7 @@ import { colorTokens } from '@tamagui/themes';
 import { Info } from '@tamagui/lucide-icons';
 import ProfileSections from './components/ProfileSections';
 
-const PersonalisedScreen = ({ navigation }) => {
+const PersonalisedScreen = () => {
   return (
     <ScreenView screenName={'Choice'} backButton={true} showName={false}>
       <YStack gap={20}>

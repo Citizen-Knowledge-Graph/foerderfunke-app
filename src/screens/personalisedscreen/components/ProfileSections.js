@@ -4,7 +4,7 @@ import { SizableText, XStack, YStack } from 'tamagui';
 import ProfileSectionItem from './ProfileSectionItem';
 import { Briefcase, Smile, Coins, Book, Baby } from '@tamagui/lucide-icons';
 
-const ProfileSections = ({ data }) => {
+const ProfileSections = ({ navigation }) => {
   const [activeSection, setActiveSection] = useState('about');
 
   return (
@@ -16,6 +16,7 @@ const ProfileSections = ({ data }) => {
       </XStack>
       <YStack gap={16}>
         <ProfileSectionItem
+          navigation
           title={'About you'}
           icon={<Smile size='$3' color='black' />}
           active={activeSection === 'about'}
