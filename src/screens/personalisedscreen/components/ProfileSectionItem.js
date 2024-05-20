@@ -1,8 +1,8 @@
 import React from 'react';
-import { XStack, SizableText, Card } from 'tamagui';
+import { XStack, SizableText, Card, Button } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 import { StyleSheet } from 'react-native';
-import { ChevronRight } from '@tamagui/lucide-icons';
+import { ChevronRight, Edit3 } from '@tamagui/lucide-icons';
 
 const ProfileSectionItem = ({ icon, title, active }) => {
   const backgroundColor = active
@@ -22,7 +22,14 @@ const ProfileSectionItem = ({ icon, title, active }) => {
           {title}
         </SizableText>
       </XStack>
-      <ChevronRight size='$1' color='black' />
+      <Button
+        backgroundColor={'white'}
+        icon={<ChevronRight size='$1' color={'black'} />}
+        pressStyle={{
+          backgroundColor: colorTokens.light.gray.gray8,
+          borderColor: 'white',
+        }}
+      />
     </XStack>
   );
 };
