@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import ScreenView from '../components/ScreenView';
+import { StyleSheet } from 'react-native';
+import ScreenView from '../../components/ScreenView';
 import { SizableText, XStack, YStack, Card } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
 
@@ -10,7 +10,7 @@ const ChoiceScreen = ({ navigation }) => {
       <YStack gap={20}>
         <YStack gap={10}>
           <XStack justifyContent={'center'}>
-            <SizableText size='$10' color={'black'}>
+            <SizableText size='$10' style={styles.titleText}>
               Your Choice
             </SizableText>
           </XStack>
@@ -28,15 +28,14 @@ const ChoiceScreen = ({ navigation }) => {
         <YStack gap={10}>
           <XStack justifyContent={'center'}>
             <Card
-              elevate
               size='$8'
               style={styles.choiceCard}
               onPress={() => {
-                navigation.navigate('OnboardingStackScreen');
+                navigation.navigate('PersonalisedStackScreen');
               }}
             >
               <YStack flex={1} justifyContent={'flex-end'}>
-                <SizableText size='$8'>
+                <SizableText size='$9' style={styles.choiceCardText}>
                   Discover personalised benefits
                 </SizableText>
               </YStack>
@@ -44,7 +43,6 @@ const ChoiceScreen = ({ navigation }) => {
           </XStack>
           <XStack justifyContent={'center'}>
             <Card
-              elevate
               size='$8'
               style={styles.choiceCard}
               onPress={() => {
@@ -52,7 +50,9 @@ const ChoiceScreen = ({ navigation }) => {
               }}
             >
               <YStack flex={1} justifyContent={'flex-end'}>
-                <SizableText size='$8'>Browse all social benefits</SizableText>
+                <SizableText size='$9' style={styles.choiceCardText}>
+                  Browse all social benefits
+                </SizableText>
               </YStack>
             </Card>
           </XStack>
@@ -63,11 +63,19 @@ const ChoiceScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  titleText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
   choiceCard: {
     flex: 1,
     height: 250,
     padding: 20,
-    backgroundColor: colorTokens.light.purple.purple9,
+    backgroundColor: colorTokens.light.blue.blue12,
+  },
+  choiceCardText: {
+    color: 'white',
+    fontWeight: '500',
   },
 });
 

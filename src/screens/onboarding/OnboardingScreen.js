@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import OnboardingList from './components/OnboardingList';
 import { fetchOnboardingScreenData } from './OnboardingController';
-import LoadingScreen from '../LoadingScreen';
+import LoadingScreen from '../miscellaneous/LoadingScreen';
 import { useOnboardingStore } from '../../storage/zustand';
 
 // Component

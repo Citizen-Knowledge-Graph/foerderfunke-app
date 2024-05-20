@@ -2,13 +2,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-import StartScreen from './screens/StartScreen';
+import StartScreen from './screens/miscellaneous/StartScreen';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/profilescreen/ProfileScreen';
 import SchemeScreen from './screens/schemescreen/SchemeScreen';
 import JourneyScreen from './screens/journeyscreen/JourneyScreen';
 import OnboardingScreen from './screens/onboarding/OnboardingScreen';
-import ChoiceScreen from './screens/ChoiceScreen';
+import ChoiceScreen from './screens/miscellaneous/ChoiceScreen';
+import PersonalisedScreen from './screens/personalisedscreen/PersonalisedScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();
@@ -29,6 +30,11 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name='ChoiceStackScreen'
         component={ChoiceScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='PersonalisedStackScreen'
+        component={PersonalisedScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

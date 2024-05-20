@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Main, Subtitle } from '../../tamagui.config';
+import { Main, Subtitle } from '../../../tamagui.config';
 import { colorTokens } from '@tamagui/themes';
 
 const StartScreen = ({ navigation }) => {

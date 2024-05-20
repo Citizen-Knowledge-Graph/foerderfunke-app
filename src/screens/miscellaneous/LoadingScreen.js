@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { Main } from '../../tamagui.config';
+import { Main } from '../../../tamagui.config';
 import { View } from 'tamagui';
 import { Loader } from '@tamagui/lucide-icons';
 import Animated, {
