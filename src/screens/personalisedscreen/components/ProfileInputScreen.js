@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import ScreenView from '../../../components/ScreenView';
-import { SizableText, XStack, YStack, Card } from 'tamagui';
+import { SizableText, XStack, YStack, Card, Button } from 'tamagui';
 import { colorTokens } from '@tamagui/themes';
-import { Info } from '@tamagui/lucide-icons';
+import { ChevronLeft, ChevronRight, Info } from '@tamagui/lucide-icons';
 import ProfileInputCard from './ProfileInputCard';
 
 const ProfileInputScreen = ({ route }) => {
   const { title } = route.params;
+  const [visibleCount, setVisibleCount] = useState(1);
+
+  const data = [
+    { title: 'First name' },
+    { title: 'Last name' },
+    { title: 'Email' },
+    { title: 'Phone number' },
+    { title: 'Address' },
+    // Add more items as needed
+  ];
+
+  const increaseVisibleCount = () => {
+    if (visibleCount < data.length - 1) {
+      setVisibleCount(visibleCount + 1);
+    }
+  };
+
+  const decreaseVisibleCount = () => {
+    if (visibleCount > 1) {
+      setVisibleCount(visibleCount - 1);
+    }
+  };
 
   return (
     <ScreenView screenName={title} backButton={true} showName={false}>
@@ -37,12 +59,32 @@ const ProfileInputScreen = ({ route }) => {
           </XStack>
         </YStack>
         <YStack gap={30}>
-          <ProfileInputCard title={'First name'} />
-          <ProfileInputCard title={'First name'} />
-          <ProfileInputCard title={'First name'} />
-          <ProfileInputCard title={'First name'} />
-          <ProfileInputCard title={'First name'} />
+          {data.slice(0, visibleCount).map((item, index) => (
+            <ProfileInputCard key={index} title={item.title} />
+          ))}
         </YStack>
+        <XStack
+          justifyContent={'space-between'}
+          gap={20}
+          style={styles.confirmPane}
+        >
+          <Button
+            icon={<ChevronLeft size='$1' color={'black'} />}
+            onPress={() => decreaseVisibleCount()}
+            style={styles.navigationButton}
+            pressStyle={{
+              backgroundColor: colorTokens.light.gray.gray8,
+            }}
+          />
+          <Button
+            icon={<ChevronRight size='$1' color={'black'} />}
+            onPress={() => increaseVisibleCount()}
+            style={styles.navigationButton}
+            pressStyle={{
+              backgroundColor: colorTokens.light.gray.gray8,
+            }}
+          />
+        </XStack>
       </YStack>
     </ScreenView>
   );
@@ -65,6 +107,15 @@ const styles = StyleSheet.create({
   },
   infoCardText: {
     color: 'black',
+  },
+  confirmPane: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 15,
+  },
+  navigationButton: {
+    backgroundColor: 'white',
   },
 });
 
