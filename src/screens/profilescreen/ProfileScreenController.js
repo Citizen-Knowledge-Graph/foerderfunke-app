@@ -1,6 +1,4 @@
-import { readFile, readJson, writeFile } from '../../utilities/fileManagement';
-import { parseTurtle, serializeTurtle } from '../../utilities/rdfHandling';
-import { updateOut } from '../../utilities/graphManagement';
+import { readFile, readJson } from '../../utilities/fileManagement';
 import { ProfileDataField, ProfileScreenData } from './ProfileScreenModel';
 import { Share } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
