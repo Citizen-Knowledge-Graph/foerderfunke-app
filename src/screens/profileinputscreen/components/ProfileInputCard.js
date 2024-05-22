@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import ProfileInputField from './ProfileInputField';
 
-const ProfileInputCard = ({ item }) => {
+const ProfileInputCard = ({ item, setProfileData }) => {
   return (
     <YStack gap={10}>
       <XStack justifyContent={'center'}>
@@ -32,7 +32,7 @@ const ProfileInputCard = ({ item }) => {
               paddingHorizontal={8}
               gap={10}
             >
-              <ProfileInputField item={item} />
+              <ProfileInputField item={item} setProfileData={setProfileData} />
             </XStack>
           </YStack>
         </Card>

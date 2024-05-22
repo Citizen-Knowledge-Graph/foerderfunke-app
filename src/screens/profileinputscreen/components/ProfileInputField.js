@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StringInput,
   IntegerInput,
@@ -7,8 +7,16 @@ import {
 } from './ProfileInputTypes';
 import { SizableText } from 'tamagui';
 
-const ProfileInputField = ({ item, setInputData }) => {
+const ProfileInputField = ({ item, setProfileData }) => {
+  const [inputData, setInputData] = useState();
   const { datatype, options } = item;
+
+  useEffect(() => {
+    setProfileData((prev) => ({
+      ...prev,
+      [item.datafield]: inputData,
+    }));
+  }, [inputData, item, setProfileData]);
 
   switch (datatype) {
     case 'selection':

@@ -8,7 +8,7 @@ import { StyleSheet, ScrollView } from 'react-native';
 const ProfileInputList = ({ title, profileInputData }) => {
   const [visibleCount, setVisibleCount] = useState(1);
   const scrollViewRef = useRef(null);
-  const [newProfileData, setNewProfileData] = useState({});
+  const [profileData, setProfileData] = useState({});
 
   const increaseVisibleCount = () => {
     if (visibleCount < profileInputData.profileInputFields.length) {
@@ -25,6 +25,8 @@ const ProfileInputList = ({ title, profileInputData }) => {
       setVisibleCount(visibleCount - 1);
     }
   };
+
+  console.log('current profile dict', profileData);
 
   return (
     <ScrollView ref={scrollViewRef}>
@@ -57,7 +59,11 @@ const ProfileInputList = ({ title, profileInputData }) => {
           {profileInputData.profileInputFields
             .slice(0, visibleCount)
             .map((item, index) => (
-              <ProfileInputCard key={index} item={item} />
+              <ProfileInputCard
+                key={index}
+                item={item}
+                setProfileData={setProfileData}
+              />
             ))}
         </YStack>
         <XStack
