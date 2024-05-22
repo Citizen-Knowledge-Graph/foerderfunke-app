@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button, Card, SizableText, XStack, YStack, View } from 'tamagui';
-import { ChevronLeft, ChevronRight, Info } from '@tamagui/lucide-icons';
+import { Check, ChevronLeft, ChevronRight, Info } from '@tamagui/lucide-icons';
 import ProfileInputCard from './ProfileInputCard';
 import { colorTokens } from '@tamagui/themes';
 import { StyleSheet, ScrollView } from 'react-native';
@@ -8,9 +8,10 @@ import { StyleSheet, ScrollView } from 'react-native';
 const ProfileInputList = ({ title, profileInputData }) => {
   const [visibleCount, setVisibleCount] = useState(1);
   const scrollViewRef = useRef(null);
+  const [newProfileData, setNewProfileData] = useState({});
 
   const increaseVisibleCount = () => {
-    if (visibleCount < profileInputData.profileInputFields.length - 1) {
+    if (visibleCount < profileInputData.profileInputFields.length) {
       setVisibleCount(visibleCount + 1);
       setTimeout(
         () => scrollViewRef.current.scrollToEnd({ animated: true }),
@@ -76,16 +77,28 @@ const ProfileInputList = ({ title, profileInputData }) => {
           ) : (
             <View />
           )}
-          <Button
-            iconAfter={<ChevronRight size='$1' color={'black'} />}
-            onPress={() => increaseVisibleCount()}
-            style={styles.navigationButton}
-            pressStyle={{
-              backgroundColor: colorTokens.light.gray.gray8,
-            }}
-          >
-            Next
-          </Button>
+          {visibleCount <= profileInputData.profileInputFields.length - 1 ? (
+            <Button
+              iconAfter={<ChevronRight size='$1' color={'black'} />}
+              onPress={() => increaseVisibleCount()}
+              style={styles.navigationButton}
+              pressStyle={{
+                backgroundColor: colorTokens.light.gray.gray8,
+              }}
+            >
+              Next
+            </Button>
+          ) : (
+            <Button
+              iconAfter={<Check size='$1' color={'black'} />}
+              style={styles.confirmButton}
+              pressStyle={{
+                backgroundColor: colorTokens.light.gray.gray8,
+              }}
+            >
+              Confirm
+            </Button>
+          )}
         </XStack>
       </YStack>
     </ScrollView>
@@ -118,6 +131,11 @@ const styles = StyleSheet.create({
   },
   navigationButton: {
     backgroundColor: 'white',
+    color: 'black',
+    fontSize: 16,
+  },
+  confirmButton: {
+    backgroundColor: colorTokens.light.green.green7,
     color: 'black',
     fontSize: 16,
   },
