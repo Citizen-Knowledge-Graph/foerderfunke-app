@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SizableText, XStack, YStack } from 'tamagui';
 import ProfileSectionItem from './ProfileSectionItem';
 import { Briefcase, Smile, Coins, Book, Baby } from '@tamagui/lucide-icons';
 
-const ProfileSections = ({ navigation }) => {
-  const [activeSection, setActiveSection] = useState('about');
-
+const ProfileSections = ({ activeSection, setActiveSection }) => {
   return (
     <YStack gap={10}>
       <XStack justifyContent={'center'}>
@@ -16,28 +14,32 @@ const ProfileSections = ({ navigation }) => {
       </XStack>
       <YStack gap={16}>
         <ProfileSectionItem
-          navigation
           title={'About you'}
+          id={'about-you'}
           icon={<Smile size='$3' color='black' />}
-          active={activeSection === 'about'}
+          active={activeSection === 'about-you'}
         />
         <ProfileSectionItem
           title={'Job'}
+          id={'job'}
           icon={<Briefcase size='$3' color='black' />}
           active={activeSection === 'job'}
         />
         <ProfileSectionItem
           title={'Income'}
+          id={'income'}
           icon={<Coins size='$3' color='black' />}
           active={activeSection === 'income'}
         />
         <ProfileSectionItem
           title={'Education'}
+          id={'education'}
           icon={<Book size='$3' color='black' />}
           active={activeSection === 'education'}
         />
         <ProfileSectionItem
           title={'Children'}
+          id={'children'}
           icon={<Baby size='$3' color='black' />}
           active={activeSection === 'children'}
         />

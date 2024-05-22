@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import ScreenView from '../../components/ScreenView';
 import { SizableText, XStack, YStack, Card } from 'tamagui';
@@ -7,6 +7,8 @@ import { Info } from '@tamagui/lucide-icons';
 import ProfileSections from './components/ProfileSections';
 
 const PersonalisedScreen = () => {
+  const [activeSection, setActiveSection] = useState('about-you');
+
   return (
     <ScreenView screenName={'Choice'} backButton={true} showName={false}>
       <YStack gap={20}>
@@ -43,7 +45,10 @@ const PersonalisedScreen = () => {
             </Card>
           </XStack>
         </YStack>
-        <ProfileSections />
+        <ProfileSections
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
       </YStack>
     </ScreenView>
   );

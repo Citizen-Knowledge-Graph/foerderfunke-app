@@ -1,14 +1,14 @@
-export class PersonalisedScreenData {
+export class ProfileInputFieldData {
   constructor() {
-    this.sectionFieldCards = [];
+    this.profileInputFields = [];
   }
 
-  addSectionFieldCard(sectionFieldCard) {
-    this.sectionFieldCards.push(sectionFieldCard);
+  addProfileInputField(profileInputField) {
+    this.profileInputFields.push(profileInputField);
   }
 }
 
-export class SectionFieldCard {
+export class ProfileInputField {
   constructor(datafield, title, datatype, options, objectClass) {
     this.datafield = datafield;
     this.title = title;

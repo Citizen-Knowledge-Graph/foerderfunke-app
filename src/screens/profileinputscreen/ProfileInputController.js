@@ -1,11 +1,11 @@
 import { readJson } from '../../utilities/fileManagement';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PersonalisedScreenData, SectionFieldCard } from './PersonalisedModel';
+import { ProfileInputFieldData, ProfileInputField } from './ProfileInputModel';
 import { UserStore } from '../../models/user-model';
 
 // config
-export const fetchPersonalisedScreenData = async (activeSection) => {
-  const personalisedScreenData = new PersonalisedScreenData();
+export const fetchProfileInputData = async (activeSection) => {
+  const profileInputData = new ProfileInputFieldData();
   //
   // fetch onboarding cards path
   const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');
@@ -16,17 +16,17 @@ export const fetchPersonalisedScreenData = async (activeSection) => {
   for (let card of sectionCards) {
     //
     // create onboarding card
-    const newSectionFieldCard = new SectionFieldCard(
+    const newSectionFieldCard = new ProfileInputField(
       card.datafield,
       card.title,
       card.datatype,
       card.options ? card.options : null,
       card.objectClass ? card.objectClass : null
     );
-    personalisedScreenData.addSectionFieldCard(newSectionFieldCard);
+    profileInputData.addProfileInputField(newSectionFieldCard);
   }
 
-  return personalisedScreenData;
+  return profileInputData;
 };
 
 export const addUserProfileField = async (userId, field, newValue) => {

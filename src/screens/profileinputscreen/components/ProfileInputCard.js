@@ -4,7 +4,7 @@ import { Info } from '@tamagui/lucide-icons';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 
-const ProfileInputCard = ({ title }) => {
+const ProfileInputCard = ({ item }) => {
   return (
     <YStack gap={10}>
       <XStack justifyContent={'center'}>
@@ -16,7 +16,7 @@ const ProfileInputCard = ({ title }) => {
               gap={10}
             >
               <SizableText size='$6' style={styles.infoCardText}>
-                What is your full name?
+                {item.title}
               </SizableText>
               <Info size='$1' color={'black'} />
             </XStack>

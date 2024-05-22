@@ -1,27 +1,21 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import ScreenView from '../../../components/ScreenView';
-import { SizableText, XStack, YStack, Card, Button } from 'tamagui';
-import { colorTokens } from '@tamagui/themes';
+import React, { useState, useRef } from 'react';
+import { Button, Card, SizableText, XStack, YStack, View } from 'tamagui';
 import { ChevronLeft, ChevronRight, Info } from '@tamagui/lucide-icons';
 import ProfileInputCard from './ProfileInputCard';
+import { colorTokens } from '@tamagui/themes';
+import { StyleSheet, ScrollView } from 'react-native';
 
-const ProfileInputScreen = ({ route }) => {
-  const { title } = route.params;
+const ProfileInputList = ({ title, profileInputData }) => {
   const [visibleCount, setVisibleCount] = useState(1);
-
-  const data = [
-    { title: 'First name' },
-    { title: 'Last name' },
-    { title: 'Email' },
-    { title: 'Phone number' },
-    { title: 'Address' },
-    // Add more items as needed
-  ];
+  const scrollViewRef = useRef(null);
 
   const increaseVisibleCount = () => {
-    if (visibleCount < data.length - 1) {
+    if (visibleCount < profileInputData.profileInputFields.length - 1) {
       setVisibleCount(visibleCount + 1);
+      setTimeout(
+        () => scrollViewRef.current.scrollToEnd({ animated: true }),
+        0
+      );
     }
   };
 
@@ -32,7 +26,7 @@ const ProfileInputScreen = ({ route }) => {
   };
 
   return (
-    <ScreenView screenName={title} backButton={true} showName={false}>
+    <ScrollView ref={scrollViewRef}>
       <YStack gap={20}>
         <XStack justifyContent={'center'}>
           <SizableText size='$9' style={styles.titleText} flex={1}>
@@ -59,34 +53,42 @@ const ProfileInputScreen = ({ route }) => {
           </XStack>
         </YStack>
         <YStack gap={30}>
-          {data.slice(0, visibleCount).map((item, index) => (
-            <ProfileInputCard key={index} title={item.title} />
-          ))}
+          {profileInputData.profileInputFields
+            .slice(0, visibleCount)
+            .map((item, index) => (
+              <ProfileInputCard key={index} item={item} />
+            ))}
         </YStack>
         <XStack
           justifyContent={'space-between'}
           gap={20}
           style={styles.confirmPane}
         >
+          {visibleCount > 1 ? (
+            <Button
+              icon={<ChevronLeft size='$1' color={'black'} />}
+              onPress={() => decreaseVisibleCount()}
+              style={styles.navigationButton}
+              pressStyle={{
+                backgroundColor: colorTokens.light.gray.gray8,
+              }}
+            />
+          ) : (
+            <View />
+          )}
           <Button
-            icon={<ChevronLeft size='$1' color={'black'} />}
-            onPress={() => decreaseVisibleCount()}
-            style={styles.navigationButton}
-            pressStyle={{
-              backgroundColor: colorTokens.light.gray.gray8,
-            }}
-          />
-          <Button
-            icon={<ChevronRight size='$1' color={'black'} />}
+            iconAfter={<ChevronRight size='$1' color={'black'} />}
             onPress={() => increaseVisibleCount()}
             style={styles.navigationButton}
             pressStyle={{
               backgroundColor: colorTokens.light.gray.gray8,
             }}
-          />
+          >
+            Next
+          </Button>
         </XStack>
       </YStack>
-    </ScreenView>
+    </ScrollView>
   );
 };
 
@@ -116,7 +118,9 @@ const styles = StyleSheet.create({
   },
   navigationButton: {
     backgroundColor: 'white',
+    color: 'black',
+    fontSize: 16,
   },
 });
 
-export default ProfileInputScreen;
+export default ProfileInputList;

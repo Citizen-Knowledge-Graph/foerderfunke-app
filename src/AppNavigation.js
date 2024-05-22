@@ -10,7 +10,7 @@ import JourneyScreen from './screens/journeyscreen/JourneyScreen';
 import OnboardingScreen from './screens/onboarding/OnboardingScreen';
 import ChoiceScreen from './screens/miscellaneous/ChoiceScreen';
 import PersonalisedScreen from './screens/personalisedscreen/PersonalisedScreen';
-import ProfileInputScreen from './screens/personalisedscreen/components/ProfileInputScreen';
+import ProfileInputScreen from './screens/profileinputscreen/ProfileInputScreen';
 
 // Stack Navigation
 const Stack = createStackNavigator();

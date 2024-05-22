@@ -5,7 +5,13 @@ import { StyleSheet } from 'react-native';
 import { ChevronRight } from '@tamagui/lucide-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const ProfileSectionItem = ({ icon, title, active }) => {
+const ProfileSectionItem = ({
+  icon,
+  title,
+  id,
+  active,
+  personalisedScreenData,
+}) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
   const backgroundColor = active
@@ -33,7 +39,7 @@ const ProfileSectionItem = ({ icon, title, active }) => {
           borderColor: 'white',
         }}
         onPress={() =>
-          navigation.navigate('ProfileInputStackScreen', { title })
+          navigation.navigate('ProfileInputStackScreen', { title, id })
         }
       />
     </XStack>
