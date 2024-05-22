@@ -86,7 +86,7 @@ export const DateInput = ({ setInputData }) => {
       value={date}
       mode='date'
       is24Hour={true}
-      display='default'
+      display='spinner'
       onChange={onChange}
     />
   );
