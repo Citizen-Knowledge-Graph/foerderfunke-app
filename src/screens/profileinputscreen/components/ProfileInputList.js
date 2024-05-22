@@ -4,11 +4,15 @@ import { Check, ChevronLeft, ChevronRight, Info } from '@tamagui/lucide-icons';
 import ProfileInputCard from './ProfileInputCard';
 import { colorTokens } from '@tamagui/themes';
 import { StyleSheet, ScrollView } from 'react-native';
+import useAddProfileData from '../hooks/useAddProfileData';
+import { useNavigation } from '@react-navigation/native';
 
 const ProfileInputList = ({ title, profileInputData }) => {
+  const navigation = useNavigation(); // Use the useNavigation hook
   const [visibleCount, setVisibleCount] = useState(1);
   const scrollViewRef = useRef(null);
   const [profileData, setProfileData] = useState({});
+  const handleAddProfileData = useAddProfileData(profileData);
 
   const increaseVisibleCount = () => {
     if (visibleCount < profileInputData.profileInputFields.length) {
@@ -97,6 +101,10 @@ const ProfileInputList = ({ title, profileInputData }) => {
           ) : (
             <Button
               iconAfter={<Check size='$1' color={'black'} />}
+              onPress={() => {
+                navigation.goBack();
+                handleAddProfileData;
+              }}
               style={styles.confirmButton}
               pressStyle={{
                 backgroundColor: colorTokens.light.gray.gray8,
