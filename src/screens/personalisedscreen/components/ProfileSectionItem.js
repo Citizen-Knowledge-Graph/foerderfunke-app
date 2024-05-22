@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     color: 'black',
-    fontWeight: '400',
+    fontWeight: '300',
   },
 });
 

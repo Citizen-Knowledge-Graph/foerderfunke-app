@@ -3,6 +3,7 @@ import { Card, SizableText, XStack, YStack, Input } from 'tamagui';
 import { Info } from '@tamagui/lucide-icons';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
+import ProfileInputField from './ProfileInputField';
 
 const ProfileInputCard = ({ item }) => {
   return (
@@ -31,12 +32,7 @@ const ProfileInputCard = ({ item }) => {
               paddingHorizontal={8}
               gap={10}
             >
-              <Input
-                placeholder='Text'
-                borderWidth={0}
-                style={styles.inputBox}
-                size='$1'
-              />
+              <ProfileInputField item={item} />
             </XStack>
           </YStack>
         </Card>
