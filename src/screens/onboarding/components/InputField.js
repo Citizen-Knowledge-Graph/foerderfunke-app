@@ -5,7 +5,7 @@ import {
   DateInput,
   SelectInput,
 } from './InputSections';
-import ObjectInput from './InputObjectClass';
+import ObjectInput from '../../profileinputscreen/components/InputObjectClass';
 import { SizableText } from 'tamagui';
 
 const InputField = ({ onboardingCard, setInputData }) => {

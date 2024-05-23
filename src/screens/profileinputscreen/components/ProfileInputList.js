@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Button, Card, SizableText, XStack, YStack, View } from 'tamagui';
+import { Button, Card, SizableText, XStack, YStack } from 'tamagui';
 import { Check, Info } from '@tamagui/lucide-icons';
-import ProfileInputCard from './ProfileInputCard';
+import ProfileInputPair from './ProfileInputPair';
 import { colorTokens } from '@tamagui/themes';
 import { StyleSheet, ScrollView } from 'react-native';
 import useAddProfileData from '../hooks/useAddProfileData';
@@ -51,7 +51,7 @@ const ProfileInputList = ({ title, id, profileInputData }) => {
         )}
         <YStack gap={30}>
           {profileInputData.profileInputFields.map((item, index) => (
-            <ProfileInputCard
+            <ProfileInputPair
               key={index}
               item={item}
               setInputFieldData={setInputFieldData}

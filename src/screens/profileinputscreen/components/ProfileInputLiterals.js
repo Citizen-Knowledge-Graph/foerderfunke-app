@@ -6,6 +6,7 @@ import {
   SelectInput,
 } from './ProfileInputTypes';
 import { SizableText } from 'tamagui';
+import ObjectInput from './InputObjectClass';
 
 const ProfileInputField = ({ item, setInputFieldData }) => {
   const [inputData, setInputData] = useState();
@@ -19,6 +20,8 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
   }, [inputData, item, setInputFieldData]);
 
   switch (datatype) {
+    case 'class':
+      return <ObjectInput setInputData={setInputData} />;
     case 'selection':
       return (
         <SelectInput

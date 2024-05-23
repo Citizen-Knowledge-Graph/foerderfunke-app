@@ -1,30 +1,14 @@
 import React from 'react';
-import { Card, SizableText, XStack, YStack } from 'tamagui';
-import { Info } from '@tamagui/lucide-icons';
+import ProfileInputLiterals from './ProfileInputLiterals';
+import { Card, XStack, YStack } from 'tamagui';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
-import ProfileInputField from './ProfileInputField';
+import ObjectInput from './InputObjectClass';
 
 const ProfileInputCard = ({ item, setInputFieldData }) => {
   return (
-    <YStack gap={10}>
-      <XStack justifyContent={'center'}>
-        <Card style={styles.profileQuestionCard} flex={1}>
-          <YStack flex={1} justifyContent={'flex-end'}>
-            <XStack
-              justifyContent={'space-between'}
-              paddingHorizontal={8}
-              gap={10}
-            >
-              <SizableText size='$6' style={styles.infoCardText}>
-                {item.title}
-              </SizableText>
-              <Info size='$1' color={'black'} />
-            </XStack>
-          </YStack>
-        </Card>
-      </XStack>
-      <XStack justifyContent={'center'}>
+    <XStack justifyContent={'center'}>
+      {item.datatype !== 'class' ? (
         <Card style={styles.profileInputCard} flex={1}>
           <YStack flex={1} justifyContent={'flex-end'}>
             <XStack
@@ -32,26 +16,27 @@ const ProfileInputCard = ({ item, setInputFieldData }) => {
               paddingHorizontal={8}
               gap={10}
             >
-              <ProfileInputField
+              <ProfileInputLiterals
                 item={item}
                 setInputFieldData={setInputFieldData}
               />
             </XStack>
           </YStack>
         </Card>
-      </XStack>
-    </YStack>
+      ) : (
+        <Card style={styles.profileInputCardObject} flex={1}>
+          <YStack flex={1} justifyContent={'flex-end'}>
+            <XStack justifyContent={'center'} paddingHorizontal={8} gap={10}>
+              <ObjectInput item={item} setInputData={setInputFieldData} />
+            </XStack>
+          </YStack>
+        </Card>
+      )}
+    </XStack>
   );
 };
 
 const styles = StyleSheet.create({
-  profileQuestionCard: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: colorTokens.light.yellow.yellow7,
-    borderWidth: 1,
-    borderColor: 'white',
-  },
   profileInputCard: {
     flex: 1,
     padding: 16,
@@ -59,13 +44,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colorTokens.light.gray.gray8,
   },
-  infoCardText: {
-    color: 'black',
-  },
-  inputBox: {
+  profileInputCardObject: {
+    padding: 8,
     backgroundColor: 'white',
-    color: 'black',
-    fontSize: 20,
   },
 });
 
