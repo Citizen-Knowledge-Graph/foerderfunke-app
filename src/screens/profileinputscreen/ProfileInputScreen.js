@@ -25,7 +25,11 @@ const ProfileInputScreen = ({ route }) => {
   return (
     <ScreenView screenName={title} backButton={true} showName={false}>
       {profileInputData && (
-        <ProfileInputList title={title} profileInputData={profileInputData} />
+        <ProfileInputList
+          title={title}
+          id={id}
+          profileInputData={profileInputData}
+        />
       )}
     </ScreenView>
   );
