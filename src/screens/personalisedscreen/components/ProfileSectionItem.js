@@ -30,7 +30,7 @@ const ProfileSectionItem = ({ title, id, active, completed }) => {
           {title}
         </SizableText>
       </XStack>
-      {active ? (
+      {active || completed ? (
         <Button
           backgroundColor={'white'}
           icon={<ChevronRight size='$1' color={'black'} />}

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SizableText, XStack, YStack } from 'tamagui';
 import ProfileSectionItem from './ProfileSectionItem';
-import { Briefcase, Smile, Coins, Book, Baby } from '@tamagui/lucide-icons';
 import { useProfileInputSectionStore } from '../../../storage/zustand';
 
 const ProfileSections = ({ personalisedScreenData }) => {
@@ -28,7 +27,7 @@ const ProfileSections = ({ personalisedScreenData }) => {
             key={index}
             title={section.title}
             id={section.id}
-            active={activeSection === section.id}
+            active={section.active}
             completed={completedSections.includes(section.id)}
           />
         ))}
