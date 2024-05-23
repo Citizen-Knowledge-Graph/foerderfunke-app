@@ -1,5 +1,6 @@
 export class ProfileInputFieldData {
-  constructor() {
+  constructor(id) {
+    this.id = id;
     this.profileInputFields = [];
   }
 

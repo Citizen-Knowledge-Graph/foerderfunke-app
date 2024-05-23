@@ -6,12 +6,7 @@ import { useProfileInputSectionStore } from '../../../storage/zustand';
 
 const ProfileSections = ({ personalisedScreenData }) => {
   // zustand hooks
-  const activeSection = useProfileInputSectionStore(
-    (state) => state.activeSection
-  );
-  const completedSections = useProfileInputSectionStore(
-    (state) => state.completedSections
-  );
+  const sections = useProfileInputSectionStore((state) => state.sections);
 
   // component
   return (
@@ -22,15 +17,18 @@ const ProfileSections = ({ personalisedScreenData }) => {
         </SizableText>
       </XStack>
       <YStack gap={16}>
-        {personalisedScreenData.personalisedData.map((section, index) => (
-          <ProfileSectionItem
-            key={index}
-            title={section.title}
-            id={section.id}
-            active={section.active}
-            completed={completedSections.includes(section.id)}
-          />
-        ))}
+        {personalisedScreenData.personalisedData.map((section, index) => {
+          const sectionStatus = sections.filter((s) => s.id === section.id)[0];
+          return (
+            <ProfileSectionItem
+              key={index}
+              title={section.title}
+              id={section.id}
+              active={sectionStatus.active}
+              completed={sectionStatus.completed}
+            />
+          );
+        })}
       </YStack>
     </YStack>
   );

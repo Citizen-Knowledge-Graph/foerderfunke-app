@@ -1,4 +1,5 @@
 import { ProfileSectionsData, ProfileSectionStatus } from './PersonalisedModel';
+import { useProfileInputSectionStore } from '../../storage/zustand';
 
 // config
 const profileSections = [
@@ -26,23 +27,25 @@ const profileSections = [
 
 export const fetchPersonalisedData = async (completedSections) => {
   const newProfileSectionsData = new ProfileSectionsData();
-  let activeSet = false;
 
-  profileSections.forEach((section) => {
-    let activeStatus = false;
-
-    if (!activeSet && !completedSections.includes(section.id)) {
-      activeSet = true;
-      activeStatus = true;
-    }
-    const newProfileSectionStatus = new ProfileSectionStatus(
-      section.id,
-      section.title,
-      completedSections.includes(section.id),
-      activeStatus
-    );
+  for (let i = 0; i < profileSections.length; i++) {
+    const currentItem = profileSections[i];
+    //
+    // populate new content card
+    const newProfileSectionStatus = {
+      id: currentItem.id,
+      title: currentItem.title,
+    };
     newProfileSectionsData.addPersonalisedData(newProfileSectionStatus);
-  });
-
+    //
+    // populate state dictionary
+    const newDictEntry = {
+      id: currentItem.id,
+      nextId: profileSections[i + 1]?.id,
+    };
+    useProfileInputSectionStore
+      .getState()
+      .initialiseSection(newDictEntry.id, newDictEntry.nextId, i === 0);
+  }
   return newProfileSectionsData;
 };

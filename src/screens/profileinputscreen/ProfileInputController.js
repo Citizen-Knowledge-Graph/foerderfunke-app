@@ -5,7 +5,7 @@ import { UserStore } from '../../models/user-model';
 
 // config
 export const fetchProfileInputData = async (activeSection) => {
-  const profileInputData = new ProfileInputFieldData();
+  const profileInputData = new ProfileInputFieldData(activeSection);
   //
   // fetch onboarding cards path
   const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');

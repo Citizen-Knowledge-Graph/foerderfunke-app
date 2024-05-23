@@ -1,0 +1,12 @@
+[
+  {
+    "datafield": "ff:hasEmployment",
+    "title": "Where are you employed?",
+    "datatype": "string"
+  },
+  {
+    "datafield": "ff:hasEmploymentType",
+    "title": "Where are you employment type?",
+    "datatype": "string"
+  }
+]

@@ -75,16 +75,29 @@ export const useOnboardingStore = create((set) => ({
 }));
 
 export const useProfileInputSectionStore = create((set) => ({
-  activeSection: 'about-you',
-  completedSections: [],
-  updateActiveInputSection: (newActiveSection) => {
-    console.log('STATE UPDATE: We are updating the profile input section');
-    set((state) => ({ activeSection: newActiveSection }));
+  sections: [],
+  initialiseSection: (id, nextId, active) => {
+    console.log(
+      'STATE UPDATE: We are adding a new section to the sections store'
+    );
+    const newSection = { id: id, next: nextId, active, completed: false };
+    set((state) => ({ sections: [...state.sections, newSection] }));
   },
-  updateCompletedSections: (newCompletedSection) => {
+  updateCompletedSections: () => {
     console.log('STATE UPDATE: We are updating the completed sections');
+    let nextSection;
     set((state) => ({
-      completedSections: [...state.completedSections, state.activeSection],
+      sections: state.sections.map((section) => {
+        if (section.active) {
+          section.completed = true;
+          section.active = false;
+          nextSection = section.next;
+        }
+        if (section.id === nextSection) {
+          section.active = true;
+        }
+        return section;
+      }),
     }));
   },
 }));

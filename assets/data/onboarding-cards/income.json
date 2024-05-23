@@ -1,0 +1,7 @@
+[
+  {
+    "datafield": "ff:hasEmployment",
+    "title": "How much do you earn?",
+    "datatype": "integer"
+  }
+]
