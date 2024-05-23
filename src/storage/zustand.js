@@ -3,7 +3,7 @@ import { updateUserProfile } from '../screens/profilescreen/ProfileScreenControl
 import {
   addUserProfileField,
   addNestedUserProfileField,
-} from '../screens/onboarding/OnboardingController';
+} from '../screens/profileinputscreen/ProfileInputController';
 
 export const useUserStore = create((set) => ({
   userId: 'kinderzuschlag-user-profile',

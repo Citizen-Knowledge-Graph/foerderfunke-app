@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ProfileOnboarding from './components/ProfileOnboarding';
-import { fetchPersonalisedData } from './PersonalisedController';
+import OnboardingContext from './components/OnboardingContext';
+import { fetchPersonalisedData } from './OnboardingController';
 
-const PersonalisedScreen = () => {
+const OnboardingScreen = () => {
   const [personalisedScreenData, setPersonalisedScreenData] = useState();
 
   useEffect(() => {
@@ -22,9 +22,9 @@ const PersonalisedScreen = () => {
 
   return (
     personalisedScreenData && (
-      <ProfileOnboarding personalisedScreenData={personalisedScreenData} />
+      <OnboardingContext personalisedScreenData={personalisedScreenData} />
     )
   );
 };
 
-export default PersonalisedScreen;
+export default OnboardingScreen;

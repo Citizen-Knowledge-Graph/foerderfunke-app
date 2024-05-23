@@ -1,12 +1,12 @@
 import ScreenView from '../../../components/ScreenView';
 import { Card, SizableText, XStack, YStack } from 'tamagui';
 import { Info } from '@tamagui/lucide-icons';
-import ProfileSections from './ProfileSections';
+import OnboardingSections from './OnboardingSections';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import React from 'react';
 
-const ProfileOnboarding = ({ personalisedScreenData }) => {
+const OnboardingContext = ({ personalisedScreenData }) => {
   return (
     <ScreenView screenName={'Choice'} backButton={true} showName={false}>
       <YStack gap={20}>
@@ -43,7 +43,7 @@ const ProfileOnboarding = ({ personalisedScreenData }) => {
             </Card>
           </XStack>
         </YStack>
-        <ProfileSections personalisedScreenData={personalisedScreenData} />
+        <OnboardingSections personalisedScreenData={personalisedScreenData} />
       </YStack>
     </ScreenView>
   );
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileOnboarding;
+export default OnboardingContext;

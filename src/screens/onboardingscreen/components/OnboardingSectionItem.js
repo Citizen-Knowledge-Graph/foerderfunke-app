@@ -6,7 +6,7 @@ import { ChevronRight } from '@tamagui/lucide-icons';
 import { useNavigation } from '@react-navigation/native';
 import ProfileIconMap from './ProfileIconMap';
 
-const ProfileSectionItem = ({ title, id, active, completed }) => {
+const OnboardingSectionItem = ({ title, id, active, completed }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
   const backgroundColor = completed
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSectionItem;
+export default OnboardingSectionItem;

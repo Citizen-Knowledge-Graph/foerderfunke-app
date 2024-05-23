@@ -1,4 +1,4 @@
-import { ProfileSectionsData, ProfileSectionStatus } from './PersonalisedModel';
+import { ProfileSectionsData, ProfileSectionStatus } from './OnboardingModel';
 import { useProfileInputSectionStore } from '../../storage/zustand';
 
 // config

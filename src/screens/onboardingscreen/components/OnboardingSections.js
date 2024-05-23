@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SizableText, XStack, YStack } from 'tamagui';
-import ProfileSectionItem from './ProfileSectionItem';
+import OnboardingSectionItem from './OnboardingSectionItem';
 import { useProfileInputSectionStore } from '../../../storage/zustand';
 
-const ProfileSections = ({ personalisedScreenData }) => {
+const OnboardingSections = ({ personalisedScreenData }) => {
   // zustand hooks
   const sections = useProfileInputSectionStore((state) => state.sections);
 
@@ -20,7 +20,7 @@ const ProfileSections = ({ personalisedScreenData }) => {
         {personalisedScreenData.personalisedData.map((section, index) => {
           const sectionStatus = sections.filter((s) => s.id === section.id)[0];
           return (
-            <ProfileSectionItem
+            <OnboardingSectionItem
               key={index}
               title={section.title}
               id={section.id}
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSections;
+export default OnboardingSections;

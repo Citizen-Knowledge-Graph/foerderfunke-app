@@ -7,9 +7,9 @@ import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/profilescreen/ProfileScreen';
 import SchemeScreen from './screens/schemescreen/SchemeScreen';
 import JourneyScreen from './screens/journeyscreen/JourneyScreen';
-import OnboardingScreen from './screens/onboarding/OnboardingScreen';
+//import OnboardingScreen from './screens/onboarding/OnboardingScreen';
 import ChoiceScreen from './screens/miscellaneous/ChoiceScreen';
-import PersonalisedScreen from './screens/personalisedscreen/PersonalisedScreen';
+import OnboardingScreen from './screens/onboardingscreen/OnboardingScreen';
 import ProfileInputScreen from './screens/profileinputscreen/ProfileInputScreen';
 
 // Stack Navigation
@@ -35,17 +35,12 @@ export const SchemeStackNavigator = () => {
       />
       <Stack.Screen
         name='PersonalisedStackScreen'
-        component={PersonalisedScreen}
+        component={OnboardingScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name='ProfileInputStackScreen'
         component={ProfileInputScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='OnboardingStackScreen'
-        component={OnboardingScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
