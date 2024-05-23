@@ -6,14 +6,19 @@ import { colorTokens } from '@tamagui/themes';
 import { StyleSheet, ScrollView } from 'react-native';
 import useAddProfileData from '../hooks/useAddProfileData';
 import { useNavigation } from '@react-navigation/native';
+import useUpdateCompletedSections from '../hooks/useUpdateCompletedSections';
 
 const ProfileInputList = ({ title, profileInputData }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
   const [visibleCount, setVisibleCount] = useState(1);
   const scrollViewRef = useRef(null);
   const [profileData, setProfileData] = useState({});
-  const handleAddProfileData = useAddProfileData(profileData);
 
+  // custom hooks
+  const handleAddProfileData = useAddProfileData(profileData);
+  const updateCompletedSections = useUpdateCompletedSections();
+
+  // utility functions
   const increaseVisibleCount = () => {
     if (visibleCount < profileInputData.profileInputFields.length) {
       setVisibleCount(visibleCount + 1);
@@ -31,7 +36,7 @@ const ProfileInputList = ({ title, profileInputData }) => {
   };
 
   console.log('current profile dict', profileData);
-
+  // component
   return (
     <ScrollView ref={scrollViewRef}>
       <YStack gap={20}>
@@ -103,7 +108,8 @@ const ProfileInputList = ({ title, profileInputData }) => {
               iconAfter={<Check size='$1' color={'black'} />}
               onPress={() => {
                 navigation.goBack();
-                handleAddProfileData;
+                handleAddProfileData();
+                updateCompletedSections();
               }}
               style={styles.confirmButton}
               pressStyle={{

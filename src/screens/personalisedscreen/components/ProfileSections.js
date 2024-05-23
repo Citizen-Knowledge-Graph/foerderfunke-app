@@ -5,10 +5,13 @@ import ProfileSectionItem from './ProfileSectionItem';
 import { Briefcase, Smile, Coins, Book, Baby } from '@tamagui/lucide-icons';
 import { useProfileInputSectionStore } from '../../../storage/zustand';
 
-const ProfileSections = () => {
+const ProfileSections = ({ personalisedScreenData }) => {
   // zustand hooks
   const activeSection = useProfileInputSectionStore(
     (state) => state.activeSection
+  );
+  const completedSections = useProfileInputSectionStore(
+    (state) => state.completedSections
   );
 
   // component
@@ -20,36 +23,15 @@ const ProfileSections = () => {
         </SizableText>
       </XStack>
       <YStack gap={16}>
-        <ProfileSectionItem
-          title={'About you'}
-          id={'about-you'}
-          icon={<Smile size='$3' color='black' />}
-          active={activeSection === 'about-you'}
-        />
-        <ProfileSectionItem
-          title={'Job'}
-          id={'job'}
-          icon={<Briefcase size='$3' color='black' />}
-          active={activeSection === 'job'}
-        />
-        <ProfileSectionItem
-          title={'Income'}
-          id={'income'}
-          icon={<Coins size='$3' color='black' />}
-          active={activeSection === 'income'}
-        />
-        <ProfileSectionItem
-          title={'Education'}
-          id={'education'}
-          icon={<Book size='$3' color='black' />}
-          active={activeSection === 'education'}
-        />
-        <ProfileSectionItem
-          title={'Children'}
-          id={'children'}
-          icon={<Baby size='$3' color='black' />}
-          active={activeSection === 'children'}
-        />
+        {personalisedScreenData.personalisedData.map((section, index) => (
+          <ProfileSectionItem
+            key={index}
+            title={section.title}
+            id={section.id}
+            active={activeSection === section.id}
+            completed={completedSections.includes(section.id)}
+          />
+        ))}
       </YStack>
     </YStack>
   );

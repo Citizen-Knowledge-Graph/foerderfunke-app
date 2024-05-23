@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import React from 'react';
 
-const ProfileOnboarding = () => {
+const ProfileOnboarding = ({ personalisedScreenData }) => {
   return (
     <ScreenView screenName={'Choice'} backButton={true} showName={false}>
       <YStack gap={20}>
@@ -43,7 +43,7 @@ const ProfileOnboarding = () => {
             </Card>
           </XStack>
         </YStack>
-        <ProfileSections />
+        <ProfileSections personalisedScreenData={personalisedScreenData} />
       </YStack>
     </ScreenView>
   );

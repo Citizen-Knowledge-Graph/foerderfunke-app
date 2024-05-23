@@ -4,18 +4,14 @@ import { colorTokens } from '@tamagui/themes';
 import { StyleSheet } from 'react-native';
 import { ChevronRight } from '@tamagui/lucide-icons';
 import { useNavigation } from '@react-navigation/native';
-import { useProfileInputSectionStore } from '../../../storage/zustand';
+import ProfileIconMap from './ProfileIconMap';
 
-const ProfileSectionItem = ({
-  icon,
-  title,
-  id,
-  active,
-  personalisedScreenData,
-}) => {
+const ProfileSectionItem = ({ title, id, active, completed }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
-  const backgroundColor = active
+  const backgroundColor = completed
+    ? colorTokens.light.green.green7
+    : active
     ? colorTokens.light.yellow.yellow8
     : colorTokens.light.gray.gray8;
 
@@ -27,22 +23,26 @@ const ProfileSectionItem = ({
       flex={1}
     >
       <XStack gap={16} alignItems={'center'}>
-        <Card style={[styles.iconContainer, { backgroundColor }]}>{icon}</Card>
+        <Card style={[styles.iconContainer, { backgroundColor }]}>
+          <ProfileIconMap id={id} />
+        </Card>
         <SizableText size='$8' style={styles.sectionTitle}>
           {title}
         </SizableText>
       </XStack>
-      <Button
-        backgroundColor={'white'}
-        icon={<ChevronRight size='$1' color={'black'} />}
-        pressStyle={{
-          backgroundColor: colorTokens.light.gray.gray8,
-          borderColor: 'white',
-        }}
-        onPress={() =>
-          navigation.navigate('ProfileInputStackScreen', { title, id })
-        }
-      />
+      {active ? (
+        <Button
+          backgroundColor={'white'}
+          icon={<ChevronRight size='$1' color={'black'} />}
+          pressStyle={{
+            backgroundColor: colorTokens.light.gray.gray8,
+            borderColor: 'white',
+          }}
+          onPress={() =>
+            navigation.navigate('ProfileInputStackScreen', { title, id })
+          }
+        />
+      ) : null}
     </XStack>
   );
 };
