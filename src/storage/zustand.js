@@ -76,8 +76,16 @@ export const useOnboardingStore = create((set) => ({
 
 export const useProfileInputSectionStore = create((set) => ({
   activeSection: 'about-you',
-  updateProfileInputSection: (newProfileInputSection) => {
+  updateActiveInputSection: (newProfileInputSection) => {
     console.log('STATE UPDATE: We are updating the profile input section');
     set((state) => ({ activeSection: newProfileInputSection }));
+  },
+}));
+
+export const useCompletedInputSectionStore = create((set) => ({
+  completedSections: [],
+  updateCompletedSections: (newCompletedSections) => {
+    console.log('STATE UPDATE: We are updating the completed sections');
+    set((state) => ({ completedSections: newCompletedSections }));
   },
 }));

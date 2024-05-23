@@ -4,6 +4,7 @@ import { colorTokens } from '@tamagui/themes';
 import { StyleSheet } from 'react-native';
 import { ChevronRight } from '@tamagui/lucide-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useProfileInputSectionStore } from '../../../storage/zustand';
 
 const ProfileSectionItem = ({
   icon,

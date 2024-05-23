@@ -3,8 +3,15 @@ import { StyleSheet } from 'react-native';
 import { SizableText, XStack, YStack } from 'tamagui';
 import ProfileSectionItem from './ProfileSectionItem';
 import { Briefcase, Smile, Coins, Book, Baby } from '@tamagui/lucide-icons';
+import { useProfileInputSectionStore } from '../../../storage/zustand';
 
-const ProfileSections = ({ activeSection, setActiveSection }) => {
+const ProfileSections = () => {
+  // zustand hooks
+  const activeSection = useProfileInputSectionStore(
+    (state) => state.activeSection
+  );
+
+  // component
   return (
     <YStack gap={10}>
       <XStack justifyContent={'center'}>
