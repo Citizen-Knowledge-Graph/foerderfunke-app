@@ -6,7 +6,7 @@
   },
   {
     "datafield": "ff:hasEmploymentType",
-    "title": "Where are you employment type?",
+    "title": "What is your employment type?",
     "datatype": "string"
   }
 ]

@@ -1,7 +1,12 @@
 [
   {
-    "datafield": "ff:hasEmployment",
-    "title": "How much do you earn?",
+    "datafield": "ff:hasIncomeBrutto",
+    "title": "What is your income BEFORE taxes?",
+    "datatype": "integer"
+  },
+  {
+    "datafield": "ff:hasIncomeNetto",
+    "title": "What is your income AFTER taxes?",
     "datatype": "integer"
   }
 ]

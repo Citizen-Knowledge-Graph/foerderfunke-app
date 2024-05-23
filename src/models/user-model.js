@@ -38,7 +38,7 @@ export class UserStore {
   static retrieveUserData(userId) {
     let userString = storage.getString(userId);
     if (!userString) {
-      userString = '{}';
+      userString = '{"@id":"ff:mainPerson","@type":"ff:Citizen"}';
       storage.set(userId, userString);
     }
     return JSON.parse(userString);

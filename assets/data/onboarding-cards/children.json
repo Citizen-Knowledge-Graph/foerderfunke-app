@@ -1,7 +1,7 @@
 [
   {
-    "datafield": "ff:hasEmployment",
-    "title": "How many children do you have?",
-    "datatype": "string"
+    "datafield": "ff:hasChild",
+    "title": "If any how many children do you want to add?",
+    "datatype": "class"
   }
 ]

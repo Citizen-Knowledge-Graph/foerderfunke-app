@@ -14,10 +14,7 @@ const ProfileInputList = ({ title, id, profileInputData }) => {
   const scrollViewRef = useRef(null);
 
   // custom hooks
-  const handleAddProfileData = useAddProfileData(
-    inputFieldData,
-    profileInputData.profileInputFields
-  );
+  const handleAddProfileData = useAddProfileData(inputFieldData);
   const updateCompletedSections = useUpdateCompletedSections();
 
   console.log('current profile dict', inputFieldData);
@@ -67,6 +64,7 @@ const ProfileInputList = ({ title, id, profileInputData }) => {
             onPress={() => {
               navigation.goBack();
               updateCompletedSections();
+              handleAddProfileData();
             }}
             style={styles.confirmButton}
             pressStyle={{
