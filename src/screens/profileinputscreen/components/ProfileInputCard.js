@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card, SizableText, XStack, YStack, Input } from 'tamagui';
+import { Card, SizableText, XStack, YStack } from 'tamagui';
 import { Info } from '@tamagui/lucide-icons';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import ProfileInputField from './ProfileInputField';
 
-const ProfileInputCard = ({ item, setProfileData }) => {
+const ProfileInputCard = ({ item, setInputFieldData }) => {
   return (
     <YStack gap={10}>
       <XStack justifyContent={'center'}>
@@ -32,7 +32,10 @@ const ProfileInputCard = ({ item, setProfileData }) => {
               paddingHorizontal={8}
               gap={10}
             >
-              <ProfileInputField item={item} setProfileData={setProfileData} />
+              <ProfileInputField
+                item={item}
+                setInputFieldData={setInputFieldData}
+              />
             </XStack>
           </YStack>
         </Card>

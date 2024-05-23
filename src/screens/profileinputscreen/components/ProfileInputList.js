@@ -10,32 +10,15 @@ import useUpdateCompletedSections from '../hooks/useUpdateCompletedSections';
 
 const ProfileInputList = ({ title, profileInputData }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
-  const [visibleCount, setVisibleCount] = useState(1);
+  const [inputFieldData, setInputFieldData] = useState({});
   const scrollViewRef = useRef(null);
-  const [profileData, setProfileData] = useState({});
 
   // custom hooks
-  const handleAddProfileData = useAddProfileData(profileData);
+  const handleAddProfileData = useAddProfileData(inputFieldData);
   const updateCompletedSections = useUpdateCompletedSections();
 
-  // utility functions
-  const increaseVisibleCount = () => {
-    if (visibleCount < profileInputData.profileInputFields.length) {
-      setVisibleCount(visibleCount + 1);
-      setTimeout(
-        () => scrollViewRef.current.scrollToEnd({ animated: true }),
-        0
-      );
-    }
-  };
+  console.log('current profile dict', inputFieldData);
 
-  const decreaseVisibleCount = () => {
-    if (visibleCount > 1) {
-      setVisibleCount(visibleCount - 1);
-    }
-  };
-
-  console.log('current profile dict', profileData);
   // component
   return (
     <ScrollView ref={scrollViewRef}>
@@ -65,60 +48,28 @@ const ProfileInputList = ({ title, profileInputData }) => {
           </XStack>
         </YStack>
         <YStack gap={30}>
-          {profileInputData.profileInputFields
-            .slice(0, visibleCount)
-            .map((item, index) => (
-              <ProfileInputCard
-                key={index}
-                item={item}
-                setProfileData={setProfileData}
-              />
-            ))}
-        </YStack>
-        <XStack
-          justifyContent={'space-between'}
-          gap={20}
-          style={styles.confirmPane}
-        >
-          {visibleCount > 1 ? (
-            <Button
-              icon={<ChevronLeft size='$1' color={'black'} />}
-              onPress={() => decreaseVisibleCount()}
-              style={styles.navigationButton}
-              pressStyle={{
-                backgroundColor: colorTokens.light.gray.gray8,
-              }}
+          {profileInputData.profileInputFields.map((item, index) => (
+            <ProfileInputCard
+              key={index}
+              item={item}
+              setInputFieldData={setInputFieldData}
             />
-          ) : (
-            <View />
-          )}
-          {visibleCount <= profileInputData.profileInputFields.length - 1 ? (
-            <Button
-              iconAfter={<ChevronRight size='$1' color={'black'} />}
-              onPress={() => increaseVisibleCount()}
-              style={styles.navigationButton}
-              pressStyle={{
-                backgroundColor: colorTokens.light.gray.gray8,
-              }}
-            >
-              Next
-            </Button>
-          ) : (
-            <Button
-              iconAfter={<Check size='$1' color={'black'} />}
-              onPress={() => {
-                navigation.goBack();
-                handleAddProfileData();
-                updateCompletedSections();
-              }}
-              style={styles.confirmButton}
-              pressStyle={{
-                backgroundColor: colorTokens.light.gray.gray8,
-              }}
-            >
-              Confirm
-            </Button>
-          )}
+          ))}
+        </YStack>
+        <XStack justifyContent={'flex-end'} gap={20} style={styles.confirmPane}>
+          <Button
+            iconAfter={<Check size='$1' color={'black'} />}
+            onPress={() => {
+              navigation.goBack();
+              updateCompletedSections();
+            }}
+            style={styles.confirmButton}
+            pressStyle={{
+              backgroundColor: colorTokens.light.gray.gray8,
+            }}
+          >
+            Confirm
+          </Button>
         </XStack>
       </YStack>
     </ScrollView>

@@ -7,16 +7,16 @@ import {
 } from './ProfileInputTypes';
 import { SizableText } from 'tamagui';
 
-const ProfileInputField = ({ item, setProfileData }) => {
+const ProfileInputField = ({ item, setInputFieldData }) => {
   const [inputData, setInputData] = useState();
   const { datatype, options } = item;
 
   useEffect(() => {
-    setProfileData((prev) => ({
+    setInputFieldData((prev) => ({
       ...prev,
       [item.datafield]: inputData,
     }));
-  }, [inputData, item, setProfileData]);
+  }, [inputData, item, setInputFieldData]);
 
   switch (datatype) {
     case 'selection':
