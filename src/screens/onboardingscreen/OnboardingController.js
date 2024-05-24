@@ -25,7 +25,7 @@ const profileSections = [
   },
 ];
 
-export const fetchPersonalisedData = async (completedSections) => {
+export const fetchPersonalisedData = async () => {
   const newProfileSectionsData = new ProfileSectionsData();
 
   for (let i = 0; i < profileSections.length; i++) {

@@ -56,24 +56,6 @@ export const useUserUpdateStore = create((set) => ({
   },
 }));
 
-export const useOnboardingStore = create((set) => ({
-  cards: [{ name: 'default', index: 0 }],
-  updateOnboardingFlow: (newCards, count) => {
-    console.log('STATE UPDATE: We are updating the onboarding flow');
-    const newCardsArray = Array.from({ length: count }, (_, index) => ({
-      ...newCards,
-      id: index,
-    }));
-    set((state) => {
-      const existingCards = state.cards.filter(
-        (card) => !newCardsArray.some((newCard) => newCard.name === card.name)
-      );
-
-      return { cards: [...existingCards, ...newCardsArray] };
-    });
-  },
-}));
-
 export const useProfileInputSectionStore = create((set) => ({
   sections: [],
   initialiseSection: (id, nextId, active) => {

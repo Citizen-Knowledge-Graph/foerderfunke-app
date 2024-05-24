@@ -18,7 +18,7 @@ const OnboardingScreen = () => {
     fetchData();
   }, []);
 
-  console.log('ProfileInputScreen', personalisedScreenData);
+  console.log('Onboarding', personalisedScreenData);
 
   return (
     personalisedScreenData && (
