@@ -10,9 +10,9 @@ export class ProfileInputFieldData {
 }
 
 export class ProfileInputField {
-  constructor(datafield, title, datatype, options, objectClass) {
-    this.datafield = datafield;
+  constructor(title, datafield, datatype, options, objectClass) {
     this.title = title;
+    this.datafield = datafield;
     this.datatype = datatype;
     this.options = options;
     this.objectClass = objectClass;

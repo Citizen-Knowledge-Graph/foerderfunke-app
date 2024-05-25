@@ -17,8 +17,8 @@ export const fetchProfileInputData = async (activeSection) => {
     //
     // create onboarding card
     const newSectionFieldCard = new ProfileInputField(
-      card.datafield,
       card.title,
+      card.datafield,
       card.datatype,
       card.options ? card.options : null,
       card.objectClass ? card.objectClass : null
