@@ -14,15 +14,32 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
   const { id, type } = item.entityData;
 
   useEffect(() => {
-    setInputFieldData((prev) => [
-      ...prev,
-      {
-        datafield: item.datafield,
-        entityId: id,
-        entityType: type,
-        inputData: inputData,
-      },
-    ]);
+    if (inputData !== undefined) {
+      setInputFieldData((prev) => {
+        // Find the index of the existing entry
+        const index = prev.findIndex(
+          (entry) => entry.datafield === item.datafield && entry.entityId === id
+        );
+
+        // Create the new entry
+        const newEntry = {
+          datafield: item.datafield,
+          entityId: id,
+          entityType: type,
+          inputData: inputData,
+        };
+
+        // If the entry exists, update it
+        if (index !== -1) {
+          const updated = [...prev];
+          updated[index] = newEntry;
+          return updated;
+        }
+
+        // If the entry doesn't exist, add it
+        return [...prev, newEntry];
+      });
+    }
   }, [id, inputData, item, setInputFieldData, type]);
 
   switch (datatype) {
