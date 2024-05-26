@@ -8,7 +8,7 @@ import ObjectInput from './InputObjectClass';
 const ProfileInputCard = ({ item, setInputFieldData }) => {
   return (
     <XStack justifyContent={'center'}>
-      {item.datatype !== 'class' ? (
+      {item.inputData.datatype !== 'class' ? (
         <Card style={styles.profileInputCard} flex={1}>
           <YStack flex={1} justifyContent={'flex-end'}>
             <XStack

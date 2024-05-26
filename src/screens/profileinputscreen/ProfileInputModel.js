@@ -1,6 +1,5 @@
 export class ProfileInputFieldData {
-  constructor(id) {
-    this.id = id;
+  constructor() {
     this.profileInputFields = [];
   }
 
@@ -10,11 +9,17 @@ export class ProfileInputFieldData {
 }
 
 export class ProfileInputField {
-  constructor(title, datafield, datatype, options, objectClass) {
-    this.title = title;
+  constructor(datafield, title, datatype, options, objectClass, id, type) {
     this.datafield = datafield;
-    this.datatype = datatype;
-    this.options = options;
-    this.objectClass = objectClass;
+    this.displayData = { title: title };
+    this.inputData = {
+      datatype: datatype,
+      options: options,
+      objectClass: objectClass,
+    };
+    this.entityData = {
+      id: id,
+      type: type,
+    };
   }
 }

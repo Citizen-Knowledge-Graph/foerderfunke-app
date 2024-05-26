@@ -10,14 +10,20 @@ import ObjectInput from './InputObjectClass';
 
 const ProfileInputField = ({ item, setInputFieldData }) => {
   const [inputData, setInputData] = useState();
-  const { datatype, options } = item;
+  const { datatype, options } = item.inputData;
+  const { id, type } = item.entityData;
 
   useEffect(() => {
-    setInputFieldData((prev) => ({
+    setInputFieldData((prev) => [
       ...prev,
-      [item.datafield]: inputData,
-    }));
-  }, [inputData, item, setInputFieldData]);
+      {
+        datafield: item.datafield,
+        entityId: id,
+        entityType: type,
+        inputData: inputData,
+      },
+    ]);
+  }, [id, inputData, item, setInputFieldData, type]);
 
   switch (datatype) {
     case 'class':

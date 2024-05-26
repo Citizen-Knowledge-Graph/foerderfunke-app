@@ -4,12 +4,12 @@ import { ProfileInputFieldData, ProfileInputField } from './ProfileInputModel';
 import { UserStore } from '../../models/user-model';
 
 // config
-export const fetchProfileInputData = async (activeSection) => {
-  const profileInputData = new ProfileInputFieldData(activeSection);
+export const fetchProfileInputData = async (entityData, sectionData) => {
+  const profileInputData = new ProfileInputFieldData(entityData, sectionData);
   //
   // fetch onboarding cards path
   const onboardingCardsPath = await AsyncStorage.getItem('onboarding-cards');
-  const sectionPath = onboardingCardsPath + activeSection + '.json';
+  const sectionPath = onboardingCardsPath + sectionData.id + '.json';
   const sectionCards = await readJson(sectionPath);
   //
   // iterate through onboarding cards
@@ -17,11 +17,13 @@ export const fetchProfileInputData = async (activeSection) => {
     //
     // create onboarding card
     const newSectionFieldCard = new ProfileInputField(
-      card.title,
       card.datafield,
+      card.title,
       card.datatype,
-      card.options ? card.options : null,
-      card.objectClass ? card.objectClass : null
+      card.options,
+      card.objectClass,
+      entityData.id,
+      entityData.type
     );
     profileInputData.addProfileInputField(newSectionFieldCard);
   }

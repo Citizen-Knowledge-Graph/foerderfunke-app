@@ -10,7 +10,7 @@ import useUpdateCompletedSections from '../hooks/useUpdateCompletedSections';
 
 const ProfileInputList = ({ title, id, profileInputData }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
-  const [inputFieldData, setInputFieldData] = useState({});
+  const [inputFieldData, setInputFieldData] = useState([]);
   const scrollViewRef = useRef(null);
 
   // custom hooks

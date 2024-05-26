@@ -17,7 +17,7 @@ const ProfileInputPair = ({ item, setInputFieldData }) => {
               gap={10}
             >
               <SizableText size='$6' style={styles.infoCardText}>
-                {item.title}
+                {item.displayData.title}
               </SizableText>
               <Info size='$1' color={'black'} />
             </XStack>
