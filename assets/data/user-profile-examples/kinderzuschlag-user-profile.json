@@ -1,4 +1,6 @@
 {
+  "@id": "ff:Person",
+  "@type": "ff:Citizen",
   "ff:hasFirstNames": "Max",
   "ff:hasFamilyName": "Mustermann",
   "ff:hasBirthday": "1992-05-17",

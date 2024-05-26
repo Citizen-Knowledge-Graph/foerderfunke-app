@@ -1,12 +1,48 @@
 import { storage } from '../storage/mmkv';
 
 export class UserStore {
+  static initialiseNewUser(userId, entityType) {
+    let userString = `{"@id":"${userId}","@type":"${entityType}"}`;
+    storage.set(userId, userString);
+    const userIds = JSON.parse(storage.getString('userIds') || '[]');
+    if (!userIds.includes(userId)) {
+      userIds.push(userId);
+      storage.set('userIds', JSON.stringify(userIds));
+    }
+  }
+
   // set a new field in the user data
-  static setField(userId, field, value) {
-    let userProfile = UserStore.retrieveUserData(userId);
-    userProfile[field] = value;
+  static setField(entityId, entityType, datafield, value) {
+    let userProfile = UserStore.retrieveUserData(entityId);
+
+    if (
+      userProfile['@id'] === entityId &&
+      userProfile['@type'] === entityType
+    ) {
+      userProfile[datafield] = value;
+      UserStore.storeUserData(entityId, userProfile);
+      return 0;
+    }
+
+    for (const entry in userProfile) {
+      if (Array.isArray(userProfile[entry])) {
+        // retrieve both the entry and the index
+        for (const [nestedEntry, index] in userProfile[entry].entries) {
+          if (
+            nestedEntry['@id'] === entityId &&
+            nestedEntry['@type'] === entityType
+          ) {
+            userProfile[entry][index][datafield] = value;
+            UserStore.storeUserData(entityId, userProfile);
+            return 0;
+          }
+        }
+      }
+    }
+
+    userProfile[datafield] = value;
     console.log('user profile', userProfile);
-    UserStore.storeUserData(userId, userProfile);
+    UserStore.storeUserData(entityId, userProfile);
   }
 
   // set a new field in the nested user data
@@ -35,13 +71,22 @@ export class UserStore {
   }
 
   // retrieve the user data from mmkv
-  static retrieveUserData(userId) {
-    let userString = storage.getString(userId);
+  static retrieveUserData(entityId, entityType) {
+    let userString = storage.getString(entityId);
     if (!userString) {
-      userString = '{"@id":"ff:mainPerson","@type":"ff:Citizen"}';
-      storage.set(userId, userString);
+      userString = `{"@id":"${entityType}","@type":"${entityType}"}`;
+      storage.set(entityId, userString);
     }
-    return JSON.parse(userString);
+
+    const userData = JSON.parse(userString);
+
+    if (userData['@type'] !== entityType) {
+      throw new Error(
+        `Entity type mismatch: expected ${entityType} but found ${userData['@type']}`
+      );
+    }
+
+    return userData;
   }
 
   // return all user ids

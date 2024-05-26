@@ -45,8 +45,8 @@ const OnboardingSectionItem = ({
           }}
           onPress={() =>
             navigation.navigate('ProfileInputStackScreen', {
-              entityData,
               sectionData,
+              entityData,
             })
           }
         />

@@ -5,12 +5,12 @@ function useAddProfileData(inputFieldData) {
   const addUserField = useUserUpdateStore((state) => state.addUserField);
 
   return useCallback(() => {
-    console.log('hooke', inputFieldData);
-    for (let [key, value] of Object.entries(inputFieldData)) {
-      // the default case
-      addUserField(key, value);
+    for (const entry of inputFieldData) {
+      const { entityId, entityType, datafield, inputData } = entry;
+      console.log('entry', entry);
+      addUserField(entityId, entityType, datafield, inputData);
     }
-  }, [inputFieldData, addUserField]);
+  }, [addUserField, inputFieldData]);
 }
 
 export default useAddProfileData;

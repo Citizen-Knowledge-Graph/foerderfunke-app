@@ -1,9 +1,6 @@
 import { create } from 'zustand';
 import { updateUserProfile } from '../screens/profilescreen/ProfileScreenController';
-import {
-  addUserProfileField,
-  addNestedUserProfileField,
-} from '../screens/profileinputscreen/ProfileInputController';
+import { UserStore } from '../models/user-model';
 
 export const useUserStore = create((set) => ({
   userId: 'kinderzuschlag-user-profile',
@@ -42,16 +39,15 @@ export const useUserUpdateStore = create((set) => ({
     await updateUserProfile(userId, key, value);
     set((state) => ({ updateCounter: state.updateCounter + 1 }));
   },
-  addUserField: async (datafield, inputData) => {
+  addUserField: async (entityId, entityType, datafield, inputData) => {
     console.log('STATE UPDATE: We are adding a user field');
-    const userId = useUserStore.getState().userId;
-    await addUserProfileField(userId, datafield, inputData);
+    await (entityId, entityType, datafield, inputData);
     set((state) => ({ updateCounter: state.updateCounter + 1 }));
   },
   addNestedUserProfileField: async (group, id, datafield, inputData) => {
     console.log('STATE UPDATE: We are adding a nested user field');
     const userId = useUserStore.getState().userId;
-    await addNestedUserProfileField(userId, group, id, datafield, inputData);
+    UserStore.setField(userId, group, id, datafield, inputData);
     set((state) => ({ updateCounter: state.updateCounter + 1 }));
   },
 }));

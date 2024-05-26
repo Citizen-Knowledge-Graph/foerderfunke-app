@@ -4,15 +4,15 @@ import { fetchProfileInputData } from './ProfileInputController';
 import ProfileInputList from './components/ProfileInputList';
 
 const ProfileInputScreen = ({ route }) => {
-  const { entityData, sectionData } = route.params;
+  const { sectionData, entityData } = route.params;
   const [profileInputData, setProfileInputData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const newProfileInputData = await fetchProfileInputData(
-          entityData,
-          sectionData
+          sectionData,
+          entityData
         );
         setProfileInputData(newProfileInputData);
       } catch (error) {
