@@ -6,7 +6,12 @@ import { ChevronRight } from '@tamagui/lucide-icons';
 import { useNavigation } from '@react-navigation/native';
 import ProfileIconMap from './ProfileIconMap';
 
-const OnboardingSectionItem = ({ title, id, active, completed }) => {
+const OnboardingSectionItem = ({
+  entityData,
+  sectionData,
+  active,
+  completed,
+}) => {
   const navigation = useNavigation(); // Use the useNavigation hook
 
   const backgroundColor = completed
@@ -24,10 +29,10 @@ const OnboardingSectionItem = ({ title, id, active, completed }) => {
     >
       <XStack gap={16} alignItems={'center'}>
         <Card style={[styles.iconContainer, { backgroundColor }]}>
-          <ProfileIconMap id={id} />
+          <ProfileIconMap id={sectionData.id} />
         </Card>
         <SizableText size='$8' style={styles.sectionTitle}>
-          {title}
+          {sectionData.title}
         </SizableText>
       </XStack>
       {active || completed ? (
@@ -39,7 +44,10 @@ const OnboardingSectionItem = ({ title, id, active, completed }) => {
             borderColor: 'white',
           }}
           onPress={() =>
-            navigation.navigate('ProfileInputStackScreen', { title, id })
+            navigation.navigate('ProfileInputStackScreen', {
+              entityData,
+              sectionData,
+            })
           }
         />
       ) : null}

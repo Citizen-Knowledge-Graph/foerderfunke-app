@@ -22,8 +22,8 @@ const OnboardingSections = ({ personalisedScreenData }) => {
           return (
             <OnboardingSectionItem
               key={index}
-              title={section.title}
-              id={section.id}
+              entityData={personalisedScreenData.entityData}
+              sectionData={section}
               active={sectionStatus.active}
               completed={sectionStatus.completed}
             />

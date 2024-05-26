@@ -4,13 +4,16 @@ import { fetchProfileInputData } from './ProfileInputController';
 import ProfileInputList from './components/ProfileInputList';
 
 const ProfileInputScreen = ({ route }) => {
-  const { title, id } = route.params;
+  const { entityData, sectionData } = route.params;
   const [profileInputData, setProfileInputData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newProfileInputData = await fetchProfileInputData(id);
+        const newProfileInputData = await fetchProfileInputData(
+          entityData,
+          sectionData
+        );
         setProfileInputData(newProfileInputData);
       } catch (error) {
         console.error('Failed to fetch profile input screen data:', error);
@@ -18,16 +21,20 @@ const ProfileInputScreen = ({ route }) => {
     };
 
     fetchData();
-  }, [id]);
+  }, [entityData, sectionData]);
 
   console.log('ProfileInputScreen', profileInputData);
 
   return (
-    <ScreenView screenName={title} backButton={true} showName={false}>
+    <ScreenView
+      screenName={sectionData.title}
+      backButton={true}
+      showName={false}
+    >
       {profileInputData && (
         <ProfileInputList
-          title={title}
-          id={id}
+          title={sectionData.title}
+          id={sectionData.id}
           profileInputData={profileInputData}
         />
       )}
