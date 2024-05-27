@@ -4,8 +4,11 @@ import { StyleSheet, TextInput } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import { Check } from '@tamagui/lucide-icons';
 import ScreenView from '../../components/ScreenView';
+import useCreateUserprofile from './hooks/useCreateUserprofile';
 
 const OnboardingUsernameScreen = ({ navigation }) => {
+  const createUserprofile = useCreateUserprofile();
+
   return (
     <ScreenView
       screenName={'OnboardingUsername'}
@@ -53,6 +56,10 @@ const OnboardingUsernameScreen = ({ navigation }) => {
             style={styles.confirmButton}
             pressStyle={{
               backgroundColor: colorTokens.light.gray.gray8,
+            }}
+            onPress={() => {
+              navigation.navigate('OnboardingStackScreen');
+              createUserprofile();
             }}
           >
             Bestätigen
