@@ -1,9 +1,16 @@
-import { useCallback } from 'react';
+import { UserStore } from '../../../models/user-model';
 
-function useCreateUserprofile() {
-  return useCallback(() => {
-    console.log('we are creating a new user here');
-  }, []);
-}
+const useCreateUserprofile = (username) => {
+  return () => {
+    return new Promise((resolve, reject) => {
+      try {
+        UserStore.initialiseNewUser(username);
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+};
 
 export default useCreateUserprofile;

@@ -1,13 +1,29 @@
-import React from 'react';
-import { Button, Card, SizableText, XStack, YStack } from 'tamagui';
+import React, { useState } from 'react';
+import { Card, SizableText, XStack, YStack } from 'tamagui';
 import { StyleSheet, TextInput } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
-import { Check } from '@tamagui/lucide-icons';
 import ScreenView from '../../components/ScreenView';
 import useCreateUserprofile from './hooks/useCreateUserprofile';
 
 const OnboardingUsernameScreen = ({ navigation }) => {
-  const createUserprofile = useCreateUserprofile();
+  const [username, setUsername] = useState();
+  const [error, setError] = useState('');
+  const createUserprofile = useCreateUserprofile(username);
+
+  const handleCreateProfile = () => {
+    createUserprofile()
+      .then(() => {
+        navigation.navigate('OnboardingStackScreen');
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
+
+  const handleUsernameChange = (text) => {
+    setUsername(text);
+    setError('');
+  };
 
   return (
     <ScreenView
@@ -45,19 +61,19 @@ const OnboardingUsernameScreen = ({ navigation }) => {
                   style={styles.inputField}
                   keyboardType='numeric'
                   placeholder='Dein Benutzername'
+                  onChangeText={(text) => handleUsernameChange(text)}
                 />
               </XStack>
             </YStack>
           </Card>
         </XStack>
+        {error ? (
+          <XStack justifyContent={'center'}>
+            <SizableText style={styles.errorText}>{error}</SizableText>
+          </XStack>
+        ) : null}
         <XStack justifyContent={'center'}>
-          <Card
-            style={styles.buttonCard}
-            onPress={() => {
-              navigation.navigate('OnboardingStackScreen');
-              createUserprofile();
-            }}
-          >
+          <Card style={styles.buttonCard} onPress={handleCreateProfile}>
             <SizableText size='$6' style={styles.buttonCardText}>
               Bestätigen
             </SizableText>
@@ -91,6 +107,11 @@ const styles = StyleSheet.create({
   buttonCardText: {
     color: 'white',
     fontWeight: '500',
+    textAlign: 'center',
+  },
+  errorText: {
+    color: 'red',
+    marginTop: 10,
     textAlign: 'center',
   },
 });

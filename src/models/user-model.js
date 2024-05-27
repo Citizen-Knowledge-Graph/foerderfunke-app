@@ -2,8 +2,16 @@ import { storage } from '../storage/mmkv';
 
 export class UserStore {
   static initialiseNewUser(userId) {
+    // check if the user already exists
+    if (storage.getString(userId)) {
+      throw new Error('User already exists');
+    }
+
+    // create a new user
     let userString = `{"@id":"${userId}","@type":"ff:Citizen"}`;
     storage.set(userId, userString);
+
+    // add the user to the list of user ids
     const userIds = JSON.parse(storage.getString('userIds') || '[]');
     if (!userIds.includes(userId)) {
       userIds.push(userId);
