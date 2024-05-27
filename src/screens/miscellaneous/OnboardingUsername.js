@@ -4,15 +4,18 @@ import { StyleSheet, TextInput } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import ScreenView from '../../components/ScreenView';
 import useCreateUserprofile from './hooks/useCreateUserprofile';
+import { useUserStore } from '../../storage/zustand';
 
 const OnboardingUsernameScreen = ({ navigation }) => {
   const [username, setUsername] = useState();
   const [error, setError] = useState('');
   const createUserprofile = useCreateUserprofile(username);
+  const updateUserId = useUserStore((state) => state.updateUserId);
 
   const handleCreateProfile = () => {
     createUserprofile()
       .then(() => {
+        updateUserId(username);
         navigation.navigate('OnboardingStackScreen');
       })
       .catch((err) => {
