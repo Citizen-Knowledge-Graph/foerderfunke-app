@@ -15,6 +15,13 @@ const OnboardingContext = ({ personalisedScreenData }) => {
               Dein Profil
             </SizableText>
           </XStack>
+          <XStack justifyContent={'center'}>
+            <SizableText size='$7' style={styles.subTitleText} flex={1}>
+              Wir benötigen noch ein paar Informationen von dir, um für dich
+              nach geeigneten Sozialleistungen und anderen staatlichen
+              Förderungen zu suchen.
+            </SizableText>
+          </XStack>
         </YStack>
         <OnboardingSections personalisedScreenData={personalisedScreenData} />
       </YStack>

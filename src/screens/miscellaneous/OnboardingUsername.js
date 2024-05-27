@@ -50,20 +50,18 @@ const OnboardingUsernameScreen = ({ navigation }) => {
             </YStack>
           </Card>
         </XStack>
-        <XStack justifyContent={'flex-end'} gap={20}>
-          <Button
-            iconAfter={<Check size='$1' color={'black'} />}
-            style={styles.confirmButton}
-            pressStyle={{
-              backgroundColor: colorTokens.light.gray.gray8,
-            }}
+        <XStack justifyContent={'center'}>
+          <Card
+            style={styles.buttonCard}
             onPress={() => {
               navigation.navigate('OnboardingStackScreen');
               createUserprofile();
             }}
           >
-            Bestätigen
-          </Button>
+            <SizableText size='$6' style={styles.buttonCardText}>
+              Bestätigen
+            </SizableText>
+          </Card>
         </XStack>
       </YStack>
     </ScreenView>
@@ -85,10 +83,15 @@ const styles = StyleSheet.create({
   inputField: {
     fontSize: 16,
   },
-  confirmButton: {
-    backgroundColor: colorTokens.light.green.green7,
-    color: 'black',
-    fontSize: 16,
+  buttonCard: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: colorTokens.light.green.green9,
+  },
+  buttonCardText: {
+    color: 'white',
+    fontWeight: '500',
+    textAlign: 'center',
   },
 });
 
