@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   buttonCardText: {
     color: 'white',
-    fontWeight: '5git00',
+    fontWeight: '500',
     textAlign: 'center',
   },
 });

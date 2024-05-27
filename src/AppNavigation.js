@@ -6,7 +6,7 @@ import StartScreen from './screens/miscellaneous/StartScreen';
 import HomeScreen from './screens/homescreen/HomeScreen';
 import ProfileScreen from './screens/profilescreen/ProfileScreen';
 import SchemeScreen from './screens/schemescreen/SchemeScreen';
-import JourneyScreen from './screens/journeyscreen/JourneyScreen';
+import JourneyScreen from './screens/miscellaneous/JourneyScreen';
 import OnboardingWelcomeScreen from './screens/miscellaneous/OnboardingWelcomeScreen';
 import ChoiceScreen from './screens/miscellaneous/ChoiceScreen';
 import OnboardingScreen from './screens/onboardingscreen/OnboardingScreen';
