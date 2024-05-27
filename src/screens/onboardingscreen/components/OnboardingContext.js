@@ -1,11 +1,9 @@
 import React from 'react';
-import { Card, SizableText, XStack, YStack } from 'tamagui';
-import { Info } from '@tamagui/lucide-icons';
+import { SizableText, XStack, YStack } from 'tamagui';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import ScreenView from '../../../components/ScreenView';
 import OnboardingSections from './OnboardingSections';
-import OnboardingUsername from './OnboardingUsername';
 
 const OnboardingContext = ({ personalisedScreenData }) => {
   return (
@@ -18,7 +16,6 @@ const OnboardingContext = ({ personalisedScreenData }) => {
             </SizableText>
           </XStack>
         </YStack>
-        <OnboardingUsername />
         <OnboardingSections personalisedScreenData={personalisedScreenData} />
       </YStack>
     </ScreenView>

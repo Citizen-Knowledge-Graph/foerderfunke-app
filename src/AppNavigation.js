@@ -11,6 +11,7 @@ import OnboardingWelcomeScreen from './screens/miscellaneous/OnboardingWelcomeSc
 import ChoiceScreen from './screens/miscellaneous/ChoiceScreen';
 import OnboardingScreen from './screens/onboardingscreen/OnboardingScreen';
 import ProfileInputScreen from './screens/profileinputscreen/ProfileInputScreen';
+import OnboardingUsernameScreen from './screens/miscellaneous/OnboardingUsername';
 
 // Stack Navigation
 const Stack = createStackNavigator();
@@ -36,6 +37,11 @@ export const SchemeStackNavigator = () => {
       <Stack.Screen
         name='OnboardingWelcomeStackScreen'
         component={OnboardingWelcomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='OnboardingUsernameStackScreen'
+        component={OnboardingUsernameScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

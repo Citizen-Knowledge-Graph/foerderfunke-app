@@ -51,7 +51,7 @@ const OnboardingWelcomeScreen = ({ navigation }) => {
             <Card
               style={styles.buttonCard}
               onPress={() => {
-                navigation.navigate('OnboardingStackScreen');
+                navigation.navigate('OnboardingUsernameStackScreen');
               }}
             >
               <SizableText size='$6' style={styles.buttonCardText}>
