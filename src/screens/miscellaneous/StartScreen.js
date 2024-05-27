@@ -11,7 +11,7 @@ const StartScreen = ({ navigation }) => {
         navigation.removeListener;
         navigation.navigate('JourneyStackScreen');
       }}
-      activeOpacity={0.7} // Optional: for better touch feedback
+      activeOpacity={0.7}
     >
       <Main>
         <Subtitle color={colorTokens.dark.blue.blue5}>FörderFunke</Subtitle>

@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
 import ScreenView from '../../components/ScreenView';
 
-const OnboardingWelcomeScreen = ({}) => {
+const OnboardingWelcomeScreen = ({ navigation }) => {
   return (
     <ScreenView
       screenName={'OnboardinWelcome'}
@@ -48,7 +48,12 @@ const OnboardingWelcomeScreen = ({}) => {
         </YStack>
         <YStack gap={10}>
           <XStack justifyContent={'center'}>
-            <Card style={styles.buttonCard}>
+            <Card
+              style={styles.buttonCard}
+              onPress={() => {
+                navigation.navigate('OnboardingStackScreen');
+              }}
+            >
               <SizableText size='$6' style={styles.buttonCardText}>
                 Los geht's!
               </SizableText>

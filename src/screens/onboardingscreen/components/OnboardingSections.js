@@ -13,7 +13,7 @@ const OnboardingSections = ({ personalisedScreenData }) => {
     <YStack gap={10}>
       <XStack justifyContent={'center'}>
         <SizableText size='$9' style={styles.titleText} flex={1}>
-          Your profile
+          Profilbereiche
         </SizableText>
       </XStack>
       <YStack gap={16}>

@@ -14,46 +14,10 @@ const OnboardingContext = ({ personalisedScreenData }) => {
         <YStack gap={10}>
           <XStack justifyContent={'center'}>
             <SizableText size='$9' style={styles.titleText} flex={1}>
-              Discover personalised benefits
-            </SizableText>
-          </XStack>
-          <XStack justifyContent={'center'}>
-            <SizableText size='$7' style={styles.subTitleText} flex={1}>
-              Answer some questions about you will find out to which benefits
-              you might be eligible to. The more questions you answer, the more
-              accurate will be the results you get.
+              Dein Profil
             </SizableText>
           </XStack>
         </YStack>
-        <YStack gap={10}>
-          <XStack justifyContent={'center'}>
-            <Card size='$8' style={styles.infoCard}>
-              <YStack flex={1} justifyContent={'flex-end'}>
-                <XStack
-                  justifyContent={'center'}
-                  paddingHorizontal={8}
-                  gap={10}
-                >
-                  <Info size='$1' color={'black'} />
-                  <SizableText size='$6' style={styles.infoCardText}>
-                    All data is stored locally on your device. It never leaves
-                    your device.
-                  </SizableText>
-                </XStack>
-              </YStack>
-            </Card>
-          </XStack>
-        </YStack>
-        <YStack gap={10}>
-          <XStack justifyContent={'center'}>
-            <Card style={styles.buttonCard}>
-              <SizableText size='$6' style={styles.buttonCardText}>
-                Los geht's!
-              </SizableText>
-            </Card>
-          </XStack>
-        </YStack>
-
         <OnboardingUsername />
         <OnboardingSections personalisedScreenData={personalisedScreenData} />
       </YStack>
