@@ -1,12 +1,7 @@
 [
   {
-    "datafield": "ff:hasFirstNames",
-    "title": "Tell us your first name",
-    "datatype": "string"
-  },
-  {
-    "datafield": "ff:hasFamilyName",
-    "title": "Tell us your family name",
+    "datafield": "@id",
+    "title": "Du brauchst einen Username",
     "datatype": "string"
   },
   {

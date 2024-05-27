@@ -3,13 +3,15 @@ import { Card, SizableText, XStack, YStack } from 'tamagui';
 import { Info } from '@tamagui/lucide-icons';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
-import ScreenView from '../../../components/ScreenView';
-import OnboardingSections from './OnboardingSections';
-import OnboardingUsername from './OnboardingUsername';
+import ScreenView from '../../components/ScreenView';
 
-const OnboardingContext = ({ personalisedScreenData }) => {
+const OnboardingWelcomeScreen = ({}) => {
   return (
-    <ScreenView screenName={'Onboarding'} backButton={true} showName={false}>
+    <ScreenView
+      screenName={'OnboardinWelcome'}
+      backButton={true}
+      showName={false}
+    >
       <YStack gap={20}>
         <YStack gap={10}>
           <XStack justifyContent={'center'}>
@@ -53,9 +55,6 @@ const OnboardingContext = ({ personalisedScreenData }) => {
             </Card>
           </XStack>
         </YStack>
-
-        <OnboardingUsername />
-        <OnboardingSections personalisedScreenData={personalisedScreenData} />
       </YStack>
     </ScreenView>
   );
@@ -84,9 +83,9 @@ const styles = StyleSheet.create({
   },
   buttonCardText: {
     color: 'white',
-    fontWeight: '400',
+    fontWeight: '5git00',
     textAlign: 'center',
   },
 });
 
-export default OnboardingContext;
+export default OnboardingWelcomeScreen;

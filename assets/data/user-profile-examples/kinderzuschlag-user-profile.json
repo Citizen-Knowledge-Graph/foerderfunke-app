@@ -1,8 +1,6 @@
 {
-  "@id": "ff:Person",
+  "@id": "ff:kinderzuschlag-user-profile",
   "@type": "ff:Citizen",
-  "ff:hasFirstNames": "Max",
-  "ff:hasFamilyName": "Mustermann",
   "ff:hasBirthday": "1992-05-17",
   "ff:paysRentCold": 900,
   "ff:hasLivingArea": 80,

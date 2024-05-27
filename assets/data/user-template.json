@@ -1,0 +1,19 @@
+{
+  "@id": "grandparent_0",
+  "@type": "type",
+  "hasName": "grandparent_0",
+  "hasChild": [
+    {
+      "@id": "child_0",
+      "@type": "type",
+      "hasName": "child_0",
+      "hasChild": [
+        {
+          "@id": "child_01",
+          "@type": "type",
+          "hasName": "child_01"
+        }
+      ]
+    }
+  ]
+}

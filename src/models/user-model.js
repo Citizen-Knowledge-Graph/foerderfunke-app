@@ -1,8 +1,8 @@
 import { storage } from '../storage/mmkv';
 
 export class UserStore {
-  static initialiseNewUser(userId, entityType) {
-    let userString = `{"@id":"${userId}","@type":"${entityType}"}`;
+  static initialiseNewUser(userId) {
+    let userString = `{"@id":"${userId}","@type":"ff:Citizen"}`;
     storage.set(userId, userString);
     const userIds = JSON.parse(storage.getString('userIds') || '[]');
     if (!userIds.includes(userId)) {
@@ -71,22 +71,14 @@ export class UserStore {
   }
 
   // retrieve the user data from mmkv
-  static retrieveUserData(entityId, entityType) {
+  static retrieveUserData(entityId) {
     let userString = storage.getString(entityId);
     if (!userString) {
-      userString = `{"@id":"${entityType}","@type":"${entityType}"}`;
+      userString = `{"@id":"${entityId}", "@type":"ff:Citizen"}`;
       storage.set(entityId, userString);
     }
 
-    const userData = JSON.parse(userString);
-
-    if (userData['@type'] !== entityType) {
-      throw new Error(
-        `Entity type mismatch: expected ${entityType} but found ${userData['@type']}`
-      );
-    }
-
-    return userData;
+    return JSON.parse(userString);
   }
 
   // return all user ids

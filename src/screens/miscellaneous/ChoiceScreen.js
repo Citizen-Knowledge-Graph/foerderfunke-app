@@ -31,7 +31,7 @@ const ChoiceScreen = ({ navigation }) => {
               size='$8'
               style={styles.choiceCard}
               onPress={() => {
-                navigation.navigate('PersonalisedStackScreen');
+                navigation.navigate('OnboardingWelcomeStackScreen');
               }}
             >
               <YStack flex={1} justifyContent={'flex-end'}>

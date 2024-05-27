@@ -3,8 +3,8 @@ import { UserStore } from './models/user-model';
 
 export const loadUserData = async () => {
   // initialise kinderzuschlag profile
-  const profileName = 'kinderzuschlag-user-profile';
-  const userProfilePath = `user-profile-examples/${profileName}.json`;
+  const profilePath = 'kinderzuschlag-user-profile';
+  const userProfilePath = `user-profile-examples/${profilePath}.json`;
   const userProfileData = await readJson(userProfilePath);
-  UserStore.storeUserData(profileName, userProfileData);
+  UserStore.storeUserData(userProfileData['@id'], userProfileData);
 };
