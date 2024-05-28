@@ -94,3 +94,38 @@ export class UserStore {
     return JSON.parse(storage.getString('userIds') || '[]');
   }
 }
+
+function updateOrAddField(data, entityData, parentData, value) {
+  // Check if the current object matches the entityData criteria and update the field if it does
+  if (data['@id'] === entityData.id && data['@type'] === entityData.type) {
+    data[entityData.datafield] = value;
+    return true;
+  }
+
+  // Check if the current object matches the parentData criteria
+  if (data['@id'] === parentData.id && data['@type'] === parentData.type) {
+    if (!Array.isArray(data[parentData.datafield])) {
+      data[parentData.datafield] = [];
+    }
+    const newChild = {
+      '@id': entityData.id,
+      '@type': entityData.type,
+      [entityData.datafield]: value,
+    };
+    data[parentData.datafield].push(newChild);
+    return true;
+  }
+
+  // Traverse arrays to continue the search/update process
+  for (const key in data) {
+    if (Array.isArray(data[key])) {
+      for (let item of data[key]) {
+        if (updateOrAddField(item, entityData, parentData, value)) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
