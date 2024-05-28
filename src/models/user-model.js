@@ -20,8 +20,8 @@ export class UserStore {
   }
 
   // set a new field in the user data
-  static setField(entityId, entityType, datafield, value) {
-    let userProfile = UserStore.retrieveUserData(entityId);
+  static setField(userId, datafield, value, entityData, parentData) {
+    let userProfile = UserStore.retrieveUserData(userId);
 
     if (
       userProfile['@id'] === entityId &&

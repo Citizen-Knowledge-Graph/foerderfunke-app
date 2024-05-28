@@ -1,16 +1,22 @@
 import { useCallback } from 'react';
-import { useUserUpdateStore } from '../../../storage/zustand';
+import { UserStore } from '../../../models/user-model';
+import { useUserStore } from '../../../storage/zustand';
 
 function useAddProfileData(inputFieldData) {
-  const addUserField = useUserUpdateStore((state) => state.addUserField);
-
   return useCallback(() => {
-    for (const entry of inputFieldData) {
-      const { entityId, entityType, datafield, inputData } = entry;
-      console.log('entry', entry);
-      //addUserField(entityId, entityType, datafield, inputData);
-    }
-  }, [addUserField, inputFieldData]);
+    const userId = useUserStore.getState().userId;
+    return new Promise((resolve, reject) => {
+      try {
+        for (const entry of inputFieldData) {
+          const { datafield, value, entityData, parentData } = entry;
+          UserStore.setField(userId, datafield, value, entityData, parentData);
+        }
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }, [inputFieldData]);
 }
 
 export default useAddProfileData;

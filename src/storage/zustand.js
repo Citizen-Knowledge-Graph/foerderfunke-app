@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { updateUserProfile } from '../screens/profilescreen/ProfileScreenController';
-import { UserStore } from '../models/user-model';
 
 export const useUserStore = create((set) => ({
   userId: 'kinderzuschlag-user-profile',

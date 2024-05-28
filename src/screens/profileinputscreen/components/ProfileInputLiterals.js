@@ -18,13 +18,15 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
       setInputFieldData((prev) => {
         // Find the index of the existing entry
         const index = prev.findIndex(
-          (entry) => entry.datafield === item.datafield
+          (entry) => entry.datafield === item.entityData.datafield
         );
 
         // Create the new entry
         const newEntry = {
-          datafield: item.datafield,
+          datafield: item.entityData.datafield,
+          value: inputData,
           entityData: item.entityData,
+          parentData: item.parentData,
         };
 
         // If the entry exists, update it
