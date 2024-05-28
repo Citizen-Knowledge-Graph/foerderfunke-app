@@ -8,7 +8,7 @@ function useAddProfileData(inputFieldData) {
     for (const entry of inputFieldData) {
       const { entityId, entityType, datafield, inputData } = entry;
       console.log('entry', entry);
-      addUserField(entityId, entityType, datafield, inputData);
+      //addUserField(entityId, entityType, datafield, inputData);
     }
   }, [addUserField, inputFieldData]);
 }

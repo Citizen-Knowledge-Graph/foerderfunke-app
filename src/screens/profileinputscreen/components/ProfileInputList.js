@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, SizableText, XStack, YStack } from 'tamagui';
 import { Check, Info } from '@tamagui/lucide-icons';
 import ProfileInputPair from './ProfileInputPair';
@@ -8,20 +8,20 @@ import useAddProfileData from '../hooks/useAddProfileData';
 import { useNavigation } from '@react-navigation/native';
 import useUpdateCompletedSections from '../hooks/useUpdateCompletedSections';
 
-const ProfileInputList = ({ title, id, profileInputData }) => {
+const ProfileInputList = ({ sectionsData, profileInputData }) => {
   const navigation = useNavigation(); // Use the useNavigation hook
   const [inputFieldData, setInputFieldData] = useState([]);
-  const scrollViewRef = useRef(null);
+  const { title, id } = sectionsData;
 
   // custom hooks
   const handleAddProfileData = useAddProfileData(inputFieldData);
-  const updateCompletedSections = useUpdateCompletedSections();
+  const updateCompletedSections = useUpdateCompletedSections(id);
 
   console.log('current profile dict', inputFieldData);
 
   // component
   return (
-    <ScrollView ref={scrollViewRef}>
+    <ScrollView>
       <YStack gap={20}>
         <XStack justifyContent={'center'}>
           <SizableText size='$9' style={styles.titleText} flex={1}>

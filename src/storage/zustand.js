@@ -44,38 +44,30 @@ export const useUserUpdateStore = create((set) => ({
     await (entityId, entityType, datafield, inputData);
     set((state) => ({ updateCounter: state.updateCounter + 1 }));
   },
-  addNestedUserProfileField: async (group, id, datafield, inputData) => {
-    console.log('STATE UPDATE: We are adding a nested user field');
-    const userId = useUserStore.getState().userId;
-    UserStore.setField(userId, group, id, datafield, inputData);
-    set((state) => ({ updateCounter: state.updateCounter + 1 }));
-  },
 }));
 
 export const useProfileInputSectionStore = create((set) => ({
+  activeSection: 'about-you',
   sections: [],
-  initialiseSection: (id, nextId, active) => {
+  initialiseSection: (id, nextId) => {
     console.log(
       'STATE UPDATE: We are adding a new section to the sections store'
     );
-    const newSection = { id: id, next: nextId, active, completed: false };
+    const newSection = { id: id, next: nextId, completed: false };
     set((state) => ({ sections: [...state.sections, newSection] }));
   },
-  updateCompletedSections: () => {
+  updateCompletedSections: (id) => {
     console.log('STATE UPDATE: We are updating the completed sections');
     let nextSection;
     set((state) => ({
       sections: state.sections.map((section) => {
-        if (section.active) {
+        if (section.id === id) {
           section.completed = true;
-          section.active = false;
           nextSection = section.next;
-        }
-        if (section.id === nextSection) {
-          section.active = true;
         }
         return section;
       }),
+      activeSection: nextSection,
     }));
   },
 }));

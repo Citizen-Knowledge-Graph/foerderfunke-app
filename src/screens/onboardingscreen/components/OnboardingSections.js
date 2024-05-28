@@ -6,6 +6,9 @@ import { useProfileInputSectionStore } from '../../../storage/zustand';
 
 const OnboardingSections = ({ personalisedScreenData }) => {
   // zustand hooks
+  const activeSection = useProfileInputSectionStore(
+    (state) => state.activeSection
+  );
   const sections = useProfileInputSectionStore((state) => state.sections);
 
   // component
@@ -24,7 +27,7 @@ const OnboardingSections = ({ personalisedScreenData }) => {
               key={index}
               entityData={personalisedScreenData.entityData}
               sectionData={section}
-              active={sectionStatus.active}
+              active={section.id === activeSection}
               completed={sectionStatus.completed}
             />
           );

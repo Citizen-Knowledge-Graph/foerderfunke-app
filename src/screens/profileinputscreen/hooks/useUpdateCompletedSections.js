@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { useProfileInputSectionStore } from '../../../storage/zustand';
 
-const useUpdateCompletedSections = () => {
+const useUpdateCompletedSections = (id) => {
   const updateCompletedSections = useProfileInputSectionStore(
     (state) => state.updateCompletedSections
   );
 
   return useCallback(() => {
-    updateCompletedSections();
-  }, [updateCompletedSections]);
+    updateCompletedSections(id);
+  }, [id, updateCompletedSections]);
 };
 
 export default useUpdateCompletedSections;

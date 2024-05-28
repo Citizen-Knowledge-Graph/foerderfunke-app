@@ -33,8 +33,7 @@ const ProfileInputScreen = ({ route }) => {
     >
       {profileInputData && (
         <ProfileInputList
-          title={sectionData.title}
-          id={sectionData.id}
+          sectionsData={sectionData}
           profileInputData={profileInputData}
         />
       )}

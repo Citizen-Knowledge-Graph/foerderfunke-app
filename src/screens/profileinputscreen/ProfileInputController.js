@@ -1,7 +1,6 @@
 import { readJson } from '../../utilities/fileManagement';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ProfileInputFieldData, ProfileInputField } from './ProfileInputModel';
-import { UserStore } from '../../models/user-model';
 
 // config
 export const fetchProfileInputData = async (sectionData, entityData) => {
@@ -35,14 +34,4 @@ export const fetchProfileInputData = async (sectionData, entityData) => {
   }
 
   return profileInputData;
-};
-
-export const addNestedUserProfileField = async (
-  userId,
-  group,
-  id,
-  datafield,
-  newValue
-) => {
-  UserStore.setNestedField(userId, group, id, datafield, newValue);
 };
