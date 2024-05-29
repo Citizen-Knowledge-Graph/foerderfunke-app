@@ -4,11 +4,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { View } from 'tamagui';
 
-export const StringInput = ({ setInputData }) => (
+export const StringInput = ({ inputData, setInputData }) => (
   <TextInput
     width={'100%'}
     style={styles.inputField}
     onChangeText={setInputData}
+    value={inputData}
   />
 );
 

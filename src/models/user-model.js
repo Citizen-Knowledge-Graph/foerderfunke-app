@@ -46,19 +46,14 @@ export class UserStore {
     UserStore.storeUserData(userId, userProfile);
   }
 
-  // set a new field in the nested user data
-  static setNestedField(userId, group, id, field, value) {
-    console.log('setNestedField', userId, group, id, field, value);
+  static retrieveUserField(userId, datafield, entityData) {
     let userProfile = UserStore.retrieveUserData(userId);
-    if (!userProfile[group]) {
-      userProfile[group] = [];
+
+    if (!userProfile) {
+      throw new Error(`User profile not found for userId: ${userId}`);
     }
-    if (!userProfile[group][id]) {
-      userProfile[group][id] = {};
-    }
-    userProfile[group][id][field] = value;
-    console.log('user profile', userProfile);
-    UserStore.storeUserData(userId, userProfile);
+
+    return retrieveField(userProfile, datafield, entityData);
   }
 
   // store user data to mmkv
@@ -118,4 +113,25 @@ function updateOrAddField(data, entityData, parentData, value) {
   }
 
   return false;
+}
+
+function retrieveField(data, datafield, entityData) {
+  if (data['@id'] === entityData.id && data['@type'] === entityData.type) {
+    if (data[datafield]) {
+      return data[datafield];
+    }
+  }
+
+  for (const key in data) {
+    if (Array.isArray(data[key])) {
+      for (let item of data[key]) {
+        const result = retrieveField(item, datafield, entityData);
+        if (result) {
+          return result;
+        }
+      }
+    }
+  }
+
+  return null;
 }

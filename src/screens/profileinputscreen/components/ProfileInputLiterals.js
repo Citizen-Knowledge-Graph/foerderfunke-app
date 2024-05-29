@@ -9,7 +9,7 @@ import { SizableText } from 'tamagui';
 import ObjectInput from './InputObjectClass';
 
 const ProfileInputField = ({ item, setInputFieldData }) => {
-  const [inputData, setInputData] = useState();
+  const [inputData, setInputData] = useState(item.displayData.value);
   const { datatype, options } = item.inputData;
   const { id, type } = item.entityData;
 
@@ -54,7 +54,7 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
         />
       );
     case 'string':
-      return <StringInput setInputData={setInputData} />;
+      return <StringInput inputData={inputData} setInputData={setInputData} />;
     case 'integer':
       return <IntegerInput setInputData={setInputData} />;
     case 'date':
