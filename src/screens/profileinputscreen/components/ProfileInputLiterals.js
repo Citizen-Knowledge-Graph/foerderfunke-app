@@ -50,15 +50,16 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
         <SelectInput
           title={item.title}
           options={options}
+          inputData={inputData}
           setInputData={setInputData}
         />
       );
     case 'string':
       return <StringInput inputData={inputData} setInputData={setInputData} />;
     case 'integer':
-      return <IntegerInput setInputData={setInputData} />;
+      return <IntegerInput inputData={inputData} setInputData={setInputData} />;
     case 'date':
-      return <DateInput setInputData={setInputData} />;
+      return <DateInput inputData={inputData} setInputData={setInputData} />;
     default:
       return <SizableText color={'black'}>Unsupported data type</SizableText>;
   }

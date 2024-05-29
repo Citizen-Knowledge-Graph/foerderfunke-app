@@ -13,7 +13,7 @@ export const StringInput = ({ inputData, setInputData }) => (
   />
 );
 
-export const IntegerInput = ({ setInputData }) => {
+export const IntegerInput = ({ inputData, setInputData }) => {
   const handleTextChange = (text) => {
     if (/^\d*$/.test(text)) {
       setInputData(text);
@@ -26,14 +26,14 @@ export const IntegerInput = ({ setInputData }) => {
       style={styles.inputField}
       onChangeText={handleTextChange}
       keyboardType='numeric'
-      placeholder='Enter an integer'
+      value={inputData}
     />
   );
 };
 
-export const SelectInput = ({ options, setInputData }) => {
+export const SelectInput = ({ options, inputData, setInputData }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(inputData);
   const [items, setItems] = useState(
     options.map((obj) => ({
       label: obj,
@@ -65,8 +65,8 @@ export const SelectInput = ({ options, setInputData }) => {
   );
 };
 
-export const DateInput = ({ setInputData }) => {
-  const [date, setDateInternal] = useState(new Date());
+export const DateInput = ({ inputData, setInputData }) => {
+  const [date, setDateInternal] = useState(new Date(inputData));
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
