@@ -9,15 +9,24 @@ import { useNavigation } from '@react-navigation/native';
 import useUpdateCompletedSections from '../hooks/useUpdateCompletedSections';
 
 const ProfileInputList = ({ sectionsData, profileInputData }) => {
-  const navigation = useNavigation(); // Use the useNavigation hook
-  const [inputFieldData, setInputFieldData] = useState([]);
   const { title, id } = sectionsData;
-
-  // custom hooks
-  const handleAddProfileData = useAddProfileData(inputFieldData);
+  const [inputFieldData, setInputFieldData] = useState([]);
+  const [error, setError] = useState('');
+  const navigation = useNavigation();
+  const addProfileData = useAddProfileData(inputFieldData);
   const updateCompletedSections = useUpdateCompletedSections(id);
 
-  console.log('current profile dict', inputFieldData);
+  // custom hooks
+  const handleAddProfileData = () => {
+    addProfileData()
+      .then(() => {
+        navigation.goBack();
+        updateCompletedSections();
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
 
   // component
   return (
@@ -58,14 +67,15 @@ const ProfileInputList = ({ sectionsData, profileInputData }) => {
             />
           ))}
         </YStack>
+        {error ? (
+          <XStack justifyContent={'center'}>
+            <SizableText style={styles.errorText}>{error}</SizableText>
+          </XStack>
+        ) : null}
         <XStack justifyContent={'flex-end'} gap={20} style={styles.confirmPane}>
           <Button
             iconAfter={<Check size='$1' color={'black'} />}
-            onPress={() => {
-              navigation.goBack();
-              updateCompletedSections();
-              handleAddProfileData();
-            }}
+            onPress={handleAddProfileData}
             style={styles.confirmButton}
             pressStyle={{
               backgroundColor: colorTokens.light.gray.gray8,
@@ -112,6 +122,11 @@ const styles = StyleSheet.create({
     backgroundColor: colorTokens.light.green.green7,
     color: 'black',
     fontSize: 16,
+  },
+  errorText: {
+    color: 'red',
+    marginTop: 10,
+    textAlign: 'center',
   },
 });
 

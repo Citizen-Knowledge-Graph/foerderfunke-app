@@ -8,8 +8,8 @@ function useAddProfileData(inputFieldData) {
     return new Promise((resolve, reject) => {
       try {
         for (const entry of inputFieldData) {
-          const { datafield, value, entityData, parentData } = entry;
-          UserStore.setField(userId, datafield, value, entityData, parentData);
+          const { value, entityData, parentData } = entry;
+          UserStore.setField(userId, value, entityData, parentData);
         }
         resolve();
       } catch (error) {

@@ -1,7 +1,7 @@
 export class ProfileSectionsData {
-  constructor() {
+  constructor(userId) {
     this.entityData = {
-      id: 'ff:mainPerson',
+      id: userId,
       type: 'ff:Citizen',
     };
     this.personalisedData = [];
