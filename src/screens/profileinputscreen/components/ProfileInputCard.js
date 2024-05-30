@@ -3,7 +3,7 @@ import ProfileInputLiterals from './ProfileInputLiterals';
 import { Card, XStack, YStack } from 'tamagui';
 import { StyleSheet } from 'react-native';
 import { colorTokens } from '@tamagui/themes';
-import ObjectInput from './InputObjectClass';
+import ProfileInputObject from './ProfileInputObject';
 
 const ProfileInputCard = ({ item, setInputFieldData }) => {
   return (
@@ -27,7 +27,7 @@ const ProfileInputCard = ({ item, setInputFieldData }) => {
         <Card style={styles.profileInputCardObject} flex={1}>
           <YStack flex={1} justifyContent={'flex-end'}>
             <XStack justifyContent={'center'} gap={10}>
-              <ObjectInput item={item} setInputData={setInputFieldData} />
+              <ProfileInputObject item={item} />
             </XStack>
           </YStack>
         </Card>

@@ -28,6 +28,8 @@ const ProfileInputList = ({ sectionsData, profileInputData }) => {
       });
   };
 
+  console.log('### current state of inputFieldData: ', inputFieldData);
+
   // component
   return (
     <ScrollView>

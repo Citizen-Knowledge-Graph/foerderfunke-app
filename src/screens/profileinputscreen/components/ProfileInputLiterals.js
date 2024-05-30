@@ -6,7 +6,6 @@ import {
   SelectInput,
 } from './ProfileInputTypes';
 import { SizableText } from 'tamagui';
-import ObjectInput from './InputObjectClass';
 
 const ProfileInputField = ({ item, setInputFieldData }) => {
   const [inputData, setInputData] = useState(item.displayData.value);
@@ -14,8 +13,11 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
   const { id, type } = item.entityData;
 
   useEffect(() => {
-    if (inputData !== undefined) {
+    console.log('### inputdata: ', inputData);
+
+    if (inputData != null) {
       setInputFieldData((prev) => {
+        console.log('### prev: ', prev);
         // Find the index of the existing entry
         const index = prev.findIndex(
           (entry) => entry.datafield === item.entityData.datafield
@@ -43,8 +45,6 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
   }, [id, inputData, item, setInputFieldData, type]);
 
   switch (datatype) {
-    case 'class':
-      return <ObjectInput setInputData={setInputData} />;
     case 'selection':
       return (
         <SelectInput

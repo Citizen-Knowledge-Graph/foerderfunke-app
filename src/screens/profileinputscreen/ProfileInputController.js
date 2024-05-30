@@ -43,6 +43,7 @@ export const fetchProfileInputData = async (
       parentType || null,
       parentDatafield || null
     );
+    console.log('new card: ', newSectionFieldCard);
     profileInputData.addProfileInputField(newSectionFieldCard);
   }
 

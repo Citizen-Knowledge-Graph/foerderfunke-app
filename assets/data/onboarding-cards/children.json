@@ -2,6 +2,7 @@
   {
     "datafield": "ff:hasChild",
     "title": "If any how many children do you want to add?",
-    "datatype": "class"
+    "datatype": "class",
+    "objectClass": "ff:Child"
   }
 ]

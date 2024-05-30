@@ -5,14 +5,28 @@ import { colorTokens } from '@tamagui/themes';
 import { StyleSheet } from 'react-native';
 import ProfileInputIconMap from './ProfileInputIconMap';
 import { ChevronRight, X } from '@tamagui/lucide-icons';
+import useAddObjectLinkData from '../hooks/useAddObjectLinkData';
+import { useNavigation } from '@react-navigation/native';
 
-const ObjectInput = ({ setInputData }) => {
+const ProfileInputObject = ({ item }) => {
+  const navigation = useNavigation(); // Use the useNavigation hook
   const [counter, setCounter] = useState(0);
-  const [objectLinks, setObjectLinks] = useState(['Child Number 1']);
+  const [currentCount, setCurrentCount] = useState(null);
+  const addObjectLinkData = useAddObjectLinkData(item, currentCount);
 
   useEffect(() => {
-    setInputData(counter);
-  }, [counter, setInputData]);
+    if (currentCount !== null) {
+      const { sectionData, entityData } = addObjectLinkData();
+      navigation.navigate('ProfileInputStackScreen', {
+        sectionData,
+        entityData,
+      });
+    }
+  }, [currentCount, addObjectLinkData, navigation]);
+
+  const handleAddObjectLink = (index) => {
+    setCurrentCount(index);
+  };
 
   return (
     <YStack gap={20} flex={1}>
@@ -23,14 +37,14 @@ const ObjectInput = ({ setInputData }) => {
           </SizableText>
         </Card>
       </XStack>
-      {objectLinks.map((link, index) => (
-        <XStack id={index} justifyContent={'space-between'}>
+      {Array.from({ length: counter }).map((_, index) => (
+        <XStack key={index} justifyContent={'space-between'}>
           <XStack gap={16} alignItems={'center'}>
             <Card style={styles.iconContainer}>
               <ProfileInputIconMap id={'ff:hasChild'} />
             </Card>
             <SizableText size='$8' style={styles.objectCardText}>
-              {link}
+              {item.entityData.datafield + ' ' + index}
             </SizableText>
           </XStack>
           <XStack gap={0} justifyContent={'flex-end'} alignItems={'center'}>
@@ -51,6 +65,7 @@ const ObjectInput = ({ setInputData }) => {
                 backgroundColor: colorTokens.light.gray.gray8,
                 borderColor: 'white',
               }}
+              onPress={() => handleAddObjectLink(index)}
             />
           </XStack>
         </XStack>
@@ -92,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ObjectInput;
+export default ProfileInputObject;
