@@ -92,6 +92,12 @@ function updateOrAddField(data, entityData, parentData, value) {
   if (data['@id'] === parentData.id && data['@type'] === parentData.type) {
     if (!Array.isArray(data[parentData.datafield])) {
       data[parentData.datafield] = [];
+    } else {
+      for (let item of data[parentData.datafield]) {
+        if (updateOrAddField(item, entityData, parentData, value)) {
+          return true;
+        }
+      }
     }
     const newChild = {
       '@id': entityData.id,

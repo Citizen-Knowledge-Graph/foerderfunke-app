@@ -33,7 +33,7 @@ const ProfileInputObject = ({ item }) => {
       <XStack justifyContent={'flex-start'}>
         <Card style={styles.buttonCard} onPress={() => setCounter(counter + 1)}>
           <SizableText size='$5' style={styles.buttonCardText}>
-            Hinzufügen{counter}
+            Hinzufügen
           </SizableText>
         </Card>
       </XStack>
