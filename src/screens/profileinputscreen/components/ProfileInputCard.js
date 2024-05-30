@@ -26,7 +26,7 @@ const ProfileInputCard = ({ item, setInputFieldData }) => {
       ) : (
         <Card style={styles.profileInputCardObject} flex={1}>
           <YStack flex={1} justifyContent={'flex-end'}>
-            <XStack justifyContent={'center'} paddingHorizontal={8} gap={10}>
+            <XStack justifyContent={'center'} gap={10}>
               <ObjectInput item={item} setInputData={setInputFieldData} />
             </XStack>
           </YStack>
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     borderColor: colorTokens.light.gray.gray8,
   },
   profileInputCardObject: {
-    padding: 8,
     backgroundColor: 'white',
   },
 });
