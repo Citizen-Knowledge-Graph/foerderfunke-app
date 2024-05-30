@@ -48,6 +48,10 @@ export const useUserUpdateStore = create((set) => ({
 export const useProfileInputSectionStore = create((set) => ({
   activeSection: 'about-you',
   sections: [],
+  resetSectionStore: () => {
+    console.log('STATE UPDATE: We are resetting the section store');
+    set((state) => ({ activeSection: 'about-you', sections: [] }));
+  },
   initialiseSection: (id, nextId) => {
     console.log(
       'STATE UPDATE: We are adding a new section to the sections store'

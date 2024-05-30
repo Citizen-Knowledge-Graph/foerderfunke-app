@@ -17,7 +17,7 @@ const ProfileInputObject = ({ item }) => {
   useEffect(() => {
     if (currentCount !== null) {
       const { sectionData, entityData } = addObjectLinkData();
-      navigation.navigate('ProfileInputStackScreen', {
+      navigation.push('ProfileInputStackScreen', {
         sectionData,
         entityData,
       });
