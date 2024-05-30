@@ -8,8 +8,6 @@ const ProfileInputScreen = ({ route }) => {
   const { sectionData, entityData } = route.params;
   const userId = useUserStore((state) => state.userId);
   const [profileInputData, setProfileInputData] = useState();
-  console.log('sectionData: ', sectionData);
-  console.log('entityData: ', entityData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +25,6 @@ const ProfileInputScreen = ({ route }) => {
 
     fetchData();
   }, [entityData, sectionData, userId]);
-
-  console.log('ProfileInputScreen', profileInputData);
 
   return (
     <ScreenView

@@ -13,17 +13,12 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
   const { id, type } = item.entityData;
 
   useEffect(() => {
-    console.log('### inputdata: ', inputData);
-
     if (inputData != null) {
       setInputFieldData((prev) => {
-        console.log('### prev: ', prev);
-        // Find the index of the existing entry
         const index = prev.findIndex(
           (entry) => entry.datafield === item.entityData.datafield
         );
 
-        // Create the new entry
         const newEntry = {
           datafield: item.entityData.datafield,
           value: inputData,
@@ -31,14 +26,12 @@ const ProfileInputField = ({ item, setInputFieldData }) => {
           parentData: item.parentData,
         };
 
-        // If the entry exists, update it
         if (index !== -1) {
           const updated = [...prev];
           updated[index] = newEntry;
           return updated;
         }
 
-        // If the entry doesn't exist, add it
         return [...prev, newEntry];
       });
     }

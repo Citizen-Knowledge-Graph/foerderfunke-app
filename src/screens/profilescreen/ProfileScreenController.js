@@ -6,8 +6,7 @@ import { UserStore } from '../../models/user-model';
 
 // config
 const dataFields = [
-  'ff:hasFirstNames',
-  'ff:hasFamilyName',
+  '@id',
   'ff:hasBirthday',
   'ff:hasResidence',
   'ff:paysRentCold',

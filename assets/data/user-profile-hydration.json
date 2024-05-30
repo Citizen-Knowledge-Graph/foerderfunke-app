@@ -1,6 +1,6 @@
 {
-  "ff:hasFirstNames": {
-    "display_name": "Vorname"
+  "@id": {
+    "display_name": "Username"
   },
   "ff:hasFamilyName": {
     "display_name": "Nachname"
